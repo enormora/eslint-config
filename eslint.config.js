@@ -1,5 +1,6 @@
 import { baseConfig } from './configs/base.js';
 import { nodeConfig } from './configs/node.js';
+import { avaConfig } from './configs/ava.js';
 
 export default [
     baseConfig,
@@ -15,5 +16,9 @@ export default [
         rules: {
             'import/no-default-export': 'off'
         }
+    },
+    {
+        ...avaConfig,
+        files: ['test/**/*.test.js', 'test/rules-configuration.js']
     }
 ];
