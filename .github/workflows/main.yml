@@ -1,0 +1,23 @@
+name: Continuous integration pipeline
+
+on:
+    push:
+    pull_request:
+
+jobs:
+    tests:
+        name: Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Use Node.js 20.x
+              uses: actions/setup-node@v3
+              with:
+                  node-version: '20.x'
+            - name: Install dependencies
+              run: npm clean-install
+            - name: Static code analysis
+              run: npm run lint
+            - name: Unit tests
+              run: npm run test
