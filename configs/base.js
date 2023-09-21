@@ -444,7 +444,7 @@ export const baseConfig = {
         ],
         'multiline-comment-style': 'off',
         'max-classes-per-file': 'off',
-        'max-lines-per-function': ['error', { max: 20 }],
+        'max-lines-per-function': ['error', { max: 50 }],
         'prefer-object-spread': 'error',
         'no-async-promise-executor': 'error',
         'no-misleading-character-class': 'error',
