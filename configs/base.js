@@ -593,7 +593,8 @@ export const baseConfig = {
                 allow: []
             }
         ],
-        'import/no-unresolved': ['error'],
+        // this rule doesn’t work correctly for ESM modules which use the exports field in package.json instead of main, see also https://github.com/import-js/eslint-plugin-import/issues/2703
+        'import/no-unresolved': 'off',
         'import/no-relative-packages': 'off',
         'import/no-import-module-exports': 'off',
         'import/no-empty-named-blocks': 'error',

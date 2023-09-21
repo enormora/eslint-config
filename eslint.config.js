@@ -1,7 +1,9 @@
 import { baseConfig } from './configs/base.js';
+import { nodeConfig } from './configs/node.js';
 
 export default [
     baseConfig,
+    nodeConfig,
     {
         files: ['configs/**/*.js'],
         rules: {
