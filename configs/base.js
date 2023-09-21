@@ -3,7 +3,7 @@ import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
-import { ecmaVersion, indentSize } from './constants.js';
+import { ecmaVersion, indentSize, javascriptExtensions } from './constants.js';
 
 export const baseConfig = {
     languageOptions: {
@@ -33,7 +33,7 @@ export const baseConfig = {
         ...stylisticRuleSet.settings,
         ...bestPracticesRuleSet.settings,
         'import/parsers': {
-            espree: ['.js', '.cjs', '.mjs', '.jsx']
+            espree: javascriptExtensions
         }
     },
     rules: {

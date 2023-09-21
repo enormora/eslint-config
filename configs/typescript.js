@@ -1,7 +1,7 @@
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import functionalPlugin from 'eslint-plugin-functional';
-import { indentSize } from './constants.js';
+import { indentSize, javascriptExtensions, typescriptExtensions } from './constants.js';
 
 export const typescriptConfig = {
     languageOptions: {
@@ -19,11 +19,11 @@ export const typescriptConfig = {
     settings: {
         'import/resolver': {
             node: {
-                extensions: ['.js', '.ts']
+                extensions: [...javascriptExtensions, ...typescriptExtensions]
             }
         },
         'import/parsers': {
-            '@typescript-eslint/parser': ['.ts']
+            '@typescript-eslint/parser': typescriptExtensions
         }
     },
     plugins: {
