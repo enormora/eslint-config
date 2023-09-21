@@ -3,9 +3,7 @@ import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
-
-const ecmaVersion = 2022;
-const indentSize = 4;
+import { ecmaVersion, indentSize } from './constants.js';
 
 export const baseConfig = {
     languageOptions: {
