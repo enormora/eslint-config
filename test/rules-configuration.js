@@ -26,7 +26,8 @@ function isRuleConfigured(ruleConfigSet, ruleName) {
     return configuredRuleNames.includes(ruleName);
 }
 
-export const checkAllCoreRulesConfigured = test.macro((t, { ruleConfigSet }) => {
+export const checkAllCoreRulesConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet } = testCase;
     const ruleNames = Object.keys(eslintCorePresets.configs.all.rules);
 
     if (ruleNames.length === 0) {
@@ -38,7 +39,8 @@ export const checkAllCoreRulesConfigured = test.macro((t, { ruleConfigSet }) => 
     });
 });
 
-export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, { ruleConfigSet }) => {
+export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet } = testCase;
     const allCoreRuleNames = Object.keys(eslintCorePresets.configs.all.rules);
     const configuredRuleNames = Object.keys(ruleConfigSet);
     const configuredCoreRuleNames = configuredRuleNames.filter((ruleName) => {
@@ -50,7 +52,8 @@ export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, { ruleConfig
     });
 });
 
-export const checkAllPluginRulesConfigured = test.macro((t, { ruleConfigSet, pluginRules, pluginName }) => {
+export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet, pluginRules, pluginName } = testCase;
     const ruleNames = Object.keys(pluginRules);
     const shortPluginName = extractShortName(pluginName);
 
@@ -72,7 +75,8 @@ export const checkAllPluginRulesConfigured = test.macro((t, { ruleConfigSet, plu
     });
 });
 
-export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, { ruleConfigSet, pluginRules, pluginName }) => {
+export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet, pluginRules, pluginName } = testCase;
     const shortPluginName = extractShortName(pluginName);
     const pluginRuleNames = Object.keys(pluginRules)
         .filter((ruleName) => {

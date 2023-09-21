@@ -6,6 +6,7 @@ import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import prettierPlugin from 'eslint-plugin-prettier';
+import destructuringPlugin from 'eslint-plugin-destructuring';
 
 const ecmaVersion = 2022;
 const indentSize = 4;
@@ -36,7 +37,8 @@ export const baseConfig = {
         'no-secrets': noSecretsPlugin,
         'array-func': arrayFunctionPlugin,
         sonarjs: sonarjsPlugin,
-        prettier: prettierPlugin
+        prettier: prettierPlugin,
+        destructuring: destructuringPlugin
     },
     settings: {
         'import/parsers': {
@@ -750,6 +752,10 @@ export const baseConfig = {
         'sonarjs/prefer-single-boolean-return': 'error',
         'sonarjs/prefer-while': 'error',
 
-        'prettier/prettier': 'error'
+        'prettier/prettier': 'error',
+
+        'destructuring/in-methods-params': 'error',
+        'destructuring/in-params': ['error', { 'max-params': 0 }],
+        'destructuring/no-rename': 'off'
     }
 };

@@ -7,6 +7,7 @@ import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import prettierPlugin from 'eslint-plugin-prettier';
+import destructuringPlugin from 'eslint-plugin-destructuring';
 import { baseConfig } from '../configs/base.js';
 import {
     checkAllCoreRulesConfigured,
@@ -117,4 +118,16 @@ test('no unknown eslint-plugin-prettier rules are configured', checkUnknownPlugi
     ruleConfigSet: baseConfig.rules,
     pluginRules: prettierPlugin.rules,
     pluginName: 'eslint-plugin-prettier'
+});
+
+test('all eslint-plugin-destructuring rules are configured', checkAllPluginRulesConfigured, {
+    ruleConfigSet: baseConfig.rules,
+    pluginRules: destructuringPlugin.rules,
+    pluginName: 'eslint-plugin-destructuring'
+});
+
+test('no unknown eslint-plugin-destructuring rules are configured', checkUnknownPluginRulesAreNotConfigured, {
+    ruleConfigSet: baseConfig.rules,
+    pluginRules: destructuringPlugin.rules,
+    pluginName: 'eslint-plugin-destructuring'
 });
