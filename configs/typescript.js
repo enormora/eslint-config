@@ -275,7 +275,6 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('comma-dangle'),
         '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
         '@typescript-eslint/no-loop-func': 'off',
-        ...configureWrappedCoreRule('no-duplicate-imports'),
         '@typescript-eslint/space-infix-ops': 'off',
         '@typescript-eslint/no-unnecessary-type-constraint': 'error',
         '@typescript-eslint/no-confusing-void-expression': [
