@@ -42,5 +42,9 @@
         "eslint-plugin-sonarjs": "0.21.0",
         "eslint-plugin-unicorn": "^48.0.1",
         "globals": "13.21.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/enormora/eslint-config.git"
     }
 }
