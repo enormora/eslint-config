@@ -3,6 +3,9 @@
     "private": true,
     "type": "module",
     "version": "0.0.0-dev",
+    "contributors": [
+        "Christian Rackerseder <github@echooff.de>"
+    ],
     "scripts": {
         "eslint:check": "eslint .",
         "eslint:fix": "npm run eslint:check -- --fix",
