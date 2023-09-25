@@ -23,7 +23,8 @@ export const typescriptConfig = {
                 jsx: false,
                 globalReturn: false
             },
-            project: ['**/tsconfig.json', '**/tsconfig.sources.json', '**/tsconfig.unit-tests.json']
+            EXPERIMENTAL_useProjectService: true,
+            project: 'tsconfig.json'
         }
     },
     settings: {
