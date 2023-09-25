@@ -1,5 +1,7 @@
 import test from 'ava';
 import eslintCorePresets from '@eslint/js';
+import { Linter } from 'eslint';
+import ts from 'typescript';
 
 function extractShortName(pluginName) {
     const prefix = 'eslint-plugin-';
@@ -98,4 +100,41 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
     configuredPluginRuleNames.forEach((ruleName) => {
         t.true(pluginRuleNames.includes(ruleName), `Rule ${ruleName} can be removed`);
     });
+});
+
+export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
+    const linter = new Linter({ configType: 'flat' });
+
+    const sourceFile = ts.createSourceFile('/foo.js', 'foo();', ts.ScriptTarget.Latest);
+    const defaultCompilerHost = ts.createCompilerHost({});
+    const customCompilerHost = {
+        ...defaultCompilerHost,
+        getSourceFile(name, languageVersion) {
+            if (name === '/foo.js') {
+                return sourceFile;
+            }
+            return defaultCompilerHost.getSourceFile(name, languageVersion);
+        }
+    };
+    const program = ts.createProgram(['/foo.js'], {}, customCompilerHost);
+
+    try {
+        linter.verify(
+            'foo();',
+            {
+                ...config,
+                languageOptions: {
+                    ...config.languageOptions,
+                    parserOptions: {
+                        ...config.parserOptions,
+                        program
+                    }
+                }
+            },
+            '/foo.js'
+        );
+        t.pass('Linter.verify() did not throw for the given config');
+    } catch (error) {
+        t.fail(`Linter.verify() failed for the given config with ${error.message}`);
+    }
 });
