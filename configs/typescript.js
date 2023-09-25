@@ -351,7 +351,7 @@ export const typescriptConfig = {
         'functional/prefer-immutable-types': [
             'error',
             {
-                enforcement: 'Immutable',
+                enforcement: 'ReadonlyShallow',
                 ignoreClasses: false,
                 ignoreInferredTypes: true,
                 fixer: {
