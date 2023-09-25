@@ -3,6 +3,7 @@
     "private": true,
     "type": "module",
     "version": "0.0.0-dev",
+    "author": "Mathias Schreck <schreck.mathias@gmail.com>",
     "contributors": [
         "Christian Rackerseder <github@echooff.de>"
     ],
