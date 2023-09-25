@@ -210,7 +210,7 @@ export const baseConfig = {
         'block-scoped-var': 'off',
         'block-spacing': 'off',
         'brace-style': ['error', '1tbs', { allowSingleLine: false }],
-        camelcase: 'error',
+        camelcase: 'off',
         'comma-dangle': ['error', 'never'],
         'comma-spacing': [
             'error',
