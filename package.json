@@ -8,7 +8,7 @@
         "Christian Rackerseder <github@echooff.de>"
     ],
     "scripts": {
-        "eslint:check": "eslint .",
+        "eslint:check": "eslint . --max-warnings 0",
         "eslint:fix": "npm run eslint:check -- --fix",
         "prettier": "prettier '**/*.(yml|yaml|json|md)'",
         "prettier:check": "npm run prettier -- --check",
@@ -19,6 +19,7 @@
     },
     "license": "MIT",
     "devDependencies": {
+        "@cspell/eslint-plugin": "7.3.6",
         "@eslint/js": "8.49.0",
         "ava": "5.3.1",
         "eslint": "8.46.0",
