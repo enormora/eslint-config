@@ -366,13 +366,42 @@ export const typescriptConfig = {
                         }
                     ]
                 },
+                parameters: {
+                    enforcement: 'ReadonlyShallow'
+                },
+                returnTypes: {
+                    enforcement: 'ReadonlyShallow'
+                },
                 variables: {
+                    enforcement: 'ReadonlyShallow',
                     ignoreInFunctions: true
                 }
             }
         ],
         'functional/prefer-tacit': 'error',
         'functional/readonly-type': ['error', 'keyword'],
-        'functional/type-declaration-immutability': 'off'
+        'functional/type-declaration-immutability': [
+            'error',
+            {
+                rules: [
+                    {
+                        identifiers: '^.*',
+                        immutability: 'ReadonlyShallow',
+                        comparator: 'AtLeast',
+                        fixer: [
+                            {
+                                pattern: '^(Array|Map|Set)<(.+)>$',
+                                replace: 'Readonly$1<$2>'
+                            },
+                            {
+                                pattern: '^(.+)$',
+                                replace: 'Readonly<$1>'
+                            }
+                        ]
+                    }
+                ],
+                ignoreInterfaces: false
+            }
+        ]
     }
 };
