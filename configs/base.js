@@ -1,6 +1,7 @@
 import importPlugin from 'eslint-plugin-import';
 import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
+import codeSpellChecker from '@cspell/eslint-plugin';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
 import { ecmaVersion, indentSize, javascriptExtensions } from './constants.js';
@@ -27,7 +28,8 @@ export const baseConfig = {
         ...bestPracticesRuleSet.plugins,
         import: importPlugin,
         'eslint-comments': eslintCommentsPlugin,
-        'no-secrets': noSecretsPlugin
+        'no-secrets': noSecretsPlugin,
+        '@cspell': codeSpellChecker
     },
     settings: {
         ...stylisticRuleSet.settings,
@@ -573,6 +575,34 @@ export const baseConfig = {
         'import/no-relative-packages': 'off',
         'import/no-import-module-exports': 'off',
         'import/no-empty-named-blocks': 'error',
-        'import/consistent-type-specifier-style': 'off'
+        'import/consistent-type-specifier-style': 'off',
+
+        '@cspell/spellchecker': [
+            'warn',
+            {
+                autoFix: false,
+                numSuggestions: 3,
+                generateSuggestions: true,
+                ignoreImports: true,
+                ignoreImportProperties: true,
+                checkIdentifiers: true,
+                checkStrings: true,
+                checkStringTemplates: true,
+                checkJSXText: true,
+                checkComments: true,
+                cspell: {
+                    words: [],
+                    ignoreWords: [],
+                    flagWords: [],
+                    ignoreRegExpList: [],
+                    includeRegExpList: [],
+                    allowCompoundWords: true,
+                    import: [],
+                    dictionaries: []
+                },
+                customWordListFile: undefined,
+                debugMode: false
+            }
+        ]
     }
 };
