@@ -331,10 +331,7 @@ export const typescriptConfig = {
         '@typescript-eslint/class-methods-use-this': 'error',
 
         'functional/functional-parameters': 'off',
-        'functional/immutable-data': [
-            'error',
-            { ignoreClasses: false, ignoreImmediateMutation: true, ignoreNonConstDeclarations: false }
-        ],
+        'functional/immutable-data': 'off',
         'functional/no-classes': 'off',
         'functional/no-conditional-statements': 'off',
         'functional/no-expression-statements': 'off',
