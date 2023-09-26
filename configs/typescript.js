@@ -350,10 +350,25 @@ export const typescriptConfig = {
         'functional/prefer-immutable-types': [
             'error',
             {
-                enforcement: 'Immutable',
+                enforcement: 'ReadonlyShallow',
                 ignoreClasses: false,
                 ignoreInferredTypes: true,
-                fixer: true,
+                fixer: {
+                    ReadonlyShallow: [
+                        {
+                            pattern: '^([_$a-zA-Z\\xA0-\\uFFFF][_$a-zA-Z0-9\\xA0-\\uFFFF]*\\[\\])$',
+                            replace: 'readonly $1'
+                        },
+                        {
+                            pattern: '^(Array|Map|Set)<(.+)>$',
+                            replace: 'Readonly$1<$2>'
+                        },
+                        {
+                            pattern: '^(.+)$',
+                            replace: 'Readonly<$1>'
+                        }
+                    ]
+                },
                 variables: {
                     ignoreInFunctions: true
                 }

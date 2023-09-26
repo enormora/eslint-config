@@ -7,7 +7,8 @@ import {
     checkAllCoreRulesConfigured,
     checkUnknownCoreRulesAreNotConfigured,
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured
+    checkUnknownPluginRulesAreNotConfigured,
+    checkConfigToHaveNoValidationIssues
 } from './rules-configuration.js';
 
 test('all core rules are configured', checkAllCoreRulesConfigured, {
@@ -53,3 +54,5 @@ test('no unknown eslint-plugin-eslint-comments rules are configured', checkUnkno
     pluginRules: eslintCommentsPlugin.rules,
     pluginName: 'eslint-plugin-eslint-comments'
 });
+
+test('base preset config has no validation errors', checkConfigToHaveNoValidationIssues, baseConfig);

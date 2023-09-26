@@ -2,7 +2,11 @@ import test from 'ava';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
 import { reactConfig } from '../configs/react.js';
-import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
+import {
+    checkAllPluginRulesConfigured,
+    checkUnknownPluginRulesAreNotConfigured,
+    checkConfigToHaveNoValidationIssues
+} from './rules-configuration.js';
 
 test('all eslint-plugin-react rules are configured', checkAllPluginRulesConfigured, {
     ruleConfigSet: reactConfig.rules,
@@ -27,3 +31,5 @@ test('no unknown eslint-plugin-react-hooks rules are configured', checkUnknownPl
     pluginRules: hooksPlugin.rules,
     pluginName: 'eslint-plugin-react-hooks'
 });
+
+test('react preset config has no validation errors', checkConfigToHaveNoValidationIssues, reactConfig);
