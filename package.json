@@ -19,7 +19,6 @@
     },
     "license": "MIT",
     "devDependencies": {
-        "@cspell/eslint-plugin": "7.3.6",
         "@eslint/js": "8.49.0",
         "ava": "5.3.1",
         "eslint": "8.46.0",
@@ -27,6 +26,7 @@
         "typescript": "5.2.2"
     },
     "dependencies": {
+        "@cspell/eslint-plugin": "7.3.6",
         "@typescript-eslint/eslint-plugin": "6.7.2",
         "@typescript-eslint/parser": "6.7.2",
         "eslint-plugin-array-func": "4.0.0",
