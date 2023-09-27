@@ -48,3 +48,17 @@ export const nodeConfig = {
         'node/shebang': 'off'
     }
 };
+
+export const nodeEntryPointFileConfig = {
+    rules: {
+        'no-console': 'off',
+        'import/max-dependencies': 'off',
+        'node/no-process-env': 'off'
+    }
+};
+
+export const nodeConfigFileConfig = {
+    rules: {
+        'import/no-default-export': 'off'
+    }
+};

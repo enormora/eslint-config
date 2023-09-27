@@ -1,10 +1,25 @@
 import avaPlugin from 'eslint-plugin-ava';
+import { baseConfig } from './base.js';
+
+const commonTestRules = {
+    'no-magic-numbers': 'off',
+    '@typescript-eslint/no-magic-numbers': 'off',
+    'max-len': [
+        'error',
+        {
+            ...baseConfig.rules['max-len'][1],
+            ignoreStrings: true
+        }
+    ]
+};
 
 export const avaConfig = {
     plugins: {
         ava: avaPlugin
     },
     rules: {
+        ...commonTestRules,
+
         'id-length': ['error', { min: 2, properties: 'never', exceptions: ['t'] }],
 
         'ava/assertion-arguments': 'error',
