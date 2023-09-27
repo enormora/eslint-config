@@ -1,6 +1,6 @@
 import test from 'ava';
 import nodePlugin from 'eslint-plugin-n';
-import { nodeConfig } from '../configs/node.js';
+import { nodeConfig, nodeConfigFileConfig, nodeEntryPointFileConfig } from '../configs/node.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,
@@ -20,3 +20,15 @@ test('no unknown eslint-plugin-n rules are configured', checkUnknownPluginRulesA
 });
 
 test('node preset config has no validation errors', checkConfigToHaveNoValidationIssues, nodeConfig);
+
+test(
+    'node config file preset config has no validation errors',
+    checkConfigToHaveNoValidationIssues,
+    nodeConfigFileConfig
+);
+
+test(
+    'node entry point file preset config has no validation errors',
+    checkConfigToHaveNoValidationIssues,
+    nodeEntryPointFileConfig
+);
