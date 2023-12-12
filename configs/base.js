@@ -4,7 +4,7 @@ import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
-import { ecmaVersion, indentSize, javascriptExtensions } from './constants.js';
+import { ecmaVersion, javascriptExtensions } from './constants.js';
 
 export const baseConfig = {
     languageOptions: {
@@ -43,13 +43,13 @@ export const baseConfig = {
         ...bestPracticesRuleSet.rules,
 
         'array-callback-return': 'error',
+        camelcase: 'off',
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
         'no-caller': 'error',
         'no-case-declarations': 'error',
         'no-class-assign': 'error',
         'no-cond-assign': 'error',
-        'no-confusing-arrow': 'error',
         'no-console': 'error',
         'no-const-assign': 'error',
         'no-constant-condition': 'error',
@@ -76,10 +76,7 @@ export const baseConfig = {
         'no-extra-bind': 'error',
         'no-extra-boolean-cast': 'error',
         'no-extra-label': 'error',
-        'no-extra-parens': 'error',
-        'no-extra-semi': 'error',
         'no-fallthrough': 'error',
-        'no-floating-decimal': 'error',
         'no-func-assign': 'error',
         'no-implicit-coercion': 'error',
         'no-implicit-globals': 'error',
@@ -95,21 +92,17 @@ export const baseConfig = {
         'no-lone-blocks': 'error',
         'no-lonely-if': 'error',
         'no-loop-func': 'error',
-        'no-mixed-spaces-and-tabs': 'error',
         'no-new-native-nonconstructor': 'error',
-        'linebreak-style': ['error', 'unix'],
-        'no-multi-spaces': 'error',
         'no-multi-str': 'error',
-        'no-multiple-empty-lines': ['error', { max: 1 }],
         'no-global-assign': 'error',
         'no-negated-condition': 'off',
         'no-nested-ternary': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
-        'no-new-object': 'error',
         'no-new-symbol': 'error',
         'no-new-wrappers': 'error',
         'no-obj-calls': 'error',
+        'no-object-constructor': 'error',
         'no-octal': 'error',
         'no-octal-escape': 'error',
         'no-param-reassign': ['error', { props: true }],
@@ -126,9 +119,7 @@ export const baseConfig = {
         'no-shadow': ['error', { builtinGlobals: true }],
         'no-shadow-restricted-names': 'error',
         'no-sparse-arrays': 'error',
-        'no-tabs': 'error',
         'no-ternary': 'off',
-        'no-trailing-spaces': 'error',
         'no-this-before-super': 'error',
         'no-throw-literal': 'error',
         'no-undef': ['error', { typeof: true }],
@@ -160,7 +151,6 @@ export const baseConfig = {
         'no-useless-constructor': 'error',
         'no-useless-escape': 'error',
         'no-useless-rename': 'error',
-        'no-whitespace-before-property': 'error',
         'no-void': 'error',
         'prefer-const': [
             'error',
@@ -190,19 +180,7 @@ export const baseConfig = {
                 ignore: [-1, 0, 1]
             }
         ],
-        'no-mixed-operators': 'off',
-        'array-bracket-spacing': ['error', 'never'],
-        'array-bracket-newline': ['error', 'consistent'],
-        'array-element-newline': ['error', 'consistent'],
         'arrow-body-style': ['error', 'always'],
-        'arrow-parens': ['error', 'always'],
-        'arrow-spacing': [
-            'error',
-            {
-                before: true,
-                after: true
-            }
-        ],
         'accessor-pairs': [
             'error',
             {
@@ -210,66 +188,24 @@ export const baseConfig = {
             }
         ],
         'block-scoped-var': 'off',
-        'block-spacing': 'off',
-        'brace-style': ['error', '1tbs', { allowSingleLine: false }],
-        camelcase: 'off',
-        'comma-dangle': ['error', 'never'],
-        'comma-spacing': [
-            'error',
-            {
-                before: false,
-                after: true
-            }
-        ],
-        'comma-style': ['error', 'last'],
         complexity: ['error', { max: 6 }],
-        'computed-property-spacing': [
-            'error',
-            'never',
-            {
-                enforceForClassMembers: true
-            }
-        ],
         'consistent-return': 'error',
         'consistent-this': ['error', 'self'],
         'constructor-super': 'error',
-        'generator-star-spacing': ['error', { before: false, after: true }],
         curly: ['error', 'all'],
         'default-case': 'error',
-        'dot-location': ['error', 'property'],
         'dot-notation': 'error',
-        'eol-last': 'error',
         eqeqeq: 'error',
         'func-names': 'off',
         'func-style': 'off',
         'guard-for-in': 'error',
         'id-length': ['error', { min: 2, properties: 'never' }],
-        indent: [
-            'error',
-            indentSize,
-            {
-                SwitchCase: 1,
-                VariableDeclarator: 1,
-                MemberExpression: 1
-            }
-        ],
         'init-declarations': ['error', 'always'],
-        'jsx-quotes': 'off',
-        'key-spacing': [
-            'error',
-            {
-                beforeColon: false,
-                afterColon: true
-            }
-        ],
-        'lines-around-comment': 'off',
         'max-depth': ['error', { max: 5 }],
         'max-lines': ['error', { max: 500, skipBlankLines: true, skipComments: true }],
         'max-nested-callbacks': ['error', { max: 4 }],
         'max-params': ['error', { max: 4 }],
         'max-statements': ['error', { max: 10 }],
-        'multiline-ternary': 'off',
-        'max-statements-per-line': ['error', { max: 1 }],
         'new-cap': [
             'error',
             {
@@ -277,23 +213,9 @@ export const baseConfig = {
                 capIsNew: true
             }
         ],
-        'new-parens': 'error',
-        'newline-per-chained-call': 'off',
-        'object-curly-newline': 'off',
-        'object-curly-spacing': ['error', 'always'],
-        'object-property-newline': 'off',
         'object-shorthand': ['error', 'always'],
         'one-var': ['error', 'never'],
-        'one-var-declaration-per-line': 'error',
         'operator-assignment': ['error', 'always'],
-        'operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
-        'padded-blocks': [
-            'error',
-            'never',
-            {
-                allowSingleLineBlocks: false
-            }
-        ],
         'prefer-arrow-callback': [
             'error',
             {
@@ -301,69 +223,19 @@ export const baseConfig = {
             }
         ],
         'prefer-rest-params': 'error',
-        'quote-props': ['error', 'as-needed'],
-        quotes: ['error', 'single', { avoidEscape: true }],
         radix: 'error',
         'id-match': 'off',
         'require-yield': 'error',
-        'rest-spread-spacing': ['error', 'never'],
-        semi: ['error', 'always'],
-        'semi-spacing': [
-            'error',
-            {
-                before: false,
-                after: true
-            }
-        ],
         'sort-vars': 'off',
-        'keyword-spacing': [
-            'error',
-            {
-                before: true,
-                after: true
-            }
-        ],
-        'space-before-blocks': ['error', 'always'],
-        'space-before-function-paren': [
-            'error',
-            {
-                anonymous: 'always',
-                named: 'never',
-                asyncArrow: 'always'
-            }
-        ],
-        'space-in-parens': ['error', 'never'],
-        'space-infix-ops': 'error',
-        'space-unary-ops': 'error',
-        'spaced-comment': [
-            'error',
-            'always',
-            {
-                line: {
-                    exceptions: ['-', '+', '*'],
-                    markers: ['!', '/', '=>']
-                },
-                block: {
-                    exceptions: ['-', '+', '*'],
-                    markers: ['!', '*'],
-                    balanced: true
-                }
-            }
-        ],
         'sort-imports': 'off',
         strict: ['error', 'safe'],
-        'template-curly-spacing': 'error',
         'unicode-bom': ['error', 'never'],
         'use-isnan': 'error',
         'valid-typeof': 'error',
         'vars-on-top': 'error',
-        'wrap-iife': ['error', 'inside'],
-        'wrap-regex': 'off',
-        'yield-star-spacing': ['error', { before: false, after: true }],
         yoda: ['error', 'never'],
         'capitalized-comments': 'off',
         'class-methods-use-this': 'error',
-        'func-call-spacing': ['error', 'never'],
         'func-name-matching': 'off',
         'line-comment-position': 'off',
         'no-await-in-loop': 'off',
@@ -373,7 +245,6 @@ export const baseConfig = {
         'no-template-curly-in-string': 'error',
         'no-unsafe-negation': 'error',
         'no-useless-return': 'error',
-        'nonblock-statement-body-position': 'off',
         'prefer-destructuring': [
             'error',
             {
@@ -400,42 +271,11 @@ export const baseConfig = {
         'require-await': 'off',
         'sort-keys': 'off',
         'symbol-description': 'error',
-        'template-tag-spacing': ['error', 'never'],
         'for-direction': 'off',
-        'padding-line-between-statements': [
-            'error',
-            {
-                blankLine: 'always',
-                prev: 'directive',
-                next: '*'
-            },
-            {
-                blankLine: 'any',
-                prev: 'directive',
-                next: 'directive'
-            }
-        ],
-        'semi-style': ['error', 'last'],
-        'switch-colon-spacing': [
-            'error',
-            {
-                after: true,
-                before: false
-            }
-        ],
-        'function-paren-newline': 'off',
         'getter-return': [
             'error',
             {
                 allowImplicit: false
-            }
-        ],
-        'implicit-arrow-linebreak': 'off',
-        'lines-between-class-members': [
-            'error',
-            'always',
-            {
-                exceptAfterSingleLine: true
             }
         ],
         'multiline-comment-style': 'off',
@@ -447,7 +287,6 @@ export const baseConfig = {
         'default-param-last': 'error',
         'prefer-regex-literals': 'error',
         'require-unicode-regexp': 'off',
-        'function-call-argument-newline': ['error', 'consistent'],
         'no-useless-catch': 'error',
         'prefer-named-capture-group': 'error',
         'no-import-assign': 'error',
@@ -458,19 +297,6 @@ export const baseConfig = {
         'no-alert': 'off',
         'no-script-url': 'off',
         'no-restricted-globals': 'off',
-        'max-len': [
-            'error',
-            {
-                code: 120,
-                tabWidth: indentSize,
-                ignoreComments: true,
-                ignoreTrailingComments: true,
-                ignoreUrls: true,
-                ignoreStrings: false,
-                ignoreTemplateLiterals: false,
-                ignoreRegExpLiterals: true
-            }
-        ],
 
         'grouped-accessor-pairs': 'off',
         'no-constructor-return': 'error',

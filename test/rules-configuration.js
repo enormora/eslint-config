@@ -55,7 +55,7 @@ export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, testCase) =>
 });
 
 export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
-    const { ruleConfigSet, pluginRules, pluginName } = testCase;
+    const { ruleConfigSet, pluginRules, pluginName, rulesToExclude = [] } = testCase;
     const ruleNames = Object.keys(pluginRules);
     const shortPluginName = extractShortName(pluginName);
 
@@ -63,18 +63,22 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
         t.fail('Plugin rules are empty');
     }
 
-    ruleNames.forEach((ruleName) => {
-        const rule = pluginRules[ruleName];
-        const shortPluginRuleName = `${shortPluginName}/${ruleName}`;
-        const isConfigured = isRuleConfigured(ruleConfigSet, shortPluginRuleName);
+    ruleNames
+        .filter((ruleName) => {
+            return !rulesToExclude.includes(ruleName);
+        })
+        .forEach((ruleName) => {
+            const rule = pluginRules[ruleName];
+            const shortPluginRuleName = `${shortPluginName}/${ruleName}`;
+            const isConfigured = isRuleConfigured(ruleConfigSet, shortPluginRuleName);
 
-        if (isRuleDeprecated(rule)) {
-            t.false(isConfigured, `Rule ${shortPluginRuleName} is deprecated`);
-            return;
-        }
+            if (isRuleDeprecated(rule)) {
+                t.false(isConfigured, `Rule ${shortPluginRuleName} is deprecated`);
+                return;
+            }
 
-        t.true(isConfigured, `Rule ${shortPluginRuleName} not configured`);
-    });
+            t.true(isConfigured, `Rule ${shortPluginRuleName} not configured`);
+        });
 });
 
 export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) => {

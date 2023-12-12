@@ -86,7 +86,6 @@ export const typescriptConfig = {
                 }
             }
         ],
-        ...configureWrappedCoreRule('brace-style'),
         '@typescript-eslint/naming-convention': [
             'error',
             {
@@ -122,21 +121,7 @@ export const typescriptConfig = {
                 allowTypedFunctionExpressions: true
             }
         ],
-        ...configureWrappedCoreRule('func-call-spacing'),
-        ...configureWrappedCoreRule('indent'),
-        '@typescript-eslint/member-delimiter-style': [
-            'error',
-            {
-                multiline: {
-                    delimiter: 'semi',
-                    requireLast: true
-                },
-                singleline: {
-                    delimiter: 'semi',
-                    requireLast: false
-                }
-            }
-        ],
+        ...configureWrappedCoreRule('max-params'),
         '@typescript-eslint/member-ordering': 'error',
         ...configureWrappedCoreRule('no-array-constructor'),
         ...configureWrappedCoreRule('no-empty-function'),
@@ -166,6 +151,7 @@ export const typescriptConfig = {
                 allowDestructuring: true
             }
         ],
+        '@typescript-eslint/no-unsafe-unary-minus': 'error',
         '@typescript-eslint/no-unnecessary-qualifier': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -173,6 +159,7 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('no-useless-constructor'),
         '@typescript-eslint/no-useless-constructor': 'error',
         '@typescript-eslint/no-var-requires': 'error',
+        ...configureWrappedCoreRule('prefer-destructuring'),
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'error',
         '@typescript-eslint/prefer-includes': 'error',
@@ -185,20 +172,16 @@ export const typescriptConfig = {
                 allowAny: true
             }
         ],
-        ...configureWrappedCoreRule('quotes'),
         '@typescript-eslint/restrict-plus-operands': 'error',
         '@typescript-eslint/require-array-sort-compare': 'error',
-        ...configureWrappedCoreRule('semi'),
         '@typescript-eslint/triple-slash-reference': [
             'error',
             {
                 path: 'never'
             }
         ],
-        '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/prefer-regexp-exec': 'error',
         '@typescript-eslint/unified-signatures': 'error',
-        ...configureWrappedCoreRule('no-unused-expressions'),
         '@typescript-eslint/require-await': 'off',
         '@typescript-eslint/strict-boolean-expressions': [
             'error',
@@ -220,20 +203,17 @@ export const typescriptConfig = {
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
-        ...configureWrappedCoreRule('comma-spacing'),
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         ...configureWrappedCoreRule('default-param-last'),
         ...configureWrappedCoreRule('dot-notation'),
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/init-declarations': 'off',
-        ...configureWrappedCoreRule('keyword-spacing'),
         '@typescript-eslint/method-signature-style': ['error', 'method'],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members'),
         '@typescript-eslint/no-dynamic-delete': ['error'],
         '@typescript-eslint/no-extra-non-null-assertion': ['error'],
-        ...configureWrappedCoreRule('no-extra-parens'),
         '@typescript-eslint/no-floating-promises': ['error'],
         '@typescript-eslint/no-implied-eval': ['error'],
         '@typescript-eslint/no-invalid-this': ['error'],
@@ -260,7 +240,6 @@ export const typescriptConfig = {
         '@typescript-eslint/switch-exhaustiveness-check': ['error'],
         '@typescript-eslint/typedef': ['off'],
         '@typescript-eslint/unbound-method': ['off'],
-        ...configureWrappedCoreRule('lines-between-class-members'),
         '@typescript-eslint/ban-tslint-comment': ['off'],
         '@typescript-eslint/no-confusing-non-null-assertion': ['error'],
         '@typescript-eslint/prefer-enum-initializers': ['off'],
@@ -272,7 +251,6 @@ export const typescriptConfig = {
             'error',
             { prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: true }
         ],
-        ...configureWrappedCoreRule('comma-dangle'),
         '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
         '@typescript-eslint/no-loop-func': 'off',
         '@typescript-eslint/space-infix-ops': 'off',
@@ -285,7 +263,6 @@ export const typescriptConfig = {
             }
         ],
         '@typescript-eslint/non-nullable-type-assertion-style': 'off',
-        '@typescript-eslint/object-curly-spacing': 'off',
         '@typescript-eslint/sort-type-constituents': [
             'error',
             {
@@ -325,7 +302,6 @@ export const typescriptConfig = {
         '@typescript-eslint/no-import-type-side-effects': 'error',
         '@typescript-eslint/no-duplicate-type-constituents': 'error',
         '@typescript-eslint/lines-around-comment': 'off',
-        ...configureWrappedCoreRule('key-spacing'),
         '@typescript-eslint/block-spacing': 'off',
         '@typescript-eslint/no-unsafe-enum-comparison': 'error',
         '@typescript-eslint/class-methods-use-this': 'error',

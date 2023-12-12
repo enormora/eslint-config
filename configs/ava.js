@@ -1,5 +1,5 @@
 import avaPlugin from 'eslint-plugin-ava';
-import { baseConfig } from './base.js';
+import { stylisticRuleSet } from './rule-sets/stylistic.js';
 
 const commonTestRules = {
     'no-magic-numbers': 'off',
@@ -7,7 +7,7 @@ const commonTestRules = {
     'max-len': [
         'error',
         {
-            ...baseConfig.rules['max-len'][1],
+            ...stylisticRuleSet.rules['@stylistic/max-len'][1],
             ignoreStrings: true
         }
     ]
