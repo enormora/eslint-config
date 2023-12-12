@@ -121,19 +121,7 @@ export const typescriptConfig = {
                 allowTypedFunctionExpressions: true
             }
         ],
-        '@typescript-eslint/member-delimiter-style': [
-            'error',
-            {
-                multiline: {
-                    delimiter: 'semi',
-                    requireLast: true
-                },
-                singleline: {
-                    delimiter: 'semi',
-                    requireLast: false
-                }
-            }
-        ],
+        ...configureWrappedCoreRule('max-params'),
         '@typescript-eslint/member-ordering': 'error',
         ...configureWrappedCoreRule('no-array-constructor'),
         ...configureWrappedCoreRule('no-empty-function'),
@@ -163,6 +151,7 @@ export const typescriptConfig = {
                 allowDestructuring: true
             }
         ],
+        '@typescript-eslint/no-unsafe-unary-minus': 'error',
         '@typescript-eslint/no-unnecessary-qualifier': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
@@ -170,6 +159,7 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('no-useless-constructor'),
         '@typescript-eslint/no-useless-constructor': 'error',
         '@typescript-eslint/no-var-requires': 'error',
+        ...configureWrappedCoreRule('prefer-destructuring'),
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'error',
         '@typescript-eslint/prefer-includes': 'error',
@@ -190,7 +180,6 @@ export const typescriptConfig = {
                 path: 'never'
             }
         ],
-        '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/prefer-regexp-exec': 'error',
         '@typescript-eslint/unified-signatures': 'error',
         '@typescript-eslint/require-await': 'off',
@@ -274,7 +263,6 @@ export const typescriptConfig = {
             }
         ],
         '@typescript-eslint/non-nullable-type-assertion-style': 'off',
-        '@typescript-eslint/object-curly-spacing': 'off',
         '@typescript-eslint/sort-type-constituents': [
             'error',
             {

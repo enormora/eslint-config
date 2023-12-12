@@ -20,7 +20,9 @@ test('all @typescript-eslint/eslint-plugin rules are configured', checkAllPlugin
         'no-unused-expressions',
         'comma-spacing',
         'keyword-spacing',
+        'member-delimiter-style',
         'no-extra-parens',
+        'type-annotation-spacing',
         'lines-between-class-members',
         'comma-dangle',
         'key-spacing'

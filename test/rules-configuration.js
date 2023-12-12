@@ -29,20 +29,16 @@ function isRuleConfigured(ruleConfigSet, ruleName) {
 }
 
 export const checkAllCoreRulesConfigured = test.macro((t, testCase) => {
-    const { ruleConfigSet, rulesToExclude = [] } = testCase;
+    const { ruleConfigSet } = testCase;
     const ruleNames = Object.keys(eslintCorePresets.configs.all.rules);
 
     if (ruleNames.length === 0) {
         t.fail('ESLint core rules not found');
     }
 
-    ruleNames
-        .filter((ruleName) => {
-            return !rulesToExclude.includes(ruleName);
-        })
-        .forEach((ruleName) => {
-            t.true(isRuleConfigured(ruleConfigSet, ruleName), `ESLint core rule "${ruleName}" not configured`);
-        });
+    ruleNames.forEach((ruleName) => {
+        t.true(isRuleConfigured(ruleConfigSet, ruleName), `ESLint core rule "${ruleName}" not configured`);
+    });
 });
 
 export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, testCase) => {

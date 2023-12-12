@@ -51,9 +51,11 @@ export const stylisticRuleSet = {
         '@stylistic/dot-location': ['error', 'property'],
         '@stylistic/eol-last': 'error',
         '@stylistic/func-call-spacing': ['error', 'never'],
+        '@stylistic/function-call-spacing': ['error', 'never'],
         '@stylistic/function-call-argument-newline': ['error', 'consistent'],
         '@stylistic/function-paren-newline': 'off',
         '@stylistic/generator-star-spacing': ['error', { before: false, after: true }],
+        '@stylistic/indent-binary-ops': ['error', indentSize],
         '@stylistic/implicit-arrow-linebreak': 'off',
         '@stylistic/indent': [
             'error',
@@ -64,7 +66,25 @@ export const stylisticRuleSet = {
                 MemberExpression: 1
             }
         ],
+        '@stylistic/jsx-child-element-spacing': 'off',
+        '@stylistic/jsx-closing-bracket-location': 'off',
+        '@stylistic/jsx-closing-tag-location': 'off',
+        '@stylistic/jsx-curly-brace-presence': 'off',
+        '@stylistic/jsx-curly-newline': 'off',
+        '@stylistic/jsx-curly-spacing': 'off',
+        '@stylistic/jsx-equals-spacing': 'off',
+        '@stylistic/jsx-first-prop-new-line': 'off',
+        '@stylistic/jsx-indent': 'off',
+        '@stylistic/jsx-indent-props': 'off',
+        '@stylistic/jsx-max-props-per-line': 'off',
+        '@stylistic/jsx-newline': 'off',
+        '@stylistic/jsx-one-expression-per-line': 'off',
+        '@stylistic/jsx-props-no-multi-spaces': 'off',
+        '@stylistic/jsx-self-closing-comp': 'off',
+        '@stylistic/jsx-sort-props': 'off',
+        '@stylistic/jsx-tag-spacing': 'off',
         '@stylistic/jsx-quotes': 'off',
+        '@stylistic/jsx-wrap-multilines': 'off',
         '@stylistic/key-spacing': [
             'error',
             {
@@ -102,6 +122,19 @@ export const stylisticRuleSet = {
             }
         ],
         '@stylistic/max-statements-per-line': ['error', { max: 1 }],
+        '@stylistic/member-delimiter-style': [
+            'error',
+            {
+                multiline: {
+                    delimiter: 'semi',
+                    requireLast: true
+                },
+                singleline: {
+                    delimiter: 'semi',
+                    requireLast: false
+                }
+            }
+        ],
         '@stylistic/multiline-ternary': 'off',
         '@stylistic/new-parens': 'error',
         '@stylistic/newline-per-chained-call': 'off',
@@ -190,6 +223,9 @@ export const stylisticRuleSet = {
         ],
         '@stylistic/template-curly-spacing': 'error',
         '@stylistic/template-tag-spacing': ['error', 'never'],
+        '@stylistic/type-annotation-spacing': 'error',
+        '@stylistic/type-generic-spacing': 'error',
+        '@stylistic/type-named-tuple-spacing': 'error',
         '@stylistic/wrap-iife': ['error', 'inside'],
         '@stylistic/wrap-regex': 'off',
         '@stylistic/yield-star-spacing': ['error', { before: false, after: true }]
