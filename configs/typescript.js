@@ -86,7 +86,6 @@ export const typescriptConfig = {
                 }
             }
         ],
-        ...configureWrappedCoreRule('brace-style'),
         '@typescript-eslint/naming-convention': [
             'error',
             {
@@ -122,8 +121,6 @@ export const typescriptConfig = {
                 allowTypedFunctionExpressions: true
             }
         ],
-        ...configureWrappedCoreRule('func-call-spacing'),
-        ...configureWrappedCoreRule('indent'),
         '@typescript-eslint/member-delimiter-style': [
             'error',
             {
@@ -185,10 +182,8 @@ export const typescriptConfig = {
                 allowAny: true
             }
         ],
-        ...configureWrappedCoreRule('quotes'),
         '@typescript-eslint/restrict-plus-operands': 'error',
         '@typescript-eslint/require-array-sort-compare': 'error',
-        ...configureWrappedCoreRule('semi'),
         '@typescript-eslint/triple-slash-reference': [
             'error',
             {
@@ -198,7 +193,6 @@ export const typescriptConfig = {
         '@typescript-eslint/type-annotation-spacing': 'error',
         '@typescript-eslint/prefer-regexp-exec': 'error',
         '@typescript-eslint/unified-signatures': 'error',
-        ...configureWrappedCoreRule('no-unused-expressions'),
         '@typescript-eslint/require-await': 'off',
         '@typescript-eslint/strict-boolean-expressions': [
             'error',
@@ -220,20 +214,17 @@ export const typescriptConfig = {
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
-        ...configureWrappedCoreRule('comma-spacing'),
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         ...configureWrappedCoreRule('default-param-last'),
         ...configureWrappedCoreRule('dot-notation'),
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/init-declarations': 'off',
-        ...configureWrappedCoreRule('keyword-spacing'),
         '@typescript-eslint/method-signature-style': ['error', 'method'],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members'),
         '@typescript-eslint/no-dynamic-delete': ['error'],
         '@typescript-eslint/no-extra-non-null-assertion': ['error'],
-        ...configureWrappedCoreRule('no-extra-parens'),
         '@typescript-eslint/no-floating-promises': ['error'],
         '@typescript-eslint/no-implied-eval': ['error'],
         '@typescript-eslint/no-invalid-this': ['error'],
@@ -260,7 +251,6 @@ export const typescriptConfig = {
         '@typescript-eslint/switch-exhaustiveness-check': ['error'],
         '@typescript-eslint/typedef': ['off'],
         '@typescript-eslint/unbound-method': ['off'],
-        ...configureWrappedCoreRule('lines-between-class-members'),
         '@typescript-eslint/ban-tslint-comment': ['off'],
         '@typescript-eslint/no-confusing-non-null-assertion': ['error'],
         '@typescript-eslint/prefer-enum-initializers': ['off'],
@@ -272,7 +262,6 @@ export const typescriptConfig = {
             'error',
             { prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: true }
         ],
-        ...configureWrappedCoreRule('comma-dangle'),
         '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
         '@typescript-eslint/no-loop-func': 'off',
         '@typescript-eslint/space-infix-ops': 'off',
@@ -325,7 +314,6 @@ export const typescriptConfig = {
         '@typescript-eslint/no-import-type-side-effects': 'error',
         '@typescript-eslint/no-duplicate-type-constituents': 'error',
         '@typescript-eslint/lines-around-comment': 'off',
-        ...configureWrappedCoreRule('key-spacing'),
         '@typescript-eslint/block-spacing': 'off',
         '@typescript-eslint/no-unsafe-enum-comparison': 'error',
         '@typescript-eslint/class-methods-use-this': 'error',
