@@ -18,13 +18,6 @@
         "test": "ava"
     },
     "license": "MIT",
-    "devDependencies": {
-        "@eslint/js": "8.49.0",
-        "ava": "6.0.1",
-        "eslint": "8.46.0",
-        "prettier": "3.0.0",
-        "typescript": "5.2.2"
-    },
     "dependencies": {
         "@cspell/eslint-plugin": "7.3.6",
         "@typescript-eslint/eslint-plugin": "6.7.2",
@@ -44,6 +37,13 @@
         "eslint-plugin-sonarjs": "0.21.0",
         "eslint-plugin-unicorn": "^48.0.1",
         "globals": "13.21.0"
+    },
+    "devDependencies": {
+        "@eslint/js": "8.49.0",
+        "ava": "6.0.1",
+        "eslint": "8.46.0",
+        "prettier": "3.0.0",
+        "typescript": "5.3.3"
     },
     "repository": {
         "type": "git",
