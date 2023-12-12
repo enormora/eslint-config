@@ -20,7 +20,7 @@
     "license": "MIT",
     "devDependencies": {
         "@eslint/js": "8.49.0",
-        "ava": "5.3.1",
+        "ava": "6.0.1",
         "eslint": "8.46.0",
         "prettier": "3.0.0",
         "typescript": "5.2.2"
