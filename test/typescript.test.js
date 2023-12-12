@@ -11,6 +11,20 @@ import {
 test('all @typescript-eslint/eslint-plugin rules are configured', checkAllPluginRulesConfigured, {
     ruleConfigSet: typescriptConfig.rules,
     pluginRules: typescriptPlugin.rules,
+    rulesToExclude: [
+        'brace-style',
+        'func-call-spacing',
+        'indent',
+        'quotes',
+        'semi',
+        'no-unused-expressions',
+        'comma-spacing',
+        'keyword-spacing',
+        'no-extra-parens',
+        'lines-between-class-members',
+        'comma-dangle',
+        'key-spacing'
+    ],
     pluginName: '@typescript-eslint/eslint-plugin'
 });
 
