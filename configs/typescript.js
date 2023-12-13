@@ -4,12 +4,22 @@ import functionalPlugin from 'eslint-plugin-functional';
 import { baseConfig } from './base.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
 
-function configureWrappedCoreRule(name) {
-    const coreRuleConfig = baseConfig.rules[name];
+function asArray(value) {
+    if (Array.isArray(value)) {
+        return value;
+    }
+
+    return [value];
+}
+
+function configureWrappedCoreRule(name, optionsOverrides) {
+    const coreRuleConfig = asArray(baseConfig.rules[name]);
+    const [coreRuleSeverity, ...coreRuleOptions] = coreRuleConfig;
+    const options = optionsOverrides === undefined ? coreRuleOptions : asArray(optionsOverrides);
 
     return {
         [name]: 'off',
-        [`@typescript-eslint/${name}`]: coreRuleConfig
+        [`@typescript-eslint/${name}`]: [coreRuleSeverity, ...options]
     };
 }
 
@@ -218,7 +228,18 @@ export const typescriptConfig = {
         '@typescript-eslint/no-implied-eval': ['error'],
         '@typescript-eslint/no-invalid-this': ['error'],
         '@typescript-eslint/no-invalid-void-type': ['error'],
-        ...configureWrappedCoreRule('no-magic-numbers'),
+        ...configureWrappedCoreRule('no-magic-numbers', {
+            ignoreEnums: false,
+            ignoreNumericLiteralTypes: true,
+            ignoreReadonlyClassProperties: false,
+            ignoreTypeIndexes: false,
+            ignoreDefaultValues: true,
+            ignoreArrayIndexes: false,
+            detectObjects: false,
+            enforceConst: false,
+            ignoreClassFieldInitialValues: false,
+            ignore: [-1, 0, 1]
+        }),
         '@typescript-eslint/no-namespace': ['error'],
         '@typescript-eslint/no-non-null-asserted-optional-chain': ['error'],
         '@typescript-eslint/no-non-null-assertion': ['error'],
