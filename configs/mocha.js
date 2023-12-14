@@ -1,8 +1,12 @@
 import mochaPlugin from 'eslint-plugin-mocha';
+import globals from 'globals';
 
 export const mochaConfig = {
     plugins: {
         mocha: mochaPlugin
+    },
+    languageOptions: {
+        globals: globals.mocha
     },
     rules: {
         'mocha/handle-done-callback': 'error',
