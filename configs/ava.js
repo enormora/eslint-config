@@ -1,24 +1,15 @@
 import avaPlugin from 'eslint-plugin-ava';
-import { stylisticRuleSet } from './rule-sets/stylistic.js';
-
-const commonTestRules = {
-    'no-magic-numbers': 'off',
-    '@typescript-eslint/no-magic-numbers': 'off',
-    'max-len': [
-        'error',
-        {
-            ...stylisticRuleSet.rules['@stylistic/max-len'][1],
-            ignoreStrings: true
-        }
-    ]
-};
+import { testRuleSet } from './rule-sets/test-rules.js';
 
 export const avaConfig = {
     plugins: {
         ava: avaPlugin
     },
     rules: {
-        ...commonTestRules,
+        ...testRuleSet.rules,
+
+        'no-magic-numbers': 'off',
+        '@typescript-eslint/no-magic-numbers': 'off',
 
         'id-length': ['error', { min: 2, properties: 'never', exceptions: ['t'] }],
 

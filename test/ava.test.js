@@ -4,7 +4,8 @@ import { avaConfig } from '../configs/ava.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,
-    checkConfigToHaveNoValidationIssues
+    checkConfigToHaveNoValidationIssues,
+    checkAllTestRulesConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-ava rules are configured', checkAllPluginRulesConfigured, {
@@ -17,6 +18,10 @@ test('no unknown eslint-plugin-ava rules are configured', checkUnknownPluginRule
     ruleConfigSet: avaConfig.rules,
     pluginRules: avaPlugin.rules,
     pluginName: 'eslint-plugin-ava'
+});
+
+test('all common test rules are configured', checkAllTestRulesConfigured, {
+    ruleConfigSet: avaConfig.rules
 });
 
 test('ava preset config has no validation errors', checkConfigToHaveNoValidationIssues, avaConfig);
