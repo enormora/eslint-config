@@ -142,3 +142,9 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
         t.fail(`Linter.verify() failed for the given config with ${error.message}`);
     }
 });
+
+export const checkConfigLanguageOptions = test.macro((t, testCase) => {
+    const { configLanguageOptions, languageOptions } = testCase;
+
+    t.deepEqual(configLanguageOptions, languageOptions);
+});
