@@ -154,18 +154,18 @@ export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet } = testCase;
 
     const testRuleNames = Object.keys(testRuleSet.rules);
-    const rulesFromConfigEntries = Object.entries(ruleConfigSet);
+    const rulesFromConfigKeys = Object.keys(ruleConfigSet);
 
-    if (rulesFromConfigEntries.length === 0) {
+    if (rulesFromConfigKeys.length === 0) {
         t.fail('Plugin rules are empty');
     }
 
-    const remainingRulesFromEntries = rulesFromConfigEntries.filter(([ruleName]) => {
+    const remainingRulesKeys = rulesFromConfigKeys.filter((ruleName) => {
         return testRuleNames.includes(ruleName);
     });
 
-    const actual = Object.fromEntries(remainingRulesFromEntries);
-    const expected = testRuleSet.rules;
+    const actual = remainingRulesKeys;
+    const expected = testRuleNames;
 
     t.deepEqual(actual, expected, 'Common test rules could not be found');
 });
