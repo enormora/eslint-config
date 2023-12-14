@@ -6,7 +6,8 @@ import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,
     checkConfigToHaveNoValidationIssues,
-    checkConfigLanguageOptions
+    checkConfigLanguageOptions,
+    checkAllTestRulesConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-mocha rules are configured', checkAllPluginRulesConfigured, {
@@ -19,6 +20,10 @@ test('no unknown eslint-plugin-mocha rules are configured', checkUnknownPluginRu
     ruleConfigSet: mochaConfig.rules,
     pluginRules: mochaPlugin.rules,
     pluginName: 'eslint-plugin-mocha'
+});
+
+test('all common test rules are configured', checkAllTestRulesConfigured, {
+    ruleConfigSet: mochaConfig.rules
 });
 
 test('mocha preset config has no validation errors', checkConfigToHaveNoValidationIssues, mochaConfig);

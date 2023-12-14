@@ -1,5 +1,6 @@
 import mochaPlugin from 'eslint-plugin-mocha';
 import globals from 'globals';
+import { testRuleSet } from './rule-sets/test-rules.js';
 
 export const mochaConfig = {
     plugins: {
@@ -9,6 +10,8 @@ export const mochaConfig = {
         globals: globals.mocha
     },
     rules: {
+        ...testRuleSet.rules,
+
         'mocha/handle-done-callback': 'error',
         'mocha/max-top-level-suites': 'error',
         'mocha/no-async-describe': 'error',

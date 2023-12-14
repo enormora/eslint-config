@@ -2,6 +2,7 @@ import test from 'ava';
 import eslintCorePresets from '@eslint/js';
 import { Linter } from 'eslint';
 import ts from 'typescript';
+import { testRuleSet } from '../configs/rule-sets/test-rules.js';
 
 function extractShortName(pluginName) {
     const prefix = 'eslint-plugin-';
@@ -147,4 +148,24 @@ export const checkConfigLanguageOptions = test.macro((t, testCase) => {
     const { configLanguageOptions, languageOptions } = testCase;
 
     t.deepEqual(configLanguageOptions, languageOptions);
+});
+
+export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet } = testCase;
+
+    const testRuleNames = Object.keys(testRuleSet.rules);
+    const rulesFromConfigEntries = Object.entries(ruleConfigSet);
+
+    if (rulesFromConfigEntries.length === 0) {
+        t.fail('Plugin rules are empty');
+    }
+
+    const remainingRulesFromEntries = rulesFromConfigEntries.filter(([ruleName]) => {
+        return testRuleNames.includes(ruleName);
+    });
+
+    const actual = Object.fromEntries(remainingRulesFromEntries);
+    const expected = testRuleSet.rules;
+
+    t.deepEqual(actual, expected, 'Common test rules could not be found');
 });
