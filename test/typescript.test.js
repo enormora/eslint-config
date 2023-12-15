@@ -1,12 +1,31 @@
 import test from 'ava';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
+import typescriptParser from '@typescript-eslint/parser';
 import functionalPlugin from 'eslint-plugin-functional';
 import { typescriptConfig } from '../configs/typescript.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,
-    checkConfigToHaveNoValidationIssues
+    checkConfigToHaveNoValidationIssues,
+    checkConfigLanguageOptions
 } from './rules-configuration.js';
+
+test('typescript preset config has the correct language options defined', checkConfigLanguageOptions, {
+    configLanguageOptions: typescriptConfig.languageOptions,
+    languageOptions: {
+        parser: typescriptParser,
+        parserOptions: {
+            warnOnUnsupportedTypeScriptVersion: false,
+            sourceType: 'module',
+            ecmaFeatures: {
+                jsx: false,
+                globalReturn: false
+            },
+            EXPERIMENTAL_useProjectService: true,
+            project: 'tsconfig.json'
+        }
+    }
+});
 
 test('all @typescript-eslint/eslint-plugin rules are configured', checkAllPluginRulesConfigured, {
     ruleConfigSet: typescriptConfig.rules,
