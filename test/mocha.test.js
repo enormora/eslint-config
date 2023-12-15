@@ -7,7 +7,8 @@ import {
     checkUnknownPluginRulesAreNotConfigured,
     checkConfigToHaveNoValidationIssues,
     checkConfigLanguageOptions,
-    checkAllTestRulesConfigured
+    checkAllTestRulesConfigured,
+    checkAdditionalRulesConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-mocha rules are configured', checkAllPluginRulesConfigured, {
@@ -32,5 +33,12 @@ test('mocha preset config has the correct language options defined', checkConfig
     configLanguageOptions: mochaConfig.languageOptions,
     languageOptions: {
         globals: globals.mocha
+    }
+});
+
+test('mocha preset config defines additional rules', checkAdditionalRulesConfigured, {
+    ruleConfigSet: mochaConfig.rules,
+    additionalRules: {
+        'prefer-arrow-callback': 'off'
     }
 });

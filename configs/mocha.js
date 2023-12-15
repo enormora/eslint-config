@@ -12,6 +12,8 @@ export const mochaConfig = {
     rules: {
         ...testRuleSet.rules,
 
+        'prefer-arrow-callback': 'off',
+
         'mocha/handle-done-callback': 'error',
         'mocha/max-top-level-suites': 'error',
         'mocha/no-async-describe': 'error',

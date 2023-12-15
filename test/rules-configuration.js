@@ -169,3 +169,26 @@ export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
 
     t.deepEqual(actual, expected, 'Common test rules could not be found');
 });
+
+export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
+    const { ruleConfigSet, additionalRules } = testCase;
+
+    const additionalRulesNames = Object.keys(additionalRules);
+    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ruleName]) => {
+        return additionalRulesNames.includes(ruleName);
+    });
+
+    if (additionalRulesFromRuleConfigSet.length === 0) {
+        t.fail('Additional plugin rules are not defined');
+    }
+
+    additionalRulesFromRuleConfigSet.forEach(([ruleName, ruleSetting]) => {
+        const expectedRuleSetting = additionalRules[ruleName];
+
+        t.deepEqual(
+            expectedRuleSetting,
+            ruleSetting,
+            `Rule ${ruleName} is not set to ${JSON.stringify(expectedRuleSetting)}`
+        );
+    });
+});
