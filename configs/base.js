@@ -345,7 +345,7 @@ export const baseConfig = {
         'import/prefer-default-export': 'off',
         'import/newline-after-import': 'error',
         'import/no-nodejs-modules': 'off',
-        'import/max-dependencies': ['error', { max: 8 }],
+        'import/max-dependencies': ['error', { max: 10 }],
         'import/first': 'error',
         'import/no-unused-modules': 'error',
         'import/no-anonymous-default-export': 'off',
