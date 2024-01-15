@@ -362,9 +362,9 @@ export const baseConfig = {
         'import/extensions': [
             'error',
             {
-                js: 'always',
-                jsx: 'always',
-                json: 'always'
+                js: 'ignorePackages',
+                jsx: 'ignorePackages',
+                json: 'ignorePackages'
             }
         ],
         'import/namespace': [
