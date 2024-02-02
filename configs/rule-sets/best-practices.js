@@ -123,6 +123,7 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-blob-reading-methods': 'error',
         'unicorn/prefer-top-level-await': 'off',
         'unicorn/prefer-at': 'error',
+        'unicorn/no-unnecessary-polyfills': 'off',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
