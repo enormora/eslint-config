@@ -218,7 +218,7 @@ export const typescriptConfig = {
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/init-declarations': 'off',
-        '@typescript-eslint/method-signature-style': ['error', 'method'],
+        '@typescript-eslint/method-signature-style': ['error', 'property'],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members'),
         '@typescript-eslint/no-dynamic-delete': ['error'],
