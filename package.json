@@ -23,7 +23,7 @@
         "@stylistic/eslint-plugin": "1.5.4",
         "@typescript-eslint/eslint-plugin": "6.20.0",
         "@typescript-eslint/parser": "6.20.0",
-        "eslint-plugin-array-func": "4.0.0",
+        "eslint-plugin-array-func": "5.0.1",
         "eslint-plugin-ava": "14.0.0",
         "eslint-plugin-destructuring": "2.2.1",
         "eslint-plugin-eslint-comments": "3.2.0",
