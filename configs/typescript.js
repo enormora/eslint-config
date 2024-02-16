@@ -322,6 +322,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-array-delete': 'error',
         '@typescript-eslint/no-useless-template-literals': 'error',
         ...configureWrappedCoreRule('prefer-promise-reject-errors'),
+        '@typescript-eslint/prefer-find': 'error',
 
         'functional/functional-parameters': 'off',
         'functional/immutable-data': 'off',
