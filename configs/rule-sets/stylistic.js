@@ -229,6 +229,7 @@ export const stylisticRuleSet = {
         '@stylistic/type-named-tuple-spacing': 'error',
         '@stylistic/wrap-iife': ['error', 'inside'],
         '@stylistic/wrap-regex': 'off',
-        '@stylistic/yield-star-spacing': ['error', { before: false, after: true }]
+        '@stylistic/yield-star-spacing': ['error', { before: false, after: true }],
+        '@stylistic/jsx-pascal-case': 'off'
     }
 };
