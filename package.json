@@ -27,7 +27,7 @@
         "eslint-plugin-ava": "14.0.0",
         "eslint-plugin-destructuring": "2.2.1",
         "eslint-plugin-eslint-comments": "3.2.0",
-        "eslint-plugin-functional": "6.0.0",
+        "eslint-plugin-functional": "6.0.1",
         "eslint-plugin-import": "2.29.1",
         "eslint-plugin-mocha": "10.2.0",
         "eslint-plugin-n": "16.6.2",
