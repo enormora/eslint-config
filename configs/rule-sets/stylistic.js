@@ -19,7 +19,7 @@ export const stylisticRuleSet = {
         'destructuring/in-params': ['error', { 'max-params': 0 }],
         'destructuring/no-rename': 'off',
 
-        '@stylistic/array-bracket-newline': ['error', 'consistent'],
+        '@stylistic/array-bracket-newline': 'off',
         '@stylistic/array-bracket-spacing': ['error', 'never'],
         '@stylistic/array-element-newline': ['error', 'consistent'],
         '@stylistic/arrow-parens': ['error', 'always'],
