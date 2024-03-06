@@ -1,7 +1,7 @@
 import test from 'ava';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import importPlugin from 'eslint-plugin-import';
-import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
+import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import { baseConfig } from '../configs/base.js';
 import {
     checkAllCoreRulesConfigured,
@@ -43,16 +43,20 @@ test('no unknown eslint-plugin-import rules are configured', checkUnknownPluginR
     pluginName: 'eslint-plugin-import'
 });
 
-test('all eslint-plugin-eslint-comments rules are configured', checkAllPluginRulesConfigured, {
+test('all @eslint-community/eslint-plugin-eslint-comments rules are configured', checkAllPluginRulesConfigured, {
     ruleConfigSet: baseConfig.rules,
     pluginRules: eslintCommentsPlugin.rules,
     pluginName: 'eslint-plugin-eslint-comments'
 });
 
-test('no unknown eslint-plugin-eslint-comments rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
-    pluginRules: eslintCommentsPlugin.rules,
-    pluginName: 'eslint-plugin-eslint-comments'
-});
+test(
+    'no unknown @eslint-community/eslint-plugin-eslint-comments rules are configured',
+    checkUnknownPluginRulesAreNotConfigured,
+    {
+        ruleConfigSet: baseConfig.rules,
+        pluginRules: eslintCommentsPlugin.rules,
+        pluginName: 'eslint-plugin-eslint-comments'
+    }
+);
 
 test('base preset config has no validation errors', checkConfigToHaveNoValidationIssues, baseConfig);
