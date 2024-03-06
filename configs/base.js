@@ -1,5 +1,5 @@
 import importPlugin from 'eslint-plugin-import';
-import eslintCommentsPlugin from 'eslint-plugin-eslint-comments';
+import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
