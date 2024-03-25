@@ -19,7 +19,7 @@
     },
     "license": "MIT",
     "dependencies": {
-        "@cspell/eslint-plugin": "8.6.0",
+        "@cspell/eslint-plugin": "8.6.1",
         "@eslint-community/eslint-plugin-eslint-comments": "4.1.0",
         "@stylistic/eslint-plugin": "1.7.0",
         "@typescript-eslint/eslint-plugin": "7.0.2",
