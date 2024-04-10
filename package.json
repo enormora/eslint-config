@@ -29,7 +29,7 @@
         "eslint-plugin-destructuring": "2.2.1",
         "eslint-plugin-functional": "6.4.0",
         "eslint-plugin-import": "2.29.1",
-        "eslint-plugin-mocha": "10.2.0",
+        "eslint-plugin-mocha": "10.4.2",
         "eslint-plugin-n": "16.6.2",
         "eslint-plugin-no-secrets": "0.8.9",
         "eslint-plugin-prettier": "5.1.3",
