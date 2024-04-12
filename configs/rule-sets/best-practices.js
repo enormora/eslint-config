@@ -124,6 +124,9 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-top-level-await': 'off',
         'unicorn/prefer-at': 'error',
         'unicorn/no-unnecessary-polyfills': 'off',
+        'unicorn/no-single-promise-in-promise-methods': 'error',
+        'unicorn/no-await-in-promise-methods': 'error',
+        'unicorn/no-anonymous-default-export': 'error',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
