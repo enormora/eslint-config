@@ -207,7 +207,7 @@ export const typescriptConfig = {
                 allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false
             }
         ],
-        '@typescript-eslint/no-throw-literal': 'error',
+        '@typescript-eslint/only-throw-error': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
         '@typescript-eslint/ban-ts-comment': 'off',
@@ -396,6 +396,8 @@ export const typescriptConfig = {
                 ],
                 ignoreInterfaces: false
             }
-        ]
+        ],
+        ...configureWrappedCoreRule('consistent-return'),
+        '@typescript-eslint/use-unknown-in-catch-callback-variable': 'error'
     }
 };
