@@ -105,6 +105,7 @@ export const reactConfig = {
         'react/jsx-no-leaked-render': 'off',
         'react/no-object-type-as-default-prop': 'warn',
         'react/sort-default-props': 'off',
+        'react/checked-requires-onchange-or-readonly': 'off',
 
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error'
