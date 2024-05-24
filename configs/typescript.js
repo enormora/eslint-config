@@ -33,7 +33,7 @@ export const typescriptConfig = {
                 jsx: false,
                 globalReturn: false
             },
-            EXPERIMENTAL_useProjectService: true,
+            projectService: true,
             project: 'tsconfig.json'
         }
     },
@@ -136,10 +136,11 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('no-array-constructor'),
         ...configureWrappedCoreRule('no-empty-function'),
         '@typescript-eslint/no-empty-function': 'off',
-        '@typescript-eslint/no-empty-interface': [
+        '@typescript-eslint/no-empty-object-type': [
             'error',
             {
-                allowSingleExtends: true
+                allowInterfaces: 'with-single-extends',
+                allowObjectTypes: 'never'
             }
         ],
         '@typescript-eslint/no-explicit-any': 'error',
@@ -263,7 +264,6 @@ export const typescriptConfig = {
         '@typescript-eslint/no-confusing-non-null-assertion': ['error'],
         '@typescript-eslint/prefer-enum-initializers': ['off'],
         '@typescript-eslint/prefer-literal-enum-member': ['off'],
-        '@typescript-eslint/no-loss-of-precision': ['off'],
         ...configureWrappedCoreRule('no-redeclare'),
         ...configureWrappedCoreRule('no-shadow'),
         '@typescript-eslint/consistent-type-imports': [
