@@ -85,6 +85,7 @@ export const stylisticRuleSet = {
         '@stylistic/jsx-tag-spacing': 'off',
         '@stylistic/jsx-quotes': 'off',
         '@stylistic/jsx-wrap-multilines': 'off',
+        '@stylistic/jsx-function-call-newline': 'off',
         '@stylistic/key-spacing': [
             'error',
             {
