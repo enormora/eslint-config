@@ -21,7 +21,7 @@ test('typescript preset config has the correct language options defined', checkC
                 jsx: false,
                 globalReturn: false
             },
-            EXPERIMENTAL_useProjectService: true,
+            projectService: true,
             project: 'tsconfig.json'
         }
     }
