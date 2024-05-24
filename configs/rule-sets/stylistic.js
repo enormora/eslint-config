@@ -74,7 +74,6 @@ export const stylisticRuleSet = {
         '@stylistic/jsx-curly-spacing': 'off',
         '@stylistic/jsx-equals-spacing': 'off',
         '@stylistic/jsx-first-prop-new-line': 'off',
-        '@stylistic/jsx-indent': 'off',
         '@stylistic/jsx-indent-props': 'off',
         '@stylistic/jsx-max-props-per-line': 'off',
         '@stylistic/jsx-newline': 'off',
@@ -231,6 +230,8 @@ export const stylisticRuleSet = {
         '@stylistic/wrap-iife': ['error', 'inside'],
         '@stylistic/wrap-regex': 'off',
         '@stylistic/yield-star-spacing': ['error', { before: false, after: true }],
-        '@stylistic/jsx-pascal-case': 'off'
+        '@stylistic/jsx-pascal-case': 'off',
+        '@stylistic/line-comment-position': 'off',
+        '@stylistic/multiline-comment-style': 'off'
     }
 };

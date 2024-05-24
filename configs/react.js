@@ -106,6 +106,7 @@ export const reactConfig = {
         'react/no-object-type-as-default-prop': 'warn',
         'react/sort-default-props': 'off',
         'react/checked-requires-onchange-or-readonly': 'off',
+        'react/jsx-props-no-spread-multi': 'error',
 
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error'

@@ -127,6 +127,13 @@ export const bestPracticesRuleSet = {
         'unicorn/no-single-promise-in-promise-methods': 'error',
         'unicorn/no-await-in-promise-methods': 'error',
         'unicorn/no-anonymous-default-export': 'error',
+        'unicorn/consistent-empty-array-spread': 'error',
+        'unicorn/no-invalid-fetch-options': 'error',
+        'unicorn/no-length-as-slice-end': 'error',
+        'unicorn/no-magic-array-flat-depth': 'error',
+        'unicorn/no-negation-in-equality-check': 'error',
+        'unicorn/prefer-string-raw': 'off',
+        'unicorn/prefer-structured-clone': 'error',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
@@ -187,6 +194,7 @@ export const bestPracticesRuleSet = {
         'promise/no-return-in-finally': 'error',
         'promise/valid-params': 'error',
         'promise/prefer-await-to-then': 'error',
-        'promise/no-multiple-resolved': 'error'
+        'promise/no-multiple-resolved': 'error',
+        'promise/spec-only': 'error'
     }
 };

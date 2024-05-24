@@ -1,6 +1,7 @@
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import functionalPlugin from 'eslint-plugin-functional';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { baseConfig } from './base.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
 
@@ -49,6 +50,7 @@ export const typescriptConfig = {
     },
     plugins: {
         '@typescript-eslint': typescriptPlugin,
+        perfectionist: perfectionistPlugin,
         functional: functionalPlugin
     },
     rules: {
@@ -61,38 +63,27 @@ export const typescriptConfig = {
             }
         ],
         '@typescript-eslint/await-thenable': 'error',
-        '@typescript-eslint/ban-types': [
+        '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'never', allowObjectTypes: 'never' }],
+        '@typescript-eslint/no-unsafe-function-type': 'error',
+        '@typescript-eslint/no-wrapper-object-types': 'error',
+        '@typescript-eslint/no-restricted-types': [
             'error',
             {
                 types: {
-                    String: {
-                        message: 'Use `string` instead.',
-                        fixWith: 'string'
-                    },
-                    Number: {
-                        message: 'Use `number` instead.',
-                        fixWith: 'number'
-                    },
-                    Boolean: {
-                        message: 'Use `boolean` instead.',
-                        fixWith: 'boolean'
-                    },
-                    Symbol: {
-                        message: 'Use `symbol` instead.',
-                        fixWith: 'symbol'
-                    },
-                    Object: {
+                    'Record<never, never>': {
                         message:
-                            'The `Object` type is mostly the same as `unknown`. You probably want `Record<string, unknown>` instead. See https://github.com/typescript-eslint/typescript-eslint/pull/848',
-                        fixWith: 'Record<string, unknown>'
+                            'The `object` type is hard to use. Use `Record<PropertyKey, never>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848',
+                        fixWith: 'Record<PropertyKey, never>'
                     },
                     object: {
                         message:
                             'The `object` type is hard to use. Use `Record<string, unknown>` instead. See: https://github.com/typescript-eslint/typescript-eslint/pull/848',
                         fixWith: 'Record<string, unknown>'
                     },
-                    Function: 'Use a specific function type instead, like `() => void`.',
-                    Omit: 'Prefer the `Except` type in the `type-fest` package instead as it’s stricter.'
+                    Omit: {
+                        message: 'Prefer the `Except` type in the `type-fest` package instead as it’s stricter.',
+                        fixWith: 'Except'
+                    }
                 }
             }
         ],
@@ -136,13 +127,6 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('no-array-constructor'),
         ...configureWrappedCoreRule('no-empty-function'),
         '@typescript-eslint/no-empty-function': 'off',
-        '@typescript-eslint/no-empty-object-type': [
-            'error',
-            {
-                allowInterfaces: 'with-single-extends',
-                allowObjectTypes: 'never'
-            }
-        ],
         '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-extraneous-class': 'error',
         '@typescript-eslint/no-for-in-array': 'error',
@@ -169,7 +153,6 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('no-unused-vars'),
         ...configureWrappedCoreRule('no-useless-constructor'),
         '@typescript-eslint/no-useless-constructor': 'error',
-        '@typescript-eslint/no-var-requires': 'error',
         ...configureWrappedCoreRule('prefer-destructuring'),
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'error',
@@ -211,7 +194,6 @@ export const typescriptConfig = {
         '@typescript-eslint/only-throw-error': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/prefer-nullish-coalescing': 'error',
-        '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         ...configureWrappedCoreRule('default-param-last'),
@@ -254,7 +236,16 @@ export const typescriptConfig = {
         // disabled because we use functional/prefer-immutable-types.md
         '@typescript-eslint/prefer-readonly-parameter-types': ['off'],
         '@typescript-eslint/prefer-reduce-type-parameter': ['error'],
-        '@typescript-eslint/prefer-ts-expect-error': ['error'],
+        '@typescript-eslint/ban-ts-comment': [
+            'error',
+            {
+                'ts-expect-error': 'allow-with-description',
+                'ts-ignore': true,
+                'ts-nocheck': true,
+                'ts-check': false,
+                minimumDescriptionLength: 10
+            }
+        ],
         '@typescript-eslint/restrict-template-expressions': ['off'],
         '@typescript-eslint/return-await': ['off'],
         '@typescript-eslint/switch-exhaustiveness-check': ['error'],
@@ -281,27 +272,6 @@ export const typescriptConfig = {
             }
         ],
         '@typescript-eslint/non-nullable-type-assertion-style': 'off',
-        '@typescript-eslint/sort-type-constituents': [
-            'error',
-            {
-                checkIntersections: true,
-                checkUnions: true,
-                groupOrder: [
-                    'named',
-                    'keyword',
-                    'operator',
-                    'literal',
-                    'function',
-                    'import',
-                    'conditional',
-                    'object',
-                    'tuple',
-                    'intersection',
-                    'union',
-                    'nullish'
-                ]
-            }
-        ],
         '@typescript-eslint/no-unsafe-argument': 'error',
         '@typescript-eslint/prefer-return-this-type': 'off',
         '@typescript-eslint/no-meaningless-void-operator': 'error',
@@ -320,9 +290,12 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unsafe-enum-comparison': 'error',
         '@typescript-eslint/class-methods-use-this': 'error',
         '@typescript-eslint/no-array-delete': 'error',
-        '@typescript-eslint/no-useless-template-literals': 'error',
+        '@typescript-eslint/no-unnecessary-template-expression': 'error',
         ...configureWrappedCoreRule('prefer-promise-reject-errors'),
         '@typescript-eslint/prefer-find': 'error',
+        '@typescript-eslint/no-deprecated': 'off',
+        '@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
+        '@typescript-eslint/no-unnecessary-type-parameters': 'error',
 
         'functional/functional-parameters': 'off',
         'functional/immutable-data': 'off',
@@ -398,6 +371,70 @@ export const typescriptConfig = {
             }
         ],
         ...configureWrappedCoreRule('consistent-return'),
-        '@typescript-eslint/use-unknown-in-catch-callback-variable': 'error'
+        '@typescript-eslint/use-unknown-in-catch-callback-variable': 'error',
+
+        'perfectionist/sort-intersection-types': [
+            'error',
+            {
+                type: 'natural',
+                order: 'asc',
+                ignoreCase: true,
+                groups: [
+                    'named',
+                    'keyword',
+                    'operator',
+                    'literal',
+                    'function',
+                    'import',
+                    'conditional',
+                    'object',
+                    'tuple',
+                    'intersection',
+                    'union',
+                    'nullish',
+                    'unknown'
+                ]
+            }
+        ],
+        'perfectionist/sort-union-types': [
+            'error',
+            {
+                type: 'natural',
+                order: 'asc',
+                ignoreCase: true,
+                groups: [
+                    'named',
+                    'keyword',
+                    'operator',
+                    'literal',
+                    'function',
+                    'import',
+                    'conditional',
+                    'object',
+                    'tuple',
+                    'intersection',
+                    'union',
+                    'nullish',
+                    'unknown'
+                ]
+            }
+        ],
+        'perfectionist/sort-array-includes': 'off',
+        'perfectionist/sort-astro-attributes': 'off',
+        'perfectionist/sort-classes': 'off',
+        'perfectionist/sort-enums': 'off',
+        'perfectionist/sort-exports': 'off',
+        'perfectionist/sort-imports': 'off',
+        'perfectionist/sort-interfaces': 'off',
+        'perfectionist/sort-jsx-props': 'off',
+        'perfectionist/sort-maps': 'off',
+        'perfectionist/sort-named-exports': 'off',
+        'perfectionist/sort-named-imports': 'off',
+        'perfectionist/sort-object-types': 'off',
+        'perfectionist/sort-objects': 'off',
+        'perfectionist/sort-svelte-attributes': 'off',
+        'perfectionist/sort-switch-case': 'off',
+        'perfectionist/sort-variable-declarations': 'off',
+        'perfectionist/sort-vue-attributes': 'off'
     }
 };
