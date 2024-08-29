@@ -1,4 +1,4 @@
-import importPlugin from 'eslint-plugin-import';
+import importPlugin from 'eslint-plugin-import-x';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
@@ -99,7 +99,6 @@ export const baseConfig = {
         'no-nested-ternary': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
-        'no-new-symbol': 'error',
         'no-new-wrappers': 'error',
         'no-obj-calls': 'error',
         'no-object-constructor': 'error',
@@ -237,7 +236,6 @@ export const baseConfig = {
         'capitalized-comments': 'off',
         'class-methods-use-this': 'error',
         'func-name-matching': 'off',
-        'line-comment-position': 'off',
         'no-await-in-loop': 'off',
         'no-compare-neg-zero': 'error',
         'no-multi-assign': 'error',
@@ -278,7 +276,6 @@ export const baseConfig = {
                 allowImplicit: false
             }
         ],
-        'multiline-comment-style': 'off',
         'max-classes-per-file': 'off',
         'max-lines-per-function': 'off',
         'prefer-object-spread': 'error',
@@ -317,6 +314,7 @@ export const baseConfig = {
         'no-constant-binary-expression': 'error',
         'logical-assignment-operators': ['error', 'never'],
         'prefer-object-has-own': 'error',
+        'no-useless-assignment': 'error',
 
         'no-secrets/no-secrets': ['error', { tolerance: 5 }],
 
@@ -402,6 +400,7 @@ export const baseConfig = {
         'import/no-import-module-exports': 'off',
         'import/no-empty-named-blocks': 'error',
         'import/consistent-type-specifier-style': 'off',
+        'import/no-rename-default': 'off',
 
         '@cspell/spellchecker': [
             'warn',

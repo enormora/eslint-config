@@ -2,6 +2,7 @@ import test from 'ava';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import functionalPlugin from 'eslint-plugin-functional';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { typescriptConfig } from '../configs/typescript.js';
 import {
     checkAllPluginRulesConfigured,
@@ -65,6 +66,18 @@ test('no unknown eslint-plugin-functional rules are configured', checkUnknownPlu
     ruleConfigSet: typescriptConfig.rules,
     pluginRules: functionalPlugin.rules,
     pluginName: 'eslint-plugin-functional'
+});
+
+test('all eslint-plugin-perfectionist rules are configured', checkAllPluginRulesConfigured, {
+    ruleConfigSet: typescriptConfig.rules,
+    pluginRules: perfectionistPlugin.rules,
+    pluginName: 'eslint-plugin-perfectionist'
+});
+
+test('no unknown eslint-plugin-perfectionist rules are configured', checkUnknownPluginRulesAreNotConfigured, {
+    ruleConfigSet: typescriptConfig.rules,
+    pluginRules: perfectionistPlugin.rules,
+    pluginName: 'eslint-plugin-perfectionist'
 });
 
 test('typescript preset config has no validation errors', checkConfigToHaveNoValidationIssues, typescriptConfig);
