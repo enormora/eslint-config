@@ -66,7 +66,7 @@ export const baseConfig = {
         'no-else-return': ['error', { allowElseIf: false }],
         'no-empty': ['error', { allowEmptyCatch: true }],
         'no-empty-character-class': 'error',
-        'no-empty-function': 'off',
+        'no-empty-function': 'error',
         'no-empty-pattern': 'error',
         'no-empty-static-block': 'error',
         'no-eq-null': 'error',

@@ -126,7 +126,6 @@ export const typescriptConfig = {
         '@typescript-eslint/member-ordering': 'error',
         ...configureWrappedCoreRule('no-array-constructor'),
         ...configureWrappedCoreRule('no-empty-function'),
-        '@typescript-eslint/no-empty-function': 'off',
         '@typescript-eslint/no-explicit-any': 'error',
         '@typescript-eslint/no-extraneous-class': 'error',
         '@typescript-eslint/no-for-in-array': 'error',
