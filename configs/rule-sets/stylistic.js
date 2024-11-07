@@ -222,6 +222,7 @@ export const stylisticRuleSet = {
                 before: false
             }
         ],
+        '@stylistic/curly-newline': 'off',
         '@stylistic/template-curly-spacing': 'error',
         '@stylistic/template-tag-spacing': ['error', 'never'],
         '@stylistic/type-annotation-spacing': 'error',
