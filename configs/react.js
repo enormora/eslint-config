@@ -107,6 +107,7 @@ export const reactConfig = {
         'react/sort-default-props': 'off',
         'react/checked-requires-onchange-or-readonly': 'off',
         'react/jsx-props-no-spread-multi': 'error',
+        'react/forward-ref-uses-ref': 'error',
 
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'error'
