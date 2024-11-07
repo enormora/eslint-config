@@ -134,6 +134,9 @@ export const bestPracticesRuleSet = {
         'unicorn/no-negation-in-equality-check': 'error',
         'unicorn/prefer-string-raw': 'off',
         'unicorn/prefer-structured-clone': 'error',
+        'unicorn/consistent-existence-index-check': 'error',
+        'unicorn/prefer-global-this': 'error',
+        'unicorn/prefer-math-min-max': 'error',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
