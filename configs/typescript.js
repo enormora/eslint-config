@@ -419,7 +419,6 @@ export const typescriptConfig = {
             }
         ],
         'perfectionist/sort-array-includes': 'off',
-        'perfectionist/sort-astro-attributes': 'off',
         'perfectionist/sort-classes': 'off',
         'perfectionist/sort-enums': 'off',
         'perfectionist/sort-exports': 'off',
@@ -431,9 +430,8 @@ export const typescriptConfig = {
         'perfectionist/sort-named-imports': 'off',
         'perfectionist/sort-object-types': 'off',
         'perfectionist/sort-objects': 'off',
-        'perfectionist/sort-svelte-attributes': 'off',
         'perfectionist/sort-switch-case': 'off',
         'perfectionist/sort-variable-declarations': 'off',
-        'perfectionist/sort-vue-attributes': 'off'
+        'perfectionist/sort-sets': 'off'
     }
 };
