@@ -346,6 +346,7 @@ export const typescriptConfig = {
         ],
         'functional/prefer-tacit': 'error',
         'functional/readonly-type': ['error', 'keyword'],
+        'functional/no-class-inheritance': 'off',
         'functional/type-declaration-immutability': [
             'error',
             {
