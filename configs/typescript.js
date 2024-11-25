@@ -435,6 +435,9 @@ export const typescriptConfig = {
         'perfectionist/sort-objects': 'off',
         'perfectionist/sort-switch-case': 'off',
         'perfectionist/sort-variable-declarations': 'off',
-        'perfectionist/sort-sets': 'off'
+        'perfectionist/sort-sets': 'off',
+        'perfectionist/sort-heritage-clauses': 'off',
+        'perfectionist/sort-decorators': 'off',
+        'perfectionist/sort-modules': 'off'
     }
 };
