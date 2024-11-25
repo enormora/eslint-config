@@ -295,6 +295,8 @@ export const typescriptConfig = {
         '@typescript-eslint/no-deprecated': 'off',
         '@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
         '@typescript-eslint/no-unnecessary-type-parameters': 'error',
+        '@typescript-eslint/no-unsafe-type-assertion': 'error',
+        '@typescript-eslint/related-getter-setter-pairs': 'off',
 
         'functional/functional-parameters': 'off',
         'functional/immutable-data': 'off',
