@@ -8,6 +8,7 @@ export const testRuleSet = {
                 ...stylisticRuleSet.rules['@stylistic/max-len'][1],
                 ignoreStrings: true
             }
-        ]
+        ],
+        '@typescript-eslint/no-unsafe-type-assertion': 'off'
     }
 };
