@@ -39,7 +39,7 @@
         "eslint-plugin-react-hooks": "5.1.0",
         "eslint-plugin-sonarjs": "1.0.4",
         "eslint-plugin-unicorn": "56.0.1",
-        "globals": "15.13.0"
+        "globals": "15.14.0"
     },
     "devDependencies": {
         "@eslint/js": "9.17.0",
