@@ -32,7 +32,7 @@
         "eslint-plugin-mocha": "10.5.0",
         "eslint-plugin-n": "17.15.1",
         "eslint-plugin-no-secrets": "1.1.2",
-        "eslint-plugin-perfectionist": "4.7.0",
+        "eslint-plugin-perfectionist": "4.8.0",
         "eslint-plugin-prettier": "5.2.3",
         "eslint-plugin-promise": "7.1.0",
         "eslint-plugin-react": "7.37.4",
