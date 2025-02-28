@@ -36,7 +36,7 @@
         "eslint-plugin-prettier": "5.2.3",
         "eslint-plugin-promise": "7.1.0",
         "eslint-plugin-react": "7.37.4",
-        "eslint-plugin-react-hooks": "5.1.0",
+        "eslint-plugin-react-hooks": "5.2.0",
         "eslint-plugin-sonarjs": "1.0.4",
         "eslint-plugin-unicorn": "56.0.1",
         "globals": "15.15.0"
