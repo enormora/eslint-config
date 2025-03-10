@@ -171,6 +171,15 @@ export async function buildConfig() {
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint react with TSX and typescript configuration'
                 }
+            },
+            {
+                name: '@enormora/eslint-config-vue-ts',
+                entryPoints: [{ js: 'vue-ts.js' }],
+                bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
+                additionalFiles: [],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Vue with TypeScript configuration'
+                }
             }
         ]
     };
