@@ -7,16 +7,7 @@
     "contributors": [
         "Christian Rackerseder <github@echooff.de>"
     ],
-    "scripts": {
-        "eslint:check": "eslint . --max-warnings 0",
-        "eslint:fix": "npm run eslint:check -- --fix",
-        "prettier": "prettier '**/*.(yml|yaml|json|md)'",
-        "prettier:check": "npm run prettier -- --check",
-        "prettier:fix": "npm run prettier -- --write",
-        "lint": "npm run eslint:check && npm run prettier:check",
-        "lint:fix-all": "npm run eslint:fix && npm run prettier:fix",
-        "test": "ava"
-    },
+    "scripts": {},
     "license": "MIT",
     "dependencies": {
         "@cspell/eslint-plugin": "8.17.5",

@@ -1,3 +1,4 @@
+---
 name: Continuous integration
 
 on: [push, pull_request]
@@ -15,6 +16,6 @@ jobs:
             - name: Install dependencies
               run: npm clean-install
             - name: Static code analysis
-              run: npm run lint
+              run: npx just lint
             - name: Run tests
-              run: npm test
+              run: npx just test
