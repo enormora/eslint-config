@@ -297,6 +297,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-type-parameters': 'error',
         '@typescript-eslint/no-unsafe-type-assertion': 'error',
         '@typescript-eslint/related-getter-setter-pairs': 'off',
+        '@typescript-eslint/no-misused-spread': 'error',
 
         'functional/functional-parameters': 'off',
         'functional/immutable-data': 'off',
