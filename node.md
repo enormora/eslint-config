@@ -30,5 +30,5 @@ export default [
 
 **Additional presets for specific scenarios:**
 
--   `nodeConfigFileConfig`: settings for config files
--   `nodeEntryPointFileConfig`: settings for entry point files, which allows e.g. the usage of environment variables
+- `nodeConfigFileConfig`: settings for config files
+- `nodeEntryPointFileConfig`: settings for entry point files, which allows e.g. the usage of environment variables
