@@ -38,5 +38,10 @@ export const mochaConfig = {
         'mocha/valid-test-title': 'off',
         'mocha/consistent-spacing-between-blocks': 'error',
         'mocha/consistent-interface': ['error', { interface: 'TDD' }]
+    },
+    settings: {
+        mocha: {
+            interface: 'exports'
+        }
     }
 };

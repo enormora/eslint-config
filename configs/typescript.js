@@ -192,7 +192,7 @@ export const typescriptConfig = {
         ],
         '@typescript-eslint/only-throw-error': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',
-        '@typescript-eslint/prefer-nullish-coalescing': 'error',
+        '@typescript-eslint/prefer-nullish-coalescing': ['error', { ignoreIfStatements: true }],
         '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
         '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
         ...configureWrappedCoreRule('default-param-last'),
