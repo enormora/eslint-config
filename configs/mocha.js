@@ -16,8 +16,8 @@ export const mochaConfig = {
 
         'mocha/handle-done-callback': 'error',
         'mocha/max-top-level-suites': 'error',
-        'mocha/no-async-describe': 'error',
-        'mocha/no-empty-description': 'error',
+        'mocha/no-async-suite': 'error',
+        'mocha/no-empty-title': 'error',
         'mocha/no-exclusive-tests': 'error',
         'mocha/no-exports': 'error',
         'mocha/no-global-tests': 'error',
@@ -31,12 +31,12 @@ export const mochaConfig = {
         'mocha/no-return-from-async': 'off',
         'mocha/no-setup-in-describe': 'error',
         'mocha/no-sibling-hooks': 'error',
-        'mocha/no-skipped-tests': 'error',
         'mocha/no-synchronous-tests': 'off',
         'mocha/no-top-level-hooks': 'error',
         'mocha/prefer-arrow-callback': 'off',
-        'mocha/valid-suite-description': 'off',
-        'mocha/valid-test-description': 'off',
-        'mocha/consistent-spacing-between-blocks': 'error'
+        'mocha/valid-suite-title': 'off',
+        'mocha/valid-test-title': 'off',
+        'mocha/consistent-spacing-between-blocks': 'error',
+        'mocha/consistent-interface': ['error', { interface: 'TDD' }]
     }
 };
