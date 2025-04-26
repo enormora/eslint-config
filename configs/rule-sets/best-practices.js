@@ -198,6 +198,7 @@ export const bestPracticesRuleSet = {
         'promise/valid-params': 'error',
         'promise/prefer-await-to-then': 'error',
         'promise/no-multiple-resolved': 'error',
-        'promise/spec-only': 'error'
+        'promise/spec-only': 'error',
+        'promise/prefer-catch': 'error'
     }
 };
