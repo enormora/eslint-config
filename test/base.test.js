@@ -1,6 +1,6 @@
 import test from 'ava';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
-import importPlugin from 'eslint-plugin-import-x';
+import { rules as importPluginRules } from 'eslint-plugin-import-x';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import { baseConfig } from '../configs/base.js';
 import {
@@ -33,13 +33,13 @@ test('no unknown eslint-plugin-no-secrets rules are configured', checkUnknownPlu
 
 test('all eslint-plugin-import rules are configured', checkAllPluginRulesConfigured, {
     ruleConfigSet: baseConfig.rules,
-    pluginRules: importPlugin.rules,
+    pluginRules: importPluginRules,
     pluginName: 'eslint-plugin-import'
 });
 
 test('no unknown eslint-plugin-import rules are configured', checkUnknownPluginRulesAreNotConfigured, {
     ruleConfigSet: baseConfig.rules,
-    pluginRules: importPlugin.rules,
+    pluginRules: importPluginRules,
     pluginName: 'eslint-plugin-import'
 });
 
