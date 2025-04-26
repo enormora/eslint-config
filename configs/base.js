@@ -317,6 +317,7 @@ export const baseConfig = {
         'no-useless-assignment': 'error',
 
         'no-secrets/no-secrets': ['error', { tolerance: 5 }],
+        'no-secrets/no-pattern-match': 'off',
 
         'eslint-comments/disable-enable-pair': [
             'error',
