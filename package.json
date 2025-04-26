@@ -39,7 +39,7 @@
         "@packtory/cli": "0.0.5",
         "ava": "6.2.0",
         "eslint": "9.25.1",
-        "prettier": "3.3.3",
+        "prettier": "3.5.3",
         "rust-just": "1.40.0",
         "typescript": "5.8.3"
     },
