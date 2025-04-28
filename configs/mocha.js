@@ -1,13 +1,9 @@
 import mochaPlugin from 'eslint-plugin-mocha';
-import globals from 'globals';
 import { testRuleSet } from './rule-sets/test-rules.js';
 
 export const mochaConfig = {
     plugins: {
         mocha: mochaPlugin
-    },
-    languageOptions: {
-        globals: globals.mocha
     },
     rules: {
         ...testRuleSet.rules,
