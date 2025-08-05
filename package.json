@@ -37,7 +37,7 @@
     "devDependencies": {
         "@eslint/js": "9.25.1",
         "@packtory/cli": "0.0.5",
-        "ava": "6.2.0",
+        "ava": "6.4.1",
         "eslint": "9.25.1",
         "prettier": "3.5.3",
         "rust-just": "1.40.0",
