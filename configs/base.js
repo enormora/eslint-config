@@ -121,6 +121,7 @@ export const baseConfig = {
         'no-ternary': 'off',
         'no-this-before-super': 'error',
         'no-throw-literal': 'error',
+        'no-unassigned-vars': 'error',
         'no-undef': ['error', { typeof: true }],
         'no-undef-init': 'error',
         'no-undefined': 'off',
