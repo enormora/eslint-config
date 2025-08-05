@@ -1,6 +1,5 @@
 import test from 'ava';
 import mochaPlugin from 'eslint-plugin-mocha';
-import globals from 'globals';
 import { mochaConfig } from '../configs/mocha.js';
 import {
     checkAllPluginRulesConfigured,
@@ -30,10 +29,7 @@ test('all common test rules are configured', checkAllTestRulesConfigured, {
 test('mocha preset config has no validation errors', checkConfigToHaveNoValidationIssues, mochaConfig);
 
 test('mocha preset config has the correct language options defined', checkConfigLanguageOptions, {
-    configLanguageOptions: mochaConfig.languageOptions,
-    languageOptions: {
-        globals: globals.mocha
-    }
+    configLanguageOptions: mochaConfig.languageOptions
 });
 
 test('mocha preset config defines additional rules', checkAdditionalRulesConfigured, {
