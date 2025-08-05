@@ -4,15 +4,18 @@ name: Continuous integration
 on: [push, pull_request]
 
 jobs:
-    build:
+    tests:
         runs-on: ubuntu-latest
-        name: Node v22
+        strategy:
+            matrix:
+                node-version: [22, 24]
+        name: Tests with Node.js v${{ matrix.node-version }}
         steps:
             - uses: actions/checkout@v4
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: 22
+                  node-version: ${{ matrix.node-version }}
             - name: Install dependencies
               run: npm clean-install
             - name: Static code analysis
