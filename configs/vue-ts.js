@@ -1,13 +1,31 @@
 import typescriptParser from '@typescript-eslint/parser';
+import vueParser from 'vue-eslint-parser';
+import vuePlugin from 'eslint-plugin-vue';
 import globals from 'globals';
+import { typescriptConfig } from './typescript.js';
 
 export const vueConfig = {
-    parser: 'vue-eslint-parser',
     languageOptions: {
-        parser: typescriptParser,
-        globals: {
-            ...globals['shared-node-browser']
+        parser: vueParser,
+        parserOptions: {
+            parser: typescriptParser,
+            extraFileExtensions: ['.vue'],
+            warnOnUnsupportedTypeScriptVersion: false,
+            sourceType: 'module',
+            ecmaFeatures: {
+                jsx: false,
+                globalReturn: false
+            },
+            projectService: true,
+            project: 'tsconfig.json',
+            globals: globals['shared-node-browser']
         }
+    },
+    processor: 'vue/vue',
+    plugins: {
+        ...typescriptConfig.plugins,
+
+        vue: vuePlugin
     },
     rules: {
         'vue/comment-directive': 'error',
@@ -143,6 +161,7 @@ export const vueConfig = {
         'vue/define-emits-declaration': 'error',
         'vue/define-macros-order': 'off',
         'vue/define-props-declaration': 'off',
+        'vue/define-props-destructuring': 'error',
         'vue/enforce-style-attribute': 'off',
         'vue/html-button-has-type': 'off',
         'vue/html-comment-content-newline': 'off',
@@ -161,6 +180,7 @@ export const vueConfig = {
         'vue/no-empty-component-block': 'error',
         'vue/no-import-compiler-macros': 'off',
         'vue/no-multiple-objects-in-class': 'error',
+        'vue/no-negated-v-if-condition': 'error',
         'vue/no-potential-component-option-typo': 'error',
         'vue/no-ref-object-reactivity-loss': 'off',
         'vue/no-restricted-block': 'error',
@@ -241,6 +261,7 @@ export const vueConfig = {
         'vue/no-implicit-coercion': 'off',
         'vue/no-irregular-whitespace': 'off',
         'vue/no-loss-of-precision': 'off',
+        'vue/no-negated-condition': 'off',
         'vue/no-restricted-syntax': 'off',
         'vue/no-sparse-arrays': 'off',
         'vue/no-useless-concat': 'off',

@@ -1,5 +1,6 @@
 import test from 'ava';
 import typescriptParser from '@typescript-eslint/parser';
+import vueParser from 'vue-eslint-parser';
 import globals from 'globals';
 import vuePlugin from 'eslint-plugin-vue';
 import { vueConfig } from '../configs/vue-ts.js';
@@ -13,11 +14,25 @@ import {
 test('vue preset config has the correct language options defined', checkConfigLanguageOptions, {
     configLanguageOptions: vueConfig.languageOptions,
     languageOptions: {
-        parser: typescriptParser,
-        globals: {
-            ...globals['shared-node-browser']
+        parser: vueParser,
+        parserOptions: {
+            parser: typescriptParser,
+            extraFileExtensions: ['.vue'],
+            warnOnUnsupportedTypeScriptVersion: false,
+            sourceType: 'module',
+            ecmaFeatures: {
+                jsx: false,
+                globalReturn: false
+            },
+            projectService: true,
+            project: 'tsconfig.json',
+            globals: globals['shared-node-browser']
         }
     }
+});
+
+test('vue preset config has the correct processor set', (t) => {
+    t.is(vueConfig.processor, 'vue/vue');
 });
 
 test('all eslint-plugin-vue rules are configured', checkAllPluginRulesConfigured, {
