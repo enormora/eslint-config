@@ -1,13 +1,31 @@
 import typescriptParser from '@typescript-eslint/parser';
+import vueParser from 'vue-eslint-parser';
+import vuePlugin from 'eslint-plugin-vue';
 import globals from 'globals';
+import { typescriptConfig } from './typescript.js';
 
 export const vueConfig = {
-    parser: 'vue-eslint-parser',
     languageOptions: {
-        parser: typescriptParser,
-        globals: {
-            ...globals['shared-node-browser']
+        parser: vueParser,
+        parserOptions: {
+            parser: typescriptParser,
+            extraFileExtensions: ['.vue'],
+            warnOnUnsupportedTypeScriptVersion: false,
+            sourceType: 'module',
+            ecmaFeatures: {
+                jsx: false,
+                globalReturn: false
+            },
+            projectService: true,
+            project: 'tsconfig.json',
+            globals: globals['shared-node-browser']
         }
+    },
+    processor: 'vue/vue',
+    plugins: {
+        ...typescriptConfig.plugins,
+
+        vue: vuePlugin
     },
     rules: {
         'vue/comment-directive': 'error',
