@@ -64,7 +64,7 @@ export const vueConfig = {
         'vue/no-export-in-script-setup': 'error',
         'vue/no-expose-after-await': 'error',
         'vue/no-lifecycle-after-await': 'error',
-        'vue/no-multiple-template-root': 'error',
+        'vue/no-multiple-template-root': 'off',
         'vue/no-mutating-props': 'error',
         'vue/no-parsing-error': 'error',
         'vue/no-ref-as-operand': 'error',
