@@ -180,6 +180,15 @@ export async function buildConfig() {
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint Vue with TypeScript configuration'
                 }
+            },
+            {
+                name: '@enormora/eslint-config-vitest',
+                entryPoints: [{ js: 'vitest.js' }],
+                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                additionalFiles: [],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Vitest configuration'
+                }
             }
         ]
     };
