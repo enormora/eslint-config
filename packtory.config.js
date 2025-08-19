@@ -190,7 +190,12 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-vitest',
                 entryPoints: [{ js: 'vitest.js' }],
                 bundlePeerDependencies: ['@enormora/eslint-config-base'],
-                additionalFiles: [],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(projectFolder, 'vitest.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint Vitest configuration'
                 }
