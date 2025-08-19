@@ -176,7 +176,12 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-vue-ts',
                 entryPoints: [{ js: 'vue-ts.js' }],
                 bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
-                additionalFiles: [],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(projectFolder, 'vue-ts.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint Vue with TypeScript configuration'
                 }
