@@ -18,3 +18,4 @@ Enormora provides a collection of shareable ESLint config presets to cater to va
 - **[@enormora/eslint-config-react-jsx](./react-jsx.md):** Adds JSX support for `react`.
 - **[@enormora/eslint-config-react-tsx](./react-tsx.md):** Adds JSX support for `react` and `typescript`.
 - **[@enormora/eslint-config-vue-ts](./vue-ts.md):** Config with `vue` together with `typescript`.
+- **[@enormora/eslint-config-vitest](./vitest.md):** Config with `vitest`
