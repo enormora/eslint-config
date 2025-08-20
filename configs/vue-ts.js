@@ -28,6 +28,8 @@ export const vueConfig = {
         vue: vuePlugin
     },
     rules: {
+        ...typescriptConfig.rules,
+
         'vue/comment-directive': 'error',
         'vue/jsx-uses-vars': 'error',
 
