@@ -41,7 +41,7 @@ test('all eslint-plugin-vue rules are configured', checkAllPluginRulesConfigured
     pluginName: 'eslint-plugin-vue'
 });
 
-test('no unknown eslint-plugin-react rules are configured', checkUnknownPluginRulesAreNotConfigured, {
+test('no unknown eslint-plugin-vue rules are configured', checkUnknownPluginRulesAreNotConfigured, {
     ruleConfigSet: vueConfig.rules,
     pluginRules: vuePlugin.rules,
     pluginName: 'eslint-plugin-vue'
