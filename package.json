@@ -10,7 +10,7 @@
     "scripts": {},
     "license": "MIT",
     "dependencies": {
-        "@cspell/eslint-plugin": "9.2.0",
+        "@cspell/eslint-plugin": "9.2.1",
         "@eslint-community/eslint-plugin-eslint-comments": "4.5.0",
         "@stylistic/eslint-plugin": "4.4.1",
         "@typescript-eslint/eslint-plugin": "8.41.0",
