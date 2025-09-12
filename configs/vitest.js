@@ -88,6 +88,8 @@ export const vitestConfig = {
         '@vitest/prefer-importing-vitest-globals': 'error',
         '@vitest/prefer-called-once': 'error',
         '@vitest/prefer-called-times': 'error',
-        '@vitest/warn-todo': 'error'
+        '@vitest/warn-todo': 'error',
+        '@vitest/hoisted-apis-on-top': 'error',
+        '@vitest/prefer-expect-type-of': 'error'
     }
 };
