@@ -160,6 +160,7 @@ export const baseConfig = {
         ],
         'prefer-spread': 'error',
         'prefer-template': 'error',
+        'preserve-caught-error': 'error',
         'no-var': 'error',
         'no-warning-comments': [
             'error',
