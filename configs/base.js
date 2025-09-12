@@ -404,6 +404,7 @@ export const baseConfig = {
         'import/no-empty-named-blocks': 'error',
         'import/consistent-type-specifier-style': 'off',
         'import/no-rename-default': 'off',
+        'import/prefer-namespace-import': 'off',
 
         '@cspell/spellchecker': [
             'warn',
