@@ -46,7 +46,8 @@ export const nodeConfig = {
         'node/no-unpublished-require': 'off',
         'node/process-exit-as-throw': 'error',
         'node/hashbang': 'off',
-        'node/prefer-node-protocol': 'off' // already covered by unicorn/prefer-node-protocol
+        'node/prefer-node-protocol': 'off', // already covered by unicorn/prefer-node-protocol
+        'node/no-top-level-await': 'off'
     }
 };
 
