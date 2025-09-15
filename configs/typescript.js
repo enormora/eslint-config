@@ -2,6 +2,8 @@ import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import functionalPlugin from 'eslint-plugin-functional';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import { createNodeResolver } from 'eslint-plugin-import-x';
 import { baseConfig } from './base.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
 
@@ -39,14 +41,15 @@ export const typescriptConfig = {
         }
     },
     settings: {
-        'import/resolver': {
-            node: {
-                extensions: [...javascriptExtensions, ...typescriptExtensions]
-            }
-        },
         'import/parsers': {
             '@typescript-eslint/parser': typescriptExtensions
-        }
+        },
+        'import-x/resolver-next': [
+            createNodeResolver({
+                extensions: [...javascriptExtensions, ...typescriptExtensions]
+            }),
+            createTypeScriptImportResolver()
+        ]
     },
     plugins: {
         '@typescript-eslint': typescriptPlugin,

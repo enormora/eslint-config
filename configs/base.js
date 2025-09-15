@@ -1,4 +1,4 @@
-import importPlugin from 'eslint-plugin-import-x';
+import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
@@ -36,7 +36,8 @@ export const baseConfig = {
         ...bestPracticesRuleSet.settings,
         'import/parsers': {
             espree: javascriptExtensions
-        }
+        },
+        'import-x/resolver-next': [createNodeResolver()]
     },
     rules: {
         ...stylisticRuleSet.rules,
