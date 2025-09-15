@@ -30,6 +30,14 @@ export const vueConfig = {
     rules: {
         ...typescriptConfig.rules,
 
+        'import/extensions': [
+            'error',
+            {
+                js: 'ignorePackages',
+                ts: 'ignorePackages'
+            }
+        ],
+
         'vue/comment-directive': 'error',
         'vue/jsx-uses-vars': 'error',
 

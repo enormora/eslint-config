@@ -379,6 +379,13 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('consistent-return'),
         '@typescript-eslint/use-unknown-in-catch-callback-variable': 'error',
 
+        'import/extensions': [
+            'error',
+            {
+                ts: 'ignorePackages'
+            }
+        ],
+
         'perfectionist/sort-intersection-types': [
             'error',
             {
