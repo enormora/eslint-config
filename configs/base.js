@@ -111,7 +111,21 @@ export const baseConfig = {
         'no-prototype-builtins': 'error',
         'no-redeclare': ['error', { builtinGlobals: true }],
         'no-regex-spaces': 'error',
-        'no-restricted-syntax': 'off',
+        'no-restricted-syntax': [
+            'error',
+            {
+                selector: 'TSEnumDeclaration',
+                message: 'Use a string union type instead'
+            },
+            {
+                selector: 'ClassDeclaration[superClass.name!=/Error$/]',
+                message: 'Class declarations are not allowed except for extending errors.'
+            },
+            {
+                selector: 'SwitchStatement',
+                message: 'Use pattern matching instead.'
+            }
+        ],
         'no-return-assign': ['error', 'always'],
         'no-self-assign': ['error', { props: true }],
         'no-self-compare': 'error',
