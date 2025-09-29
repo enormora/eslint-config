@@ -120,6 +120,10 @@ export const baseConfig = {
             {
                 selector: 'ClassDeclaration[superClass.name!=/Error$/]',
                 message: 'Class declarations are not allowed except for extending errors.'
+            },
+            {
+                selector: 'SwitchStatement',
+                message: 'Use pattern matching instead.'
             }
         ],
         'no-return-assign': ['error', 'always'],
