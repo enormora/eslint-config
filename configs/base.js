@@ -116,6 +116,10 @@ export const baseConfig = {
             {
                 selector: 'TSEnumDeclaration',
                 message: 'Use a string union type instead'
+            },
+            {
+                selector: 'ClassDeclaration[superClass.name!=/Error$/]',
+                message: 'Class declarations are not allowed except for extending errors.'
             }
         ],
         'no-return-assign': ['error', 'always'],
