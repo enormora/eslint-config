@@ -14,5 +14,15 @@ export const reactTsxConfig = {
             '@typescript-eslint/parser': [...typescriptExtensions, '.tsx']
         }
     },
-    rules: reactJsxConfig.rules
+    rules: {
+        ...reactJsxConfig.rules,
+
+        'import/extensions': [
+            'error',
+            {
+                tsx: 'ignorePackages',
+                json: 'ignorePackages'
+            }
+        ]
+    }
 };
