@@ -87,7 +87,7 @@ export const vitestConfig = {
         '@vitest/no-importing-vitest-globals': 'off',
         '@vitest/prefer-importing-vitest-globals': 'error',
         '@vitest/prefer-called-once': 'error',
-        '@vitest/prefer-called-times': 'error',
+        '@vitest/prefer-called-times': 'off',
         '@vitest/warn-todo': 'error',
         '@vitest/hoisted-apis-on-top': 'error',
         '@vitest/prefer-expect-type-of': 'error'
