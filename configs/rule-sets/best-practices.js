@@ -2,6 +2,7 @@ import unicornPlugin from 'eslint-plugin-unicorn';
 import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 
 const maxSwitchCases = 6;
 
@@ -10,7 +11,8 @@ export const bestPracticesRuleSet = {
         unicorn: unicornPlugin,
         promise: promisePlugin,
         'array-func': arrayFunctionPlugin,
-        sonarjs: sonarjsPlugin
+        sonarjs: sonarjsPlugin,
+        'no-barrel-files': noBarrelFiles
     },
     settings: {},
     rules: {
@@ -214,6 +216,8 @@ export const bestPracticesRuleSet = {
         'promise/prefer-await-to-then': 'error',
         'promise/no-multiple-resolved': 'error',
         'promise/spec-only': 'error',
-        'promise/prefer-catch': 'error'
+        'promise/prefer-catch': 'error',
+
+        'no-barrel-files/no-barrel-files': 'error'
     }
 };
