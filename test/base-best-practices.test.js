@@ -3,6 +3,7 @@ import unicornPlugin from 'eslint-plugin-unicorn';
 import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 import { baseConfig } from '../configs/base.js';
 import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
 
@@ -52,4 +53,16 @@ test('no unknown eslint-plugin-sonarjs rules are configured', checkUnknownPlugin
     ruleConfigSet: baseConfig.rules,
     pluginRules: sonarjsPlugin.rules,
     pluginName: 'eslint-plugin-sonarjs'
+});
+
+test('all eslint-plugin-no-barrel-files rules are configured', checkAllPluginRulesConfigured, {
+    ruleConfigSet: baseConfig.rules,
+    pluginRules: noBarrelFiles.rules,
+    pluginName: 'eslint-plugin-no-barrel-files'
+});
+
+test('no unknown eslint-plugin-no-barrel-files rules are configured', checkUnknownPluginRulesAreNotConfigured, {
+    ruleConfigSet: baseConfig.rules,
+    pluginRules: noBarrelFiles.rules,
+    pluginName: 'eslint-plugin-no-barrel-files'
 });
