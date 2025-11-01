@@ -38,10 +38,10 @@
         "vue-eslint-parser": "10.2.0"
     },
     "devDependencies": {
-        "@eslint/js": "9.38.0",
+        "@eslint/js": "9.39.0",
         "@packtory/cli": "0.0.7",
         "ava": "6.4.1",
-        "eslint": "9.38.0",
+        "eslint": "9.39.0",
         "prettier": "3.6.2",
         "rust-just": "1.43.0",
         "typescript": "5.9.3"
