@@ -71,6 +71,7 @@ export const vueConfig = {
         'vue/no-dupe-keys': 'error',
         'vue/no-dupe-v-else-if': 'error',
         'vue/no-duplicate-attributes': 'error',
+        'vue/no-duplicate-class-names': 'error',
         'vue/no-export-in-script-setup': 'error',
         'vue/no-expose-after-await': 'error',
         'vue/no-lifecycle-after-await': 'error',
