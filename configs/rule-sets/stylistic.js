@@ -153,7 +153,7 @@ export const stylisticRuleSet = {
         '@stylistic/object-curly-spacing': ['error', 'always'],
         '@stylistic/object-property-newline': 'off',
         '@stylistic/one-var-declaration-per-line': 'error',
-        '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }],
+        '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before', '|': 'before' } }],
         '@stylistic/padded-blocks': [
             'error',
             'never',
