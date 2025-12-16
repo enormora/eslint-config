@@ -17,7 +17,9 @@ export const reactJsxConfig = {
     },
     rules: {
         ...reactConfig.rules,
+
         'jsx-quotes': ['error', 'prefer-single'],
+
         'react/jsx-key': 'error',
         'react/jsx-max-depth': ['error', { max: 10 }],
         'react/jsx-no-comment-textnodes': 'error',
