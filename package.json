@@ -23,7 +23,7 @@
         "eslint-plugin-functional": "9.0.2",
         "eslint-plugin-import-x": "4.16.1",
         "eslint-plugin-mocha": "11.2.0",
-        "eslint-plugin-n": "17.23.1",
+        "eslint-plugin-n": "17.23.2",
         "eslint-plugin-no-barrel-files": "1.2.2",
         "eslint-plugin-no-secrets": "2.2.1",
         "eslint-plugin-perfectionist": "4.15.1",
