@@ -12,7 +12,7 @@
     "dependencies": {
         "@cspell/eslint-plugin": "9.6.2",
         "@eslint-community/eslint-plugin-eslint-comments": "4.6.0",
-        "@stylistic/eslint-plugin": "5.4.0",
+        "@stylistic/eslint-plugin": "5.7.1",
         "@typescript-eslint/eslint-plugin": "8.46.4",
         "@typescript-eslint/parser": "8.46.4",
         "@vitest/eslint-plugin": "1.5.2",
