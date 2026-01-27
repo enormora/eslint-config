@@ -34,7 +34,7 @@
         "eslint-plugin-sonarjs": "1.0.4",
         "eslint-plugin-unicorn": "62.0.0",
         "eslint-plugin-vue": "10.7.0",
-        "globals": "17.1.0",
+        "globals": "17.2.0",
         "vue-eslint-parser": "10.2.0"
     },
     "devDependencies": {
