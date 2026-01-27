@@ -152,9 +152,11 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-qualifier': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+        '@typescript-eslint/no-unused-private-class-members': 'error',
         ...configureWrappedCoreRule('no-unused-vars'),
         ...configureWrappedCoreRule('no-useless-constructor'),
         '@typescript-eslint/no-useless-constructor': 'error',
+        '@typescript-eslint/no-useless-default-assignment': 'error',
         ...configureWrappedCoreRule('prefer-destructuring'),
         '@typescript-eslint/prefer-for-of': 'error',
         '@typescript-eslint/prefer-function-type': 'error',
@@ -193,6 +195,7 @@ export const typescriptConfig = {
                 allowRuleToRunWithoutStrictNullChecksIKnowWhatIAmDoing: false
             }
         ],
+        '@typescript-eslint/strict-void-return': 'error',
         '@typescript-eslint/only-throw-error': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',
         '@typescript-eslint/prefer-nullish-coalescing': ['error', { ignoreIfStatements: true }],
