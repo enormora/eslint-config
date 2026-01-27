@@ -31,7 +31,7 @@
         "eslint-plugin-promise": "7.2.1",
         "eslint-plugin-react": "7.37.5",
         "eslint-plugin-react-hooks": "7.0.1",
-        "eslint-plugin-sonarjs": "1.0.4",
+        "eslint-plugin-sonarjs": "3.0.6",
         "eslint-plugin-unicorn": "62.0.0",
         "eslint-plugin-vue": "10.7.0",
         "globals": "17.2.0",
