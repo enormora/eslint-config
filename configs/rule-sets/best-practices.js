@@ -33,6 +33,7 @@ export const bestPracticesRuleSet = {
         'unicorn/explicit-length-check': 'error',
         'unicorn/no-useless-length-check': 'error',
         'unicorn/filename-case': 'off',
+        'unicorn/no-immediate-mutation': 'error',
         'unicorn/new-for-builtins': 'error',
         'unicorn/no-abusive-eslint-disable': 'error',
         'unicorn/no-console-spaces': 'error',
@@ -154,6 +155,8 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-single-call': 'error',
         'unicorn/require-module-attributes': 'error',
         'unicorn/require-module-specifiers': 'error',
+        'unicorn/no-useless-collection-argument': 'error',
+        'unicorn/prefer-response-static-json': 'error',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
