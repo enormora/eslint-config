@@ -19,6 +19,7 @@ export const reactJsxConfig = {
         ...reactConfig.rules,
 
         'jsx-quotes': ['error', 'prefer-single'],
+        'jsx-sort-props': 'off',
 
         'react/jsx-boolean-value': 'error',
         'react/jsx-key': 'error',
