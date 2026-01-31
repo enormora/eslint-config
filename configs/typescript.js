@@ -36,8 +36,7 @@ export const typescriptConfig = {
                 jsx: false,
                 globalReturn: false
             },
-            projectService: true,
-            project: 'tsconfig.json'
+            projectService: true
         }
     },
     settings: {
