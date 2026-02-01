@@ -21,7 +21,7 @@ export const reactJsxConfig = {
         'jsx-quotes': ['error', 'prefer-single'],
         'jsx-sort-props': 'off',
 
-        'react/jsx-boolean-value': 'error',
+        'react/jsx-boolean-value': ['error', 'always'],
         'react/jsx-key': 'error',
         'react/jsx-max-depth': ['error', { max: 10 }],
         'react/jsx-no-comment-textnodes': 'error',
