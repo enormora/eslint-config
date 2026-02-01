@@ -17,7 +17,6 @@ export const vueConfig = {
                 globalReturn: false
             },
             projectService: true,
-            project: 'tsconfig.json',
             globals: globals['shared-node-browser']
         }
     },
