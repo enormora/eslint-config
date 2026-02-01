@@ -25,7 +25,6 @@ test('vue preset config has the correct language options defined', checkConfigLa
                 globalReturn: false
             },
             projectService: true,
-            project: 'tsconfig.json',
             globals: globals['shared-node-browser']
         }
     }
