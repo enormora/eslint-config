@@ -15,7 +15,7 @@
         "@stylistic/eslint-plugin": "5.7.1",
         "@typescript-eslint/eslint-plugin": "8.55.0",
         "@typescript-eslint/parser": "8.55.0",
-        "@vitest/eslint-plugin": "1.6.6",
+        "@vitest/eslint-plugin": "1.6.7",
         "eslint-import-resolver-typescript": "4.4.4",
         "eslint-plugin-array-func": "5.1.0",
         "eslint-plugin-ava": "15.1.0",
