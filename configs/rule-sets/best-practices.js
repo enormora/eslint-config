@@ -157,6 +157,7 @@ export const bestPracticesRuleSet = {
         'unicorn/require-module-specifiers': 'error',
         'unicorn/no-useless-collection-argument': 'error',
         'unicorn/prefer-response-static-json': 'error',
+        'unicorn/isolated-functions': 'off',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
