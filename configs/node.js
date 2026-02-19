@@ -44,6 +44,8 @@ export const nodeConfig = {
         'node/no-sync': 'error',
         'node/no-unpublished-import': 'off',
         'node/no-unpublished-require': 'off',
+        'node/prefer-global/crypto': ['error', 'never'],
+        'node/prefer-global/timers': ['error', 'never'],
         'node/process-exit-as-throw': 'error',
         'node/hashbang': 'off',
         'node/prefer-node-protocol': 'off', // already covered by unicorn/prefer-node-protocol
