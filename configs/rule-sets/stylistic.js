@@ -51,6 +51,7 @@ export const stylisticRuleSet = {
         '@stylistic/dot-location': ['error', 'property'],
         '@stylistic/eol-last': 'error',
         '@stylistic/exp-list-style': 'off',
+        '@stylistic/exp-jsx-props-style': 'off',
         '@stylistic/function-call-spacing': ['error', 'never'],
         '@stylistic/function-call-argument-newline': ['error', 'consistent'],
         '@stylistic/function-paren-newline': 'off',
