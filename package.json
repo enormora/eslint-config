@@ -43,7 +43,7 @@
         "ava": "7.0.0",
         "eslint": "9.39.4",
         "prettier": "3.8.1",
-        "rust-just": "1.46.0",
+        "rust-just": "1.47.0",
         "typescript": "5.9.3"
     },
     "repository": {
