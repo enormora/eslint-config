@@ -98,6 +98,7 @@ export const vitestConfig = {
         '@vitest/require-test-timeout': 'off',
         '@vitest/warn-todo': 'error',
         '@vitest/hoisted-apis-on-top': 'error',
-        '@vitest/prefer-expect-type-of': 'error'
+        '@vitest/prefer-expect-type-of': 'error',
+        '@vitest/unbound-method': 'error'
     }
 };
