@@ -33,9 +33,7 @@ export const checkAllCoreRulesConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet } = testCase;
     const ruleNames = Object.keys(eslintCorePresets.configs.all.rules);
 
-    if (ruleNames.length === 0) {
-        t.fail('ESLint core rules not found');
-    }
+    t.not(ruleNames.length, 0, 'ESLint core rules not found');
 
     ruleNames.forEach((ruleName) => {
         t.true(isRuleConfigured(ruleConfigSet, ruleName), `ESLint core rule "${ruleName}" not configured`);
@@ -60,9 +58,7 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
     const ruleNames = Object.keys(pluginRules);
     const shortPluginName = extractShortName(pluginName);
 
-    if (ruleNames.length === 0) {
-        t.fail('Plugin rules are empty');
-    }
+    t.not(ruleNames.length, 0, 'Plugin rules are empty');
 
     ruleNames
         .filter((ruleName) => {
@@ -73,12 +69,12 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
             const shortPluginRuleName = `${shortPluginName}/${ruleName}`;
             const isConfigured = isRuleConfigured(ruleConfigSet, shortPluginRuleName);
 
-            if (isRuleDeprecated(rule)) {
-                t.false(isConfigured, `Rule ${shortPluginRuleName} is deprecated`);
-                return;
-            }
-
-            t.true(isConfigured, `Rule ${shortPluginRuleName} not configured`);
+            const shouldRuleBeConfigured = !isRuleDeprecated(rule);
+            t.is(
+                isConfigured,
+                shouldRuleBeConfigured,
+                `Rule ${shortPluginRuleName} ${shouldRuleBeConfigured ? 'not configured' : 'is deprecated'}`
+            );
         });
 });
 
@@ -93,9 +89,7 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
             return `${shortPluginName}/${ruleName}`;
         });
 
-    if (pluginRuleNames.length === 0) {
-        t.fail('Plugin rules are empty');
-    }
+    t.not(pluginRuleNames.length, 0, 'Plugin rules are empty');
 
     const configuredRuleNames = Object.keys(ruleConfigSet);
     const configuredPluginRuleNames = configuredRuleNames.filter((ruleName) => {
@@ -123,7 +117,7 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
     };
     const program = ts.createProgram(['/foo.js'], {}, customCompilerHost);
 
-    try {
+    t.notThrows(() => {
         linter.verify(
             'foo();',
             {
@@ -138,10 +132,7 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
             },
             '/foo.js'
         );
-        t.pass('Linter.verify() did not throw for the given config');
-    } catch (error) {
-        t.fail(`Linter.verify() failed for the given config with ${error.message}`);
-    }
+    }, 'Linter.verify() failed for the given config');
 });
 
 export const checkConfigLanguageOptions = test.macro((t, testCase) => {
@@ -156,9 +147,7 @@ export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
     const testRuleNames = Object.keys(testRuleSet.rules);
     const rulesFromConfigKeys = Object.keys(ruleConfigSet);
 
-    if (rulesFromConfigKeys.length === 0) {
-        t.fail('Plugin rules are empty');
-    }
+    t.not(rulesFromConfigKeys.length, 0, 'Plugin rules are empty');
 
     const remainingRulesKeys = rulesFromConfigKeys.filter((ruleName) => {
         return testRuleNames.includes(ruleName);
@@ -178,9 +167,7 @@ export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
         return additionalRulesNames.includes(ruleName);
     });
 
-    if (additionalRulesFromRuleConfigSet.length === 0) {
-        t.fail('Additional plugin rules are not defined');
-    }
+    t.not(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
 
     additionalRulesFromRuleConfigSet.forEach(([ruleName, ruleSetting]) => {
         const expectedRuleSetting = additionalRules[ruleName];
