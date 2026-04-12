@@ -6,6 +6,26 @@ import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 
 const maxSwitchCases = 6;
 
+function isSonarjsRuleDeprecated(sonarjsRule) {
+    return sonarjsRule.meta?.deprecated ?? false;
+}
+
+const nonDeprecatedSonarjsRuleNames = new Set(
+    Object.entries(sonarjsPlugin.rules)
+        .filter(([, sonarjsRule]) => {
+            return !isSonarjsRuleDeprecated(sonarjsRule);
+        })
+        .map(([sonarjsRuleName]) => {
+            return `sonarjs/${sonarjsRuleName}`;
+        })
+);
+
+const nonDeprecatedSonarjsRecommendedRules = Object.fromEntries(
+    Object.entries(sonarjsPlugin.configs.recommended.rules).filter(([sonarjsRuleName]) => {
+        return nonDeprecatedSonarjsRuleNames.has(sonarjsRuleName);
+    })
+);
+
 export const bestPracticesRuleSet = {
     plugins: {
         unicorn: unicornPlugin,
@@ -170,6 +190,8 @@ export const bestPracticesRuleSet = {
         'array-func/prefer-flat-map': 'error',
         'array-func/prefer-flat': 'error',
 
+        ...nonDeprecatedSonarjsRecommendedRules,
+
         'sonarjs/cognitive-complexity': 'off',
         'sonarjs/elseif-without-else': 'off',
         'sonarjs/max-switch-cases': ['error', maxSwitchCases],
@@ -181,6 +203,7 @@ export const bestPracticesRuleSet = {
         'sonarjs/no-element-overwrite': 'error',
         'sonarjs/no-empty-collection': 'error',
         'sonarjs/no-extra-arguments': 'off',
+        'sonarjs/function-name': 'off',
         'sonarjs/no-gratuitous-expressions': 'error',
         'sonarjs/no-identical-conditions': 'error',
         'sonarjs/no-identical-expressions': 'error',
@@ -189,7 +212,6 @@ export const bestPracticesRuleSet = {
         'sonarjs/no-inverted-boolean-check': 'error',
         'sonarjs/no-nested-switch': 'error',
         'sonarjs/no-nested-template-literals': 'error',
-        'sonarjs/no-one-iteration-loop': 'error',
         'sonarjs/no-redundant-boolean': 'off',
         'sonarjs/no-redundant-jump': 'off',
         'sonarjs/no-same-line-conditional': 'error',
