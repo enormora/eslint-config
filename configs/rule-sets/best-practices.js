@@ -198,6 +198,7 @@ export const bestPracticesRuleSet = {
         'sonarjs/no-all-duplicated-branches': 'error',
         'sonarjs/no-collapsible-if': 'error',
         'sonarjs/no-collection-size-mischeck': 'error',
+        'sonarjs/no-clear-text-protocols': 'off',
         'sonarjs/no-duplicate-string': 'off',
         'sonarjs/no-duplicated-branches': 'error',
         'sonarjs/no-element-overwrite': 'error',
