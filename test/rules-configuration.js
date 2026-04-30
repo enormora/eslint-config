@@ -1,22 +1,25 @@
-import test from 'ava';
 import eslintCorePresets from '@eslint/js';
+import test from 'ava';
 import { Linter } from 'eslint';
 import ts from 'typescript';
 import { testRuleSet } from '../configs/presets/test-base/test-base.js';
 
+const scopedPluginShortNamePattern = /^@[^/]+\/eslint-plugin-(?<shortName>.+)$/u;
+
 function extractShortName(pluginName) {
     const prefix = 'eslint-plugin-';
     const suffix = '/eslint-plugin';
+    const scopedMatch = scopedPluginShortNamePattern.exec(pluginName);
 
     if (pluginName.startsWith(prefix)) {
         return pluginName.slice(prefix.length);
     }
-
     if (pluginName.startsWith('@') && pluginName.endsWith(suffix)) {
-        const startPosition = 0;
-        return pluginName.slice(startPosition, pluginName.length - suffix.length);
+        return pluginName.slice(0, pluginName.length - suffix.length);
     }
-
+    if (scopedMatch !== null) {
+        return scopedMatch.groups.shortName;
+    }
     return pluginName;
 }
 
@@ -81,7 +84,8 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
 export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet, pluginRules, pluginName } = testCase;
     const shortPluginName = extractShortName(pluginName);
-    const pluginRuleNames = Object.keys(pluginRules)
+    const pluginRuleNames = Object
+        .keys(pluginRules)
         .filter((ruleName) => {
             return !isRuleDeprecated(pluginRules[ruleName]);
         })

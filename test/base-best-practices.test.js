@@ -1,9 +1,9 @@
 import test from 'ava';
-import unicornPlugin from 'eslint-plugin-unicorn';
-import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
-import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
+import promisePlugin from 'eslint-plugin-promise';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import unicornPlugin from 'eslint-plugin-unicorn';
 import { baseConfig } from '../configs/presets/base/base.js';
 import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
 

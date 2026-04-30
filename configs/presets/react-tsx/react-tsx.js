@@ -1,5 +1,5 @@
-import { reactJsxConfig } from '../react-jsx/react-jsx.js';
 import { javascriptExtensions, typescriptExtensions } from '../../constants.js';
+import { reactJsxConfig } from '../react-jsx/react-jsx.js';
 
 export const reactTsxConfig = {
     languageOptions: reactJsxConfig.languageOptions,

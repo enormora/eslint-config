@@ -1,11 +1,9 @@
-import prettierPlugin from 'eslint-plugin-prettier';
-import destructuringPlugin from 'eslint-plugin-destructuring';
 import stylisticPlugin from '@stylistic/eslint-plugin';
+import destructuringPlugin from 'eslint-plugin-destructuring';
 import { indentSize } from '../constants.js';
 
 export const stylisticRuleSet = {
     plugins: {
-        prettier: prettierPlugin,
         destructuring: destructuringPlugin,
         '@stylistic': stylisticPlugin
     },
@@ -13,8 +11,6 @@ export const stylisticRuleSet = {
     settings: {},
 
     rules: {
-        'prettier/prettier': 'error',
-
         'destructuring/in-methods-params': 'error',
         'destructuring/in-params': ['error', { 'max-params': 0 }],
         'destructuring/no-rename': 'off',

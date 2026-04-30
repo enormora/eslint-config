@@ -1,11 +1,11 @@
-import test from 'ava';
 import vitestPlugin from '@vitest/eslint-plugin';
+import test from 'ava';
 import { vitestConfig } from '../configs/presets/vitest/vitest.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
+    checkAllTestRulesConfigured,
     checkConfigToHaveNoValidationIssues,
-    checkAllTestRulesConfigured
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('all @vitest/eslint-plugin rules are configured', checkAllPluginRulesConfigured, {

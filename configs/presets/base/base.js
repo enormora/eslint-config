@@ -1,8 +1,9 @@
-import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
-import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
-import noSecretsPlugin from 'eslint-plugin-no-secrets';
+import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import codeSpellChecker from '@cspell/eslint-plugin';
-import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
+import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
+import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
+import noSecretsPlugin from 'eslint-plugin-no-secrets';
+import { ecmaVersion, javascriptExtensions } from '../../constants.js';
 import { bestPracticesRuleSet } from '../../rule-sets/best-practices.js';
 import {
     createRestrictedSyntaxPlugin,
@@ -10,7 +11,7 @@ import {
     noEmptyFunctionBodyRestriction,
     noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.js';
-import { ecmaVersion, javascriptExtensions } from '../../constants.js';
+import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
 
 const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
     'no-class-declaration',
@@ -42,7 +43,8 @@ export const baseConfig = {
         'eslint-comments': eslintCommentsPlugin,
         'no-secrets': noSecretsPlugin,
         '@cspell': codeSpellChecker,
-        'restricted-syntax': restrictedSyntaxPlugin
+        'restricted-syntax': restrictedSyntaxPlugin,
+        dprint: dprintPlugin
     },
     settings: {
         ...stylisticRuleSet.settings,
@@ -406,7 +408,6 @@ export const baseConfig = {
         'import/no-mutable-exports': 'error',
         'import/no-named-as-default-member': 'error',
         'import/no-named-as-default': 'error',
-        'import/order': 'error',
         'import/no-unassigned-import': [
             'error',
             {
@@ -448,6 +449,20 @@ export const baseConfig = {
                 customWordListFile: undefined,
                 debugMode: false
             }
-        ]
+        ],
+
+        'dprint/typescript': ['error', { configFile: 'dprint.json' }],
+        'dprint/json': 'off',
+        'dprint/markdown': 'off',
+        'dprint/toml': 'off',
+        'dprint/dockerfile': 'off',
+        'dprint/malva': 'off',
+        'dprint/markup': 'off',
+        'dprint/yaml': 'off',
+        'dprint/graphql': 'off',
+
+        '@stylistic/member-delimiter-style': 'off',
+        '@stylistic/operator-linebreak': 'off',
+        'import/order': 'off'
     }
 };

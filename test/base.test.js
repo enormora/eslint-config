@@ -1,14 +1,14 @@
-import test from 'ava';
-import noSecretsPlugin from 'eslint-plugin-no-secrets';
-import { rules as importPluginRules } from 'eslint-plugin-import-x';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
+import test from 'ava';
+import { rules as importPluginRules } from 'eslint-plugin-import-x';
+import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { baseConfig } from '../configs/presets/base/base.js';
 import {
     checkAllCoreRulesConfigured,
-    checkUnknownCoreRulesAreNotConfigured,
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
-    checkConfigToHaveNoValidationIssues
+    checkConfigToHaveNoValidationIssues,
+    checkUnknownCoreRulesAreNotConfigured,
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('all core rules are configured', checkAllCoreRulesConfigured, {

@@ -3,8 +3,8 @@ import nodePlugin from 'eslint-plugin-n';
 import { nodeConfig, nodeConfigFileConfig, nodeEntryPointFileConfig } from '../configs/presets/node/node.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
-    checkConfigToHaveNoValidationIssues
+    checkConfigToHaveNoValidationIssues,
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-n rules are configured', checkAllPluginRulesConfigured, {

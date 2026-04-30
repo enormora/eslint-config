@@ -1,8 +1,8 @@
-import unicornPlugin from 'eslint-plugin-unicorn';
-import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
-import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
+import promisePlugin from 'eslint-plugin-promise';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import unicornPlugin from 'eslint-plugin-unicorn';
 
 const maxSwitchCases = 6;
 
@@ -11,7 +11,8 @@ function isSonarjsRuleDeprecated(sonarjsRule) {
 }
 
 const nonDeprecatedSonarjsRuleNames = new Set(
-    Object.entries(sonarjsPlugin.rules)
+    Object
+        .entries(sonarjsPlugin.rules)
         .filter(([, sonarjsRule]) => {
             return !isSonarjsRuleDeprecated(sonarjsRule);
         })

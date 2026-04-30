@@ -1,12 +1,12 @@
-import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
-import functionalPlugin from 'eslint-plugin-functional';
-import perfectionistPlugin from 'eslint-plugin-perfectionist';
+import typescriptParser from '@typescript-eslint/parser';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
+import functionalPlugin from 'eslint-plugin-functional';
 import { createNodeResolver } from 'eslint-plugin-import-x';
-import { baseConfig } from '../base/base.js';
-import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.js';
+import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { javascriptExtensions, typescriptExtensions } from '../../constants.js';
+import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.js';
+import { baseConfig } from '../base/base.js';
 
 export const noTsEnumDeclarationRestriction = {
     selector: 'TSEnumDeclaration',

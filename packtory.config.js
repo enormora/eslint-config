@@ -1,6 +1,6 @@
 // @ts-check
-import path from 'node:path';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 const projectFolder = process.cwd();
 const sourcesFolder = path.join(projectFolder, 'configs');
