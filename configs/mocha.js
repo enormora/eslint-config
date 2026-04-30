@@ -25,7 +25,7 @@ export const mochaConfig = {
         'mocha/no-pending-tests': 'error',
         'mocha/no-return-and-callback': 'error',
         'mocha/no-return-from-async': 'off',
-        'mocha/no-setup-in-describe': 'error',
+        'mocha/no-setup-in-describe': 'off',
         'mocha/no-sibling-hooks': 'error',
         'mocha/no-synchronous-tests': 'off',
         'mocha/no-top-level-hooks': 'error',
