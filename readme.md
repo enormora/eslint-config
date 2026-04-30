@@ -8,7 +8,8 @@ The config presets are distributed in multiple packages and only work with the [
 
 Enormora provides a collection of shareable ESLint config presets to cater to various project types and requirements. Choose the configuration that best aligns with your project's needs for seamless linting and consistent coding styles.
 
-- **[@enormora/eslint-config-base](./configs/presets/base/base.md):** Base config, environment-, framework-, and library-agnostic.
+- **[@enormora/eslint-config-base](./configs/presets/base/base.md):** Base config, environment-, framework-, and library-agnostic. Uses dprint for formatting.
+- **[@enormora/eslint-config-base-with-prettier](./configs/presets/base-with-prettier/base-with-prettier.md):** Alternative base config that uses prettier instead of dprint. Pick one of the two base presets.
 - **[@enormora/eslint-config-node](./configs/presets/node/node.md):** Config with Node.js specific rules.
 - **[@enormora/eslint-config-typescript](./configs/presets/typescript/typescript.md):** Config with TypeScript specific rules.
 - **[@enormora/eslint-config-ava](./configs/presets/ava/ava.md):** Config with [`ava`](https://ava.li/) specific rules.

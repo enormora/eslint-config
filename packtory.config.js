@@ -61,6 +61,23 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-base-with-prettier',
+                entryPoints: [
+                    {
+                        js: 'presets/base-with-prettier/base-with-prettier.js'
+                    }
+                ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(sourcesFolder, 'presets/base-with-prettier/base-with-prettier.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint base configuration formatted with prettier'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-node',
                 entryPoints: [
                     {
