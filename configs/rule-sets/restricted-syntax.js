@@ -1,7 +1,17 @@
-export const noClassDeclarationRestriction = {
-    selector: 'ClassDeclaration[superClass.name!=/Error$/]',
-    message: 'Class declarations are not allowed except for extending errors.'
-};
+const defaultAllowedSuperClassNamePattern = '/Error$/';
+const defaultClassDeclarationMessage = 'Class declarations are not allowed except for extending errors.';
+
+export function createNoClassDeclarationRestriction({
+    allowedSuperClassNamePattern = defaultAllowedSuperClassNamePattern,
+    message = defaultClassDeclarationMessage
+} = {}) {
+    return {
+        selector: `ClassDeclaration[superClass.name!=${allowedSuperClassNamePattern}]`,
+        message
+    };
+}
+
+export const noClassDeclarationRestriction = createNoClassDeclarationRestriction();
 
 export const noSwitchStatementRestriction = {
     selector: 'SwitchStatement',
