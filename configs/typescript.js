@@ -5,6 +5,11 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver } from 'eslint-plugin-import-x';
 import { baseConfig } from './base.js';
+import {
+    noClassDeclarationRestriction,
+    noSwitchStatementRestriction,
+    noTsEnumDeclarationRestriction
+} from './rule-sets/restricted-syntax.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
 
 function asArray(value) {
@@ -56,6 +61,13 @@ export const typescriptConfig = {
         functional: functionalPlugin
     },
     rules: {
+        'no-restricted-syntax': [
+            'error',
+            noClassDeclarationRestriction,
+            noSwitchStatementRestriction,
+            noTsEnumDeclarationRestriction
+        ],
+
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': [

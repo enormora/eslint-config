@@ -4,6 +4,7 @@ import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
+import { noClassDeclarationRestriction, noSwitchStatementRestriction } from './rule-sets/restricted-syntax.js';
 import { ecmaVersion, javascriptExtensions } from './constants.js';
 
 export const baseConfig = {
@@ -111,21 +112,7 @@ export const baseConfig = {
         'no-prototype-builtins': 'error',
         'no-redeclare': ['error', { builtinGlobals: true }],
         'no-regex-spaces': 'error',
-        'no-restricted-syntax': [
-            'error',
-            {
-                selector: 'TSEnumDeclaration',
-                message: 'Use a string union type instead'
-            },
-            {
-                selector: 'ClassDeclaration[superClass.name!=/Error$/]',
-                message: 'Class declarations are not allowed except for extending errors.'
-            },
-            {
-                selector: 'SwitchStatement',
-                message: 'Use pattern matching instead.'
-            }
-        ],
+        'no-restricted-syntax': ['error', noClassDeclarationRestriction, noSwitchStatementRestriction],
         'no-return-assign': ['error', 'always'],
         'no-self-assign': ['error', { props: true }],
         'no-self-compare': 'error',

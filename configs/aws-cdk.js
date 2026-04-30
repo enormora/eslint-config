@@ -1,9 +1,10 @@
+import { noSwitchStatementRestriction, noTsEnumDeclarationRestriction } from './rule-sets/restricted-syntax.js';
+
 export const awsCdkConfig = {
     rules: {
-        'no-restricted-syntax': 'off',
+        'no-restricted-syntax': ['error', noSwitchStatementRestriction, noTsEnumDeclarationRestriction],
         'no-new': 'off',
         'sonarjs/constructor-for-side-effects': 'off',
-        'functional/no-classes': 'off',
         'functional/no-this-expressions': 'off'
     }
 };
