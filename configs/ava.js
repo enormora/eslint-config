@@ -8,9 +8,6 @@ export const avaConfig = {
     rules: {
         ...testRuleSet.rules,
 
-        'no-magic-numbers': 'off',
-        '@typescript-eslint/no-magic-numbers': 'off',
-
         'id-length': ['error', { min: 2, properties: 'never', exceptions: ['t'] }],
 
         'ava/assertion-arguments': 'error',
