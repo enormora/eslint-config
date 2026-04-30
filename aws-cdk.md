@@ -4,10 +4,9 @@ Config preset for AWS CDK projects. Disables a small set of rules that conflict 
 
 ## What it disables and why
 
-- `no-restricted-syntax` — CDK uses many of the syntactic constructs typically banned in restricted-syntax presets.
+- `no-restricted-syntax` — re-applies the switch and TS enum bans but lifts the class-declaration ban, since CDK constructs require classes.
 - `no-new` — `new MyStack(app, 'id', props)` is the canonical way to register stacks and constructs; the side-effecting `new` is intentional.
 - `sonarjs/constructor-for-side-effects` — child constructs register themselves on their parent via `super(scope, id)` in the constructor; the returned instance is often unused.
-- `functional/no-classes` — every CDK construct extends `Construct` (or `Stack`), so a class is required.
 - `functional/no-this-expressions` — construct constructors reference `this` to expose typed children to consumers.
 
 ## Install & Setup
