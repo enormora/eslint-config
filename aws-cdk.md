@@ -4,7 +4,7 @@ Config preset for AWS CDK projects. Disables a small set of rules that conflict 
 
 ## What it disables and why
 
-- `no-restricted-syntax` — re-applies the switch and TS enum bans, and keeps the class-declaration ban but widens its allowlist so classes whose superclass name ends in `Error` or `Construct` (e.g. `MyStack extends Construct`, custom errors) are permitted.
+- `no-restricted-syntax` — re-applies the switch and TS enum bans, and keeps the class-declaration ban but widens its allowlist so classes whose superclass name ends in `Error`, `Construct`, `Stack`, or `Resource` (e.g. `MyStack extends Stack`, custom errors) are permitted.
 - `no-new` — `new MyStack(app, 'id', props)` is the canonical way to register stacks and constructs; the side-effecting `new` is intentional.
 - `sonarjs/constructor-for-side-effects` — child constructs register themselves on their parent via `super(scope, id)` in the constructor; the returned instance is often unused.
 - `functional/no-this-expressions` — construct constructors reference `this` to expose typed children to consumers.
