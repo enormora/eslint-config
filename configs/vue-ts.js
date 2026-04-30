@@ -7,6 +7,7 @@ import { typescriptConfig } from './typescript.js';
 export const vueConfig = {
     languageOptions: {
         parser: vueParser,
+        globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
             extraFileExtensions: ['.vue'],
@@ -16,8 +17,7 @@ export const vueConfig = {
                 jsx: false,
                 globalReturn: false
             },
-            projectService: true,
-            globals: globals['shared-node-browser']
+            projectService: true
         }
     },
     processor: 'vue/vue',
