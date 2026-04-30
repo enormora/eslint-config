@@ -15,6 +15,7 @@ test('vue preset config has the correct language options defined', checkConfigLa
     configLanguageOptions: vueConfig.languageOptions,
     languageOptions: {
         parser: vueParser,
+        globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
             extraFileExtensions: ['.vue'],
@@ -24,8 +25,7 @@ test('vue preset config has the correct language options defined', checkConfigLa
                 jsx: false,
                 globalReturn: false
             },
-            projectService: true,
-            globals: globals['shared-node-browser']
+            projectService: true
         }
     }
 });
