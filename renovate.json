@@ -4,6 +4,8 @@
     "labels": ["renovate", "upgrade"],
     "dependencyDashboard": false,
     "rebaseStalePrs": true,
+    "automerge": true,
+    "automergeType": "pr",
     "lockFileMaintenance": {
         "enabled": true,
         "automerge": true
@@ -12,12 +14,6 @@
         {
             "matchPackageNames": ["eslint", "@eslint/js", "eslint-plugin-ava"],
             "groupName": "ESLint packages"
-        },
-        {
-            "matchDepTypes": ["dependencies", "devDependencies"],
-            "matchUpdateTypes": ["minor", "patch"],
-            "automerge": true,
-            "automergeType": "pr"
         }
     ]
 }
