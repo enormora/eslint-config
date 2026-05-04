@@ -4,9 +4,9 @@ import functionalPlugin from 'eslint-plugin-functional';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver } from 'eslint-plugin-import-x';
-import { baseConfig } from './base.js';
-import { createRestrictedSyntaxPlugin } from './rule-sets/restricted-syntax.js';
-import { javascriptExtensions, typescriptExtensions } from './constants.js';
+import { baseConfig } from '../base/base.js';
+import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.js';
+import { javascriptExtensions, typescriptExtensions } from '../../constants.js';
 
 export const noTsEnumDeclarationRestriction = {
     selector: 'TSEnumDeclaration',

@@ -1,6 +1,6 @@
 import test from 'ava';
 import vitestPlugin from '@vitest/eslint-plugin';
-import { vitestConfig } from '../configs/vitest.js';
+import { vitestConfig } from '../configs/presets/vitest/vitest.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

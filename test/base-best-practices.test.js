@@ -4,7 +4,7 @@ import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
-import { baseConfig } from '../configs/base.js';
+import { baseConfig } from '../configs/presets/base/base.js';
 import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
 
 test('all eslint-plugin-unicorn rules are configured', checkAllPluginRulesConfigured, {

@@ -1,5 +1,5 @@
 import vitestPlugin from '@vitest/eslint-plugin';
-import { testRuleSet } from './test-base.js';
+import { testRuleSet } from '../test-base/test-base.js';
 
 export const vitestConfig = {
     plugins: {

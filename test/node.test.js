@@ -1,6 +1,6 @@
 import test from 'ava';
 import nodePlugin from 'eslint-plugin-n';
-import { nodeConfig, nodeConfigFileConfig, nodeEntryPointFileConfig } from '../configs/node.js';
+import { nodeConfig, nodeConfigFileConfig, nodeEntryPointFileConfig } from '../configs/presets/node/node.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

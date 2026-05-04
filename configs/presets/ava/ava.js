@@ -1,5 +1,5 @@
 import avaPlugin from 'eslint-plugin-ava';
-import { testRuleSet } from './test-base.js';
+import { testRuleSet } from '../test-base/test-base.js';
 
 export const avaConfig = {
     plugins: {

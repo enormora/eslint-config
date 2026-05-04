@@ -2,15 +2,15 @@ import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
-import { stylisticRuleSet } from './rule-sets/stylistic.js';
-import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
+import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
+import { bestPracticesRuleSet } from '../../rule-sets/best-practices.js';
 import {
     createRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noSwitchStatementRestriction
-} from './rule-sets/restricted-syntax.js';
-import { ecmaVersion, javascriptExtensions } from './constants.js';
+} from '../../rule-sets/restricted-syntax.js';
+import { ecmaVersion, javascriptExtensions } from '../../constants.js';
 
 const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
     'no-class-declaration',

@@ -1,5 +1,5 @@
-import { reactConfig } from './react.js';
-import { javascriptExtensions } from './constants.js';
+import { reactConfig } from '../react/react.js';
+import { javascriptExtensions } from '../../constants.js';
 
 export const reactJsxConfig = {
     languageOptions: {

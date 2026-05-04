@@ -1,6 +1,6 @@
 import test from 'ava';
-import { baseConfig } from '../../configs/base.js';
-import { typescriptConfig } from '../../configs/typescript.js';
+import { baseConfig } from '../../configs/presets/base/base.js';
+import { typescriptConfig } from '../../configs/presets/typescript/typescript.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript';

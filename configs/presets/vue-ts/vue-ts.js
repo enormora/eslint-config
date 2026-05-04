@@ -2,7 +2,7 @@ import typescriptParser from '@typescript-eslint/parser';
 import vueParser from 'vue-eslint-parser';
 import vuePlugin from 'eslint-plugin-vue';
 import globals from 'globals';
-import { typescriptConfig } from './typescript.js';
+import { typescriptConfig } from '../typescript/typescript.js';
 
 export const vueConfig = {
     languageOptions: {

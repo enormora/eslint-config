@@ -1,7 +1,7 @@
 import test from 'ava';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
-import { reactJsxConfig } from '../configs/react-jsx.js';
+import { reactJsxConfig } from '../configs/presets/react-jsx/react-jsx.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

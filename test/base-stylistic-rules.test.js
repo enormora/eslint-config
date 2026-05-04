@@ -2,7 +2,7 @@ import test from 'ava';
 import prettierPlugin from 'eslint-plugin-prettier';
 import destructuringPlugin from 'eslint-plugin-destructuring';
 import stylisticPlugin from '@stylistic/eslint-plugin';
-import { baseConfig } from '../configs/base.js';
+import { baseConfig } from '../configs/presets/base/base.js';
 import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
 
 test('all eslint-plugin-prettier rules are configured', checkAllPluginRulesConfigured, {

@@ -1,4 +1,4 @@
-import { createNoClassDeclarationRestriction } from './rule-sets/restricted-syntax.js';
+import { createNoClassDeclarationRestriction } from '../../rule-sets/restricted-syntax.js';
 
 const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
     allowedSuperClassNamePattern: '/(Error|Construct|Stack|Resource)$/',

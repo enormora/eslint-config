@@ -1,6 +1,6 @@
 import test from 'ava';
-import { baseConfig } from '../../configs/base.js';
-import { nodeConfig } from '../../configs/node.js';
+import { baseConfig } from '../../configs/presets/base/base.js';
+import { nodeConfig } from '../../configs/presets/node/node.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-node';

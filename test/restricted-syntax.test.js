@@ -8,7 +8,10 @@ import {
     noEmptyFunctionBodyRestriction,
     noSwitchStatementRestriction
 } from '../configs/rule-sets/restricted-syntax.js';
-import { noInlineSignatureTypeLiteralRestriction, noTsEnumDeclarationRestriction } from '../configs/typescript.js';
+import {
+    noInlineSignatureTypeLiteralRestriction,
+    noTsEnumDeclarationRestriction
+} from '../configs/presets/typescript/typescript.js';
 
 const noRestrictedSyntaxRule = builtinRules.get('no-restricted-syntax');
 

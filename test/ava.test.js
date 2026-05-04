@@ -1,6 +1,6 @@
 import test from 'ava';
 import avaPlugin from 'eslint-plugin-ava';
-import { avaConfig } from '../configs/ava.js';
+import { avaConfig } from '../configs/presets/ava/ava.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

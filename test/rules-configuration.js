@@ -2,7 +2,7 @@ import test from 'ava';
 import eslintCorePresets from '@eslint/js';
 import { Linter } from 'eslint';
 import ts from 'typescript';
-import { testRuleSet } from '../configs/test-base.js';
+import { testRuleSet } from '../configs/presets/test-base/test-base.js';
 
 function extractShortName(pluginName) {
     const prefix = 'eslint-plugin-';

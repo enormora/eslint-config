@@ -1,4 +1,4 @@
-import { stylisticRuleSet } from './rule-sets/stylistic.js';
+import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
 
 export const testRuleSet = {
     rules: {
