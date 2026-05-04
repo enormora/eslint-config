@@ -370,12 +370,12 @@ export const typescriptConfig = {
                             replace: 'readonly $1'
                         },
                         {
-                            pattern: '^(Array|Map|Set)<(.+)>$',
-                            replace: 'Readonly$1<$2>'
+                            pattern: '^(\\[.+\\])$',
+                            replace: 'readonly $1'
                         },
                         {
-                            pattern: '^(.+)$',
-                            replace: 'Readonly<$1>'
+                            pattern: '^(Map|Set)<(.+)>$',
+                            replace: 'Readonly$1<$2>'
                         }
                     ]
                 },
@@ -383,11 +383,10 @@ export const typescriptConfig = {
                     enforcement: 'ReadonlyShallow'
                 },
                 returnTypes: {
-                    enforcement: 'ReadonlyShallow'
+                    enforcement: 'None'
                 },
                 variables: {
-                    enforcement: 'ReadonlyShallow',
-                    ignoreInFunctions: true
+                    enforcement: 'None'
                 }
             }
         ],
@@ -404,12 +403,16 @@ export const typescriptConfig = {
                         comparator: 'AtLeast',
                         fixer: [
                             {
-                                pattern: '^(Array|Map|Set)<(.+)>$',
-                                replace: 'Readonly$1<$2>'
+                                pattern: '^([_$a-zA-Z\\xA0-\\uFFFF][_$a-zA-Z0-9\\xA0-\\uFFFF]*\\[\\])$',
+                                replace: 'readonly $1'
                             },
                             {
-                                pattern: '^(.+)$',
-                                replace: 'Readonly<$1>'
+                                pattern: '^(\\[.+\\])$',
+                                replace: 'readonly $1'
+                            },
+                            {
+                                pattern: '^(Map|Set)<(.+)>$',
+                                replace: 'Readonly$1<$2>'
                             }
                         ]
                     }

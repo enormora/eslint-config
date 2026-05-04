@@ -5,11 +5,7 @@ import { reactTsxConfig } from '../../configs/react-tsx.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript-react-tsx';
-const configs = [
-    baseConfig,
-    { ...typescriptConfig, files: ['**/*.tsx'] },
-    { ...reactTsxConfig, files: ['**/*.tsx'] }
-];
+const configs = [baseConfig, { ...typescriptConfig, files: ['**/*.tsx'] }, { ...reactTsxConfig, files: ['**/*.tsx'] }];
 
 const expectedViolationRuleIds = [
     '@typescript-eslint/explicit-function-return-type',
