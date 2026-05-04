@@ -107,7 +107,10 @@ export const reactConfig = {
         'react/sort-default-props': 'off',
         'react/checked-requires-onchange-or-readonly': 'off',
         'react/jsx-props-no-spread-multi': 'error',
-        'react/forward-ref-uses-ref': 'error',
+        // Disabled: rule calls removed `context.getSourceCode()` and crashes on ESLint 10.
+        // Tracked upstream in jsx-eslint/eslint-plugin-react#3977; fix PR #3979 stalled.
+        // Low cost to leave off — React 19 deprecates `forwardRef` itself.
+        'react/forward-ref-uses-ref': 'off',
 
         'react-hooks/automatic-effect-dependencies': 'off',
         'react-hooks/capitalized-calls': 'off',

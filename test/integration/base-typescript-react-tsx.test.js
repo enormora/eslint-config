@@ -30,6 +30,7 @@ const expectedViolationRuleIds = [
     'react/jsx-no-literals',
     'react/jsx-no-target-blank',
     'react/react-in-jsx-scope',
+    'restricted-syntax-typescript/no-inline-signature-type-literal',
     'sonarjs/prefer-read-only-props'
 ];
 
