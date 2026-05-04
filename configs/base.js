@@ -4,8 +4,19 @@ import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import codeSpellChecker from '@cspell/eslint-plugin';
 import { stylisticRuleSet } from './rule-sets/stylistic.js';
 import { bestPracticesRuleSet } from './rule-sets/best-practices.js';
-import { noClassDeclarationRestriction, noSwitchStatementRestriction } from './rule-sets/restricted-syntax.js';
+import {
+    createRestrictedSyntaxPlugin,
+    noClassDeclarationRestriction,
+    noEmptyFunctionBodyRestriction,
+    noSwitchStatementRestriction
+} from './rule-sets/restricted-syntax.js';
 import { ecmaVersion, javascriptExtensions } from './constants.js';
+
+const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
+    'no-class-declaration',
+    'no-switch-statement',
+    'no-empty-function-body'
+]);
 
 export const baseConfig = {
     languageOptions: {
@@ -30,7 +41,8 @@ export const baseConfig = {
         import: importPlugin,
         'eslint-comments': eslintCommentsPlugin,
         'no-secrets': noSecretsPlugin,
-        '@cspell': codeSpellChecker
+        '@cspell': codeSpellChecker,
+        'restricted-syntax': restrictedSyntaxPlugin
     },
     settings: {
         ...stylisticRuleSet.settings,
@@ -68,7 +80,7 @@ export const baseConfig = {
         'no-else-return': ['error', { allowElseIf: false }],
         'no-empty': ['error', { allowEmptyCatch: true }],
         'no-empty-character-class': 'error',
-        'no-empty-function': 'error',
+        'no-empty-function': 'off',
         'no-empty-pattern': 'error',
         'no-empty-static-block': 'error',
         'no-eq-null': 'error',
@@ -112,7 +124,10 @@ export const baseConfig = {
         'no-prototype-builtins': 'error',
         'no-redeclare': ['error', { builtinGlobals: true }],
         'no-regex-spaces': 'error',
-        'no-restricted-syntax': ['error', noClassDeclarationRestriction, noSwitchStatementRestriction],
+        'no-restricted-syntax': 'off',
+        'restricted-syntax/no-class-declaration': ['error', noClassDeclarationRestriction],
+        'restricted-syntax/no-switch-statement': ['error', noSwitchStatementRestriction],
+        'restricted-syntax/no-empty-function-body': ['error', noEmptyFunctionBodyRestriction],
         'no-return-assign': ['error', 'always'],
         'no-self-assign': ['error', { props: true }],
         'no-self-compare': 'error',

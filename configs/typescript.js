@@ -5,12 +5,15 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver } from 'eslint-plugin-import-x';
 import { baseConfig } from './base.js';
-import {
-    noClassDeclarationRestriction,
-    noSwitchStatementRestriction,
-    noTsEnumDeclarationRestriction
-} from './rule-sets/restricted-syntax.js';
+import { createRestrictedSyntaxPlugin } from './rule-sets/restricted-syntax.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
+
+const noTsEnumDeclarationRestriction = {
+    selector: 'TSEnumDeclaration',
+    message: 'Use a string union type instead'
+};
+
+const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin(['no-ts-enum-declaration']);
 
 function asArray(value) {
     if (Array.isArray(value)) {
@@ -58,15 +61,11 @@ export const typescriptConfig = {
     plugins: {
         '@typescript-eslint': typescriptPlugin,
         perfectionist: perfectionistPlugin,
-        functional: functionalPlugin
+        functional: functionalPlugin,
+        'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin
     },
     rules: {
-        'no-restricted-syntax': [
-            'error',
-            noClassDeclarationRestriction,
-            noSwitchStatementRestriction,
-            noTsEnumDeclarationRestriction
-        ],
+        'restricted-syntax-typescript/no-ts-enum-declaration': ['error', noTsEnumDeclarationRestriction],
 
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',

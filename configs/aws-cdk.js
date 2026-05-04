@@ -1,8 +1,4 @@
-import {
-    createNoClassDeclarationRestriction,
-    noSwitchStatementRestriction,
-    noTsEnumDeclarationRestriction
-} from './rule-sets/restricted-syntax.js';
+import { createNoClassDeclarationRestriction } from './rule-sets/restricted-syntax.js';
 
 const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
     allowedSuperClassNamePattern: '/(Error|Construct|Stack|Resource)$/',
@@ -11,12 +7,7 @@ const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
 
 export const awsCdkConfig = {
     rules: {
-        'no-restricted-syntax': [
-            'error',
-            cdkClassDeclarationRestriction,
-            noSwitchStatementRestriction,
-            noTsEnumDeclarationRestriction
-        ],
+        'restricted-syntax/no-class-declaration': ['error', cdkClassDeclarationRestriction],
         'no-new': 'off',
         'sonarjs/constructor-for-side-effects': 'off',
         'functional/no-this-expressions': 'off'
