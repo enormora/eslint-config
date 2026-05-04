@@ -5,9 +5,11 @@ import { reactTsxConfig } from '../../configs/presets/react-tsx/react-tsx.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript-react-tsx';
-const configs = [baseConfig, { ...typescriptConfig, files: ['**/*.tsx'] }, { ...reactTsxConfig, files: ['**/*.tsx'] }];
+const configs = [...baseConfig, { ...typescriptConfig, files: ['**/*.tsx'] }, { ...reactTsxConfig, files: ['**/*.tsx'] }];
 
 const expectedViolationRuleIds = [
+    '@stylistic/array-bracket-spacing',
+    '@stylistic/no-extra-parens',
     '@typescript-eslint/explicit-function-return-type',
     '@typescript-eslint/no-unsafe-assignment',
     '@typescript-eslint/no-unsafe-call',
@@ -17,9 +19,9 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/strict-boolean-expressions',
     'arrow-body-style',
     'destructuring/in-params',
+    'dprint/typescript',
     'functional/prefer-immutable-types',
     'functional/type-declaration-immutability',
-    'prettier/prettier',
     'react-hooks/exhaustive-deps',
     'react-hooks/rules-of-hooks',
     'react/button-has-type',

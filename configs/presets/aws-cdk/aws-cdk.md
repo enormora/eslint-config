@@ -28,7 +28,7 @@ export default [
     {
         ignores: ['cdk.out/**/*']
     },
-    baseConfig,
+    ...baseConfig,
     {
         ...typescriptConfig,
         files: ['**/*.ts']

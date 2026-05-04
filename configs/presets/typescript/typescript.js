@@ -6,7 +6,7 @@ import { createNodeResolver } from 'eslint-plugin-import-x';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { javascriptExtensions, typescriptExtensions } from '../../constants.js';
 import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.js';
-import { baseConfig } from '../base/base.js';
+import { baseSharedConfig } from '../base/base-shared.js';
 
 export const noTsEnumDeclarationRestriction = {
     selector: 'TSEnumDeclaration',
@@ -48,7 +48,7 @@ function asArray(value) {
 }
 
 function configureWrappedCoreRule(name, optionsOverrides) {
-    const coreRuleConfig = asArray(baseConfig.rules[name]);
+    const coreRuleConfig = asArray(baseSharedConfig.rules[name]);
     const [coreRuleSeverity, ...coreRuleOptions] = coreRuleConfig;
     const options = optionsOverrides === undefined ? coreRuleOptions : asArray(optionsOverrides);
 

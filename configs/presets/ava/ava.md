@@ -20,7 +20,7 @@ export default [
     {
         ignores: ['dist/**/*']
     },
-    baseConfig,
+    ...baseConfig,
     {
         ...avaConfig,
         files: ['**/*.test.js']

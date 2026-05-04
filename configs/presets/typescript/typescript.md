@@ -20,7 +20,7 @@ export default [
     {
         ignores: ['dist/**/*']
     },
-    baseConfig,
+    ...baseConfig,
     {
         ...typescriptConfig,
         files: ['**/*.ts']

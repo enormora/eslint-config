@@ -20,7 +20,7 @@ export default [
     {
         ignores: ['dist/**/*']
     },
-    baseConfig,
+    ...baseConfig,
     {
         ...reactTsxConfig,
         files: ['src/components/**/*.tsx']

@@ -16,7 +16,7 @@ export const stylisticRuleSet = {
         'destructuring/no-rename': 'off',
 
         '@stylistic/array-bracket-newline': 'off',
-        '@stylistic/array-bracket-spacing': ['error', 'never'],
+        '@stylistic/array-bracket-spacing': ['error', 'always'],
         '@stylistic/array-element-newline': ['error', 'consistent'],
         '@stylistic/arrow-parens': ['error', 'always'],
         '@stylistic/arrow-spacing': [
@@ -134,8 +134,7 @@ export const stylisticRuleSet = {
         '@stylistic/new-parens': 'error',
         '@stylistic/newline-per-chained-call': 'off',
         '@stylistic/no-confusing-arrow': 'error',
-        // Currently this rule conflicts with prettier, because in some cases prettier adds unnecessary extra parens. Unfortunately there is no way to turn this off yet. We should re-enable this rule once this has been fixed in prettier or once there is a better formatter that doesn’t add unnecessary parens. See https://github.com/prettier/prettier/issues/3089
-        '@stylistic/no-extra-parens': 'off',
+        '@stylistic/no-extra-parens': 'error',
         '@stylistic/no-extra-semi': 'error',
         '@stylistic/no-floating-decimal': 'error',
         '@stylistic/no-mixed-operators': 'off',

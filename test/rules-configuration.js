@@ -105,6 +105,15 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
     });
 });
 
+export function mergeConfigRules(config) {
+    if (Array.isArray(config)) {
+        return config.reduce((merged, block) => {
+            return { ...merged, ...(block.rules ?? {}) };
+        }, {});
+    }
+    return config.rules ?? {};
+}
+
 export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
     const linter = new Linter({ configType: 'flat' });
 
@@ -121,21 +130,23 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
     };
     const program = ts.createProgram(['/foo.js'], {}, customCompilerHost);
 
-    t.notThrows(() => {
-        linter.verify(
-            'foo();',
-            {
-                ...config,
-                languageOptions: {
-                    ...config.languageOptions,
-                    parserOptions: {
-                        ...config.parserOptions,
-                        program
-                    }
+    function injectProgram(block) {
+        return {
+            ...block,
+            languageOptions: {
+                ...block.languageOptions,
+                parserOptions: {
+                    ...block.parserOptions,
+                    program
                 }
-            },
-            '/foo.js'
-        );
+            }
+        };
+    }
+
+    const verifiableConfig = Array.isArray(config) ? config.map(injectProgram) : injectProgram(config);
+
+    t.notThrows(() => {
+        linter.verify('foo();', verifiableConfig, '/foo.js');
     }, 'Linter.verify() failed for the given config');
 });
 

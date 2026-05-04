@@ -8,43 +8,46 @@ import {
     checkAllPluginRulesConfigured,
     checkConfigToHaveNoValidationIssues,
     checkUnknownCoreRulesAreNotConfigured,
-    checkUnknownPluginRulesAreNotConfigured
+    checkUnknownPluginRulesAreNotConfigured,
+    mergeConfigRules
 } from './rules-configuration.js';
 
+const baseConfigRules = mergeConfigRules(baseConfig);
+
 test('all core rules are configured', checkAllCoreRulesConfigured, {
-    ruleConfigSet: baseConfig.rules
+    ruleConfigSet: baseConfigRules
 });
 
 test('does not contain removed core rules', checkUnknownCoreRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules
+    ruleConfigSet: baseConfigRules
 });
 
 test('all eslint-plugin-no-secrets rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: noSecretsPlugin.rules,
     pluginName: 'eslint-plugin-no-secrets'
 });
 
 test('no unknown eslint-plugin-no-secrets rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: noSecretsPlugin.rules,
     pluginName: 'eslint-plugin-no-secrets'
 });
 
 test('all eslint-plugin-import rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: importPluginRules,
     pluginName: 'eslint-plugin-import'
 });
 
 test('no unknown eslint-plugin-import rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: importPluginRules,
     pluginName: 'eslint-plugin-import'
 });
 
 test('all @eslint-community/eslint-plugin-eslint-comments rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: eslintCommentsPlugin.rules,
     pluginName: 'eslint-plugin-eslint-comments'
 });
@@ -53,7 +56,7 @@ test(
     'no unknown @eslint-community/eslint-plugin-eslint-comments rules are configured',
     checkUnknownPluginRulesAreNotConfigured,
     {
-        ruleConfigSet: baseConfig.rules,
+        ruleConfigSet: baseConfigRules,
         pluginRules: eslintCommentsPlugin.rules,
         pluginName: 'eslint-plugin-eslint-comments'
     }

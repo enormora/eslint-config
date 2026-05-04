@@ -5,64 +5,70 @@ import promisePlugin from 'eslint-plugin-promise';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import { baseConfig } from '../configs/presets/base/base.js';
-import { checkAllPluginRulesConfigured, checkUnknownPluginRulesAreNotConfigured } from './rules-configuration.js';
+import {
+    checkAllPluginRulesConfigured,
+    checkUnknownPluginRulesAreNotConfigured,
+    mergeConfigRules
+} from './rules-configuration.js';
+
+const baseConfigRules = mergeConfigRules(baseConfig);
 
 test('all eslint-plugin-unicorn rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: unicornPlugin.rules,
     pluginName: 'eslint-plugin-unicorn'
 });
 
 test('no unknown eslint-plugin-unicorn rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: unicornPlugin.rules,
     pluginName: 'eslint-plugin-unicorn'
 });
 
 test('all eslint-plugin-promise rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: promisePlugin.rules,
     pluginName: 'eslint-plugin-promise'
 });
 
 test('no unknown eslint-plugin-promise rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: promisePlugin.rules,
     pluginName: 'eslint-plugin-promise'
 });
 
 test('all eslint-plugin-array-func rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: arrayFunctionPlugin.rules,
     pluginName: 'eslint-plugin-array-func'
 });
 
 test('no unknown eslint-plugin-array-func rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: arrayFunctionPlugin.rules,
     pluginName: 'eslint-plugin-array-func'
 });
 
 test('all eslint-plugin-sonarjs rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: sonarjsPlugin.rules,
     pluginName: 'eslint-plugin-sonarjs'
 });
 
 test('no unknown eslint-plugin-sonarjs rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: sonarjsPlugin.rules,
     pluginName: 'eslint-plugin-sonarjs'
 });
 
 test('all eslint-plugin-no-barrel-files rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: noBarrelFiles.rules,
     pluginName: 'eslint-plugin-no-barrel-files'
 });
 
 test('no unknown eslint-plugin-no-barrel-files rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: baseConfig.rules,
+    ruleConfigSet: baseConfigRules,
     pluginRules: noBarrelFiles.rules,
     pluginName: 'eslint-plugin-no-barrel-files'
 });

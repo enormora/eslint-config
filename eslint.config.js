@@ -37,7 +37,7 @@ export default [
     {
         ignores: ['test/fixtures/**']
     },
-    baseConfig,
+    ...baseConfig,
     nodeConfig,
     {
         files: ['configs/**/*.js'],

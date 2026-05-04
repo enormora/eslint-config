@@ -1,7 +1,16 @@
 import dprintPlugin from '@ben_12/eslint-plugin-dprint';
+import simpleParser from '@ben_12/eslint-simple-parser';
 import { baseSharedConfig } from './base-shared.js';
+import {
+    jsonDprintConfig,
+    markdownDprintConfig,
+    tomlDprintConfig,
+    typescriptDprintConfig,
+    yamlDprintConfig
+} from './dprint-config.js';
 
-export const baseConfig = {
+const baseJsConfig = {
+    files: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}'],
     ...baseSharedConfig,
     plugins: {
         ...baseSharedConfig.plugins,
@@ -10,7 +19,7 @@ export const baseConfig = {
     rules: {
         ...baseSharedConfig.rules,
 
-        'dprint/typescript': ['error', { configFile: 'dprint.json' }],
+        'dprint/typescript': ['error', { config: typescriptDprintConfig }],
         'dprint/json': 'off',
         'dprint/markdown': 'off',
         'dprint/toml': 'off',
@@ -20,8 +29,50 @@ export const baseConfig = {
         'dprint/yaml': 'off',
         'dprint/graphql': 'off',
 
-        '@stylistic/member-delimiter-style': 'off',
-        '@stylistic/operator-linebreak': 'off',
-        'import/order': 'off'
+        '@stylistic/member-delimiter-style': 'off'
     }
 };
+
+const dprintJsonConfig = {
+    files: ['**/*.json'],
+    languageOptions: { parser: simpleParser },
+    plugins: { dprint: dprintPlugin },
+    rules: { 'dprint/json': ['error', { config: jsonDprintConfig }] }
+};
+
+const dprintMarkdownConfig = {
+    files: ['**/*.md'],
+    languageOptions: { parser: simpleParser },
+    plugins: { dprint: dprintPlugin },
+    rules: { 'dprint/markdown': ['error', { config: markdownDprintConfig }] }
+};
+
+const dprintYamlConfig = {
+    files: ['**/*.{yml,yaml}'],
+    languageOptions: { parser: simpleParser },
+    plugins: { dprint: dprintPlugin },
+    rules: { 'dprint/yaml': ['error', { config: yamlDprintConfig }] }
+};
+
+const dprintTomlConfig = {
+    files: ['**/*.toml'],
+    languageOptions: { parser: simpleParser },
+    plugins: { dprint: dprintPlugin },
+    rules: { 'dprint/toml': ['error', { config: tomlDprintConfig }] }
+};
+
+export const baseConfig = [
+    baseJsConfig,
+    dprintJsonConfig,
+    dprintMarkdownConfig,
+    dprintYamlConfig,
+    dprintTomlConfig
+];
+
+export {
+    jsonDprintConfig,
+    markdownDprintConfig,
+    tomlDprintConfig,
+    typescriptDprintConfig,
+    yamlDprintConfig
+} from './dprint-config.js';
