@@ -19,6 +19,12 @@ export async function buildConfig() {
 
     return {
         registrySettings: { token: npmToken },
+        checks: {
+            noDuplicatedFiles: {
+                enabled: true,
+                allowList: [path.join(projectFolder, 'LICENSE')]
+            }
+        },
         commonPackageSettings: {
             sourcesFolder,
             mainPackageJson: packageJson,
@@ -87,9 +93,24 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-test-base',
+                entryPoints: [{ js: 'test-base.js' }],
+                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(projectFolder, 'test-base.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s shared ESLint rules for test files'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-ava',
                 entryPoints: [{ js: 'ava.js' }],
                 bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                bundleDependencies: ['@enormora/eslint-config-test-base'],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(projectFolder, 'ava.md'),
@@ -104,6 +125,7 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-mocha',
                 entryPoints: [{ js: 'mocha.js' }],
                 bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                bundleDependencies: ['@enormora/eslint-config-test-base'],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(projectFolder, 'mocha.md'),
@@ -190,6 +212,7 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-vitest',
                 entryPoints: [{ js: 'vitest.js' }],
                 bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                bundleDependencies: ['@enormora/eslint-config-test-base'],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(projectFolder, 'vitest.md'),
