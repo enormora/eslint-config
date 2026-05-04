@@ -32,6 +32,9 @@ const codeSpellCheckerRules = {
 };
 
 export default [
+    {
+        ignores: ['test/fixtures/**']
+    },
     baseConfig,
     nodeConfig,
     {
