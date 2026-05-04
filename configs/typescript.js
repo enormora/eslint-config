@@ -13,7 +13,31 @@ const noTsEnumDeclarationRestriction = {
     message: 'Use a string union type instead'
 };
 
-const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin(['no-ts-enum-declaration']);
+const functionLikeNodes = [
+    'FunctionDeclaration',
+    'FunctionExpression',
+    'ArrowFunctionExpression',
+    'TSFunctionType',
+    'TSMethodSignature',
+    'TSDeclareFunction',
+    'TSConstructorType'
+].join(', ');
+
+const noInlineSignatureTypeLiteralSelector = [
+    `:matches(${functionLikeNodes}) > .params TSTypeAnnotation > TSTypeLiteral`,
+    `:matches(${functionLikeNodes}) > TSTypeAnnotation.returnType > TSTypeLiteral`
+].join(', ');
+
+const noInlineSignatureTypeLiteralRestriction = {
+    selector: noInlineSignatureTypeLiteralSelector,
+    message:
+        'Inline object type literals are not allowed in function parameters or return types — extract a named type.'
+};
+
+const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin([
+    'no-ts-enum-declaration',
+    'no-inline-signature-type-literal'
+]);
 
 function asArray(value) {
     if (Array.isArray(value)) {
@@ -66,6 +90,10 @@ export const typescriptConfig = {
     },
     rules: {
         'restricted-syntax-typescript/no-ts-enum-declaration': ['error', noTsEnumDeclarationRestriction],
+        'restricted-syntax-typescript/no-inline-signature-type-literal': [
+            'error',
+            noInlineSignatureTypeLiteralRestriction
+        ],
 
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
