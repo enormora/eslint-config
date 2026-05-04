@@ -5,7 +5,39 @@ import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import { createNodeResolver } from 'eslint-plugin-import-x';
 import { baseConfig } from './base.js';
+import { createRestrictedSyntaxPlugin } from './rule-sets/restricted-syntax.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
+
+export const noTsEnumDeclarationRestriction = {
+    selector: 'TSEnumDeclaration',
+    message: 'Use a string union type instead'
+};
+
+const functionLikeNodes = [
+    'FunctionDeclaration',
+    'FunctionExpression',
+    'ArrowFunctionExpression',
+    'TSFunctionType',
+    'TSMethodSignature',
+    'TSDeclareFunction',
+    'TSConstructorType'
+].join(', ');
+
+const noInlineSignatureTypeLiteralSelector = [
+    `:matches(${functionLikeNodes}) > .params TSTypeAnnotation > TSTypeLiteral`,
+    `:matches(${functionLikeNodes}) > TSTypeAnnotation.returnType > TSTypeLiteral`
+].join(', ');
+
+export const noInlineSignatureTypeLiteralRestriction = {
+    selector: noInlineSignatureTypeLiteralSelector,
+    message:
+        'Inline object type literals are not allowed in function parameters or return types — extract a named type.'
+};
+
+const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin([
+    'no-ts-enum-declaration',
+    'no-inline-signature-type-literal'
+]);
 
 function asArray(value) {
     if (Array.isArray(value)) {
@@ -53,9 +85,16 @@ export const typescriptConfig = {
     plugins: {
         '@typescript-eslint': typescriptPlugin,
         perfectionist: perfectionistPlugin,
-        functional: functionalPlugin
+        functional: functionalPlugin,
+        'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin
     },
     rules: {
+        'restricted-syntax-typescript/no-ts-enum-declaration': ['error', noTsEnumDeclarationRestriction],
+        'restricted-syntax-typescript/no-inline-signature-type-literal': [
+            'error',
+            noInlineSignatureTypeLiteralRestriction
+        ],
+
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
         '@typescript-eslint/array-type': [
@@ -387,7 +426,9 @@ export const typescriptConfig = {
                 ts: 'ignorePackages',
                 mts: 'ignorePackages',
                 cts: 'ignorePackages',
-                js: 'ignorePackages',
+                js: 'never',
+                mjs: 'never',
+                cjs: 'never',
                 json: 'ignorePackages'
             }
         ],

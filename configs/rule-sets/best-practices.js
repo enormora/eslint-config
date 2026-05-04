@@ -244,7 +244,7 @@ export const bestPracticesRuleSet = {
         'promise/no-new-statics': 'error',
         'promise/no-return-in-finally': 'error',
         'promise/valid-params': 'error',
-        'promise/prefer-await-to-then': 'error',
+        'promise/prefer-await-to-then': ['error', { strict: true }],
         'promise/no-multiple-resolved': 'error',
         'promise/spec-only': 'error',
         'promise/prefer-catch': 'error',

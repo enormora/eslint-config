@@ -199,6 +199,20 @@ export async function buildConfig() {
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint Vitest configuration'
                 }
+            },
+            {
+                name: '@enormora/eslint-config-aws-cdk',
+                entryPoints: [{ js: 'aws-cdk.js' }],
+                bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(projectFolder, 'aws-cdk.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint AWS CDK configuration'
+                }
             }
         ]
     };
