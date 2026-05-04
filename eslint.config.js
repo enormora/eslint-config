@@ -1,6 +1,6 @@
-import { baseConfig } from './configs/base.js';
-import { nodeConfig } from './configs/node.js';
-import { avaConfig } from './configs/ava.js';
+import { baseConfig } from './configs/presets/base/base.js';
+import { nodeConfig } from './configs/presets/node/node.js';
+import { avaConfig } from './configs/presets/ava/ava.js';
 
 const codeSpellCheckerRules = {
     '@cspell/spellchecker': [

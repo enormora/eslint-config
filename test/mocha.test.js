@@ -1,6 +1,6 @@
 import test from 'ava';
 import mochaPlugin from 'eslint-plugin-mocha';
-import { mochaConfig } from '../configs/mocha.js';
+import { mochaConfig } from '../configs/presets/mocha/mocha.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

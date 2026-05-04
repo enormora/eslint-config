@@ -1,5 +1,5 @@
 import mochaPlugin from 'eslint-plugin-mocha';
-import { testRuleSet } from './test-base.js';
+import { testRuleSet } from '../test-base/test-base.js';
 
 export const mochaConfig = {
     plugins: {

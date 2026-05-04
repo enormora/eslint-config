@@ -3,7 +3,7 @@ import typescriptParser from '@typescript-eslint/parser';
 import vueParser from 'vue-eslint-parser';
 import globals from 'globals';
 import vuePlugin from 'eslint-plugin-vue';
-import { vueConfig } from '../configs/vue-ts.js';
+import { vueConfig } from '../configs/presets/vue-ts/vue-ts.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,

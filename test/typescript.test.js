@@ -3,7 +3,7 @@ import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import functionalPlugin from 'eslint-plugin-functional';
 import { rules as perfectionistRules } from 'eslint-plugin-perfectionist';
-import { typescriptConfig } from '../configs/typescript.js';
+import { typescriptConfig } from '../configs/presets/typescript/typescript.js';
 import {
     checkAllPluginRulesConfigured,
     checkUnknownPluginRulesAreNotConfigured,
