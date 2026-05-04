@@ -4,20 +4,13 @@ default:
     @just --list
 
 eslint *OPTIONS:
-    eslint . --max-warnings 0 {{OPTIONS}}
+    eslint . '.github/**/*.{yml,yaml,json,md}' --max-warnings 0 {{OPTIONS}}
 
 eslint-fix: (eslint '--fix')
 
-prettier *OPTIONS:
-    prettier '**/*.(yml|yaml|json|md)' {{OPTIONS}}
+lint: eslint
 
-prettier-check: (prettier '--check')
-
-prettier-fix: (prettier '--write')
-
-lint: eslint prettier-check
-
-lint-fix: eslint-fix prettier-fix
+lint-fix: eslint-fix
 
 test:
     ava
