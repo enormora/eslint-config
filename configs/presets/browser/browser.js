@@ -7,6 +7,6 @@ export const browserConfig = {
     rules: {
         'no-alert': 'error',
         'no-script-url': 'error',
-        'no-restricted-globals': ['error', 'event']
+        'no-restricted-globals': [ 'error', 'event' ]
     }
 };

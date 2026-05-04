@@ -50,7 +50,7 @@ export const baseSharedConfig = {
         'import/parsers': {
             espree: javascriptExtensions
         },
-        'import-x/resolver-next': [createNodeResolver()]
+        'import-x/resolver-next': [ createNodeResolver() ]
     },
     rules: {
         ...stylisticRuleSet.rules,
@@ -77,8 +77,8 @@ export const baseSharedConfig = {
         'no-dupe-args': 'error',
         'no-duplicate-case': 'error',
         'no-duplicate-imports': 'error',
-        'no-else-return': ['error', { allowElseIf: false }],
-        'no-empty': ['error', { allowEmptyCatch: true }],
+        'no-else-return': [ 'error', { allowElseIf: false } ],
+        'no-empty': [ 'error', { allowEmptyCatch: true } ],
         'no-empty-character-class': 'error',
         'no-empty-function': 'off',
         'no-empty-pattern': 'error',
@@ -96,7 +96,7 @@ export const baseSharedConfig = {
         'no-implicit-globals': 'error',
         'no-implied-eval': 'error',
         'no-inline-comments': 'off',
-        'no-inner-declarations': ['error', 'functions'],
+        'no-inner-declarations': [ 'error', 'functions' ],
         'no-invalid-regexp': 'error',
         'no-invalid-this': 'off',
         'no-irregular-whitespace': 'error',
@@ -118,28 +118,28 @@ export const baseSharedConfig = {
         'no-object-constructor': 'error',
         'no-octal': 'error',
         'no-octal-escape': 'error',
-        'no-param-reassign': ['error', { props: true }],
+        'no-param-reassign': [ 'error', { props: true } ],
         'no-plusplus': 'error',
         'no-proto': 'error',
         'no-prototype-builtins': 'error',
-        'no-redeclare': ['error', { builtinGlobals: true }],
+        'no-redeclare': [ 'error', { builtinGlobals: true } ],
         'no-regex-spaces': 'error',
         'no-restricted-syntax': 'off',
-        'restricted-syntax/no-class-declaration': ['error', noClassDeclarationRestriction],
-        'restricted-syntax/no-switch-statement': ['error', noSwitchStatementRestriction],
-        'restricted-syntax/no-empty-function-body': ['error', noEmptyFunctionBodyRestriction],
-        'no-return-assign': ['error', 'always'],
-        'no-self-assign': ['error', { props: true }],
+        'restricted-syntax/no-class-declaration': [ 'error', noClassDeclarationRestriction ],
+        'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
+        'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
+        'no-return-assign': [ 'error', 'always' ],
+        'no-self-assign': [ 'error', { props: true } ],
         'no-self-compare': 'error',
         'no-sequences': 'error',
-        'no-shadow': ['error', { builtinGlobals: true }],
+        'no-shadow': [ 'error', { builtinGlobals: true } ],
         'no-shadow-restricted-names': 'error',
         'no-sparse-arrays': 'error',
         'no-ternary': 'off',
         'no-this-before-super': 'error',
         'no-throw-literal': 'error',
         'no-unassigned-vars': 'error',
-        'no-undef': ['error', { typeof: true }],
+        'no-undef': [ 'error', { typeof: true } ],
         'no-undef-init': 'error',
         'no-undefined': 'off',
         'no-unexpected-multiline': 'error',
@@ -182,7 +182,7 @@ export const baseSharedConfig = {
         'no-warning-comments': [
             'error',
             {
-                terms: ['todo', 'fixme', 'wtf', 'falls through', 'istanbul', 'c8'],
+                terms: [ 'todo', 'fixme', 'wtf', 'falls through', 'istanbul', 'c8' ],
                 location: 'anywhere'
             }
         ],
@@ -195,10 +195,10 @@ export const baseSharedConfig = {
                 detectObjects: false,
                 enforceConst: false,
                 ignoreClassFieldInitialValues: false,
-                ignore: [-1, 0, 1]
+                ignore: [ -1, 0, 1 ]
             }
         ],
-        'arrow-body-style': ['error', 'always'],
+        'arrow-body-style': [ 'error', 'always' ],
         'accessor-pairs': [
             'error',
             {
@@ -206,24 +206,24 @@ export const baseSharedConfig = {
             }
         ],
         'block-scoped-var': 'off',
-        complexity: ['error', { max: 6 }],
+        complexity: [ 'error', { max: 6 } ],
         'consistent-return': 'error',
-        'consistent-this': ['error', 'self'],
+        'consistent-this': [ 'error', 'self' ],
         'constructor-super': 'error',
-        curly: ['error', 'all'],
+        curly: [ 'error', 'all' ],
         'default-case': 'error',
         'dot-notation': 'error',
         eqeqeq: 'error',
         'func-names': 'off',
         'func-style': 'off',
         'guard-for-in': 'error',
-        'id-length': ['error', { min: 2, properties: 'never' }],
-        'init-declarations': ['error', 'always'],
-        'max-depth': ['error', { max: 5 }],
-        'max-lines': ['error', { max: 500, skipBlankLines: true, skipComments: true }],
-        'max-nested-callbacks': ['error', { max: 4 }],
-        'max-params': ['error', { max: 4 }],
-        'max-statements': ['error', { max: 10 }],
+        'id-length': [ 'error', { min: 2, properties: 'never' } ],
+        'init-declarations': [ 'error', 'always' ],
+        'max-depth': [ 'error', { max: 5 } ],
+        'max-lines': [ 'error', { max: 500, skipBlankLines: true, skipComments: true } ],
+        'max-nested-callbacks': [ 'error', { max: 4 } ],
+        'max-params': [ 'error', { max: 4 } ],
+        'max-statements': [ 'error', { max: 10 } ],
         'new-cap': [
             'error',
             {
@@ -231,9 +231,9 @@ export const baseSharedConfig = {
                 capIsNew: true
             }
         ],
-        'object-shorthand': ['error', 'always'],
-        'one-var': ['error', 'never'],
-        'operator-assignment': ['error', 'always'],
+        'object-shorthand': [ 'error', 'always' ],
+        'one-var': [ 'error', 'never' ],
+        'operator-assignment': [ 'error', 'always' ],
         'prefer-arrow-callback': [
             'error',
             {
@@ -246,12 +246,12 @@ export const baseSharedConfig = {
         'require-yield': 'error',
         'sort-vars': 'off',
         'sort-imports': 'off',
-        strict: ['error', 'safe'],
-        'unicode-bom': ['error', 'never'],
+        strict: [ 'error', 'safe' ],
+        'unicode-bom': [ 'error', 'never' ],
         'use-isnan': 'error',
         'valid-typeof': 'error',
         'vars-on-top': 'error',
-        yoda: ['error', 'never'],
+        yoda: [ 'error', 'never' ],
         'capitalized-comments': 'off',
         'class-methods-use-this': 'error',
         'func-name-matching': 'off',
@@ -331,11 +331,11 @@ export const baseSharedConfig = {
         'no-unsafe-optional-chaining': 'error',
         'no-unused-private-class-members': 'error',
         'no-constant-binary-expression': 'error',
-        'logical-assignment-operators': ['error', 'never'],
+        'logical-assignment-operators': [ 'error', 'never' ],
         'prefer-object-has-own': 'error',
         'no-useless-assignment': 'error',
 
-        'no-secrets/no-secrets': ['error', { tolerance: 5 }],
+        'no-secrets/no-secrets': [ 'error', { tolerance: 5 } ],
         'no-secrets/no-pattern-match': 'off',
 
         'eslint-comments/disable-enable-pair': [
@@ -362,7 +362,7 @@ export const baseSharedConfig = {
         'import/prefer-default-export': 'off',
         'import/newline-after-import': 'error',
         'import/no-nodejs-modules': 'off',
-        'import/max-dependencies': ['error', { max: 10 }],
+        'import/max-dependencies': [ 'error', { max: 10 } ],
         'import/first': 'error',
         'import/no-unused-modules': 'error',
         'import/no-anonymous-default-export': 'off',

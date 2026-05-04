@@ -22,7 +22,7 @@ export const vitestConfig = {
         '@vitest/prefer-lowercase-title': 'error',
         '@vitest/prefer-called-exactly-once-with': 'error',
         '@vitest/consistent-each-for': 'error',
-        '@vitest/max-nested-describe': ['error', { max: 2 }],
+        '@vitest/max-nested-describe': [ 'error', { max: 2 } ],
         '@vitest/no-identical-title': 'error',
         '@vitest/no-focused-tests': 'error',
         '@vitest/no-conditional-tests': 'error',

@@ -7,11 +7,11 @@ export const reactTsxConfig = {
     settings: {
         'import/resolver': {
             node: {
-                extensions: [...javascriptExtensions, ...typescriptExtensions, '.tsx']
+                extensions: [ ...javascriptExtensions, ...typescriptExtensions, '.tsx' ]
             }
         },
         'import/parsers': {
-            '@typescript-eslint/parser': [...typescriptExtensions, '.tsx']
+            '@typescript-eslint/parser': [ ...typescriptExtensions, '.tsx' ]
         }
     },
     rules: {

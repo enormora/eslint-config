@@ -8,7 +8,7 @@ export const avaConfig = {
     rules: {
         ...testRuleSet.rules,
 
-        'id-length': ['error', { min: 2, properties: 'never', exceptions: ['t'] }],
+        'id-length': [ 'error', { min: 2, properties: 'never', exceptions: [ 't' ] } ],
 
         'ava/assertion-arguments': 'error',
         'ava/failing-test-url': 'error',

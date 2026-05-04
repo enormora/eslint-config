@@ -5,7 +5,10 @@ import { reactTsxConfig } from '../../configs/presets/react-tsx/react-tsx.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript-react-tsx';
-const configs = [...baseConfig, { ...typescriptConfig, files: ['**/*.tsx'] }, { ...reactTsxConfig, files: ['**/*.tsx'] }];
+const configs = [ ...baseConfig, { ...typescriptConfig, files: [ '**/*.tsx' ] }, {
+    ...reactTsxConfig,
+    files: [ '**/*.tsx' ]
+} ];
 
 const expectedViolationRuleIds = [
     '@stylistic/array-bracket-spacing',

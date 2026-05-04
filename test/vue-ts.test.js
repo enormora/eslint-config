@@ -18,7 +18,7 @@ test('vue preset config has the correct language options defined', checkConfigLa
         globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
-            extraFileExtensions: ['.vue'],
+            extraFileExtensions: [ '.vue' ],
             warnOnUnsupportedTypeScriptVersion: false,
             sourceType: 'module',
             ecmaFeatures: {

@@ -10,7 +10,7 @@ import {
 } from './dprint-config.js';
 
 const baseJsConfig = {
-    files: ['**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}'],
+    files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
     ...baseSharedConfig,
     plugins: {
         ...baseSharedConfig.plugins,
@@ -19,7 +19,7 @@ const baseJsConfig = {
     rules: {
         ...baseSharedConfig.rules,
 
-        'dprint/typescript': ['error', { config: typescriptDprintConfig }],
+        'dprint/typescript': [ 'error', { config: typescriptDprintConfig } ],
         'dprint/json': 'off',
         'dprint/markdown': 'off',
         'dprint/toml': 'off',
@@ -34,31 +34,31 @@ const baseJsConfig = {
 };
 
 const dprintJsonConfig = {
-    files: ['**/*.json'],
+    files: [ '**/*.json' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
-    rules: { 'dprint/json': ['error', { config: jsonDprintConfig }] }
+    rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
 };
 
 const dprintMarkdownConfig = {
-    files: ['**/*.md'],
+    files: [ '**/*.md' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
-    rules: { 'dprint/markdown': ['error', { config: markdownDprintConfig }] }
+    rules: { 'dprint/markdown': [ 'error', { config: markdownDprintConfig } ] }
 };
 
 const dprintYamlConfig = {
-    files: ['**/*.{yml,yaml}'],
+    files: [ '**/*.{yml,yaml}' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
-    rules: { 'dprint/yaml': ['error', { config: yamlDprintConfig }] }
+    rules: { 'dprint/yaml': [ 'error', { config: yamlDprintConfig } ] }
 };
 
 const dprintTomlConfig = {
-    files: ['**/*.toml'],
+    files: [ '**/*.toml' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
-    rules: { 'dprint/toml': ['error', { config: tomlDprintConfig }] }
+    rules: { 'dprint/toml': [ 'error', { config: tomlDprintConfig } ] }
 };
 
 export const baseConfig = [
@@ -69,6 +69,7 @@ export const baseConfig = [
     dprintTomlConfig
 ];
 
+/* eslint-disable no-barrel-files/no-barrel-files -- expose dprint configs as public API so consumers can spread them when overriding individual options */
 export {
     jsonDprintConfig,
     markdownDprintConfig,
@@ -76,3 +77,4 @@ export {
     typescriptDprintConfig,
     yamlDprintConfig
 } from './dprint-config.js';
+/* eslint-enable no-barrel-files/no-barrel-files -- end of public re-exports */

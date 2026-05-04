@@ -6,7 +6,7 @@ export function createRestrictedSyntaxPlugin(ruleNames) {
     return {
         rules: Object.fromEntries(
             ruleNames.map((ruleName) => {
-                return [ruleName, noRestrictedSyntaxRule];
+                return [ ruleName, noRestrictedSyntaxRule ];
             })
         )
     };
@@ -32,7 +32,7 @@ export const noSwitchStatementRestriction = {
     message: 'Use pattern matching instead.'
 };
 
-const emptyFunctionBodySelector = ['FunctionDeclaration', 'FunctionExpression', 'ArrowFunctionExpression']
+const emptyFunctionBodySelector = [ 'FunctionDeclaration', 'FunctionExpression', 'ArrowFunctionExpression' ]
     .map((kind) => {
         return `${kind} > BlockStatement[body.length=0]`;
     })

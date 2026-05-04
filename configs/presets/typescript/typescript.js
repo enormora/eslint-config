@@ -21,12 +21,14 @@ const functionLikeNodes = [
     'TSMethodSignature',
     'TSDeclareFunction',
     'TSConstructorType'
-].join(', ');
+]
+    .join(', ');
 
 const noInlineSignatureTypeLiteralSelector = [
     `:matches(${functionLikeNodes}) > .params TSTypeAnnotation > TSTypeLiteral`,
     `:matches(${functionLikeNodes}) > TSTypeAnnotation.returnType > TSTypeLiteral`
-].join(', ');
+]
+    .join(', ');
 
 export const noInlineSignatureTypeLiteralRestriction = {
     selector: noInlineSignatureTypeLiteralSelector,
@@ -44,17 +46,17 @@ function asArray(value) {
         return value;
     }
 
-    return [value];
+    return [ value ];
 }
 
 function configureWrappedCoreRule(name, optionsOverrides) {
     const coreRuleConfig = asArray(baseSharedConfig.rules[name]);
-    const [coreRuleSeverity, ...coreRuleOptions] = coreRuleConfig;
+    const [ coreRuleSeverity, ...coreRuleOptions ] = coreRuleConfig;
     const options = optionsOverrides === undefined ? coreRuleOptions : asArray(optionsOverrides);
 
     return {
         [name]: 'off',
-        [`@typescript-eslint/${name}`]: [coreRuleSeverity, ...options]
+        [`@typescript-eslint/${name}`]: [ coreRuleSeverity, ...options ]
     };
 }
 
@@ -77,7 +79,7 @@ export const typescriptConfig = {
         },
         'import-x/resolver-next': [
             createNodeResolver({
-                extensions: [...javascriptExtensions, ...typescriptExtensions]
+                extensions: [ ...javascriptExtensions, ...typescriptExtensions ]
             }),
             createTypeScriptImportResolver()
         ]
@@ -89,7 +91,7 @@ export const typescriptConfig = {
         'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin
     },
     rules: {
-        'restricted-syntax-typescript/no-ts-enum-declaration': ['error', noTsEnumDeclarationRestriction],
+        'restricted-syntax-typescript/no-ts-enum-declaration': [ 'error', noTsEnumDeclarationRestriction ],
         'restricted-syntax-typescript/no-inline-signature-type-literal': [
             'error',
             noInlineSignatureTypeLiteralRestriction
@@ -104,7 +106,7 @@ export const typescriptConfig = {
             }
         ],
         '@typescript-eslint/await-thenable': 'error',
-        '@typescript-eslint/no-empty-object-type': ['error', { allowInterfaces: 'never', allowObjectTypes: 'never' }],
+        '@typescript-eslint/no-empty-object-type': [ 'error', { allowInterfaces: 'never', allowObjectTypes: 'never' } ],
         '@typescript-eslint/no-unsafe-function-type': 'error',
         '@typescript-eslint/no-wrapper-object-types': 'error',
         '@typescript-eslint/no-restricted-types': [
@@ -132,17 +134,17 @@ export const typescriptConfig = {
             'error',
             {
                 selector: 'parameter',
-                format: ['camelCase'],
+                format: [ 'camelCase' ],
                 leadingUnderscore: 'allow',
                 trailingUnderscore: 'forbid'
             },
             {
                 selector: 'typeLike',
-                format: ['PascalCase']
+                format: [ 'PascalCase' ]
             },
             {
                 selector: 'interface',
-                format: ['PascalCase'],
+                format: [ 'PascalCase' ],
                 custom: {
                     regex: '^I[A-Z]',
                     match: false
@@ -236,23 +238,23 @@ export const typescriptConfig = {
         '@typescript-eslint/strict-void-return': 'error',
         '@typescript-eslint/only-throw-error': 'error',
         '@typescript-eslint/prefer-optional-chain': 'error',
-        '@typescript-eslint/prefer-nullish-coalescing': ['error', { ignoreIfStatements: true }],
-        '@typescript-eslint/class-literal-property-style': ['error', 'fields'],
-        '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
+        '@typescript-eslint/prefer-nullish-coalescing': [ 'error', { ignoreIfStatements: true } ],
+        '@typescript-eslint/class-literal-property-style': [ 'error', 'fields' ],
+        '@typescript-eslint/consistent-type-definitions': [ 'error', 'type' ],
         ...configureWrappedCoreRule('default-param-last'),
         ...configureWrappedCoreRule('dot-notation'),
         '@typescript-eslint/explicit-member-accessibility': 'off',
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/init-declarations': 'off',
-        '@typescript-eslint/method-signature-style': ['error', 'property'],
+        '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members'),
-        '@typescript-eslint/no-dynamic-delete': ['error'],
-        '@typescript-eslint/no-extra-non-null-assertion': ['error'],
-        '@typescript-eslint/no-floating-promises': ['error'],
-        '@typescript-eslint/no-implied-eval': ['error'],
-        '@typescript-eslint/no-invalid-this': ['error'],
-        '@typescript-eslint/no-invalid-void-type': ['error'],
+        '@typescript-eslint/no-dynamic-delete': [ 'error' ],
+        '@typescript-eslint/no-extra-non-null-assertion': [ 'error' ],
+        '@typescript-eslint/no-floating-promises': [ 'error' ],
+        '@typescript-eslint/no-implied-eval': [ 'error' ],
+        '@typescript-eslint/no-invalid-this': [ 'error' ],
+        '@typescript-eslint/no-invalid-void-type': [ 'error' ],
         ...configureWrappedCoreRule('no-magic-numbers', {
             ignoreEnums: false,
             ignoreNumericLiteralTypes: true,
@@ -263,22 +265,22 @@ export const typescriptConfig = {
             detectObjects: false,
             enforceConst: false,
             ignoreClassFieldInitialValues: false,
-            ignore: [-1, 0, 1]
+            ignore: [ -1, 0, 1 ]
         }),
-        '@typescript-eslint/no-namespace': ['error'],
-        '@typescript-eslint/no-non-null-asserted-optional-chain': ['error'],
-        '@typescript-eslint/no-non-null-assertion': ['error'],
-        '@typescript-eslint/no-unnecessary-boolean-literal-compare': ['error'],
-        '@typescript-eslint/no-unnecessary-condition': ['error'],
-        '@typescript-eslint/no-unsafe-assignment': ['error'],
-        '@typescript-eslint/no-unsafe-call': ['error'],
-        '@typescript-eslint/no-unsafe-member-access': ['error'],
-        '@typescript-eslint/no-unsafe-return': ['error'],
+        '@typescript-eslint/no-namespace': [ 'error' ],
+        '@typescript-eslint/no-non-null-asserted-optional-chain': [ 'error' ],
+        '@typescript-eslint/no-non-null-assertion': [ 'error' ],
+        '@typescript-eslint/no-unnecessary-boolean-literal-compare': [ 'error' ],
+        '@typescript-eslint/no-unnecessary-condition': [ 'error' ],
+        '@typescript-eslint/no-unsafe-assignment': [ 'error' ],
+        '@typescript-eslint/no-unsafe-call': [ 'error' ],
+        '@typescript-eslint/no-unsafe-member-access': [ 'error' ],
+        '@typescript-eslint/no-unsafe-return': [ 'error' ],
         ...configureWrappedCoreRule('no-use-before-define'),
-        '@typescript-eslint/prefer-as-const': ['error'],
+        '@typescript-eslint/prefer-as-const': [ 'error' ],
         // disabled because we use functional/prefer-immutable-types.md
-        '@typescript-eslint/prefer-readonly-parameter-types': ['off'],
-        '@typescript-eslint/prefer-reduce-type-parameter': ['error'],
+        '@typescript-eslint/prefer-readonly-parameter-types': [ 'off' ],
+        '@typescript-eslint/prefer-reduce-type-parameter': [ 'error' ],
         '@typescript-eslint/ban-ts-comment': [
             'error',
             {
@@ -289,21 +291,21 @@ export const typescriptConfig = {
                 minimumDescriptionLength: 10
             }
         ],
-        '@typescript-eslint/restrict-template-expressions': ['off'],
-        '@typescript-eslint/return-await': ['off'],
-        '@typescript-eslint/switch-exhaustiveness-check': ['error'],
-        '@typescript-eslint/unbound-method': ['off'],
-        '@typescript-eslint/ban-tslint-comment': ['off'],
-        '@typescript-eslint/no-confusing-non-null-assertion': ['error'],
-        '@typescript-eslint/prefer-enum-initializers': ['off'],
-        '@typescript-eslint/prefer-literal-enum-member': ['off'],
+        '@typescript-eslint/restrict-template-expressions': [ 'off' ],
+        '@typescript-eslint/return-await': [ 'off' ],
+        '@typescript-eslint/switch-exhaustiveness-check': [ 'error' ],
+        '@typescript-eslint/unbound-method': [ 'off' ],
+        '@typescript-eslint/ban-tslint-comment': [ 'off' ],
+        '@typescript-eslint/no-confusing-non-null-assertion': [ 'error' ],
+        '@typescript-eslint/prefer-enum-initializers': [ 'off' ],
+        '@typescript-eslint/prefer-literal-enum-member': [ 'off' ],
         ...configureWrappedCoreRule('no-redeclare'),
         ...configureWrappedCoreRule('no-shadow'),
         '@typescript-eslint/consistent-type-imports': [
             'error',
             { prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: true }
         ],
-        '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
+        '@typescript-eslint/consistent-indexed-object-style': [ 'error', 'record' ],
         '@typescript-eslint/no-loop-func': 'off',
         '@typescript-eslint/no-unnecessary-type-constraint': 'error',
         '@typescript-eslint/no-confusing-void-expression': [
@@ -322,7 +324,7 @@ export const typescriptConfig = {
         '@typescript-eslint/consistent-type-exports': 'error',
         '@typescript-eslint/no-redundant-type-constituents': 'error',
         '@typescript-eslint/no-useless-empty-export': 'error',
-        '@typescript-eslint/consistent-generic-constructors': ['error', 'constructor'],
+        '@typescript-eslint/consistent-generic-constructors': [ 'error', 'constructor' ],
         '@typescript-eslint/no-duplicate-enum-values': 'error',
         '@typescript-eslint/parameter-properties': 'off',
         '@typescript-eslint/no-unsafe-declaration-merging': 'error',
@@ -391,7 +393,7 @@ export const typescriptConfig = {
             }
         ],
         'functional/prefer-tacit': 'error',
-        'functional/readonly-type': ['error', 'keyword'],
+        'functional/readonly-type': [ 'error', 'keyword' ],
         'functional/no-class-inheritance': 'off',
         'functional/type-declaration-immutability': [
             'error',

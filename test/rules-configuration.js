@@ -108,7 +108,7 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
 export function mergeConfigRules(config) {
     if (Array.isArray(config)) {
         return config.reduce((merged, block) => {
-            return { ...merged, ...(block.rules ?? {}) };
+            return { ...merged, ...block.rules };
         }, {});
     }
     return config.rules ?? {};
@@ -128,7 +128,7 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
             return defaultCompilerHost.getSourceFile(name, languageVersion);
         }
     };
-    const program = ts.createProgram(['/foo.js'], {}, customCompilerHost);
+    const program = ts.createProgram([ '/foo.js' ], {}, customCompilerHost);
 
     function injectProgram(block) {
         return {
@@ -178,13 +178,13 @@ export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet, additionalRules } = testCase;
 
     const additionalRulesNames = Object.keys(additionalRules);
-    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ruleName]) => {
+    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ ruleName ]) => {
         return additionalRulesNames.includes(ruleName);
     });
 
     t.not(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
 
-    additionalRulesFromRuleConfigSet.forEach(([ruleName, ruleSetting]) => {
+    additionalRulesFromRuleConfigSet.forEach(([ ruleName, ruleSetting ]) => {
         const expectedRuleSetting = additionalRules[ruleName];
 
         t.deepEqual(

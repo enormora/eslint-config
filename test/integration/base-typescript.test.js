@@ -4,7 +4,7 @@ import { typescriptConfig } from '../../configs/presets/typescript/typescript.js
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript';
-const configs = [...baseConfig, { ...typescriptConfig, files: ['**/*.ts'] }];
+const configs = [ ...baseConfig, { ...typescriptConfig, files: [ '**/*.ts' ] } ];
 
 const expectedViolationRuleIds = [
     '@stylistic/array-bracket-spacing',

@@ -33,7 +33,7 @@ export const mochaConfig = {
         'mocha/valid-suite-title': 'off',
         'mocha/valid-test-title': 'off',
         'mocha/consistent-spacing-between-blocks': 'error',
-        'mocha/consistent-interface': ['error', { interface: 'TDD' }]
+        'mocha/consistent-interface': [ 'error', { interface: 'TDD' } ]
     },
     settings: {
         mocha: {

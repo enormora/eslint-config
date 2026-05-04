@@ -1,12 +1,11 @@
-const sharedDprintConfig = {
-    lineWidth: 120,
-    indentWidth: 4,
-    newLineKind: 'lf',
-    useTabs: false
-};
+const lineWidth = 120;
+const indentWidth = 4;
 
 export const typescriptDprintConfig = {
-    ...sharedDprintConfig,
+    lineWidth,
+    indentWidth,
+    newLineKind: 'lf',
+    useTabs: false,
     semiColons: 'always',
     quoteStyle: 'preferSingle',
     quoteProps: 'asNeeded',
@@ -65,10 +64,27 @@ export const typescriptDprintConfig = {
     'importDeclaration.forceMultiLine': 'never'
 };
 
-export const jsonDprintConfig = { ...sharedDprintConfig };
+export const jsonDprintConfig = {
+    lineWidth,
+    indentWidth,
+    newLineKind: 'lf',
+    useTabs: false
+};
 
-export const markdownDprintConfig = { ...sharedDprintConfig };
+export const markdownDprintConfig = {
+    lineWidth,
+    newLineKind: 'lf'
+};
 
-export const yamlDprintConfig = { ...sharedDprintConfig };
+export const yamlDprintConfig = {
+    printWidth: lineWidth,
+    indentWidth,
+    lineBreak: 'lf'
+};
 
-export const tomlDprintConfig = { ...sharedDprintConfig };
+export const tomlDprintConfig = {
+    lineWidth,
+    indentWidth,
+    newLineKind: 'lf',
+    useTabs: false
+};

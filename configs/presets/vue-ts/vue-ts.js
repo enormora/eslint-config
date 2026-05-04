@@ -10,7 +10,7 @@ export const vueConfig = {
         globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
-            extraFileExtensions: ['.vue'],
+            extraFileExtensions: [ '.vue' ],
             warnOnUnsupportedTypeScriptVersion: false,
             sourceType: 'module',
             ecmaFeatures: {
