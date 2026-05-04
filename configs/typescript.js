@@ -8,7 +8,7 @@ import { baseConfig } from './base.js';
 import { createRestrictedSyntaxPlugin } from './rule-sets/restricted-syntax.js';
 import { javascriptExtensions, typescriptExtensions } from './constants.js';
 
-const noTsEnumDeclarationRestriction = {
+export const noTsEnumDeclarationRestriction = {
     selector: 'TSEnumDeclaration',
     message: 'Use a string union type instead'
 };
@@ -28,7 +28,7 @@ const noInlineSignatureTypeLiteralSelector = [
     `:matches(${functionLikeNodes}) > TSTypeAnnotation.returnType > TSTypeLiteral`
 ].join(', ');
 
-const noInlineSignatureTypeLiteralRestriction = {
+export const noInlineSignatureTypeLiteralRestriction = {
     selector: noInlineSignatureTypeLiteralSelector,
     message:
         'Inline object type literals are not allowed in function parameters or return types — extract a named type.'
