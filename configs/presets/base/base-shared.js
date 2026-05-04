@@ -364,7 +364,7 @@ export const baseSharedConfig = {
         'import/no-nodejs-modules': 'off',
         'import/max-dependencies': [ 'error', { max: 10 } ],
         'import/first': 'error',
-        'import/no-unused-modules': 'error',
+        'import/no-unused-modules': [ 'error', { unusedExports: true, suppressMissingFileEnumeratorAPIWarning: true } ],
         'import/no-anonymous-default-export': 'off',
         'import/no-named-default': 'off',
         'import/no-cycle': 'error',
