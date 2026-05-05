@@ -22,3 +22,7 @@ jobs:
               run: npx just lint
             - name: Run tests
               run: npx just test
+            - name: Packtory dry-run
+              env:
+                  NPM_TOKEN: dry-run
+              run: npx just packtory-dry-run
