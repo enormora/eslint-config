@@ -16,7 +16,7 @@
         "@dprint/json": "0.21.3",
         "@dprint/markdown": "0.21.1",
         "@dprint/toml": "0.7.0",
-        "@dprint/typescript": "0.95.15",
+        "@dprint/typescript": "0.96.0",
         "@eslint-community/eslint-plugin-eslint-comments": "4.7.1",
         "@stylistic/eslint-plugin": "5.10.0",
         "@typescript-eslint/eslint-plugin": "8.59.2",
