@@ -1,22 +1,25 @@
-import test from 'ava';
 import eslintCorePresets from '@eslint/js';
+import test from 'ava';
 import { Linter } from 'eslint';
 import ts from 'typescript';
 import { testRuleSet } from '../configs/presets/test-base/test-base.js';
 
+const scopedPluginShortNamePattern = /^@[^/]+\/eslint-plugin-(?<shortName>.+)$/u;
+
 function extractShortName(pluginName) {
     const prefix = 'eslint-plugin-';
     const suffix = '/eslint-plugin';
+    const scopedMatch = scopedPluginShortNamePattern.exec(pluginName);
 
     if (pluginName.startsWith(prefix)) {
         return pluginName.slice(prefix.length);
     }
-
     if (pluginName.startsWith('@') && pluginName.endsWith(suffix)) {
-        const startPosition = 0;
-        return pluginName.slice(startPosition, pluginName.length - suffix.length);
+        return pluginName.slice(0, pluginName.length - suffix.length);
     }
-
+    if (scopedMatch !== null) {
+        return scopedMatch.groups.shortName;
+    }
     return pluginName;
 }
 
@@ -81,7 +84,8 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
 export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet, pluginRules, pluginName } = testCase;
     const shortPluginName = extractShortName(pluginName);
-    const pluginRuleNames = Object.keys(pluginRules)
+    const pluginRuleNames = Object
+        .keys(pluginRules)
         .filter((ruleName) => {
             return !isRuleDeprecated(pluginRules[ruleName]);
         })
@@ -101,6 +105,15 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
     });
 });
 
+export function mergeConfigRules(config) {
+    if (Array.isArray(config)) {
+        return config.reduce((merged, block) => {
+            return { ...merged, ...block.rules };
+        }, {});
+    }
+    return config.rules ?? {};
+}
+
 export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
     const linter = new Linter({ configType: 'flat' });
 
@@ -115,23 +128,25 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
             return defaultCompilerHost.getSourceFile(name, languageVersion);
         }
     };
-    const program = ts.createProgram(['/foo.js'], {}, customCompilerHost);
+    const program = ts.createProgram([ '/foo.js' ], {}, customCompilerHost);
+
+    function injectProgram(block) {
+        return {
+            ...block,
+            languageOptions: {
+                ...block.languageOptions,
+                parserOptions: {
+                    ...block.parserOptions,
+                    program
+                }
+            }
+        };
+    }
+
+    const verifiableConfig = Array.isArray(config) ? config.map(injectProgram) : injectProgram(config);
 
     t.notThrows(() => {
-        linter.verify(
-            'foo();',
-            {
-                ...config,
-                languageOptions: {
-                    ...config.languageOptions,
-                    parserOptions: {
-                        ...config.parserOptions,
-                        program
-                    }
-                }
-            },
-            '/foo.js'
-        );
+        linter.verify('foo();', verifiableConfig, '/foo.js');
     }, 'Linter.verify() failed for the given config');
 });
 
@@ -163,13 +178,13 @@ export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
     const { ruleConfigSet, additionalRules } = testCase;
 
     const additionalRulesNames = Object.keys(additionalRules);
-    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ruleName]) => {
+    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ ruleName ]) => {
         return additionalRulesNames.includes(ruleName);
     });
 
     t.not(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
 
-    additionalRulesFromRuleConfigSet.forEach(([ruleName, ruleSetting]) => {
+    additionalRulesFromRuleConfigSet.forEach(([ ruleName, ruleSetting ]) => {
         const expectedRuleSetting = additionalRules[ruleName];
 
         t.deepEqual(

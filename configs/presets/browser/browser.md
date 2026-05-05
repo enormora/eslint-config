@@ -13,17 +13,17 @@ npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-brow
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base and browser config to the configuration array:
 
 ```javascript
-import { baseConfig } from '@enormora/eslint-config-base';
-import { browserConfig } from '@enormora/eslint-config-browser';
+import { baseConfig } from "@enormora/eslint-config-base";
+import { browserConfig } from "@enormora/eslint-config-browser";
 
 export default [
-    {
-        ignores: ['dist/**/*']
-    },
-    baseConfig,
-    {
-        ...browserConfig,
-        files: ['src/browser/**/*.js']
-    }
+  {
+    ignores: ["dist/**/*"],
+  },
+  ...baseConfig,
+  {
+    ...browserConfig,
+    files: ["src/browser/**/*.js"],
+  },
 ];
 ```

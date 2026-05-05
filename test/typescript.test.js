@@ -1,14 +1,14 @@
-import test from 'ava';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
+import test from 'ava';
 import functionalPlugin from 'eslint-plugin-functional';
 import { rules as perfectionistRules } from 'eslint-plugin-perfectionist';
 import { typescriptConfig } from '../configs/presets/typescript/typescript.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
+    checkConfigLanguageOptions,
     checkConfigToHaveNoValidationIssues,
-    checkConfigLanguageOptions
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('typescript preset config has the correct language options defined', checkConfigLanguageOptions, {

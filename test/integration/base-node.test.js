@@ -4,12 +4,15 @@ import { nodeConfig } from '../../configs/presets/node/node.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-node';
-const configs = [baseConfig, nodeConfig];
+const configs = [ ...baseConfig, nodeConfig ];
 
 const expectedViolationRuleIds = [
+    '@stylistic/array-bracket-spacing',
+    '@stylistic/no-extra-parens',
     'complexity',
     'default-case',
     'default-param-last',
+    'dprint/typescript',
     'eqeqeq',
     'id-length',
     'import/no-duplicates',

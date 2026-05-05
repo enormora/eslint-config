@@ -1,6 +1,6 @@
 // @ts-check
-import path from 'node:path';
 import fs from 'node:fs/promises';
+import path from 'node:path';
 
 const projectFolder = process.cwd();
 const sourcesFolder = path.join(projectFolder, 'configs');
@@ -22,7 +22,7 @@ export async function buildConfig() {
         checks: {
             noDuplicatedFiles: {
                 enabled: true,
-                allowList: [path.join(projectFolder, 'LICENSE')]
+                allowList: [ path.join(projectFolder, 'LICENSE') ]
             }
         },
         commonPackageSettings: {
@@ -61,13 +61,30 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-base-with-prettier',
+                entryPoints: [
+                    {
+                        js: 'presets/base-with-prettier/base-with-prettier.js'
+                    }
+                ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(sourcesFolder, 'presets/base-with-prettier/base-with-prettier.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint base configuration formatted with prettier'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-node',
                 entryPoints: [
                     {
                         js: 'presets/node/node.js'
                     }
                 ],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/node/node.md'),
@@ -80,8 +97,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-typescript',
-                entryPoints: [{ js: 'presets/typescript/typescript.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                entryPoints: [ { js: 'presets/typescript/typescript.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/typescript/typescript.md'),
@@ -94,8 +111,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-test-base',
-                entryPoints: [{ js: 'presets/test-base/test-base.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                entryPoints: [ { js: 'presets/test-base/test-base.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/test-base/test-base.md'),
@@ -108,9 +125,9 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-ava',
-                entryPoints: [{ js: 'presets/ava/ava.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
-                bundleDependencies: ['@enormora/eslint-config-test-base'],
+                entryPoints: [ { js: 'presets/ava/ava.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/ava/ava.md'),
@@ -123,9 +140,9 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-mocha',
-                entryPoints: [{ js: 'presets/mocha/mocha.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
-                bundleDependencies: ['@enormora/eslint-config-test-base'],
+                entryPoints: [ { js: 'presets/mocha/mocha.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/mocha/mocha.md'),
@@ -138,8 +155,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-browser',
-                entryPoints: [{ js: 'presets/browser/browser.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                entryPoints: [ { js: 'presets/browser/browser.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/browser/browser.md'),
@@ -152,8 +169,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-react',
-                entryPoints: [{ js: 'presets/react/react.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
+                entryPoints: [ { js: 'presets/react/react.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/react/react.md'),
@@ -166,9 +183,9 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-react-jsx',
-                entryPoints: [{ js: 'presets/react-jsx/react-jsx.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
-                bundleDependencies: ['@enormora/eslint-config-react'],
+                entryPoints: [ { js: 'presets/react-jsx/react-jsx.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-react' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/react-jsx/react-jsx.md'),
@@ -181,9 +198,9 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-react-tsx',
-                entryPoints: [{ js: 'presets/react-tsx/react-tsx.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
-                bundleDependencies: ['@enormora/eslint-config-react-jsx'],
+                entryPoints: [ { js: 'presets/react-tsx/react-tsx.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                bundleDependencies: [ '@enormora/eslint-config-react-jsx' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/react-tsx/react-tsx.md'),
@@ -196,8 +213,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-vue-ts',
-                entryPoints: [{ js: 'presets/vue-ts/vue-ts.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
+                entryPoints: [ { js: 'presets/vue-ts/vue-ts.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/vue-ts/vue-ts.md'),
@@ -210,9 +227,9 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-vitest',
-                entryPoints: [{ js: 'presets/vitest/vitest.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base'],
-                bundleDependencies: ['@enormora/eslint-config-test-base'],
+                entryPoints: [ { js: 'presets/vitest/vitest.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/vitest/vitest.md'),
@@ -225,8 +242,8 @@ export async function buildConfig() {
             },
             {
                 name: '@enormora/eslint-config-aws-cdk',
-                entryPoints: [{ js: 'presets/aws-cdk/aws-cdk.js' }],
-                bundlePeerDependencies: ['@enormora/eslint-config-base', '@enormora/eslint-config-typescript'],
+                entryPoints: [ { js: 'presets/aws-cdk/aws-cdk.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(sourcesFolder, 'presets/aws-cdk/aws-cdk.md'),

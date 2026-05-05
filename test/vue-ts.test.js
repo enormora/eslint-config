@@ -1,14 +1,14 @@
-import test from 'ava';
 import typescriptParser from '@typescript-eslint/parser';
-import vueParser from 'vue-eslint-parser';
-import globals from 'globals';
+import test from 'ava';
 import vuePlugin from 'eslint-plugin-vue';
+import globals from 'globals';
+import vueParser from 'vue-eslint-parser';
 import { vueConfig } from '../configs/presets/vue-ts/vue-ts.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
+    checkConfigLanguageOptions,
     checkConfigToHaveNoValidationIssues,
-    checkConfigLanguageOptions
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('vue preset config has the correct language options defined', checkConfigLanguageOptions, {
@@ -18,7 +18,7 @@ test('vue preset config has the correct language options defined', checkConfigLa
         globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
-            extraFileExtensions: ['.vue'],
+            extraFileExtensions: [ '.vue' ],
             warnOnUnsupportedTypeScriptVersion: false,
             sourceType: 'module',
             ecmaFeatures: {

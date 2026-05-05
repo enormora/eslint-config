@@ -20,22 +20,22 @@ npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-type
 Apply the preset to the directories that hold CDK code (typically a folder named `infrastructure/` or similar) in your `eslint.config.js`:
 
 ```javascript
-import { baseConfig } from '@enormora/eslint-config-base';
-import { typescriptConfig } from '@enormora/eslint-config-typescript';
-import { awsCdkConfig } from '@enormora/eslint-config-aws-cdk';
+import { awsCdkConfig } from "@enormora/eslint-config-aws-cdk";
+import { baseConfig } from "@enormora/eslint-config-base";
+import { typescriptConfig } from "@enormora/eslint-config-typescript";
 
 export default [
-    {
-        ignores: ['cdk.out/**/*']
-    },
-    baseConfig,
-    {
-        ...typescriptConfig,
-        files: ['**/*.ts']
-    },
-    {
-        ...awsCdkConfig,
-        files: ['**/infrastructure/**/*.ts']
-    }
+  {
+    ignores: ["cdk.out/**/*"],
+  },
+  ...baseConfig,
+  {
+    ...typescriptConfig,
+    files: ["**/*.ts"],
+  },
+  {
+    ...awsCdkConfig,
+    files: ["**/infrastructure/**/*.ts"],
+  },
 ];
 ```

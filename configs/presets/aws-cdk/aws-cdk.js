@@ -7,7 +7,7 @@ const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
 
 export const awsCdkConfig = {
     rules: {
-        'restricted-syntax/no-class-declaration': ['error', cdkClassDeclarationRestriction],
+        'restricted-syntax/no-class-declaration': [ 'error', cdkClassDeclarationRestriction ],
         'no-new': 'off',
         'sonarjs/constructor-for-side-effects': 'off',
         'functional/no-this-expressions': 'off'

@@ -1,5 +1,5 @@
-import { reactConfig } from '../react/react.js';
 import { javascriptExtensions } from '../../constants.js';
+import { reactConfig } from '../react/react.js';
 
 export const reactJsxConfig = {
     languageOptions: {
@@ -12,18 +12,18 @@ export const reactJsxConfig = {
     plugins: reactConfig.plugins,
     settings: {
         'import/parsers': {
-            espree: [...javascriptExtensions, '.jsx']
+            espree: [ ...javascriptExtensions, '.jsx' ]
         }
     },
     rules: {
         ...reactConfig.rules,
 
-        'jsx-quotes': ['error', 'prefer-single'],
+        'jsx-quotes': [ 'error', 'prefer-single' ],
         'jsx-sort-props': 'off',
 
-        'react/jsx-boolean-value': ['error', 'always'],
+        'react/jsx-boolean-value': [ 'error', 'always' ],
         'react/jsx-key': 'error',
-        'react/jsx-max-depth': ['error', { max: 10 }],
+        'react/jsx-max-depth': [ 'error', { max: 10 } ],
         'react/jsx-no-comment-textnodes': 'error',
         'react/jsx-no-duplicate-props': 'error',
         'react/jsx-no-literals': 'error',
@@ -32,7 +32,7 @@ export const reactJsxConfig = {
         'react/jsx-no-useless-fragment': 'error',
         'react/jsx-no-undef': 'error',
         'react/jsx-pascal-case': 'error',
-        'react/jsx-fragments': ['error', 'element'],
+        'react/jsx-fragments': [ 'error', 'element' ],
         'react/jsx-props-no-spreading': 'error',
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',

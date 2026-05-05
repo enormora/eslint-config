@@ -1,8 +1,8 @@
-import unicornPlugin from 'eslint-plugin-unicorn';
-import promisePlugin from 'eslint-plugin-promise';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
-import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
+import promisePlugin from 'eslint-plugin-promise';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
+import unicornPlugin from 'eslint-plugin-unicorn';
 
 const maxSwitchCases = 6;
 
@@ -11,17 +11,18 @@ function isSonarjsRuleDeprecated(sonarjsRule) {
 }
 
 const nonDeprecatedSonarjsRuleNames = new Set(
-    Object.entries(sonarjsPlugin.rules)
-        .filter(([, sonarjsRule]) => {
+    Object
+        .entries(sonarjsPlugin.rules)
+        .filter(([ , sonarjsRule ]) => {
             return !isSonarjsRuleDeprecated(sonarjsRule);
         })
-        .map(([sonarjsRuleName]) => {
+        .map(([ sonarjsRuleName ]) => {
             return `sonarjs/${sonarjsRuleName}`;
         })
 );
 
 const nonDeprecatedSonarjsRecommendedRules = Object.fromEntries(
-    Object.entries(sonarjsPlugin.configs.recommended.rules).filter(([sonarjsRuleName]) => {
+    Object.entries(sonarjsPlugin.configs.recommended.rules).filter(([ sonarjsRuleName ]) => {
         return nonDeprecatedSonarjsRuleNames.has(sonarjsRuleName);
     })
 );
@@ -194,7 +195,7 @@ export const bestPracticesRuleSet = {
 
         'sonarjs/cognitive-complexity': 'off',
         'sonarjs/elseif-without-else': 'off',
-        'sonarjs/max-switch-cases': ['error', maxSwitchCases],
+        'sonarjs/max-switch-cases': [ 'error', maxSwitchCases ],
         'sonarjs/no-all-duplicated-branches': 'error',
         'sonarjs/no-collapsible-if': 'error',
         'sonarjs/no-collection-size-mischeck': 'error',
@@ -244,7 +245,7 @@ export const bestPracticesRuleSet = {
         'promise/no-new-statics': 'error',
         'promise/no-return-in-finally': 'error',
         'promise/valid-params': 'error',
-        'promise/prefer-await-to-then': ['error', { strict: true }],
+        'promise/prefer-await-to-then': [ 'error', { strict: true } ],
         'promise/no-multiple-resolved': 'error',
         'promise/spec-only': 'error',
         'promise/prefer-catch': 'error',

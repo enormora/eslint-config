@@ -13,17 +13,17 @@ npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-moch
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base and mocha config to the configuration array:
 
 ```javascript
-import { baseConfig } from '@enormora/eslint-config-base';
-import { mochaConfig } from '@enormora/eslint-config-mocha';
+import { baseConfig } from "@enormora/eslint-config-base";
+import { mochaConfig } from "@enormora/eslint-config-mocha";
 
 export default [
-    {
-        ignores: ['dist/**/*']
-    },
-    baseConfig,
-    {
-        ...mochaConfig,
-        files: ['**/*.test.js']
-    }
+  {
+    ignores: ["dist/**/*"],
+  },
+  ...baseConfig,
+  {
+    ...mochaConfig,
+    files: ["**/*.test.js"],
+  },
 ];
 ```

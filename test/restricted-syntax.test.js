@@ -29,14 +29,14 @@ const typescriptRuleTester = new RuleTester({
 
 function runRuleCases(t, ruleTester, restriction, cases) {
     const valid = cases.valid.map((code) => {
-        return { code, options: [restriction] };
+        return { code, options: [ restriction ] };
     });
     const invalid = cases.invalid.map((entry) => {
         const code = typeof entry === 'string' ? entry : entry.code;
         const count = typeof entry === 'string' ? 1 : entry.count;
         return {
             code,
-            options: [restriction],
+            options: [ restriction ],
             errors: Array.from({ length: count }, () => {
                 return { message: restriction.message };
             })
@@ -80,13 +80,13 @@ test('createNoClassDeclarationRestriction with CDK pattern permits CDK base clas
             'class MyResource extends Resource {}',
             'class MyBucket extends BaseResource {}'
         ],
-        invalid: ['class Foo {}', 'class MyBucket extends Bucket {}', 'class MyHelper extends Helper {}']
+        invalid: [ 'class Foo {}', 'class MyBucket extends Bucket {}', 'class MyHelper extends Helper {}' ]
     });
 });
 
 test('noSwitchStatementRestriction forbids switch statements', (t) => {
     runRuleCases(t, javascriptRuleTester, noSwitchStatementRestriction, {
-        valid: ['if (x === 1) { a(); } else { b(); }', 'const result = x === 1 ? a() : b();'],
+        valid: [ 'if (x === 1) { a(); } else { b(); }', 'const result = x === 1 ? a() : b();' ],
         invalid: [
             'switch (x) { case 1: break; default: break; }',
             'function pick(x) { switch (x) { case "a": return 1; default: return 0; } }'
@@ -114,8 +114,8 @@ test('noEmptyFunctionBodyRestriction forbids empty bodies even with comments', (
 
 test('noTsEnumDeclarationRestriction forbids TS enum declarations', (t) => {
     runRuleCases(t, typescriptRuleTester, noTsEnumDeclarationRestriction, {
-        valid: ['type Color = "red" | "green" | "blue";', 'const Color = { red: "red", green: "green" } as const;'],
-        invalid: ['enum Color { Red, Green, Blue }', 'const enum Status { Active, Inactive }']
+        valid: [ 'type Color = "red" | "green" | "blue";', 'const Color = { red: "red", green: "green" } as const;' ],
+        invalid: [ 'enum Color { Red, Green, Blue }', 'const enum Status { Active, Inactive }' ]
     });
 });
 

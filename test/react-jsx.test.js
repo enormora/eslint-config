@@ -4,9 +4,9 @@ import hooksPlugin from 'eslint-plugin-react-hooks';
 import { reactJsxConfig } from '../configs/presets/react-jsx/react-jsx.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
+    checkConfigLanguageOptions,
     checkConfigToHaveNoValidationIssues,
-    checkConfigLanguageOptions
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('react preset config has the correct language options defined', checkConfigLanguageOptions, {

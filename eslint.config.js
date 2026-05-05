@@ -1,6 +1,6 @@
+import { avaConfig } from './configs/presets/ava/ava.js';
 import { baseConfig } from './configs/presets/base/base.js';
 import { nodeConfig } from './configs/presets/node/node.js';
-import { avaConfig } from './configs/presets/ava/ava.js';
 
 const codeSpellCheckerRules = {
     '@cspell/spellchecker': [
@@ -24,7 +24,9 @@ const codeSpellCheckerRules = {
                     'chunkname',
                     'freelist',
                     'smalloc',
-                    'mischeck'
+                    'mischeck',
+                    'malva',
+                    'dprint'
                 ]
             }
         }
@@ -33,19 +35,19 @@ const codeSpellCheckerRules = {
 
 export default [
     {
-        ignores: ['test/fixtures/**']
+        ignores: [ 'test/fixtures/**' ]
     },
-    baseConfig,
+    ...baseConfig,
     nodeConfig,
     {
-        files: ['configs/**/*.js'],
+        files: [ 'configs/**/*.js' ],
         rules: {
-            'max-lines': ['error', { max: 2000, skipBlankLines: true, skipComments: false }],
+            'max-lines': [ 'error', { max: 2000, skipBlankLines: true, skipComments: false } ],
             ...codeSpellCheckerRules
         }
     },
     {
-        files: ['eslint.config.js', 'prettier.config.js', 'ava.config.js'],
+        files: [ 'eslint.config.js', 'prettier.config.js', 'ava.config.js' ],
         rules: {
             'import/no-default-export': 'off',
             ...codeSpellCheckerRules
@@ -53,7 +55,7 @@ export default [
     },
     {
         ...avaConfig,
-        files: ['test/**/*.test.js', 'test/rules-configuration.js'],
+        files: [ 'test/**/*.test.js', 'test/rules-configuration.js' ],
         rules: {
             ...avaConfig.rules,
             ...codeSpellCheckerRules

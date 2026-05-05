@@ -1,7 +1,7 @@
 import typescriptParser from '@typescript-eslint/parser';
-import vueParser from 'vue-eslint-parser';
 import vuePlugin from 'eslint-plugin-vue';
 import globals from 'globals';
+import vueParser from 'vue-eslint-parser';
 import { typescriptConfig } from '../typescript/typescript.js';
 
 export const vueConfig = {
@@ -10,7 +10,7 @@ export const vueConfig = {
         globals: globals['shared-node-browser'],
         parserOptions: {
             parser: typescriptParser,
-            extraFileExtensions: ['.vue'],
+            extraFileExtensions: [ '.vue' ],
             warnOnUnsupportedTypeScriptVersion: false,
             sourceType: 'module',
             ecmaFeatures: {

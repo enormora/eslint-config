@@ -2,12 +2,12 @@ import test from 'ava';
 import mochaPlugin from 'eslint-plugin-mocha';
 import { mochaConfig } from '../configs/presets/mocha/mocha.js';
 import {
+    checkAdditionalRulesConfigured,
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
-    checkConfigToHaveNoValidationIssues,
-    checkConfigLanguageOptions,
     checkAllTestRulesConfigured,
-    checkAdditionalRulesConfigured
+    checkConfigLanguageOptions,
+    checkConfigToHaveNoValidationIssues,
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-mocha rules are configured', checkAllPluginRulesConfigured, {

@@ -3,9 +3,9 @@ import avaPlugin from 'eslint-plugin-ava';
 import { avaConfig } from '../configs/presets/ava/ava.js';
 import {
     checkAllPluginRulesConfigured,
-    checkUnknownPluginRulesAreNotConfigured,
+    checkAllTestRulesConfigured,
     checkConfigToHaveNoValidationIssues,
-    checkAllTestRulesConfigured
+    checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
 test('all eslint-plugin-ava rules are configured', checkAllPluginRulesConfigured, {

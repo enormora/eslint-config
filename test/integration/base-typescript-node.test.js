@@ -5,9 +5,11 @@ import { typescriptConfig } from '../../configs/presets/typescript/typescript.js
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript-node';
-const configs = [baseConfig, nodeConfig, { ...typescriptConfig, files: ['**/*.ts'] }];
+const configs = [ ...baseConfig, nodeConfig, { ...typescriptConfig, files: [ '**/*.ts' ] } ];
 
 const expectedViolationRuleIds = [
+    '@stylistic/array-bracket-spacing',
+    '@stylistic/no-extra-parens',
     '@typescript-eslint/array-type',
     '@typescript-eslint/ban-ts-comment',
     '@typescript-eslint/consistent-type-assertions',
@@ -46,6 +48,7 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/triple-slash-reference',
     'complexity',
     'default-case',
+    'dprint/typescript',
     'eqeqeq',
     'functional/no-this-expressions',
     'functional/prefer-immutable-types',
