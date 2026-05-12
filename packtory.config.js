@@ -226,6 +226,35 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-astro',
+                entryPoints: [ { js: 'presets/astro/astro.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(sourcesFolder, 'presets/astro/astro.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Astro configuration'
+                }
+            },
+            {
+                name: '@enormora/eslint-config-astro-ts',
+                entryPoints: [ { js: 'presets/astro-ts/astro-ts.js' } ],
+                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                bundleDependencies: [ '@enormora/eslint-config-astro' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(sourcesFolder, 'presets/astro-ts/astro-ts.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Astro with TypeScript configuration'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-vitest',
                 entryPoints: [ { js: 'presets/vitest/vitest.js' } ],
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],

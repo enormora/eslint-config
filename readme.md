@@ -19,5 +19,7 @@ Enormora provides a collection of shareable ESLint config presets to cater to va
 - **[@enormora/eslint-config-react-jsx](./configs/presets/react-jsx/react-jsx.md):** Adds JSX support for `react`.
 - **[@enormora/eslint-config-react-tsx](./configs/presets/react-tsx/react-tsx.md):** Adds JSX support for `react` and `typescript`.
 - **[@enormora/eslint-config-vue-ts](./configs/presets/vue-ts/vue-ts.md):** Config with `vue` together with `typescript`.
+- **[@enormora/eslint-config-astro](./configs/presets/astro/astro.md):** Config with `astro`.
+- **[@enormora/eslint-config-astro-ts](./configs/presets/astro-ts/astro-ts.md):** Config with `astro` together with `typescript`.
 - **[@enormora/eslint-config-vitest](./configs/presets/vitest/vitest.md):** Config with `vitest`
 - **[@enormora/eslint-config-aws-cdk](./configs/presets/aws-cdk/aws-cdk.md):** Config for AWS CDK projects.
