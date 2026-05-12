@@ -1,1 +1,15 @@
-{ "words": ["enormora", "hashbang", "astro", "scopedslots"] }
+{
+    "words": [
+        "enormora",
+        "hashbang",
+        "astro",
+        "scopedslots",
+        "canonicalurl",
+        "fetchcontent",
+        "getentrybyslug",
+        "activedescendant",
+        "proptypes",
+        "treegrid",
+        "spinbutton"
+    ]
+}
