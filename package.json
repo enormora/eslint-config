@@ -14,7 +14,7 @@
         "@ben_12/eslint-simple-parser": "0.1.0",
         "@cspell/eslint-plugin": "10.0.0",
         "@dprint/json": "0.21.3",
-        "@dprint/markdown": "0.21.1",
+        "@dprint/markdown": "0.22.0",
         "@dprint/toml": "0.7.0",
         "@dprint/typescript": "0.96.0",
         "@eslint-community/eslint-plugin-eslint-comments": "4.7.1",
