@@ -49,7 +49,7 @@
     },
     "devDependencies": {
         "@eslint/js": "10.0.1",
-        "@packtory/cli": "0.0.10",
+        "@packtory/cli": "0.0.12",
         "ava": "8.0.0",
         "eslint": "10.4.0",
         "prettier": "3.8.3",
