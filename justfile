@@ -14,3 +14,6 @@ lint-fix: eslint-fix
 
 test:
     ava
+
+packtory-dry-run:
+    packtory publish
