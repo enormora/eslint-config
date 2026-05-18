@@ -8,15 +8,21 @@ on:
         types: [opened, reopened, synchronize]
     merge_group:
 
+permissions: {}
+
 jobs:
     tests:
         runs-on: ubuntu-latest
+        permissions:
+            contents: read
         strategy:
             matrix:
                 node-version: [24, 26]
         name: Tests with Node.js v${{ matrix.node-version }}
         steps:
             - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  persist-credentials: false
             - name: Use Node.js
               uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
               with:
@@ -40,7 +46,10 @@ jobs:
             security-events: write
         steps:
             - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+              with:
+                  persist-credentials: false
             - name: Run zizmor
+              id: zizmor
               uses: zizmorcore/zizmor-action@5f14fd08f7cf1cb1609c1e344975f152c7ee938d # v0.5.6
               with:
                   version: 1.9.0
@@ -48,3 +57,10 @@ jobs:
                   min-severity: informational
                   min-confidence: low
                   config: .github/zizmor.yml
+            - name: Fail if zizmor reported findings
+              env:
+                  SARIF_FILE: ${{ steps.zizmor.outputs.sarif-file }}
+              run: |
+                  count="$(jq '[.runs[].results[]] | length' "$SARIF_FILE")"
+                  echo "zizmor findings: $count"
+                  test "$count" -eq 0
