@@ -59,7 +59,7 @@ jobs:
                   config: .github/zizmor.yml
             - name: Fail if zizmor reported findings
               env:
-                  SARIF_FILE: ${{ steps.zizmor.outputs.sarif-file }}
+                  SARIF_FILE: ${{ steps.zizmor.outputs.output-file }}
               run: |
                   count="$(jq '[.runs[].results[]] | length' "$SARIF_FILE")"
                   echo "zizmor findings: $count"
