@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-node`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-node?label=)](https://www.npmjs.com/package/@enormora/eslint-config-node)
+
 Config preset for node.js, enabling specific rules and configures global variables.
 
 ## Install & Setup

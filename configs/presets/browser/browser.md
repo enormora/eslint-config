@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-browser`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-browser?label=)](https://www.npmjs.com/package/@enormora/eslint-config-browser)
+
 Config preset for browser environments, enabling specific rules and configures global variables.
 
 ## Install & Setup

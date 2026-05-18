@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-astro`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-astro?label=)](https://www.npmjs.com/package/@enormora/eslint-config-astro)
+
 Config preset for Astro with JavaScript, enabling Astro parser support and explicit Astro rules.
 
 ## Install & Setup

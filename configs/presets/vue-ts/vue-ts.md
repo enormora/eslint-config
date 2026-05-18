@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-vue-ts`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-vue-ts?label=)](https://www.npmjs.com/package/@enormora/eslint-config-vue-ts)
+
 Config preset for Vue with TypeScript, enabling specific rules and compiler settings.
 
 ## Install & Setup

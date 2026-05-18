@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-typescript`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-typescript?label=)](https://www.npmjs.com/package/@enormora/eslint-config-typescript)
+
 Config preset for typescript, enabling specific rules and compiler settings.
 
 ## Install & Setup

@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-react`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-react?label=)](https://www.npmjs.com/package/@enormora/eslint-config-react)
+
 Config preset for react, enabling specific rules.
 
 ## Install & Setup

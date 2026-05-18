@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-react-jsx`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-react-jsx?label=)](https://www.npmjs.com/package/@enormora/eslint-config-react-jsx)
+
 Config preset for react and JSX, enabling specific rules and compiler settings.
 
 ## Install & Setup

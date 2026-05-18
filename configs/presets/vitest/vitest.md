@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-vitest`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-vitest?label=)](https://www.npmjs.com/package/@enormora/eslint-config-vitest)
+
 Config preset for `vitest`, enabling specific rules and configures global variables.
 
 ## Install & Setup

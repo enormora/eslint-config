@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-base`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-base?label=)](https://www.npmjs.com/package/@enormora/eslint-config-base)
+
 Base ESLint config preset, agnostic to any environment, framework, or library. Targets ESM-only projects.
 
 Code formatting is handled by [dprint](https://dprint.dev/), wired into ESLint via the

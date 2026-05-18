@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-base-with-prettier`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-base-with-prettier?label=)](https://www.npmjs.com/package/@enormora/eslint-config-base-with-prettier)
+
 Drop-in alternative to [`@enormora/eslint-config-base`](../base/base.md) that formats with
 [prettier](https://prettier.io/) instead of dprint.
 
