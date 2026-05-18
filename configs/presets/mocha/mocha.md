@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-mocha`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-mocha?label=)](https://www.npmjs.com/package/@enormora/eslint-config-mocha)
+
 Config preset for `mocha`, enabling specific rules and configures global variables.
 
 ## Install & Setup

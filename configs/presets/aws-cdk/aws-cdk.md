@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-aws-cdk`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-aws-cdk?label=)](https://www.npmjs.com/package/@enormora/eslint-config-aws-cdk)
+
 Config preset for AWS CDK projects. Disables a small set of rules that conflict with idiomatic CDK construct code.
 
 ## What it disables and why

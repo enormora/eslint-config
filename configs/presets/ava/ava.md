@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-ava`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-ava?label=)](https://www.npmjs.com/package/@enormora/eslint-config-ava)
+
 Config preset for ava, enabling specific rules.
 
 ## Install & Setup

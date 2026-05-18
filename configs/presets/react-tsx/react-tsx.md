@@ -1,5 +1,7 @@
 # `@enormora/eslint-config-react-tsx`
 
+[![npm](https://img.shields.io/npm/v/@enormora/eslint-config-react-tsx?label=)](https://www.npmjs.com/package/@enormora/eslint-config-react-tsx)
+
 Config preset for react and JSX per typescript, enabling specific rules and compiler settings.
 
 ## Install & Setup
