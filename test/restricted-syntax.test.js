@@ -6,6 +6,7 @@ import {
     createNoClassDeclarationRestriction,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
+    noInOperatorRestriction,
     noSwitchStatementRestriction
 } from '../configs/rule-sets/restricted-syntax.js';
 import {
@@ -108,6 +109,21 @@ test('noEmptyFunctionBodyRestriction forbids empty bodies even with comments', (
             'const arrow = () => {};',
             'const arrow = () => { /* noop */ };',
             'const expr = function () {};'
+        ]
+    });
+});
+
+test('noInOperatorRestriction forbids the in operator but permits for-in loops', (t) => {
+    runRuleCases(t, javascriptRuleTester, noInOperatorRestriction, {
+        valid: [
+            'if (Object.hasOwn(bar, "foo")) {}',
+            'for (const key in bar) {}',
+            'const x = a < b;'
+        ],
+        invalid: [
+            'if ("foo" in bar) {}',
+            'const has = "foo" in bar;',
+            'function check(obj) { return "key" in obj; }'
         ]
     });
 });

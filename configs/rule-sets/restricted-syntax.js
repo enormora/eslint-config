@@ -42,3 +42,8 @@ export const noEmptyFunctionBodyRestriction = {
     selector: emptyFunctionBodySelector,
     message: 'Empty function bodies are not allowed, even with a comment.'
 };
+
+export const noInOperatorRestriction = {
+    selector: 'BinaryExpression[operator="in"]',
+    message: 'The `in` operator is not allowed. Use `Object.hasOwn` instead.'
+};
