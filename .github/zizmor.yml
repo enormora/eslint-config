@@ -9,10 +9,6 @@ rules:
             policies:
                 "*": hash-pin
 
-    dependabot-cooldown:
-        config:
-            days: 7
-
     secrets-outside-env:
         config:
             allow: []
