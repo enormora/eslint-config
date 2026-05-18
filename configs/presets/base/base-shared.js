@@ -8,6 +8,7 @@ import {
     createRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
+    noInOperatorRestriction,
     noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.js';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
@@ -15,7 +16,8 @@ import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
 const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
     'no-class-declaration',
     'no-switch-statement',
-    'no-empty-function-body'
+    'no-empty-function-body',
+    'no-in-operator'
 ]);
 
 export const baseSharedConfig = {
@@ -128,6 +130,7 @@ export const baseSharedConfig = {
         'restricted-syntax/no-class-declaration': [ 'error', noClassDeclarationRestriction ],
         'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
         'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
+        'restricted-syntax/no-in-operator': [ 'error', noInOperatorRestriction ],
         'no-return-assign': [ 'error', 'always' ],
         'no-self-assign': [ 'error', { props: true } ],
         'no-self-compare': 'error',
