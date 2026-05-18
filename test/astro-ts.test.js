@@ -2,6 +2,7 @@ import typescriptParser from '@typescript-eslint/parser';
 import * as astroParser from 'astro-eslint-parser';
 import { Linter } from 'eslint';
 import astroPlugin, { rules as astroPluginRules } from 'eslint-plugin-astro';
+import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import test from 'ava';
 import { astroRules } from '../configs/presets/astro/astro.js';
@@ -18,7 +19,8 @@ const astroConfigRules = mergeConfigRules(astroConfig);
 test('astro-ts preset config has the correct plugin defined', (t) => {
     t.deepEqual(astroConfig[0], {
         plugins: {
-            astro: astroPlugin
+            astro: astroPlugin,
+            'jsx-a11y': jsxAccessibilityPlugin
         }
     });
 });

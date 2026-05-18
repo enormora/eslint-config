@@ -1,5 +1,6 @@
 import * as astroParser from 'astro-eslint-parser';
 import astroPlugin from 'eslint-plugin-astro';
+import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 
 export const astroComponentGlobals = {
@@ -54,45 +55,12 @@ export const astroRules = {
     'astro/jsx-a11y/aria-unsupported-elements': 'error',
     'astro/jsx-a11y/autocomplete-valid': 'error',
     'astro/jsx-a11y/click-events-have-key-events': 'error',
-    'astro/jsx-a11y/control-has-associated-label': [
-        'error',
-        {
-            ignoreElements: [ 'audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video' ],
-            ignoreRoles: [
-                'grid',
-                'listbox',
-                'menu',
-                'menubar',
-                'radiogroup',
-                'row',
-                'tablist',
-                'toolbar',
-                'tree',
-                'treegrid'
-            ],
-            includeRoles: [ 'alert', 'dialog' ]
-        }
-    ],
+    'astro/jsx-a11y/control-has-associated-label': 'error',
     'astro/jsx-a11y/heading-has-content': 'error',
     'astro/jsx-a11y/html-has-lang': 'error',
     'astro/jsx-a11y/iframe-has-title': 'error',
     'astro/jsx-a11y/img-redundant-alt': 'error',
-    'astro/jsx-a11y/interactive-supports-focus': [
-        'error',
-        {
-            tabbable: [
-                'button',
-                'checkbox',
-                'link',
-                'progressbar',
-                'searchbox',
-                'slider',
-                'spinbutton',
-                'switch',
-                'textbox'
-            ]
-        }
-    ],
+    'astro/jsx-a11y/interactive-supports-focus': 'error',
     'astro/jsx-a11y/label-has-associated-control': 'error',
     'astro/jsx-a11y/lang': 'error',
     'astro/jsx-a11y/media-has-caption': 'error',
@@ -102,14 +70,7 @@ export const astroRules = {
     'astro/jsx-a11y/no-autofocus': 'error',
     'astro/jsx-a11y/no-distracting-elements': 'error',
     'astro/jsx-a11y/no-interactive-element-to-noninteractive-role': 'error',
-    'astro/jsx-a11y/no-noninteractive-element-interactions': [
-        'error',
-        {
-            body: [ 'onError', 'onLoad' ],
-            iframe: [ 'onError', 'onLoad' ],
-            img: [ 'onError', 'onLoad' ]
-        }
-    ],
+    'astro/jsx-a11y/no-noninteractive-element-interactions': 'error',
     'astro/jsx-a11y/no-noninteractive-element-to-interactive-role': 'error',
     'astro/jsx-a11y/no-noninteractive-tabindex': 'error',
     'astro/jsx-a11y/no-redundant-roles': 'error',
@@ -123,7 +84,8 @@ export const astroRules = {
 
 export const astroPluginConfig = {
     plugins: {
-        astro: astroPlugin
+        astro: astroPlugin,
+        'jsx-a11y': jsxAccessibilityPlugin
     }
 };
 

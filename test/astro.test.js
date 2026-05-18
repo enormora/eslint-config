@@ -1,6 +1,7 @@
 import * as astroParser from 'astro-eslint-parser';
 import { Linter } from 'eslint';
 import astroPlugin, { rules as astroPluginRules } from 'eslint-plugin-astro';
+import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import test from 'ava';
 import { astroConfig, astroRules } from '../configs/presets/astro/astro.js';
@@ -16,7 +17,8 @@ const astroConfigRules = mergeConfigRules(astroConfig);
 test('astro preset config has the correct plugin defined', (t) => {
     t.deepEqual(astroConfig[0], {
         plugins: {
-            astro: astroPlugin
+            astro: astroPlugin,
+            'jsx-a11y': jsxAccessibilityPlugin
         }
     });
 });
@@ -67,6 +69,12 @@ test('no unknown eslint-plugin-astro rules are configured', checkUnknownPluginRu
 
 test('astro preset rules are attached to the astro file block', (t) => {
     t.is(astroConfig[1].rules, astroRules);
+});
+
+test('astro preset uses rule settings compatible with eslint-plugin-astro', (t) => {
+    t.is(astroRules['astro/jsx-a11y/control-has-associated-label'], 'error');
+    t.is(astroRules['astro/jsx-a11y/interactive-supports-focus'], 'error');
+    t.is(astroRules['astro/jsx-a11y/no-noninteractive-element-interactions'], 'error');
 });
 
 test('astro preset config reports astro and accessibility violations', (t) => {
