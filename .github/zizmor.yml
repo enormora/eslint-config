@@ -1,0 +1,18 @@
+---
+# All 38 audits run with defaults; only the configurable audits are
+# overridden below. Persona, severity floor, and confidence floor are
+# set on the zizmor CLI in .github/workflows/continuous-integration.yml.
+
+rules:
+    unpinned-uses:
+        config:
+            policies:
+                "*": hash-pin
+
+    dependabot-cooldown:
+        config:
+            days: 7
+
+    secrets-outside-env:
+        config:
+            allow: []
