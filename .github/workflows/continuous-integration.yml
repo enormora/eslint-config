@@ -10,9 +10,17 @@ on:
 
 permissions: {}
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+    run:
+        shell: bash
+
 jobs:
     tests:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         permissions:
             contents: read
         strategy:
@@ -39,7 +47,7 @@ jobs:
               run: npx just packtory-dry-run
 
     workflow-security:
-        runs-on: ubuntu-latest
+        runs-on: ubuntu-24.04
         name: Workflow security analysis
         permissions:
             contents: read
