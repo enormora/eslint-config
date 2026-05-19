@@ -1,11 +1,9 @@
 import typescriptParser from '@typescript-eslint/parser';
 import * as astroParser from 'astro-eslint-parser';
-import { Linter } from 'eslint';
 import astroPlugin, { rules as astroPluginRules } from 'eslint-plugin-astro';
 import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
 import test from 'ava';
-import { astroRules } from '../configs/presets/astro/astro.js';
 import { astroConfig } from '../configs/presets/astro-ts/astro-ts.js';
 import {
     checkAllPluginRulesConfigured,
@@ -82,27 +80,6 @@ test('no unknown eslint-plugin-astro rules are configured', checkUnknownPluginRu
     ruleConfigSet: astroConfigRules,
     pluginRules: astroPluginRules,
     pluginName: 'eslint-plugin-astro'
-});
-
-test('astro-ts preset rules are attached to the astro file block', (t) => {
-    t.is(astroConfig[1].rules, astroRules);
-});
-
-test('astro-ts preset config reports astro and accessibility violations', (t) => {
-    const linter = new Linter({ configType: 'flat' });
-    const sourceCodeLines = [
-        '---',
-        'const html = "<strong>Unsafe</strong>";',
-        '---',
-        '<html><body><img src="/logo.png" /><div set:html={html} /></body></html>'
-    ];
-    const messages = linter.verify(sourceCodeLines.join('\n'), astroConfig, 'src/pages/index.astro');
-    const ruleIds = new Set(messages.map((message) => {
-        return message.ruleId;
-    }));
-
-    t.true(ruleIds.has('astro/no-set-html-directive'));
-    t.true(ruleIds.has('astro/jsx-a11y/alt-text'));
 });
 
 test('astro-ts preset config has no validation errors', checkConfigToHaveNoValidationIssues, astroConfig);

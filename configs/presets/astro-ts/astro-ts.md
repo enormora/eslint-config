@@ -12,6 +12,8 @@ Install the Astro preset, the base preset and the TypeScript package via npm:
 npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-typescript @enormora/eslint-config-astro-ts
 ```
 
+The preset package includes the `eslint-plugin-jsx-a11y` dependency required by Astro accessibility rules.
+
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base, TypeScript and Astro config to the configuration array:
 
 ```javascript
