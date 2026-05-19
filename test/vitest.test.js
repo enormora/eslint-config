@@ -1,5 +1,5 @@
 import vitestPlugin from '@vitest/eslint-plugin';
-import test from 'ava';
+import { suite, test } from 'mocha';
 import { vitestConfig } from '../configs/presets/vitest/vitest.js';
 import {
     checkAllPluginRulesConfigured,
@@ -8,20 +8,30 @@ import {
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.js';
 
-test('all @vitest/eslint-plugin rules are configured', checkAllPluginRulesConfigured, {
-    ruleConfigSet: vitestConfig.rules,
-    pluginRules: vitestPlugin.rules,
-    pluginName: '@vitest/eslint-plugin'
-});
+suite('vitest preset', function () {
+    test('all @vitest/eslint-plugin rules are configured', function () {
+        checkAllPluginRulesConfigured({
+            ruleConfigSet: vitestConfig.rules,
+            pluginRules: vitestPlugin.rules,
+            pluginName: '@vitest/eslint-plugin'
+        });
+    });
 
-test('no unknown @vitest/eslint-plugin rules are configured', checkUnknownPluginRulesAreNotConfigured, {
-    ruleConfigSet: vitestConfig.rules,
-    pluginRules: vitestPlugin.rules,
-    pluginName: '@vitest/eslint-plugin'
-});
+    test('no unknown @vitest/eslint-plugin rules are configured', function () {
+        checkUnknownPluginRulesAreNotConfigured({
+            ruleConfigSet: vitestConfig.rules,
+            pluginRules: vitestPlugin.rules,
+            pluginName: '@vitest/eslint-plugin'
+        });
+    });
 
-test('all common test rules are configured', checkAllTestRulesConfigured, {
-    ruleConfigSet: vitestConfig.rules
-});
+    test('all common test rules are configured', function () {
+        checkAllTestRulesConfigured({
+            ruleConfigSet: vitestConfig.rules
+        });
+    });
 
-test('vitest preset config has no validation errors', checkConfigToHaveNoValidationIssues, vitestConfig);
+    test('vitest preset config has no validation errors', function () {
+        checkConfigToHaveNoValidationIssues(vitestConfig);
+    });
+});

@@ -13,7 +13,7 @@ lint: eslint
 lint-fix: eslint-fix
 
 test:
-    ava
+    mocha --config mocha.config.json
 
 packtory-dry-run:
     packtory publish
