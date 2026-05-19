@@ -1,14 +1,18 @@
-import test from 'ava';
+import { suite, test } from 'mocha';
 import { reactTsxConfig } from '../configs/presets/react-tsx/react-tsx.js';
 import { checkConfigLanguageOptions } from './rules-configuration.js';
 
-test('react-tsx preset config has the correct language options defined', checkConfigLanguageOptions, {
-    configLanguageOptions: reactTsxConfig.languageOptions,
-    languageOptions: {
-        parserOptions: {
-            ecmaFeatures: {
-                jsx: true
+suite('react-tsx preset', function () {
+    test('react-tsx preset config has the correct language options defined', function () {
+        checkConfigLanguageOptions({
+            configLanguageOptions: reactTsxConfig.languageOptions,
+            languageOptions: {
+                parserOptions: {
+                    ecmaFeatures: {
+                        jsx: true
+                    }
+                }
             }
-        }
-    }
+        });
+    });
 });

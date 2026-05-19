@@ -1,7 +1,8 @@
-import test from 'ava';
+import assert from 'node:assert';
+import { suite, test } from 'mocha';
 import { baseConfig } from '../../configs/presets/base/base.js';
-import { typescriptConfig } from '../../configs/presets/typescript/typescript.js';
 import { reactTsxConfig } from '../../configs/presets/react-tsx/react-tsx.js';
+import { typescriptConfig } from '../../configs/presets/typescript/typescript.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
 
 const comboName = 'base-typescript-react-tsx';
@@ -39,23 +40,25 @@ const expectedViolationRuleIds = [
     'sonarjs/prefer-read-only-props'
 ];
 
-test('base+typescript+react-tsx violations fixture reports the expected rule ids', async (t) => {
-    const { messages } = await lintFixture(configs, comboName, 'violations.tsx');
-    t.deepEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
-});
-
-test('base+typescript+react-tsx clean fixture produces no reports', async (t) => {
-    const { messages } = await lintFixture(configs, comboName, 'clean.tsx');
-    const detail = messages.map((message) => {
-        return { ruleId: message.ruleId, line: message.line, message: message.message };
+suite('base+typescript+react-tsx integration', function () {
+    test('base+typescript+react-tsx violations fixture reports the expected rule ids', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'violations.tsx');
+        assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
     });
-    t.deepEqual(detail, []);
-});
 
-test('base+typescript+react-tsx autofix is idempotent on the violations fixture', async (t) => {
-    const { code, filePath } = await resolveFixture(comboName, 'violations.tsx');
-    const firstPass = fixFixture(configs, code, filePath);
-    const secondPass = fixFixture(configs, firstPass.output, filePath);
-    t.is(secondPass.output, firstPass.output, 'second autofix pass changed the output');
-    t.false(secondPass.fixed, 'second autofix pass reported further fixes');
+    test('base+typescript+react-tsx clean fixture produces no reports', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'clean.tsx');
+        const detail = messages.map((message) => {
+            return { ruleId: message.ruleId, line: message.line, message: message.message };
+        });
+        assert.deepStrictEqual(detail, []);
+    });
+
+    test('base+typescript+react-tsx autofix is idempotent on the violations fixture', async function () {
+        const { code, filePath } = await resolveFixture(comboName, 'violations.tsx');
+        const firstPass = fixFixture(configs, code, filePath);
+        const secondPass = fixFixture(configs, firstPass.output, filePath);
+        assert.strictEqual(secondPass.output, firstPass.output, 'second autofix pass changed the output');
+        assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
+    });
 });

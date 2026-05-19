@@ -50,8 +50,8 @@
     "devDependencies": {
         "@eslint/js": "10.0.1",
         "@packtory/cli": "0.0.15",
-        "ava": "8.0.1",
         "eslint": "10.4.0",
+        "mocha": "11.7.5",
         "prettier": "3.8.3",
         "rust-just": "1.51.0",
         "typescript": "6.0.3"

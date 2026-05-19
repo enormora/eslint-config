@@ -1,5 +1,5 @@
+import assert from 'node:assert';
 import eslintCorePresets from '@eslint/js';
-import test from 'ava';
 import { Linter } from 'eslint';
 import ts from 'typescript';
 import { testRuleSet } from '../configs/presets/test-base/test-base.js';
@@ -32,18 +32,22 @@ function isRuleConfigured(ruleConfigSet, ruleName) {
     return configuredRuleNames.includes(ruleName);
 }
 
-export const checkAllCoreRulesConfigured = test.macro((t, testCase) => {
+export function checkAllCoreRulesConfigured(testCase) {
     const { ruleConfigSet } = testCase;
     const ruleNames = Object.keys(eslintCorePresets.configs.all.rules);
 
-    t.not(ruleNames.length, 0, 'ESLint core rules not found');
+    assert.notStrictEqual(ruleNames.length, 0, 'ESLint core rules not found');
 
     ruleNames.forEach((ruleName) => {
-        t.true(isRuleConfigured(ruleConfigSet, ruleName), `ESLint core rule "${ruleName}" not configured`);
+        assert.strictEqual(
+            isRuleConfigured(ruleConfigSet, ruleName),
+            true,
+            `ESLint core rule "${ruleName}" not configured`
+        );
     });
-});
+}
 
-export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, testCase) => {
+export function checkUnknownCoreRulesAreNotConfigured(testCase) {
     const { ruleConfigSet } = testCase;
     const allCoreRuleNames = Object.keys(eslintCorePresets.configs.all.rules);
     const configuredRuleNames = Object.keys(ruleConfigSet);
@@ -52,16 +56,20 @@ export const checkUnknownCoreRulesAreNotConfigured = test.macro((t, testCase) =>
     });
 
     configuredCoreRuleNames.forEach((ruleName) => {
-        t.true(allCoreRuleNames.includes(ruleName), `ESLint core rule "${ruleName}" configured, but doesn’t not exist`);
+        assert.strictEqual(
+            allCoreRuleNames.includes(ruleName),
+            true,
+            `ESLint core rule "${ruleName}" configured, but doesn’t not exist`
+        );
     });
-});
+}
 
-export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
+export function checkAllPluginRulesConfigured(testCase) {
     const { ruleConfigSet, pluginRules, pluginName, rulesToExclude = [] } = testCase;
     const ruleNames = Object.keys(pluginRules);
     const shortPluginName = extractShortName(pluginName);
 
-    t.not(ruleNames.length, 0, 'Plugin rules are empty');
+    assert.notStrictEqual(ruleNames.length, 0, 'Plugin rules are empty');
 
     ruleNames
         .filter((ruleName) => {
@@ -73,15 +81,15 @@ export const checkAllPluginRulesConfigured = test.macro((t, testCase) => {
             const isConfigured = isRuleConfigured(ruleConfigSet, shortPluginRuleName);
 
             const shouldRuleBeConfigured = !isRuleDeprecated(rule);
-            t.is(
+            assert.strictEqual(
                 isConfigured,
                 shouldRuleBeConfigured,
                 `Rule ${shortPluginRuleName} ${shouldRuleBeConfigured ? 'not configured' : 'is deprecated'}`
             );
         });
-});
+}
 
-export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) => {
+export function checkUnknownPluginRulesAreNotConfigured(testCase) {
     const { ruleConfigSet, pluginRules, pluginName } = testCase;
     const shortPluginName = extractShortName(pluginName);
     const pluginRuleNames = Object
@@ -93,7 +101,7 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
             return `${shortPluginName}/${ruleName}`;
         });
 
-    t.not(pluginRuleNames.length, 0, 'Plugin rules are empty');
+    assert.notStrictEqual(pluginRuleNames.length, 0, 'Plugin rules are empty');
 
     const configuredRuleNames = Object.keys(ruleConfigSet);
     const configuredPluginRuleNames = configuredRuleNames.filter((ruleName) => {
@@ -101,9 +109,9 @@ export const checkUnknownPluginRulesAreNotConfigured = test.macro((t, testCase) 
     });
 
     configuredPluginRuleNames.forEach((ruleName) => {
-        t.true(pluginRuleNames.includes(ruleName), `Rule ${ruleName} can be removed`);
+        assert.strictEqual(pluginRuleNames.includes(ruleName), true, `Rule ${ruleName} can be removed`);
     });
-});
+}
 
 export function mergeConfigRules(config) {
     if (Array.isArray(config)) {
@@ -114,7 +122,7 @@ export function mergeConfigRules(config) {
     return config.rules ?? {};
 }
 
-export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
+export function checkConfigToHaveNoValidationIssues(config) {
     const linter = new Linter({ configType: 'flat' });
 
     const sourceFile = ts.createSourceFile('/foo.js', 'foo();', ts.ScriptTarget.Latest);
@@ -145,24 +153,24 @@ export const checkConfigToHaveNoValidationIssues = test.macro((t, config) => {
 
     const verifiableConfig = Array.isArray(config) ? config.map(injectProgram) : injectProgram(config);
 
-    t.notThrows(() => {
+    assert.doesNotThrow(() => {
         linter.verify('foo();', verifiableConfig, '/foo.js');
     }, 'Linter.verify() failed for the given config');
-});
+}
 
-export const checkConfigLanguageOptions = test.macro((t, testCase) => {
+export function checkConfigLanguageOptions(testCase) {
     const { configLanguageOptions, languageOptions } = testCase;
 
-    t.deepEqual(configLanguageOptions, languageOptions);
-});
+    assert.deepStrictEqual(configLanguageOptions, languageOptions);
+}
 
-export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
+export function checkAllTestRulesConfigured(testCase) {
     const { ruleConfigSet } = testCase;
 
     const testRuleNames = Object.keys(testRuleSet.rules);
     const rulesFromConfigKeys = Object.keys(ruleConfigSet);
 
-    t.not(rulesFromConfigKeys.length, 0, 'Plugin rules are empty');
+    assert.notStrictEqual(rulesFromConfigKeys.length, 0, 'Plugin rules are empty');
 
     const remainingRulesKeys = rulesFromConfigKeys.filter((ruleName) => {
         return testRuleNames.includes(ruleName);
@@ -171,10 +179,10 @@ export const checkAllTestRulesConfigured = test.macro((t, testCase) => {
     const actual = remainingRulesKeys;
     const expected = testRuleNames;
 
-    t.deepEqual(actual, expected, 'Common test rules could not be found');
-});
+    assert.deepStrictEqual(actual, expected, 'Common test rules could not be found');
+}
 
-export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
+export function checkAdditionalRulesConfigured(testCase) {
     const { ruleConfigSet, additionalRules } = testCase;
 
     const additionalRulesNames = Object.keys(additionalRules);
@@ -182,15 +190,15 @@ export const checkAdditionalRulesConfigured = test.macro((t, testCase) => {
         return additionalRulesNames.includes(ruleName);
     });
 
-    t.not(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
+    assert.notStrictEqual(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
 
     additionalRulesFromRuleConfigSet.forEach(([ ruleName, ruleSetting ]) => {
         const expectedRuleSetting = additionalRules[ruleName];
 
-        t.deepEqual(
+        assert.deepStrictEqual(
             expectedRuleSetting,
             ruleSetting,
             `Rule ${ruleName} is not set to ${JSON.stringify(expectedRuleSetting)}`
         );
     });
-});
+}

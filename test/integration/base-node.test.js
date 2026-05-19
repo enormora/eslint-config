@@ -1,4 +1,5 @@
-import test from 'ava';
+import assert from 'node:assert';
+import { suite, test } from 'mocha';
 import { baseConfig } from '../../configs/presets/base/base.js';
 import { nodeConfig } from '../../configs/presets/node/node.js';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.js';
@@ -71,23 +72,25 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-string-slice'
 ];
 
-test('base+node violations fixture reports the expected rule ids', async (t) => {
-    const { messages } = await lintFixture(configs, comboName, 'violations.js');
-    t.deepEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
-});
-
-test('base+node clean fixture produces no reports', async (t) => {
-    const { messages } = await lintFixture(configs, comboName, 'clean.js');
-    const detail = messages.map((message) => {
-        return { ruleId: message.ruleId, line: message.line, message: message.message };
+suite('base+node integration', function () {
+    test('base+node violations fixture reports the expected rule ids', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'violations.js');
+        assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
     });
-    t.deepEqual(detail, []);
-});
 
-test('base+node autofix is idempotent on the violations fixture', async (t) => {
-    const { code, filePath } = await resolveFixture(comboName, 'violations.js');
-    const firstPass = fixFixture(configs, code, filePath);
-    const secondPass = fixFixture(configs, firstPass.output, filePath);
-    t.is(secondPass.output, firstPass.output, 'second autofix pass changed the output');
-    t.false(secondPass.fixed, 'second autofix pass reported further fixes');
+    test('base+node clean fixture produces no reports', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'clean.js');
+        const detail = messages.map((message) => {
+            return { ruleId: message.ruleId, line: message.line, message: message.message };
+        });
+        assert.deepStrictEqual(detail, []);
+    });
+
+    test('base+node autofix is idempotent on the violations fixture', async function () {
+        const { code, filePath } = await resolveFixture(comboName, 'violations.js');
+        const firstPass = fixFixture(configs, code, filePath);
+        const secondPass = fixFixture(configs, firstPass.output, filePath);
+        assert.strictEqual(secondPass.output, firstPass.output, 'second autofix pass changed the output');
+        assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
+    });
 });

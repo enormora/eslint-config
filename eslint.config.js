@@ -1,5 +1,6 @@
-import { avaConfig } from './configs/presets/ava/ava.js';
+import cspellPlugin from '@cspell/eslint-plugin';
 import { baseConfig } from './configs/presets/base/base.js';
+import { mochaConfig } from './configs/presets/mocha/mocha.js';
 import { nodeConfig } from './configs/presets/node/node.js';
 
 const codeSpellCheckerRules = {
@@ -41,23 +42,33 @@ export default [
     nodeConfig,
     {
         files: [ 'configs/**/*.js' ],
+        plugins: {
+            '@cspell': cspellPlugin
+        },
         rules: {
             'max-lines': [ 'error', { max: 2000, skipBlankLines: true, skipComments: false } ],
             ...codeSpellCheckerRules
         }
     },
     {
-        files: [ 'eslint.config.js', 'prettier.config.js', 'ava.config.js' ],
+        files: [ 'eslint.config.js', 'prettier.config.js', 'mocha.config.json' ],
+        plugins: {
+            '@cspell': cspellPlugin
+        },
         rules: {
             'import/no-default-export': 'off',
             ...codeSpellCheckerRules
         }
     },
     {
-        ...avaConfig,
+        ...mochaConfig,
         files: [ 'test/**/*.test.js', 'test/rules-configuration.js' ],
+        plugins: {
+            ...mochaConfig.plugins,
+            '@cspell': cspellPlugin
+        },
         rules: {
-            ...avaConfig.rules,
+            ...mochaConfig.rules,
             ...codeSpellCheckerRules
         }
     }
