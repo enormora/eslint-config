@@ -1,3 +1,9 @@
+/* eslint-disable import/no-unassigned-import -- side-effect imports surface the dprint formatter packages to Packtory's static dependency scanner so they end up as runtime dependencies of the published package */
+import '@dprint/json';
+import '@dprint/markdown';
+import '@dprint/toml';
+import '@dprint/typescript';
+/* eslint-enable import/no-unassigned-import -- end of Packtory-visibility imports */
 import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import simpleParser from '@ben_12/eslint-simple-parser';
 import { baseSharedConfig } from './base-shared.js';
