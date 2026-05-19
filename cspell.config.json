@@ -10,6 +10,8 @@
         "activedescendant",
         "proptypes",
         "treegrid",
-        "spinbutton"
+        "spinbutton",
+        "menuitemradio",
+        "menuitemcheckbox"
     ]
 }
