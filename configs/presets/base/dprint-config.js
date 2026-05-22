@@ -73,7 +73,10 @@ export const jsonDprintConfig = {
 
 export const markdownDprintConfig = {
     lineWidth,
-    newLineKind: 'lf'
+    newLineKind: 'lf',
+    textWrap: 'maintain',
+    emphasisKind: 'underscores',
+    strongKind: 'asterisks'
 };
 
 export const yamlDprintConfig = {
