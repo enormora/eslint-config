@@ -103,7 +103,7 @@ export const reactConfig = {
         'react/hook-use-state': 'off',
         'react/iframe-missing-sandbox': 'error',
         'react/jsx-no-leaked-render': 'off',
-        'react/no-object-type-as-default-prop': 'warn',
+        'react/no-object-type-as-default-prop': 'error',
         'react/sort-default-props': 'off',
         'react/checked-requires-onchange-or-readonly': 'off',
         'react/jsx-props-no-spread-multi': 'error',
