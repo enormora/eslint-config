@@ -7,13 +7,8 @@ import '@dprint/typescript';
 import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import simpleParser from '@ben_12/eslint-simple-parser';
 import { baseSharedConfig } from './base-shared.js';
-import {
-    jsonDprintConfig,
-    markdownDprintConfig,
-    tomlDprintConfig,
-    typescriptDprintConfig,
-    yamlDprintConfig
-} from './dprint-config.js';
+import { jsonDprintConfig, tomlDprintConfig, typescriptDprintConfig, yamlDprintConfig } from './dprint-config.js';
+import { markdownConfig } from './markdown.js';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -46,13 +41,6 @@ const dprintJsonConfig = {
     rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
 };
 
-const dprintMarkdownConfig = {
-    files: [ '**/*.md' ],
-    languageOptions: { parser: simpleParser },
-    plugins: { dprint: dprintPlugin },
-    rules: { 'dprint/markdown': [ 'error', { config: markdownDprintConfig } ] }
-};
-
 const dprintYamlConfig = {
     files: [ '**/*.{yml,yaml}' ],
     languageOptions: { parser: simpleParser },
@@ -70,7 +58,7 @@ const dprintTomlConfig = {
 export const baseConfig = [
     baseJsConfig,
     dprintJsonConfig,
-    dprintMarkdownConfig,
+    markdownConfig,
     dprintYamlConfig,
     dprintTomlConfig
 ];
