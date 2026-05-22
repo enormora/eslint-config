@@ -45,6 +45,21 @@ The remaining blocks each enable one dprint formatter scoped to a default file g
 | YAML          | `**/*.{yml,yaml}`                          | `dprint/yaml`       |
 | TOML          | `**/*.toml`                                | `dprint/toml`       |
 
+### Linting hidden directories
+
+ESLint's CLI walker skips dot-directories such as `.github/` when you run `eslint .`. Because the dprint formatter
+blocks above match against file paths, they will silently _not_ run on files inside `.github/` (CI workflows, issue
+templates, dependabot/renovate configs) unless you pass that path to ESLint explicitly. The recommended lint script is
+therefore:
+
+```json
+{
+  "scripts": {
+    "lint": "eslint . .github"
+  }
+}
+```
+
 ### Customizing or disabling a formatter
 
 Because the formatter blocks are plain flat config, you override them the same way as any other ESLint config — by
