@@ -426,7 +426,7 @@ export const baseSharedConfig = {
         'import/prefer-namespace-import': 'off',
 
         '@cspell/spellchecker': [
-            'warn',
+            'error',
             {
                 autoFix: false,
                 numSuggestions: 3,

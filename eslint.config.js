@@ -5,7 +5,7 @@ import { nodeConfig } from './configs/presets/node/node.js';
 
 const codeSpellCheckerRules = {
     '@cspell/spellchecker': [
-        'warn',
+        'error',
         {
             cspell: {
                 words: [
