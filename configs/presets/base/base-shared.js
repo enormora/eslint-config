@@ -20,6 +20,31 @@ const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
     'no-in-operator'
 ]);
 
+export const cspellSpellcheckerOptions = {
+    autoFix: false,
+    numSuggestions: 3,
+    generateSuggestions: true,
+    ignoreImports: true,
+    ignoreImportProperties: true,
+    checkIdentifiers: true,
+    checkStrings: true,
+    checkStringTemplates: true,
+    checkJSXText: true,
+    checkComments: true,
+    cspell: {
+        words: [],
+        ignoreWords: [],
+        flagWords: [],
+        ignoreRegExpList: [],
+        includeRegExpList: [],
+        allowCompoundWords: true,
+        import: [],
+        dictionaries: []
+    },
+    customWordListFile: undefined,
+    debugMode: false
+};
+
 export const baseSharedConfig = {
     languageOptions: {
         ecmaVersion,
@@ -425,32 +450,6 @@ export const baseSharedConfig = {
         'import/no-rename-default': 'off',
         'import/prefer-namespace-import': 'off',
 
-        '@cspell/spellchecker': [
-            'error',
-            {
-                autoFix: false,
-                numSuggestions: 3,
-                generateSuggestions: true,
-                ignoreImports: true,
-                ignoreImportProperties: true,
-                checkIdentifiers: true,
-                checkStrings: true,
-                checkStringTemplates: true,
-                checkJSXText: true,
-                checkComments: true,
-                cspell: {
-                    words: [],
-                    ignoreWords: [],
-                    flagWords: [],
-                    ignoreRegExpList: [],
-                    includeRegExpList: [],
-                    allowCompoundWords: true,
-                    import: [],
-                    dictionaries: []
-                },
-                customWordListFile: undefined,
-                debugMode: false
-            }
-        ]
+        '@cspell/spellchecker': [ 'error', cspellSpellcheckerOptions ]
     }
 };
