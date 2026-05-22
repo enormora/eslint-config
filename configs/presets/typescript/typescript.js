@@ -82,7 +82,26 @@ export const typescriptConfig = {
                 extensions: [ ...javascriptExtensions, ...typescriptExtensions ]
             }),
             createTypeScriptImportResolver()
-        ]
+        ],
+        // The upstream defaults in `is-immutable-type` classify Date, URL,
+        // and URLSearchParams as Mutable, which poisons any union, record,
+        // or recursive value type that mentions them. We promote them — and
+        // a few more value-like built-ins — to ReadonlyShallow so consumers
+        // can use them without a Readonly<T> wrapper. Map and Set stay
+        // Mutable (via the upstream defaults) so the autofixer keeps
+        // rewriting them to ReadonlyMap/ReadonlySet.
+        immutability: {
+            overrides: [
+                { type: { from: 'lib', name: 'Date' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'RegExp' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'URL' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'URLSearchParams' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'WeakMap' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'WeakSet' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'Promise' }, to: 'ReadonlyShallow' },
+                { type: { from: 'lib', name: 'Error' }, to: 'ReadonlyShallow' }
+            ]
+        }
     },
     plugins: {
         '@typescript-eslint': typescriptPlugin,

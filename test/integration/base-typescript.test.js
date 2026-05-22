@@ -131,4 +131,17 @@ suite('base+typescript integration', function () {
         assert.strictEqual(secondPass.output, firstPass.output, 'second autofix pass changed the output');
         assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
     });
+
+    test('base+typescript built-in mutable classes do not poison immutability checks', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'builtin-classes.ts');
+        const immutabilityMessages = messages
+            .filter((message) => {
+                return message.ruleId === 'functional/prefer-immutable-types' ||
+                    message.ruleId === 'functional/type-declaration-immutability';
+            })
+            .map((message) => {
+                return { ruleId: message.ruleId, line: message.line, message: message.message };
+            });
+        assert.deepStrictEqual(immutabilityMessages, []);
+    });
 });
