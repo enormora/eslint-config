@@ -397,6 +397,24 @@ export const typescriptConfig = {
                         {
                             pattern: '^(Map|Set)<(.+)>$',
                             replace: 'Readonly$1<$2>'
+                        },
+                        {
+                            pattern: '^Record<(.+)>$',
+                            replace: 'Readonly<Record<$1>>'
+                        },
+                        {
+                            pattern: '^\\{ \\[([^\\]]+)\\]: (.+?);? \\}$',
+                            replace: '{ readonly [$1]: $2; }'
+                        },
+                        // Iterative one-property-per-pass prefix for object
+                        // literal types. ESLint --fix runs the rule repeatedly
+                        // until stable, so this prefixes one property each
+                        // pass. Anchoring at "^{ " or "; " means only property
+                        // boundaries inside an object type match; function
+                        // parameters are inside "(" and never matched.
+                        {
+                            pattern: '(^\\{ |; )(?!readonly )([\\w$]+\\??: )',
+                            replace: '$1readonly $2'
                         }
                     ]
                 },
@@ -434,6 +452,18 @@ export const typescriptConfig = {
                             {
                                 pattern: '^(Map|Set)<(.+)>$',
                                 replace: 'Readonly$1<$2>'
+                            },
+                            {
+                                pattern: '^Record<(.+)>$',
+                                replace: 'Readonly<Record<$1>>'
+                            },
+                            {
+                                pattern: '^\\{ \\[([^\\]]+)\\]: (.+?);? \\}$',
+                                replace: '{ readonly [$1]: $2; }'
+                            },
+                            {
+                                pattern: '(^\\{ |; )(?!readonly )([\\w$]+\\??: )',
+                                replace: '$1readonly $2'
                             }
                         ]
                     }
