@@ -184,6 +184,10 @@ export const typescriptConfig = {
                 allowTypedFunctionExpressions: true
             }
         ],
+        // TS already validates return types, and the SonarJS heuristic
+        // misfires on intentional tagged-union returns (e.g. `Value | Sentinel`)
+        // even when expressed as a single named alias.
+        'sonarjs/function-return-type': 'off',
         ...configureWrappedCoreRule('max-params'),
         '@typescript-eslint/member-ordering': 'error',
         ...configureWrappedCoreRule('no-array-constructor'),
