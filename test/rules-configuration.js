@@ -4,23 +4,16 @@ import { Linter } from 'eslint';
 import ts from 'typescript';
 import { testRuleSet } from '../configs/presets/test-base/test-base.js';
 
-const scopedPluginShortNamePattern = /^@[^/]+\/eslint-plugin-(?<shortName>.+)$/u;
+const scopedPluginShortNamePattern = /^@[^/]+\/(?:eslint-plugin-)?(?<shortName>.+)$/u;
 
 function extractShortName(pluginName) {
-    const prefix = 'eslint-plugin-';
-    const suffix = '/eslint-plugin';
-    const scopedMatch = scopedPluginShortNamePattern.exec(pluginName);
-
-    if (pluginName.startsWith(prefix)) {
-        return pluginName.slice(prefix.length);
+    if (pluginName.startsWith('eslint-plugin-')) {
+        return pluginName.slice('eslint-plugin-'.length);
     }
-    if (pluginName.startsWith('@') && pluginName.endsWith(suffix)) {
-        return pluginName.slice(0, pluginName.length - suffix.length);
+    if (pluginName.startsWith('@') && pluginName.endsWith('/eslint-plugin')) {
+        return pluginName.slice(0, pluginName.length - '/eslint-plugin'.length);
     }
-    if (scopedMatch !== null) {
-        return scopedMatch.groups.shortName;
-    }
-    return pluginName;
+    return scopedPluginShortNamePattern.exec(pluginName)?.groups.shortName ?? pluginName;
 }
 
 function isRuleDeprecated(rule) {

@@ -27,7 +27,12 @@ const codeSpellCheckerRules = {
                     'smalloc',
                     'mischeck',
                     'malva',
-                    'dprint'
+                    'dprint',
+                    'commonmark',
+                    'mdast',
+                    'autolinks',
+                    'blockquotes',
+                    'setext'
                 ]
             }
         }
@@ -39,7 +44,7 @@ export default [
         ignores: [ 'test/fixtures/**' ]
     },
     ...baseConfig,
-    nodeConfig,
+    { ...nodeConfig, files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}' ] },
     {
         files: [ 'configs/**/*.js' ],
         plugins: {
