@@ -63,7 +63,7 @@ export const baseConfig = [
     dprintTomlConfig
 ];
 
-/* eslint-disable no-barrel-files/no-barrel-files -- expose dprint configs as public API so consumers can spread them when overriding individual options */
+/* eslint-disable no-barrel-files/no-barrel-files -- expose dprint configs and cspell helper as public API so consumers can spread or call them when customizing */
 export {
     jsonDprintConfig,
     markdownDprintConfig,
@@ -71,4 +71,5 @@ export {
     typescriptDprintConfig,
     yamlDprintConfig
 } from './dprint-config.js';
+export { withCspellWords } from './cspell-config.js';
 /* eslint-enable no-barrel-files/no-barrel-files -- end of public re-exports */
