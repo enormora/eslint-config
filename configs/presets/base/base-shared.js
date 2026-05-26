@@ -210,7 +210,23 @@ export const baseSharedConfig = {
         'no-warning-comments': [
             'error',
             {
-                terms: [ 'todo', 'fixme', 'wtf', 'falls through', 'istanbul', 'c8' ],
+                terms: [
+                    'todo',
+                    'fixme',
+                    'wtf',
+                    'falls through',
+                    'istanbul',
+                    'c8',
+                    'v8 ignore',
+                    'node:coverage',
+                    'prettier-ignore',
+                    'dprint-ignore',
+                    'cspell:disable',
+                    'cspell:ignore',
+                    'cspell:words',
+                    'Stryker disable',
+                    'Stryker restore'
+                ],
                 location: 'anywhere'
             }
         ],
