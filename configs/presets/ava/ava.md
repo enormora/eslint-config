@@ -15,17 +15,17 @@ npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-ava
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base and node config to the configuration array:
 
 ```javascript
-import { avaConfig } from "@enormora/eslint-config-ava";
-import { baseConfig } from "@enormora/eslint-config-base";
+import { avaConfig } from '@enormora/eslint-config-ava';
+import { baseConfig } from '@enormora/eslint-config-base';
 
 export default [
-  {
-    ignores: ["dist/**/*"],
-  },
-  ...baseConfig,
-  {
-    ...avaConfig,
-    files: ["**/*.test.js"],
-  },
+    {
+        ignores: [ 'dist/**/*' ]
+    },
+    ...baseConfig,
+    {
+        ...avaConfig,
+        files: [ '**/*.test.js' ]
+    }
 ];
 ```

@@ -2,7 +2,14 @@ import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import markdownPlugin from '@eslint/markdown';
 import markdownLinksPlugin from 'eslint-plugin-markdown-links';
 import markdownPreferencesPlugin from 'eslint-plugin-markdown-preferences';
-import { markdownDprintConfig } from './dprint-config.js';
+import {
+    jsonDprintConfig,
+    markdownDprintConfig,
+    tomlDprintConfig,
+    typescriptDprintConfig,
+    yamlDprintConfig
+} from './dprint-config.js';
+import { dprintSettings } from './dprint-formatters.js';
 
 // `@eslint/markdown` declares `language: 'markdown/commonmark'` for .md files, which makes ESLint
 // parse them into an mdast tree (root node `type: 'root'`). The stock `dprint/markdown` rule listens
@@ -36,8 +43,20 @@ export const markdownConfig = {
     // 10's reporter ("Custom getLoc() method must be implemented in the subclass"). Revisit once
     // @eslint/markdown ships a fix.
     language: 'markdown/commonmark',
+    settings: dprintSettings,
     rules: {
-        'dprint-markdown/markdown': [ 'error', { config: markdownDprintConfig } ],
+        'dprint-markdown/markdown': [
+            'error',
+            {
+                config: markdownDprintConfig,
+                hostConfigs: {
+                    typescript: typescriptDprintConfig,
+                    json: jsonDprintConfig,
+                    toml: tomlDprintConfig,
+                    yaml: yamlDprintConfig
+                }
+            }
+        ],
 
         'markdown/fenced-code-language': 'error',
         'markdown/fenced-code-meta': 'off',

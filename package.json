@@ -9,6 +9,9 @@
     ],
     "scripts": {},
     "license": "MIT",
+    "engines": {
+        "node": "^20.19.0 || ^22.13.0 || >=24"
+    },
     "dependencies": {
         "@ben_12/eslint-plugin-dprint": "1.21.0",
         "@ben_12/eslint-simple-parser": "0.1.0",
