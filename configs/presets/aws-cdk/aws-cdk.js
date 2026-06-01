@@ -1,7 +1,7 @@
 import { createNoClassDeclarationRestriction } from '../../rule-sets/restricted-syntax.js';
 
 const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
-    allowedSuperClassNamePattern: '/(Error|Construct|Stack|Resource)$/',
+    allowedSuperClassNamePattern: '/(Error|Construct|Stack|Stage|App|Resource)$/',
     message: 'Class declarations are not allowed except for extending errors or CDK constructs.'
 });
 

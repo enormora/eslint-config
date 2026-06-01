@@ -70,7 +70,7 @@ suite('restricted syntax rules', function () {
 
     test('createNoClassDeclarationRestriction with CDK pattern permits CDK base classes', function () {
         const cdkRestriction = createNoClassDeclarationRestriction({
-            allowedSuperClassNamePattern: '/(Error|Construct|Stack|Resource)$/',
+            allowedSuperClassNamePattern: '/(Error|Construct|Stack|Stage|App|Resource)$/',
             message: 'CDK class restriction'
         });
 
@@ -80,6 +80,8 @@ suite('restricted syntax rules', function () {
                 'class MyConstruct extends Construct {}',
                 'class MyStack extends Stack {}',
                 'class MyNestedStack extends NestedStack {}',
+                'class MyStage extends Stage {}',
+                'class MyApp extends App {}',
                 'class MyResource extends Resource {}',
                 'class MyBucket extends BaseResource {}'
             ],
