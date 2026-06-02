@@ -10,6 +10,7 @@ Config preset for AWS CDK projects. Disables a small set of rules that conflict 
 - `no-new` — `new MyStack(app, 'id', props)` is the canonical way to register stacks and constructs; the side-effecting `new` is intentional.
 - `sonarjs/constructor-for-side-effects` — child constructs register themselves on their parent via `super(scope, id)` in the constructor; the returned instance is often unused.
 - `functional/no-this-expressions` — construct constructors reference `this` to expose typed children to consumers.
+- `functional/prefer-immutable-types` and `functional/type-declaration-immutability` — CDK constructs are mutable class instances, so `Readonly<Construct>` drops their methods and private fields and no longer type-checks as the construct; the rules cannot be satisfied for parameters or type aliases built on construct types.
 
 ## Install & Setup
 

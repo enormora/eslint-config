@@ -10,6 +10,8 @@ export const awsCdkConfig = {
         'restricted-syntax/no-class-declaration': [ 'error', cdkClassDeclarationRestriction ],
         'no-new': 'off',
         'sonarjs/constructor-for-side-effects': 'off',
-        'functional/no-this-expressions': 'off'
+        'functional/no-this-expressions': 'off',
+        'functional/prefer-immutable-types': 'off',
+        'functional/type-declaration-immutability': 'off'
     }
 };
