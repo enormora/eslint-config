@@ -21,9 +21,6 @@ const publishingPeerDependencies = {
     typescript: '>=4.8.4 <6.1.0'
 };
 
-// eslint-disable-next-line node/no-process-env -- needed
-const npmToken = process.env.NPM_TOKEN;
-
 /** @returns {Promise<import('@packtory/cli').PacktoryConfig>} */
 export async function buildConfig() {
     const packageJsonContent = await fs.readFile(path.join(projectFolder, './package.json'), { encoding: 'utf8' });
@@ -36,13 +33,12 @@ export async function buildConfig() {
         }
     };
 
-    if (npmToken === undefined) {
-        throw new Error('Missing NPM_TOKEN environment variable');
-    }
-
     return {
         registrySettings: {
-            auth: { type: 'bearer-token', token: npmToken }
+            auth: {
+                publish: { type: 'npm-oidc', provider: 'auto' },
+                metadata: 'auto'
+            }
         },
         checks: {
             noDuplicatedFiles: {
@@ -54,7 +50,10 @@ export async function buildConfig() {
             sourcesFolder,
             mainPackageJson: packtoryMainPackageJson,
             includeSourceMapFiles: true,
-            publishSettings: { access: 'public' },
+            publishSettings: {
+                access: 'public',
+                provenance: { type: 'auto' }
+            },
             additionalFiles: [
                 {
                     sourceFilePath: path.join(projectFolder, 'LICENSE'),
