@@ -15,17 +15,17 @@ npm install --save-dev @enormora/eslint-config-base @enormora/eslint-config-type
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base and react config to the configuration array:
 
 ```javascript
-import { baseConfig } from "@enormora/eslint-config-base";
-import { vueConfig } from "@enormora/eslint-config-vue-ts";
+import { baseConfig } from '@enormora/eslint-config-base';
+import { vueConfig } from '@enormora/eslint-config-vue-ts';
 
 export default [
-  {
-    ignores: ["dist/**/*"],
-  },
-  ...baseConfig,
-  {
-    ...vueConfig,
-    files: ["src/**/*.vue"],
-  },
+    {
+        ignores: [ 'dist/**/*' ]
+    },
+    ...baseConfig,
+    {
+        ...vueConfig,
+        files: [ 'src/**/*.vue' ]
+    }
 ];
 ```

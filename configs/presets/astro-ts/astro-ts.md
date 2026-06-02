@@ -17,19 +17,19 @@ The preset package includes the `eslint-plugin-jsx-a11y` dependency required by 
 Create an ESLint configuration file (e.g., `eslint.config.js`) in your project and add the base, TypeScript and Astro config to the configuration array:
 
 ```javascript
-import { astroConfig } from "@enormora/eslint-config-astro-ts";
-import { baseConfig } from "@enormora/eslint-config-base";
-import { typescriptConfig } from "@enormora/eslint-config-typescript";
+import { astroConfig } from '@enormora/eslint-config-astro-ts';
+import { baseConfig } from '@enormora/eslint-config-base';
+import { typescriptConfig } from '@enormora/eslint-config-typescript';
 
 export default [
-  {
-    ignores: ["dist/**/*"],
-  },
-  ...baseConfig,
-  {
-    ...typescriptConfig,
-    files: ["**/*.ts"],
-  },
-  ...astroConfig,
+    {
+        ignores: [ 'dist/**/*' ]
+    },
+    ...baseConfig,
+    {
+        ...typescriptConfig,
+        files: [ '**/*.ts' ]
+    },
+    ...astroConfig
 ];
 ```

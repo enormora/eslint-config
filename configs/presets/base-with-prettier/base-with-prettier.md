@@ -21,11 +21,11 @@ Provide a `prettier.config.js` at your project root with the formatting options 
 
 ```javascript
 export default {
-  printWidth: 120,
-  tabWidth: 4,
-  singleQuote: true,
-  trailingComma: "none",
-  arrowParens: "always",
+    printWidth: 120,
+    tabWidth: 4,
+    singleQuote: true,
+    trailingComma: 'none',
+    arrowParens: 'always'
 };
 ```
 
@@ -33,12 +33,12 @@ Create an ESLint configuration file (e.g., `eslint.config.js`) in your project a
 array:
 
 ```javascript
-import { baseWithPrettierConfig } from "@enormora/eslint-config-base-with-prettier";
+import { baseWithPrettierConfig } from '@enormora/eslint-config-base-with-prettier';
 
 export default [
-  {
-    ignores: ["dist/**/*"],
-  },
-  baseWithPrettierConfig,
+    {
+        ignores: [ 'dist/**/*' ]
+    },
+    baseWithPrettierConfig
 ];
 ```

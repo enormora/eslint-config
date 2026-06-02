@@ -1,13 +1,8 @@
-/* eslint-disable import/no-unassigned-import -- side-effect imports surface the dprint formatter packages to Packtory's static dependency scanner so they end up as runtime dependencies of the published package */
-import '@dprint/json';
-import '@dprint/markdown';
-import '@dprint/toml';
-import '@dprint/typescript';
-/* eslint-enable import/no-unassigned-import -- end of Packtory-visibility imports */
 import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import simpleParser from '@ben_12/eslint-simple-parser';
 import { baseSharedConfig } from './base-shared.js';
 import { jsonDprintConfig, tomlDprintConfig, typescriptDprintConfig, yamlDprintConfig } from './dprint-config.js';
+import { dprintSettings } from './dprint-formatters.js';
 import { markdownConfig } from './markdown.js';
 
 const baseJsConfig = {
@@ -17,6 +12,7 @@ const baseJsConfig = {
         ...baseSharedConfig.plugins,
         dprint: dprintPlugin
     },
+    settings: { ...baseSharedConfig.settings, ...dprintSettings },
     rules: {
         ...baseSharedConfig.rules,
 
@@ -38,6 +34,7 @@ const dprintJsonConfig = {
     files: [ '**/*.json' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
+    settings: dprintSettings,
     rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
 };
 
@@ -45,6 +42,7 @@ const dprintYamlConfig = {
     files: [ '**/*.{yml,yaml}' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
+    settings: dprintSettings,
     rules: { 'dprint/yaml': [ 'error', { config: yamlDprintConfig } ] }
 };
 
@@ -52,6 +50,7 @@ const dprintTomlConfig = {
     files: [ '**/*.toml' ],
     languageOptions: { parser: simpleParser },
     plugins: { dprint: dprintPlugin },
+    settings: dprintSettings,
     rules: { 'dprint/toml': [ 'error', { config: tomlDprintConfig } ] }
 };
 

@@ -41,12 +41,12 @@ files with JS-only rules (e.g. `eslint-plugin-n`) will try to run on `.md` and c
 scope them to JS/TS files explicitly:
 
 ```javascript
-import { baseConfig } from "@enormora/eslint-config-base";
-import { nodeConfig } from "@enormora/eslint-config-node";
+import { baseConfig } from '@enormora/eslint-config-base';
+import { nodeConfig } from '@enormora/eslint-config-node';
 
 export default [
-  ...baseConfig,
-  { ...nodeConfig, files: ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}"] },
+    ...baseConfig,
+    { ...nodeConfig, files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}' ] }
 ];
 ```
 
@@ -62,13 +62,13 @@ Create an ESLint configuration file (e.g., `eslint.config.js`) in your project a
 configuration array:
 
 ```javascript
-import { baseConfig } from "@enormora/eslint-config-base";
+import { baseConfig } from '@enormora/eslint-config-base';
 
 export default [
-  {
-    ignores: ["dist/**/*"],
-  },
-  ...baseConfig,
+    {
+        ignores: [ 'dist/**/*' ]
+    },
+    ...baseConfig
 ];
 ```
 
@@ -92,9 +92,9 @@ therefore:
 
 ```json
 {
-  "scripts": {
-    "lint": "eslint . .github"
-  }
+    "scripts": {
+        "lint": "eslint . .github"
+    }
 }
 ```
 
@@ -107,8 +107,8 @@ Disable a formatter entirely:
 
 ```javascript
 export default [
-  ...baseConfig,
-  { files: ["**/*.json"], rules: { "dprint/json": "off" } },
+    ...baseConfig,
+    { files: [ '**/*.json' ], rules: { 'dprint/json': 'off' } }
 ];
 ```
 
@@ -116,9 +116,9 @@ Scope a formatter to a different path (turn the default off, then re-enable on y
 
 ```javascript
 export default [
-  ...baseConfig,
-  { files: ["**/*.json"], rules: { "dprint/json": "off" } },
-  { files: ["src/**/*.json"], rules: { "dprint/json": "error" } },
+    ...baseConfig,
+    { files: [ '**/*.json' ], rules: { 'dprint/json': 'off' } },
+    { files: [ 'src/**/*.json' ], rules: { 'dprint/json': 'error' } }
 ];
 ```
 
@@ -126,8 +126,8 @@ Ignore specific paths from formatting:
 
 ```javascript
 export default [
-  ...baseConfig,
-  { ignores: ["vendor/**/*.json", "fixtures/**/*.md"] },
+    ...baseConfig,
+    { ignores: [ 'vendor/**/*.json', 'fixtures/**/*.md' ] }
 ];
 ```
 
@@ -138,18 +138,18 @@ block — the same pattern as for any other ESLint rule:
 
 ```javascript
 export default [
-  ...baseConfig,
-  {
-    files: ["**/*.md"],
-    rules: {
-      "markdown/no-html": "off",
-      "markdown/fenced-code-language": ["error", { required: ["js", "ts"] }],
-      // Turn the opt-in network-based dead-link check on locally:
-      "markdown-links/no-dead-urls": "error",
-      // Opt into a stricter formatting rule from markdown-preferences:
-      "markdown-preferences/heading-casing": ["error", { style: "Sentence case" }],
-    },
-  },
+    ...baseConfig,
+    {
+        files: [ '**/*.md' ],
+        rules: {
+            'markdown/no-html': 'off',
+            'markdown/fenced-code-language': [ 'error', { required: [ 'js', 'ts' ] } ],
+            // Turn the opt-in network-based dead-link check on locally:
+            'markdown-links/no-dead-urls': 'error',
+            // Opt into a stricter formatting rule from markdown-preferences:
+            'markdown-preferences/heading-casing': [ 'error', { style: 'Sentence case' } ]
+        }
+    }
 ];
 ```
 
@@ -159,15 +159,15 @@ To override an individual dprint option (e.g. line width, quote style), add a la
 with your own `config`:
 
 ```javascript
-import { baseConfig, typescriptDprintConfig } from "@enormora/eslint-config-base";
+import { baseConfig, typescriptDprintConfig } from '@enormora/eslint-config-base';
 
 export default [
-  ...baseConfig,
-  {
-    files: ["**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}"],
-    rules: {
-      "dprint/typescript": ["error", { config: { ...typescriptDprintConfig, lineWidth: 100 } }],
-    },
-  },
+    ...baseConfig,
+    {
+        files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
+        rules: {
+            'dprint/typescript': [ 'error', { config: { ...typescriptDprintConfig, lineWidth: 100 } } ]
+        }
+    }
 ];
 ```
