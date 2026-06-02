@@ -13,6 +13,10 @@ export const noTsEnumDeclarationRestriction = {
     message: 'Use a string union type instead'
 };
 
+const namedReferenceIgnorePattern =
+    String.raw`^(?!(?:Array|ReadonlyArray|Map|ReadonlyMap|Set|ReadonlySet|Record|Readonly)\b)` +
+    String.raw`[A-Z][\w$]*(?:\.[A-Z][\w$]*)*(?:<.*>)?$`;
+
 const functionLikeNodes = [
     'FunctionDeclaration',
     'FunctionExpression',
@@ -388,6 +392,11 @@ export const typescriptConfig = {
                 enforcement: 'ReadonlyShallow',
                 ignoreClasses: false,
                 ignoreInferredTypes: true,
+                // Mimics the deprecated functional/prefer-readonly-type: skip
+                // named class/interface/type-alias references whose upstream
+                // members are not declared readonly, so structural shallow
+                // checks cannot be satisfied by any annotation.
+                ignoreTypePattern: [ namedReferenceIgnorePattern ],
                 fixer: {
                     ReadonlyShallow: [
                         {
