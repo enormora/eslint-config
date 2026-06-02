@@ -26,11 +26,13 @@ jobs:
             - name: Dispatch publish workflow
               env:
                   GH_TOKEN: ${{ github.token }}
+                  GH_REPO: ${{ github.repository }}
               run: gh workflow run publish.yml --ref main
             - name: Wait then redispatch the scheduler as a cron-drift fallback
               if: always()
               env:
                   GH_TOKEN: ${{ github.token }}
+                  GH_REPO: ${{ github.repository }}
               run: |
                   sleep 1800
                   gh workflow run scheduler.yml --ref main
