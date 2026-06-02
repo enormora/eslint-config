@@ -144,4 +144,31 @@ suite('base+typescript integration', function () {
             });
         assert.deepStrictEqual(immutabilityMessages, []);
     });
+
+    test('base+typescript named class/interface parameters pass while inline mutable parameters are flagged', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'named-class-type-parameters.ts');
+        const flaggedLines = new Set(
+            messages
+                .filter((message) => {
+                    return message.ruleId === 'functional/prefer-immutable-types';
+                })
+                .map((message) => {
+                    return message.line;
+                })
+        );
+        const acceptedNamedTypeLines = new Set([ 33, 34, 35, 36, 37 ]);
+        const expectedInlineMutableLines = new Set([ 40, 41, 42, 43, 44 ]);
+        const unexpectedNamedTypeReports = Array.from(acceptedNamedTypeLines).filter((line) => {
+            return flaggedLines.has(line);
+        });
+        const missingInlineMutableReports = Array.from(expectedInlineMutableLines).filter((line) => {
+            return !flaggedLines.has(line);
+        });
+        assert.deepStrictEqual(unexpectedNamedTypeReports, [], 'named class/interface parameters must not be flagged');
+        assert.deepStrictEqual(
+            missingInlineMutableReports,
+            [],
+            'inline mutable parameter types must still be flagged'
+        );
+    });
 });
