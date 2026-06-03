@@ -13,9 +13,12 @@ export const noTsEnumDeclarationRestriction = {
     message: 'Use a string union type instead'
 };
 
-const namedReferenceIgnorePattern =
-    String.raw`^(?!(?:Array|ReadonlyArray|Map|ReadonlyMap|Set|ReadonlySet|Record|Readonly)\b)` +
-    String.raw`[A-Z][\w$]*(?:\.[A-Z][\w$]*)*(?:<.*>)?$`;
+const namedReferenceTypePrefix = String.raw`(?:(?:keyof)?typeof)?`;
+const mutableContainerLookahead = String
+    .raw`(?!(?:Array|ReadonlyArray|Map|ReadonlyMap|Set|ReadonlySet|Record|Readonly)\b)`;
+const namedReferenceBody = String.raw`[A-Z][\w$]*(?:\.[A-Z][\w$]*)*(?:<.*>)?`;
+const namedReferenceAtom = `${namedReferenceTypePrefix}${mutableContainerLookahead}${namedReferenceBody}`;
+const namedReferenceIgnorePattern = String.raw`^${namedReferenceAtom}(?:[|&]${namedReferenceAtom})*$`;
 
 const functionLikeNodes = [
     'FunctionDeclaration',
@@ -481,6 +484,7 @@ export const typescriptConfig = {
                         ]
                     }
                 ],
+                ignoreTypePattern: [ namedReferenceIgnorePattern ],
                 ignoreInterfaces: false
             }
         ],

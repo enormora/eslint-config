@@ -171,4 +171,68 @@ suite('base+typescript integration', function () {
             'inline mutable parameter types must still be flagged'
         );
     });
+
+    test('base+typescript named-reference-shaped parameters (typeof, unions, utility wrappers) are accepted while inferred mutable types stay flagged', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'named-reference-shapes.ts');
+        const flaggedLines = new Set(
+            messages
+                .filter((message) => {
+                    return message.ruleId === 'functional/prefer-immutable-types';
+                })
+                .map((message) => {
+                    return message.line;
+                })
+        );
+        const acceptedNamedReferenceLines = new Set([ 40, 41, 42, 43 ]);
+        const expectedFlaggedLines = new Set([ 47, 50, 51 ]);
+        const unexpectedNamedReferenceReports = Array.from(acceptedNamedReferenceLines).filter(
+            (line) => {
+                return flaggedLines.has(line);
+            }
+        );
+        const missingFlaggedReports = Array.from(expectedFlaggedLines).filter((line) => {
+            return !flaggedLines.has(line);
+        });
+        assert.deepStrictEqual(
+            unexpectedNamedReferenceReports,
+            [],
+            'named-reference-shaped parameter types must not be flagged'
+        );
+        assert.deepStrictEqual(
+            missingFlaggedReports,
+            [],
+            'lowercase-namespaced inferred mutable types and inline mutable types must still be flagged'
+        );
+    });
+
+    test('base+typescript named-reference-shaped type aliases are accepted while inline structural aliases stay flagged', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'named-reference-shapes.ts');
+        const flaggedLines = new Set(
+            messages
+                .filter((message) => {
+                    return message.ruleId === 'functional/type-declaration-immutability';
+                })
+                .map((message) => {
+                    return message.line;
+                })
+        );
+        const acceptedAliasLines = new Set([ 54, 55, 56, 57 ]);
+        const expectedFlaggedAliasLines = new Set([ 61, 65, 66 ]);
+        const unexpectedAliasReports = Array.from(acceptedAliasLines).filter((line) => {
+            return flaggedLines.has(line);
+        });
+        const missingAliasReports = Array.from(expectedFlaggedAliasLines).filter((line) => {
+            return !flaggedLines.has(line);
+        });
+        assert.deepStrictEqual(
+            unexpectedAliasReports,
+            [],
+            'named-reference-shaped type aliases must not be flagged'
+        );
+        assert.deepStrictEqual(
+            missingAliasReports,
+            [],
+            'lowercase-namespaced inferred mutable aliases and inline mutable aliases must still be flagged'
+        );
+    });
 });
