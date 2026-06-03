@@ -37,6 +37,7 @@ const expectedViolationRuleIds = [
     'react/jsx-no-target-blank',
     'react/react-in-jsx-scope',
     'restricted-syntax-typescript/no-inline-signature-type-literal',
+    'restricted-syntax/no-unnecessary-arrow-function',
     'sonarjs/prefer-read-only-props'
 ];
 
@@ -48,7 +49,7 @@ suite('base+typescript+react-tsx integration', function () {
 
     test('base+typescript+react-tsx clean fixture produces no reports', async function () {
         const { messages } = await lintFixture(configs, comboName, 'clean.tsx');
-        const detail = messages.map((message) => {
+        const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);

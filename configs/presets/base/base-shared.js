@@ -9,7 +9,8 @@ import {
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
-    noSwitchStatementRestriction
+    noSwitchStatementRestriction,
+    noUnnecessaryArrowFunctionRestriction
 } from '../../rule-sets/restricted-syntax.js';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.js';
 
@@ -17,7 +18,8 @@ const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
     'no-class-declaration',
     'no-switch-statement',
     'no-empty-function-body',
-    'no-in-operator'
+    'no-in-operator',
+    'no-unnecessary-arrow-function'
 ]);
 
 export const cspellSpellcheckerOptions = {
@@ -156,6 +158,7 @@ export const baseSharedConfig = {
         'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
         'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
         'restricted-syntax/no-in-operator': [ 'error', noInOperatorRestriction ],
+        'restricted-syntax/no-unnecessary-arrow-function': [ 'error', noUnnecessaryArrowFunctionRestriction ],
         'no-return-assign': [ 'error', 'always' ],
         'no-self-assign': [ 'error', { props: true } ],
         'no-self-compare': 'error',
@@ -278,12 +281,7 @@ export const baseSharedConfig = {
         'object-shorthand': [ 'error', 'always' ],
         'one-var': [ 'error', 'never' ],
         'operator-assignment': [ 'error', 'always' ],
-        'prefer-arrow-callback': [
-            'error',
-            {
-                allowNamedFunctions: true
-            }
-        ],
+        'prefer-arrow-callback': 'off',
         'prefer-rest-params': 'error',
         radix: 'error',
         'id-match': 'off',

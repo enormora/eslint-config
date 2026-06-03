@@ -14,7 +14,7 @@ const noDuplicatedFilesAllowList = [
     'configs/rule-sets/restricted-syntax.js',
     'configs/rule-sets/stylistic.js'
 ]
-    .map((filePath) => {
+    .map(function toAbsolutePath(filePath) {
         return path.join(projectFolder, filePath);
     });
 const publishingPeerDependencies = {

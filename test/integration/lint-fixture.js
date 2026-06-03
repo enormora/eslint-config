@@ -19,10 +19,10 @@ export async function lintFixture(configs, comboName, filename) {
 }
 
 export function uniqueSortedRuleIds(messages) {
-    const ruleIds = messages.map((message) => {
+    const ruleIds = messages.map(function extractRuleId(message) {
         return message.ruleId;
     });
-    const definedRuleIds = ruleIds.filter((ruleId) => {
+    const definedRuleIds = ruleIds.filter(function keepDefinedRuleId(ruleId) {
         return ruleId !== null && ruleId !== undefined;
     });
     return Array.from(new Set(definedRuleIds)).toSorted();
