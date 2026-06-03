@@ -1,7 +1,10 @@
-import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
+import { rules as eslintCommentsPluginRules } from '@eslint-community/eslint-plugin-eslint-comments';
+import markdownPlugin from '@eslint/markdown';
 import { suite, test } from 'mocha';
 import { rules as importPluginRules } from 'eslint-plugin-import-x';
-import noSecretsPlugin from 'eslint-plugin-no-secrets';
+import { rules as markdownLinksPluginRules } from 'eslint-plugin-markdown-links';
+import { rules as markdownPreferencesPluginRules } from 'eslint-plugin-markdown-preferences';
+import { rules as noSecretsPluginRules } from 'eslint-plugin-no-secrets';
 import prettierPlugin from 'eslint-plugin-prettier';
 import { baseWithPrettierConfig } from '../configs/presets/base-with-prettier/base-with-prettier.js';
 import {
@@ -9,91 +12,50 @@ import {
     checkAllPluginRulesConfigured,
     checkConfigToHaveNoValidationIssues,
     checkUnknownCoreRulesAreNotConfigured,
-    checkUnknownPluginRulesAreNotConfigured
+    checkUnknownPluginRulesAreNotConfigured,
+    mergeConfigRules
 } from './rules-configuration.js';
 
-suite('base-with-prettier preset', function () {
-    suite('base rules', function () {
-        test('all core rules are configured', function () {
-            checkAllCoreRulesConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules
-            });
-        });
+const baseWithPrettierConfigRules = mergeConfigRules(baseWithPrettierConfig);
 
-        test('does not contain removed core rules', function () {
-            checkUnknownCoreRulesAreNotConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules
-            });
-        });
-
-        test('all eslint-plugin-no-secrets rules are configured', function () {
+function pluginCoverageSuite(pluginName, pluginRules) {
+    suite(pluginName, function () {
+        test('all rules are configured', function () {
             checkAllPluginRulesConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: noSecretsPlugin.rules,
-                pluginName: 'eslint-plugin-no-secrets'
+                ruleConfigSet: baseWithPrettierConfigRules,
+                pluginRules,
+                pluginName
             });
         });
 
-        test('no unknown eslint-plugin-no-secrets rules are configured', function () {
+        test('no unknown rules are configured', function () {
             checkUnknownPluginRulesAreNotConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: noSecretsPlugin.rules,
-                pluginName: 'eslint-plugin-no-secrets'
-            });
-        });
-
-        test('all eslint-plugin-import rules are configured', function () {
-            checkAllPluginRulesConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: importPluginRules,
-                pluginName: 'eslint-plugin-import'
-            });
-        });
-
-        test('no unknown eslint-plugin-import rules are configured', function () {
-            checkUnknownPluginRulesAreNotConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: importPluginRules,
-                pluginName: 'eslint-plugin-import'
+                ruleConfigSet: baseWithPrettierConfigRules,
+                pluginRules,
+                pluginName
             });
         });
     });
+}
 
-    suite('plugin coverage', function () {
-        test('all @eslint-community/eslint-plugin-eslint-comments rules are configured', function () {
-            checkAllPluginRulesConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: eslintCommentsPlugin.rules,
-                pluginName: 'eslint-plugin-eslint-comments'
-            });
-        });
+suite('base-with-prettier preset', function () {
+    test('all core rules are configured', function () {
+        checkAllCoreRulesConfigured({ ruleConfigSet: baseWithPrettierConfigRules });
+    });
 
-        test('no unknown @eslint-community/eslint-plugin-eslint-comments rules are configured', function () {
-            checkUnknownPluginRulesAreNotConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: eslintCommentsPlugin.rules,
-                pluginName: 'eslint-plugin-eslint-comments'
-            });
-        });
+    test('does not contain removed core rules', function () {
+        checkUnknownCoreRulesAreNotConfigured({ ruleConfigSet: baseWithPrettierConfigRules });
+    });
 
-        test('all eslint-plugin-prettier rules are configured', function () {
-            checkAllPluginRulesConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: prettierPlugin.rules,
-                pluginName: 'eslint-plugin-prettier'
-            });
-        });
+    pluginCoverageSuite('eslint-plugin-no-secrets', noSecretsPluginRules);
+    pluginCoverageSuite('eslint-plugin-import', importPluginRules);
+    pluginCoverageSuite('eslint-plugin-eslint-comments', eslintCommentsPluginRules);
+    pluginCoverageSuite('eslint-plugin-prettier', prettierPlugin.rules);
+    pluginCoverageSuite('@eslint/markdown', markdownPlugin.rules);
+    pluginCoverageSuite('eslint-plugin-markdown-links', markdownLinksPluginRules);
+    pluginCoverageSuite('eslint-plugin-markdown-preferences', markdownPreferencesPluginRules);
 
-        test('no unknown eslint-plugin-prettier rules are configured', function () {
-            checkUnknownPluginRulesAreNotConfigured({
-                ruleConfigSet: baseWithPrettierConfig.rules,
-                pluginRules: prettierPlugin.rules,
-                pluginName: 'eslint-plugin-prettier'
-            });
-        });
-
-        test('base-with-prettier preset config has no validation errors', function () {
-            checkConfigToHaveNoValidationIssues(baseWithPrettierConfig);
-        });
+    test('base-with-prettier preset config has no validation errors', function () {
+        checkConfigToHaveNoValidationIssues(baseWithPrettierConfig);
     });
 });
