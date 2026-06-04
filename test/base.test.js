@@ -5,6 +5,7 @@ import { rules as importPluginRules } from 'eslint-plugin-import-x';
 import { rules as markdownLinksPluginRules } from 'eslint-plugin-markdown-links';
 import { rules as markdownPreferencesPluginRules } from 'eslint-plugin-markdown-preferences';
 import { rules as noSecretsPluginRules } from 'eslint-plugin-no-secrets';
+import { rules as regexpPluginRules } from 'eslint-plugin-regexp';
 import { baseConfig } from '../configs/presets/base/base.js';
 import {
     checkAllCoreRulesConfigured,
@@ -44,6 +45,7 @@ suite('base preset', function () {
     pluginCoverageSuite('@eslint/markdown', markdownPlugin.rules);
     pluginCoverageSuite('eslint-plugin-markdown-links', markdownLinksPluginRules);
     pluginCoverageSuite('eslint-plugin-markdown-preferences', markdownPreferencesPluginRules);
+    pluginCoverageSuite('eslint-plugin-regexp', regexpPluginRules);
 
     test('base preset config has no validation errors', function () {
         checkConfigToHaveNoValidationIssues(baseConfig);

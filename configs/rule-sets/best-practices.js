@@ -1,6 +1,7 @@
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 import promisePlugin from 'eslint-plugin-promise';
+import * as regexpPlugin from 'eslint-plugin-regexp';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
 
@@ -33,7 +34,8 @@ export const bestPracticesRuleSet = {
         promise: promisePlugin,
         'array-func': arrayFunctionPlugin,
         sonarjs: sonarjsPlugin,
-        'no-barrel-files': noBarrelFiles
+        'no-barrel-files': noBarrelFiles,
+        regexp: regexpPlugin
     },
     settings: {},
     rules: {
@@ -226,6 +228,9 @@ export const bestPracticesRuleSet = {
         'sonarjs/prefer-object-literal': 'error',
         'sonarjs/prefer-single-boolean-return': 'error',
         'sonarjs/prefer-while': 'error',
+        // regexp/no-super-linear-backtracking subsumes this with a sound NFA-based analysis
+        // (sonarjs is heuristic); see the regexp/* block below.
+        'sonarjs/slow-regex': 'off',
 
         'promise/avoid-new': 'off',
         'promise/no-nesting': 'error',
@@ -250,6 +255,97 @@ export const bestPracticesRuleSet = {
         'promise/spec-only': 'error',
         'promise/prefer-catch': 'error',
 
-        'no-barrel-files/no-barrel-files': 'error'
+        'no-barrel-files/no-barrel-files': 'error',
+
+        // eslint-plugin-regexp — purely additive on top of core / unicorn / sonarjs regex coverage.
+        // Rules with a working equivalent already in core, unicorn, or sonarjs are turned off here so
+        // each diagnostic is reported by exactly one rule. The only swap is regexp/no-super-linear-backtracking
+        // taking over from the (off-above) sonarjs/slow-regex.
+        'regexp/confusing-quantifier': 'error',
+        'regexp/control-character-escape': 'error',
+        'regexp/match-any': 'error',
+        'regexp/negation': 'error',
+        'regexp/no-contradiction-with-assertion': 'error',
+        'regexp/no-dupe-disjunctions': 'error',
+        'regexp/no-empty-capturing-group': 'error',
+        'regexp/no-empty-group': 'error',
+        'regexp/no-empty-lookarounds-assertion': 'error',
+        'regexp/no-empty-string-literal': 'error',
+        'regexp/no-escape-backspace': 'error',
+        'regexp/no-extra-lookaround-assertions': 'error',
+        'regexp/no-invisible-character': 'error',
+        'regexp/no-lazy-ends': 'error',
+        'regexp/no-legacy-features': 'error',
+        'regexp/no-misleading-capturing-group': 'error',
+        'regexp/no-missing-g-flag': 'error',
+        'regexp/no-non-standard-flag': 'error',
+        'regexp/no-obscure-range': 'error',
+        'regexp/no-octal': 'error',
+        'regexp/no-optional-assertion': 'error',
+        'regexp/no-potentially-useless-backreference': 'error',
+        'regexp/no-standalone-backslash': 'error',
+        'regexp/no-super-linear-backtracking': 'error',
+        'regexp/no-super-linear-move': 'error',
+        'regexp/no-trivially-nested-assertion': 'error',
+        'regexp/no-trivially-nested-quantifier': 'error',
+        'regexp/no-unused-capturing-group': 'error',
+        'regexp/no-useless-assertions': 'error',
+        'regexp/no-useless-character-class': 'error',
+        'regexp/no-useless-dollar-replacements': 'error',
+        'regexp/no-useless-flag': 'error',
+        'regexp/no-useless-lazy': 'error',
+        'regexp/no-useless-non-capturing-group': 'error',
+        'regexp/no-useless-quantifier': 'error',
+        'regexp/no-useless-range': 'error',
+        'regexp/no-useless-set-operand': 'error',
+        'regexp/no-useless-string-literal': 'error',
+        'regexp/no-useless-two-nums-quantifier': 'error',
+        'regexp/no-zero-quantifier': 'error',
+        'regexp/optimal-lookaround-quantifier': 'error',
+        'regexp/optimal-quantifier-concatenation': 'error',
+        'regexp/prefer-escape-replacement-dollar-char': 'error',
+        'regexp/prefer-named-backreference': 'error',
+        'regexp/prefer-named-replacement': 'error',
+        'regexp/prefer-result-array-groups': 'error',
+        'regexp/prefer-set-operation': 'error',
+        'regexp/prefer-unicode-codepoint-escapes': 'error',
+        'regexp/simplify-set-operations': 'error',
+
+        // Overlap with existing rules — keep the existing rule as single source of truth.
+        'regexp/no-control-character': 'off', // core no-control-regex
+        'regexp/no-dupe-characters-character-class': 'off', // sonarjs/duplicates-in-character-class
+        'regexp/no-empty-alternative': 'off', // sonarjs/no-empty-alternatives
+        'regexp/no-empty-character-class': 'off', // core no-empty-character-class
+        'regexp/no-invalid-regexp': 'off', // core no-invalid-regexp
+        'regexp/no-misleading-unicode-character': 'off', // core no-misleading-character-class
+        'regexp/no-useless-backreference': 'off', // core no-useless-backreference
+        'regexp/no-useless-escape': 'off', // core no-useless-escape
+        'regexp/prefer-character-class': 'off', // unicorn/better-regex + sonarjs/concise-regex
+        'regexp/prefer-d': 'off', // unicorn/better-regex
+        'regexp/prefer-named-capture-group': 'off', // core prefer-named-capture-group
+        'regexp/prefer-plus-quantifier': 'off', // unicorn/better-regex
+        'regexp/prefer-question-quantifier': 'off', // unicorn/better-regex
+        'regexp/prefer-regexp-exec': 'off', // @typescript-eslint/prefer-regexp-exec
+        'regexp/prefer-regexp-test': 'off', // unicorn/prefer-regexp-test
+        'regexp/prefer-star-quantifier': 'off', // unicorn/better-regex
+        'regexp/prefer-w': 'off', // unicorn/better-regex
+        'regexp/require-unicode-regexp': 'off', // matches core require-unicode-regexp (off)
+        'regexp/strict': 'off', // unicorn/better-regex
+
+        // Pure style preferences outside the project's scope.
+        'regexp/grapheme-string-literal': 'off',
+        'regexp/hexadecimal-escape': 'off',
+        'regexp/letter-case': 'off',
+        'regexp/prefer-lookaround': 'off',
+        'regexp/prefer-predefined-assertion': 'off',
+        'regexp/prefer-quantifier': 'off',
+        'regexp/prefer-range': 'off',
+        'regexp/require-unicode-sets-regexp': 'off',
+        'regexp/sort-alternatives': 'off',
+        'regexp/sort-character-class-elements': 'off',
+        'regexp/sort-flags': 'off',
+        'regexp/unicode-escape': 'off',
+        'regexp/unicode-property': 'off',
+        'regexp/use-ignore-case': 'off'
     }
 };
