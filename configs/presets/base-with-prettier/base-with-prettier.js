@@ -2,6 +2,7 @@ import simpleParser from '@ben_12/eslint-simple-parser';
 import prettierPlugin from 'eslint-plugin-prettier';
 import { baseSharedConfig } from '../base/base-shared.js';
 import { markdownLintPlugins, markdownLintRules } from '../base/markdown-lint-rules.js';
+import { packageJsonConfig } from '../base/package-json.js';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -52,6 +53,7 @@ const markdownConfig = {
 export const baseWithPrettierConfig = [
     baseJsConfig,
     prettierJsonConfig,
+    packageJsonConfig,
     markdownConfig,
     prettierYamlConfig
 ];

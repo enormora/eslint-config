@@ -33,7 +33,9 @@ const codeSpellCheckerRules = {
                     'autolinks',
                     'blockquotes',
                     'setext',
-                    'lookarounds'
+                    'lookarounds',
+                    'gypfile',
+                    'libc'
                 ]
             }
         }
