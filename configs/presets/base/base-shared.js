@@ -332,7 +332,7 @@ export const baseSharedConfig = {
         'require-await': 'off',
         'sort-keys': 'off',
         'symbol-description': 'error',
-        'for-direction': 'off',
+        'for-direction': 'error',
         'getter-return': [
             'error',
             {
@@ -358,7 +358,7 @@ export const baseSharedConfig = {
         'no-script-url': 'off',
         'no-restricted-globals': 'off',
 
-        'grouped-accessor-pairs': 'off',
+        'grouped-accessor-pairs': [ 'error', 'getBeforeSet' ],
         'no-constructor-return': 'error',
         'no-dupe-else-if': 'error',
         'no-setter-return': 'error',
@@ -368,7 +368,7 @@ export const baseSharedConfig = {
         'no-restricted-exports': 'off',
         'no-useless-backreference': 'error',
         'id-denylist': 'off',
-        'no-loss-of-precision': 'off',
+        'no-loss-of-precision': 'error',
         'no-promise-executor-return': 'error',
         'no-unreachable-loop': 'error',
         'no-nonoctal-decimal-escape': 'error',

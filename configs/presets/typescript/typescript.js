@@ -40,9 +40,23 @@ export const noInlineSignatureTypeLiteralRestriction = {
         'Inline object type literals are not allowed in function parameters or return types — extract a named type.'
 };
 
+const noPublicClassPropertySelector = [
+    'PropertyDefinition[accessibility="public"]',
+    'AccessorProperty[accessibility="public"]',
+    'MethodDefinition[kind="get"][accessibility="public"]',
+    'MethodDefinition[kind="set"][accessibility="public"]'
+]
+    .join(', ');
+
+export const noPublicClassPropertyRestriction = {
+    selector: noPublicClassPropertySelector,
+    message: 'Class properties and accessors must be private or protected — only methods may be public.'
+};
+
 const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin([
     'no-ts-enum-declaration',
-    'no-inline-signature-type-literal'
+    'no-inline-signature-type-literal',
+    'no-public-class-property'
 ]);
 
 function asArray(value) {
@@ -119,6 +133,7 @@ export const typescriptConfig = {
             'error',
             noInlineSignatureTypeLiteralRestriction
         ],
+        'restricted-syntax-typescript/no-public-class-property': [ 'error', noPublicClassPropertyRestriction ],
 
         '@typescript-eslint/no-require-imports': 'error',
         '@typescript-eslint/adjacent-overload-signatures': 'error',
@@ -270,7 +285,7 @@ export const typescriptConfig = {
         '@typescript-eslint/consistent-type-definitions': [ 'error', 'type' ],
         ...configureWrappedCoreRule('default-param-last'),
         ...configureWrappedCoreRule('dot-notation'),
-        '@typescript-eslint/explicit-member-accessibility': 'off',
+        '@typescript-eslint/explicit-member-accessibility': [ 'error', { accessibility: 'explicit' } ],
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/init-declarations': 'off',
         '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
@@ -344,7 +359,7 @@ export const typescriptConfig = {
         ],
         '@typescript-eslint/non-nullable-type-assertion-style': 'off',
         '@typescript-eslint/no-unsafe-argument': 'error',
-        '@typescript-eslint/prefer-return-this-type': 'off',
+        '@typescript-eslint/prefer-return-this-type': 'error',
         '@typescript-eslint/no-meaningless-void-operator': 'error',
         '@typescript-eslint/no-restricted-imports': 'error',
         '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
@@ -353,7 +368,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-useless-empty-export': 'error',
         '@typescript-eslint/consistent-generic-constructors': [ 'error', 'constructor' ],
         '@typescript-eslint/no-duplicate-enum-values': 'error',
-        '@typescript-eslint/parameter-properties': 'off',
+        '@typescript-eslint/parameter-properties': [ 'error', { prefer: 'class-property' } ],
         '@typescript-eslint/no-unsafe-declaration-merging': 'error',
         '@typescript-eslint/no-mixed-enums': 'error',
         '@typescript-eslint/no-import-type-side-effects': 'error',
@@ -369,7 +384,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
         '@typescript-eslint/no-unnecessary-type-parameters': 'error',
         '@typescript-eslint/no-unsafe-type-assertion': 'error',
-        '@typescript-eslint/related-getter-setter-pairs': 'off',
+        '@typescript-eslint/related-getter-setter-pairs': 'error',
         '@typescript-eslint/no-misused-spread': 'error',
 
         'functional/functional-parameters': 'off',

@@ -103,6 +103,30 @@ class WithThis {
 }
 new WithThis().method();
 
+class TemperatureSensor {
+    public label = '';
+
+    private current = 0;
+
+    constructor(readonly id: number) {
+        this.current = id;
+    }
+
+    public get reading(): number {
+        return this.current;
+    }
+
+    public set reading(label: string) {
+        this.current = label.length;
+    }
+
+    duplicate(): TemperatureSensor {
+        this.current = this.current + 1;
+        return this;
+    }
+}
+new TemperatureSensor(1).duplicate();
+
 function fail(): never {
     throw 'oops';
 }

@@ -16,6 +16,7 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/consistent-type-assertions',
     '@typescript-eslint/consistent-type-definitions',
     '@typescript-eslint/default-param-last',
+    '@typescript-eslint/explicit-member-accessibility',
     '@typescript-eslint/max-params',
     '@typescript-eslint/method-signature-style',
     '@typescript-eslint/naming-convention',
