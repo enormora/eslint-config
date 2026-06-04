@@ -32,7 +32,8 @@ const codeSpellCheckerRules = {
                     'mdast',
                     'autolinks',
                     'blockquotes',
-                    'setext'
+                    'setext',
+                    'lookarounds'
                 ]
             }
         }
