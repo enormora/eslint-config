@@ -12,6 +12,19 @@ formatter step. The dprint configuration ships inline with this preset, so no `d
 project root. If you'd rather use prettier, use [`@enormora/eslint-config-base-with-prettier`](../base-with-prettier/base-with-prettier.md)
 instead — it is an alternative base preset and is not meant to be combined with this one.
 
+`package.json` files get dedicated semantic linting through two plugins, parsed by
+[`jsonc-eslint-parser`](https://github.com/ota-meshi/jsonc-eslint-parser):
+
+- **[`eslint-plugin-package-json`](https://github.com/JoshuaKGoldberg/eslint-plugin-package-json)** (`package-json/*`)
+  — validates the shape of every field that is present (author, repository, engines, exports, scripts, peers, etc.),
+  catches duplicate dependencies across `dependencies`/`devDependencies`/`peerDependencies`, sorts collections, and
+  enforces `repository` shorthand. The opinionated `require-*` rules (which would demand every package declare e.g.
+  `funding` or `cpu`) and `order-properties` are off; opt in by overriding individual rules in your own config.
+- **[`eslint-plugin-json-schema-validator`](https://github.com/ota-meshi/eslint-plugin-json-schema-validator)**
+  (`json-schema-validator/no-invalid`) — validates the file against [schemastore.org](https://www.schemastore.org/)'s
+  `package.json` schema, catching invalid values that the field-shape rules above can't see (e.g. unknown
+  `engines.node` operators, malformed `exports` conditions).
+
 Markdown files additionally get semantic linting through three language-aware plugins, all riding on
 [`@eslint/markdown`](https://github.com/eslint/markdown)'s `language: "markdown/commonmark"`:
 
@@ -79,6 +92,7 @@ The remaining blocks each enable one formatter or linter scoped to a default fil
 | :------------ | :----------------------------------------- | :------------------------------------------------------------------------------------- |
 | JavaScript/TS | `**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}` | `dprint/typescript`                                                                    |
 | JSON          | `**/*.json`                                | `dprint/json`                                                                          |
+| package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                   |
 | Markdown      | `**/*.md`                                  | `dprint-markdown/markdown`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*` |
 | YAML          | `**/*.{yml,yaml}`                          | `dprint/yaml`                                                                          |
 | TOML          | `**/*.toml`                                | `dprint/toml`                                                                          |

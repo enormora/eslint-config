@@ -10,6 +10,7 @@ const noDuplicatedFilesAllowList = [
     'configs/presets/base/base-shared.js',
     'configs/presets/base/cspell-config.js',
     'configs/presets/base/markdown-lint-rules.js',
+    'configs/presets/base/package-json.js',
     'configs/rule-sets/best-practices.js',
     'configs/rule-sets/restricted-syntax.js',
     'configs/rule-sets/stylistic.js'

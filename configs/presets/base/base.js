@@ -4,6 +4,7 @@ import { baseSharedConfig } from './base-shared.js';
 import { jsonDprintConfig, tomlDprintConfig, typescriptDprintConfig, yamlDprintConfig } from './dprint-config.js';
 import { dprintSettings } from './dprint-formatters.js';
 import { markdownConfig } from './markdown.js';
+import { packageJsonConfig } from './package-json.js';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -57,6 +58,7 @@ const dprintTomlConfig = {
 export const baseConfig = [
     baseJsConfig,
     dprintJsonConfig,
+    packageJsonConfig,
     markdownConfig,
     dprintYamlConfig,
     dprintTomlConfig
