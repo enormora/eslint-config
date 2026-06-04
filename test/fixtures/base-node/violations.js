@@ -197,4 +197,39 @@ function legacyBuffer() {
 }
 legacyBuffer();
 
+const localSettings = {
+    enabled: true,
+    unusedFlag: false
+};
+console.log(localSettings.enabled);
+
+let storedCelsius = 0;
+const temperatureStore = {
+    set celsius(value) {
+        storedCelsius = value;
+    },
+    get celsius() {
+        return storedCelsius;
+    }
+};
+console.log(temperatureStore.celsius);
+
+function countdownBroken() {
+    for (let index = 0; index < 3; index--) {
+        console.log(index);
+    }
+}
+countdownBroken();
+
+const imprecise = 9007199254740993;
+console.log(imprecise);
+
+class DatabaseError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = 'WrongName';
+    }
+}
+console.log(new DatabaseError('boom'));
+
 process.exit(0);
