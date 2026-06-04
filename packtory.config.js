@@ -195,6 +195,20 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-eslint-plugin',
+                roots: { main: { js: 'presets/eslint-plugin/eslint-plugin.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(sourcesFolder, 'presets/eslint-plugin/eslint-plugin.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint configuration for authoring ESLint plugins'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-react',
                 roots: { main: { js: 'presets/react/react.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
