@@ -50,7 +50,6 @@ const expectedViolationRuleIds = [
     'node/no-process-exit',
     'node/no-sync',
     'operator-assignment',
-    'prefer-arrow-callback',
     'prefer-template',
     'promise/catch-or-return',
     'restricted-syntax/no-empty-function-body',
@@ -86,7 +85,7 @@ suite('base+node integration', function () {
 
     test('base+node clean fixture produces no reports', async function () {
         const { messages } = await lintFixture(configs, comboName, 'clean.js');
-        const detail = messages.map((message) => {
+        const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);

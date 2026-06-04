@@ -82,7 +82,6 @@ const expectedViolationRuleIds = [
     'no-var',
     'no-warning-comments',
     'operator-assignment',
-    'prefer-arrow-callback',
     'prefer-template',
     'promise/catch-or-return',
     'restricted-syntax-typescript/no-inline-signature-type-literal',
@@ -90,6 +89,7 @@ const expectedViolationRuleIds = [
     'restricted-syntax/no-class-declaration',
     'restricted-syntax/no-empty-function-body',
     'restricted-syntax/no-switch-statement',
+    'restricted-syntax/no-unnecessary-arrow-function',
     'sonarjs/deprecation',
     'sonarjs/no-alphabetical-sort',
     'sonarjs/no-collapsible-if',
@@ -123,7 +123,7 @@ suite('base+typescript integration', function () {
 
     test('base+typescript clean fixture produces no reports', async function () {
         const { messages } = await lintFixture(configs, comboName, 'clean.ts');
-        const detail = messages.map((message) => {
+        const detail = messages.map(function toRuleLocation(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);
@@ -140,11 +140,11 @@ suite('base+typescript integration', function () {
     test('base+typescript built-in mutable classes do not poison immutability checks', async function () {
         const { messages } = await lintFixture(configs, comboName, 'builtin-classes.ts');
         const immutabilityMessages = messages
-            .filter((message) => {
+            .filter(function isImmutabilityMessage(message) {
                 return message.ruleId === 'functional/prefer-immutable-types' ||
                     message.ruleId === 'functional/type-declaration-immutability';
             })
-            .map((message) => {
+            .map(function toRuleLocation(message) {
                 return { ruleId: message.ruleId, line: message.line, message: message.message };
             });
         assert.deepStrictEqual(immutabilityMessages, []);
@@ -154,19 +154,19 @@ suite('base+typescript integration', function () {
         const { messages } = await lintFixture(configs, comboName, 'named-class-type-parameters.ts');
         const flaggedLines = new Set(
             messages
-                .filter((message) => {
+                .filter(function isImmutableTypesMessage(message) {
                     return message.ruleId === 'functional/prefer-immutable-types';
                 })
-                .map((message) => {
+                .map(function toLine(message) {
                     return message.line;
                 })
         );
         const acceptedNamedTypeLines = new Set([ 33, 34, 35, 36, 37 ]);
         const expectedInlineMutableLines = new Set([ 40, 41, 42, 43, 44 ]);
-        const unexpectedNamedTypeReports = Array.from(acceptedNamedTypeLines).filter((line) => {
+        const unexpectedNamedTypeReports = Array.from(acceptedNamedTypeLines).filter(function isFlagged(line) {
             return flaggedLines.has(line);
         });
-        const missingInlineMutableReports = Array.from(expectedInlineMutableLines).filter((line) => {
+        const missingInlineMutableReports = Array.from(expectedInlineMutableLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(unexpectedNamedTypeReports, [], 'named class/interface parameters must not be flagged');

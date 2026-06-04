@@ -14,16 +14,16 @@ function isSonarjsRuleDeprecated(sonarjsRule) {
 const nonDeprecatedSonarjsRuleNames = new Set(
     Object
         .entries(sonarjsPlugin.rules)
-        .filter(([ , sonarjsRule ]) => {
+        .filter(function removeDeprecated([ , sonarjsRule ]) {
             return !isSonarjsRuleDeprecated(sonarjsRule);
         })
-        .map(([ sonarjsRuleName ]) => {
+        .map(function toQualifiedRuleName([ sonarjsRuleName ]) {
             return `sonarjs/${sonarjsRuleName}`;
         })
 );
 
 const nonDeprecatedSonarjsRecommendedRules = Object.fromEntries(
-    Object.entries(sonarjsPlugin.configs.recommended.rules).filter(([ sonarjsRuleName ]) => {
+    Object.entries(sonarjsPlugin.configs.recommended.rules).filter(function keepNonDeprecated([ sonarjsRuleName ]) {
         return nonDeprecatedSonarjsRuleNames.has(sonarjsRuleName);
     })
 );

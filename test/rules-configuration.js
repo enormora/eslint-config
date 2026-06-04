@@ -31,7 +31,7 @@ export function checkAllCoreRulesConfigured(testCase) {
 
     assert.notStrictEqual(ruleNames.length, 0, 'ESLint core rules not found');
 
-    ruleNames.forEach((ruleName) => {
+    ruleNames.forEach(function assertCoreRuleConfigured(ruleName) {
         assert.strictEqual(
             isRuleConfigured(ruleConfigSet, ruleName),
             true,
@@ -44,11 +44,11 @@ export function checkUnknownCoreRulesAreNotConfigured(testCase) {
     const { ruleConfigSet } = testCase;
     const allCoreRuleNames = Object.keys(eslintCorePresets.configs.all.rules);
     const configuredRuleNames = Object.keys(ruleConfigSet);
-    const configuredCoreRuleNames = configuredRuleNames.filter((ruleName) => {
+    const configuredCoreRuleNames = configuredRuleNames.filter(function isCoreRuleName(ruleName) {
         return !ruleName.includes('/');
     });
 
-    configuredCoreRuleNames.forEach((ruleName) => {
+    configuredCoreRuleNames.forEach(function assertCoreRuleExists(ruleName) {
         assert.strictEqual(
             allCoreRuleNames.includes(ruleName),
             true,
@@ -65,10 +65,10 @@ export function checkAllPluginRulesConfigured(testCase) {
     assert.notStrictEqual(ruleNames.length, 0, 'Plugin rules are empty');
 
     ruleNames
-        .filter((ruleName) => {
+        .filter(function isNotExcluded(ruleName) {
             return !rulesToExclude.includes(ruleName);
         })
-        .forEach((ruleName) => {
+        .forEach(function assertPluginRuleConfigured(ruleName) {
             const rule = pluginRules[ruleName];
             const shortPluginRuleName = `${shortPluginName}/${ruleName}`;
             const isConfigured = isRuleConfigured(ruleConfigSet, shortPluginRuleName);
@@ -87,28 +87,28 @@ export function checkUnknownPluginRulesAreNotConfigured(testCase) {
     const shortPluginName = extractShortName(pluginName);
     const pluginRuleNames = Object
         .keys(pluginRules)
-        .filter((ruleName) => {
+        .filter(function isNotDeprecated(ruleName) {
             return !isRuleDeprecated(pluginRules[ruleName]);
         })
-        .map((ruleName) => {
+        .map(function prefixWithPluginName(ruleName) {
             return `${shortPluginName}/${ruleName}`;
         });
 
     assert.notStrictEqual(pluginRuleNames.length, 0, 'Plugin rules are empty');
 
     const configuredRuleNames = Object.keys(ruleConfigSet);
-    const configuredPluginRuleNames = configuredRuleNames.filter((ruleName) => {
+    const configuredPluginRuleNames = configuredRuleNames.filter(function belongsToPlugin(ruleName) {
         return ruleName.startsWith(`${shortPluginName}/`);
     });
 
-    configuredPluginRuleNames.forEach((ruleName) => {
+    configuredPluginRuleNames.forEach(function assertPluginRuleStillExists(ruleName) {
         assert.strictEqual(pluginRuleNames.includes(ruleName), true, `Rule ${ruleName} can be removed`);
     });
 }
 
 export function mergeConfigRules(config) {
     if (Array.isArray(config)) {
-        return config.reduce((merged, block) => {
+        return config.reduce(function collectBlockRules(merged, block) {
             return { ...merged, ...block.rules };
         }, {});
     }
@@ -146,7 +146,7 @@ export function checkConfigToHaveNoValidationIssues(config) {
 
     const verifiableConfig = Array.isArray(config) ? config.map(injectProgram) : injectProgram(config);
 
-    assert.doesNotThrow(() => {
+    assert.doesNotThrow(function verifyConfig() {
         linter.verify('foo();', verifiableConfig, '/foo.js');
     }, 'Linter.verify() failed for the given config');
 }
@@ -165,7 +165,7 @@ export function checkAllTestRulesConfigured(testCase) {
 
     assert.notStrictEqual(rulesFromConfigKeys.length, 0, 'Plugin rules are empty');
 
-    const remainingRulesKeys = rulesFromConfigKeys.filter((ruleName) => {
+    const remainingRulesKeys = rulesFromConfigKeys.filter(function isTestRuleName(ruleName) {
         return testRuleNames.includes(ruleName);
     });
 
@@ -179,13 +179,15 @@ export function checkAdditionalRulesConfigured(testCase) {
     const { ruleConfigSet, additionalRules } = testCase;
 
     const additionalRulesNames = Object.keys(additionalRules);
-    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(([ ruleName ]) => {
-        return additionalRulesNames.includes(ruleName);
-    });
+    const additionalRulesFromRuleConfigSet = Object.entries(ruleConfigSet).filter(
+        function isAdditionalRule([ ruleName ]) {
+            return additionalRulesNames.includes(ruleName);
+        }
+    );
 
     assert.notStrictEqual(additionalRulesFromRuleConfigSet.length, 0, 'Additional plugin rules are not defined');
 
-    additionalRulesFromRuleConfigSet.forEach(([ ruleName, ruleSetting ]) => {
+    additionalRulesFromRuleConfigSet.forEach(function assertAdditionalRuleSetting([ ruleName, ruleSetting ]) {
         const expectedRuleSetting = additionalRules[ruleName];
 
         assert.deepStrictEqual(

@@ -46,7 +46,7 @@ suite('base markdown integration', function () {
 
     test('base markdown clean fixture produces no reports', async function () {
         const { messages } = await lintFixture(configs, comboName, 'clean.md');
-        const detail = messages.map((message) => {
+        const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);

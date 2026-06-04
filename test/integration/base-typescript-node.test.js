@@ -89,6 +89,7 @@ const expectedViolationRuleIds = [
     'restricted-syntax/no-class-declaration',
     'restricted-syntax/no-empty-function-body',
     'restricted-syntax/no-switch-statement',
+    'restricted-syntax/no-unnecessary-arrow-function',
     'sonarjs/deprecation',
     'sonarjs/no-alphabetical-sort',
     'sonarjs/no-collapsible-if',
@@ -122,7 +123,7 @@ suite('base+typescript+node integration', function () {
 
     test('base+typescript+node clean fixture produces no reports', async function () {
         const { messages } = await lintFixture(configs, comboName, 'clean.ts');
-        const detail = messages.map((message) => {
+        const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);

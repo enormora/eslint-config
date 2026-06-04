@@ -5,7 +5,7 @@ import { withCspellWords } from '../configs/presets/base/cspell-config.js';
 
 function cloneOptions(value) {
     if (Array.isArray(value)) {
-        return value.map((item) => {
+        return value.map(function cloneItem(item) {
             return cloneOptions(item);
         });
     }
