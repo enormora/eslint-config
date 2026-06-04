@@ -3,12 +3,10 @@
 [![npm](https://img.shields.io/npm/v/@enormora/eslint-config-eslint-plugin?label=)](https://www.npmjs.com/package/@enormora/eslint-config-eslint-plugin)
 
 Config preset for projects that author ESLint plugins or rules. Wraps
-[`eslint-plugin-eslint-plugin`](https://github.com/eslint-community/eslint-plugin-eslint-plugin) and applies the
-overrides that follow from a base preset that otherwise forbids default exports.
+[`eslint-plugin-eslint-plugin`](https://github.com/eslint-community/eslint-plugin-eslint-plugin).
 
-The preset enables every rule from `eslint-plugin-eslint-plugin` that does not require TypeScript type information
-(`no-property-in-node` is off by default; opt in when wiring the plugin into a TypeScript preset).
-`import/no-default-export` is turned off because rule definition files conventionally `export default { meta, create }`.
+The preset enables every rule from `eslint-plugin-eslint-plugin` that does not require TypeScript type information.
+`no-property-in-node` is off by default; opt in when wiring the plugin into a TypeScript preset.
 
 ## Install & Setup
 

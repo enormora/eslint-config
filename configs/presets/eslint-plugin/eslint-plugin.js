@@ -5,10 +5,6 @@ export const eslintPluginConfig = {
         'eslint-plugin': eslintPluginPlugin
     },
     rules: {
-        // Rule definition files almost always export the rule object as the module's default export;
-        // the base preset forbids default exports otherwise.
-        'import/no-default-export': 'off',
-
         'eslint-plugin/consistent-output': 'error',
         'eslint-plugin/fixer-return': 'error',
         'eslint-plugin/meta-property-ordering': 'error',
