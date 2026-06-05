@@ -4,7 +4,7 @@ default:
     @just --list
 
 compile:
-    tsc -p configs/tsconfig.sources.json
+    tsc --build
     tsc -p test/tsconfig.json
 
 eslint *OPTIONS: compile

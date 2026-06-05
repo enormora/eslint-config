@@ -1,11 +1,12 @@
+import type { Linter } from 'eslint';
 import * as eslintPluginPlugin from 'eslint-plugin-eslint-plugin';
 
 type EslintPluginConfigOptions = {
-    docsUrlPattern: string;
-    descriptionPattern: string;
+    readonly docsUrlPattern: string;
+    readonly descriptionPattern: string;
 };
 
-export function createEslintPluginConfig(options: EslintPluginConfigOptions) {
+export function createEslintPluginConfig(options: EslintPluginConfigOptions): Linter.Config {
     const { docsUrlPattern, descriptionPattern } = options;
 
     if (typeof docsUrlPattern !== 'string' || !docsUrlPattern.includes('{{name}}')) {
@@ -64,5 +65,5 @@ export function createEslintPluginConfig(options: EslintPluginConfigOptions) {
             // Off by default so the preset works on plain JS plugins; opt in from a TS preset layer.
             'eslint-plugin/no-property-in-node': 'off'
         }
-    };
+    } as unknown as Linter.Config;
 }

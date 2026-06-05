@@ -57,7 +57,7 @@ export const baseWithPrettierConfig = [
     packageJsonConfig,
     markdownConfig,
     prettierYamlConfig
-] as Linter.Config[];
+] as unknown as Linter.Config[];
 
 /* eslint-disable no-barrel-files/no-barrel-files -- expose cspell helper as public API so consumers can spread or call it when customizing */
 export { withCspellWords } from '../base/cspell-config.ts';

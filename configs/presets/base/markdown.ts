@@ -15,7 +15,7 @@ import { markdownLintPlugins, markdownLintRules } from './markdown-lint-rules.ts
 // on the ESTree selector `Program` and therefore never fires under that language, silently turning
 // dprint formatting off. The adapter below wraps the original `dprint/markdown` rule and re-keys its
 // visitor under the mdast `root` selector so the formatter runs in the same pass as the linters.
-const originalDprintMarkdownRule = dprintPlugin.rules?.markdown;
+const originalDprintMarkdownRule = dprintPlugin.rules.markdown;
 if (originalDprintMarkdownRule === undefined) {
     throw new Error('Expected dprint plugin to expose a `markdown` rule');
 }
@@ -60,4 +60,4 @@ export const markdownConfig = {
 
         ...markdownLintRules
     }
-} as Linter.Config;
+} as unknown as Linter.Config;

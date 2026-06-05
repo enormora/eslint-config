@@ -30,9 +30,9 @@ const typescriptRuleTester = new RuleTester({
     }
 });
 
-type SyntaxRestriction = { selector: string; message: string };
-type InvalidCaseEntry = string | { code: string; count: number };
-type RuleCases = { valid: readonly string[]; invalid: readonly InvalidCaseEntry[] };
+type SyntaxRestriction = { readonly selector: string; readonly message: string; };
+type InvalidCaseEntry = string | { code: string; readonly count: number; };
+type RuleCases = { readonly valid: readonly string[]; readonly invalid: readonly InvalidCaseEntry[]; };
 
 function runRuleCases(ruleTester: RuleTester, restriction: SyntaxRestriction, cases: RuleCases) {
     const valid = cases.valid.map(function attachRestrictionOption(code) {

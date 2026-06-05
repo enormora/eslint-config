@@ -41,4 +41,4 @@ export const astroConfig = [
             }
         }
     }
-] as Linter.Config[];
+] as unknown as Linter.Config[];

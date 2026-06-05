@@ -63,7 +63,7 @@ export const baseConfig = [
     markdownConfig,
     dprintYamlConfig,
     dprintTomlConfig
-] as Linter.Config[];
+] as unknown as Linter.Config[];
 
 /* eslint-disable no-barrel-files/no-barrel-files -- expose dprint configs and cspell helper as public API so consumers can spread or call them when customizing */
 export {

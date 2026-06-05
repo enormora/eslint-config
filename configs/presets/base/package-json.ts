@@ -112,4 +112,4 @@ export const packageJsonConfig = {
 
         'json-schema-validator/no-invalid': 'error'
     }
-} as Linter.Config;
+} as unknown as Linter.Config;

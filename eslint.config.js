@@ -41,10 +41,14 @@ const codeSpellCheckerRules = {
     ]
 };
 
-// TypeScript sources and tests are not linted in this commit. Adopting the typescript preset
-// against the freshly migrated code surfaces a broad set of follow-up rule violations
-// (explicit return types, immutability, inline type literals, …) that are out of scope for the
-// JavaScript-to-TypeScript move itself. A follow-up will enable typed linting and fix those.
+// Typed linting of the migrated configs/ and test/ TypeScript sources is intentionally
+// deferred. Turning the typescript preset on against this code surfaces a structural
+// tension with @typescript-eslint/no-unsafe-type-assertion: ESLint plugin packages
+// (dprint, perfectionist, functional, …) expose types that are not assignable to
+// Linter.Config['plugins'], so every preset needs an `as unknown as Linter.Config[]`
+// cast that the rule then flags. Resolving that requires either overriding the rule
+// for preset files (a project-wide policy decision) or a deeper refactor to wrap each
+// plugin in a typed adapter; either way it is its own change.
 export default [
     {
         ignores: [

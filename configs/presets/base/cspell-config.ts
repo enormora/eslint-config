@@ -1,6 +1,14 @@
 import { cspellSpellcheckerOptions } from './base-shared.ts';
 
-export function withCspellWords(words: readonly string[]) {
+type CspellRule = readonly ['error', {
+    readonly cspell: {
+        readonly words: readonly string[];
+    };
+}];
+
+type CspellConfigBlock = { readonly rules: { readonly '@cspell/spellchecker': CspellRule; }; };
+
+export function withCspellWords(words: readonly string[]): CspellConfigBlock {
     return {
         rules: {
             '@cspell/spellchecker': [

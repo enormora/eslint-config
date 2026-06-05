@@ -292,4 +292,4 @@ export const vueConfig = {
         'vue/space-unary-ops': 'off',
         'vue/template-curly-spacing': 'off'
     }
-} as Linter.Config;
+} as unknown as Linter.Config;

@@ -2,39 +2,58 @@ import assert from 'node:assert';
 import eslintCorePresets from '@eslint/js';
 import { Linter } from 'eslint';
 import ts from 'typescript';
+import type { Except } from 'type-fest';
 import { testRuleSet } from '../configs/presets/test-base/test-base.ts';
 
-type RuleConfigSet = Record<string, unknown> | undefined;
-type PluginRules = Record<string, unknown> | undefined;
+type RuleConfigSet = Readonly<Record<string, unknown>> | undefined;
+type PluginRules = Readonly<Record<string, unknown>> | undefined;
 
 type RuleTestCase = {
-    ruleConfigSet: RuleConfigSet;
-    pluginRules: PluginRules;
-    pluginName: string;
-    rulesToExclude?: readonly string[];
+    readonly ruleConfigSet: RuleConfigSet;
+    readonly pluginRules: PluginRules;
+    readonly pluginName: string;
+    readonly rulesToExclude?: readonly string[];
 };
 
 type ConfigBlock = {
-    rules: RuleConfigSet;
-    languageOptions: Record<string, unknown>;
-    parserOptions: Record<string, unknown>;
+    readonly rules: RuleConfigSet;
+    readonly languageOptions: Readonly<Record<string, unknown>>;
+    readonly parserOptions: Readonly<Record<string, unknown>>;
+};
+
+type RuleWithMeta = { readonly meta?: { readonly deprecated?: unknown; }; };
+
+type LanguageOptionsTestCase = {
+    readonly configLanguageOptions: unknown;
+    readonly languageOptions?: unknown;
+};
+
+type AdditionalRulesTestCase = {
+    readonly ruleConfigSet: RuleConfigSet;
+    readonly additionalRules: RuleConfigSet;
 };
 
 const scopedPluginShortNamePattern = /^@[^/]+\/(?:eslint-plugin-)?(?<shortName>.+)$/u;
+const eslintPluginPrefix = 'eslint-plugin-';
+const scopedEslintPluginSuffix = '/eslint-plugin';
 
-function extractShortName(pluginName: string): string {
-    if (pluginName.startsWith('eslint-plugin-')) {
-        return pluginName.slice('eslint-plugin-'.length);
-    }
-    if (pluginName.startsWith('@') && pluginName.endsWith('/eslint-plugin')) {
-        return pluginName.slice(0, pluginName.length - '/eslint-plugin'.length);
-    }
+function extractScopedShortName(pluginName: string): string {
     return scopedPluginShortNamePattern.exec(pluginName)?.groups?.shortName ?? pluginName;
 }
 
+function extractShortName(pluginName: string): string {
+    if (pluginName.startsWith(eslintPluginPrefix)) {
+        return pluginName.slice(eslintPluginPrefix.length);
+    }
+    if (pluginName.startsWith('@') && pluginName.endsWith(scopedEslintPluginSuffix)) {
+        return pluginName.slice(0, pluginName.length - scopedEslintPluginSuffix.length);
+    }
+    return extractScopedShortName(pluginName);
+}
+
 function isRuleDeprecated(rule: unknown): boolean {
-    const meta = (rule as { meta?: { deprecated?: unknown } } | undefined)?.meta;
-    return Boolean(meta?.deprecated);
+    const ruleWithMeta = rule as RuleWithMeta | undefined;
+    return Boolean(ruleWithMeta?.meta?.deprecated);
 }
 
 function isRuleConfigured(ruleConfigSet: RuleConfigSet, ruleName: string): boolean {
@@ -42,7 +61,7 @@ function isRuleConfigured(ruleConfigSet: RuleConfigSet, ruleName: string): boole
     return configuredRuleNames.includes(ruleName);
 }
 
-export function checkAllCoreRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>) {
+export function checkAllCoreRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {
     const { ruleConfigSet } = testCase;
     const allRules = eslintCorePresets.configs.all.rules ?? {};
     const ruleNames = Object.keys(allRules);
@@ -58,7 +77,7 @@ export function checkAllCoreRulesConfigured(testCase: Pick<RuleTestCase, 'ruleCo
     });
 }
 
-export function checkUnknownCoreRulesAreNotConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>) {
+export function checkUnknownCoreRulesAreNotConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {
     const { ruleConfigSet } = testCase;
     const allRules = eslintCorePresets.configs.all.rules ?? {};
     const allCoreRuleNames = Object.keys(allRules);
@@ -76,7 +95,7 @@ export function checkUnknownCoreRulesAreNotConfigured(testCase: Pick<RuleTestCas
     });
 }
 
-export function checkAllPluginRulesConfigured(testCase: RuleTestCase) {
+export function checkAllPluginRulesConfigured(testCase: RuleTestCase): void {
     const { ruleConfigSet, pluginRules: maybePluginRules, pluginName, rulesToExclude = [] } = testCase;
     const pluginRules = maybePluginRules ?? {};
     const ruleNames = Object.keys(pluginRules);
@@ -102,7 +121,9 @@ export function checkAllPluginRulesConfigured(testCase: RuleTestCase) {
         });
 }
 
-export function checkUnknownPluginRulesAreNotConfigured(testCase: Omit<RuleTestCase, 'rulesToExclude'>) {
+export function checkUnknownPluginRulesAreNotConfigured(
+    testCase: Except<RuleTestCase, 'rulesToExclude'>
+): void {
     const { ruleConfigSet, pluginRules: maybePluginRules, pluginName } = testCase;
     const pluginRules = maybePluginRules ?? {};
     const shortPluginName = extractShortName(pluginName);
@@ -128,21 +149,21 @@ export function checkUnknownPluginRulesAreNotConfigured(testCase: Omit<RuleTestC
 }
 
 export function mergeConfigRules(config: unknown): RuleConfigSet {
-    const blocks = Array.isArray(config) ? config : [config];
-    return blocks.reduce(function collectBlockRules(merged: RuleConfigSet, block: unknown) {
-        const blockRules = ((block as { rules?: RuleConfigSet } | undefined)?.rules ?? {}) as RuleConfigSet;
+    const blocks = Array.isArray(config) ? config : [ config ];
+    return blocks.reduce<RuleConfigSet>(function collectBlockRules(merged: RuleConfigSet, block: unknown) {
+        const blockRules = (block as { readonly rules?: RuleConfigSet; } | undefined)?.rules ?? {};
         return { ...merged, ...blockRules };
-    }, {} as RuleConfigSet);
+    }, {});
 }
 
-export function checkConfigToHaveNoValidationIssues(config: unknown) {
+export function checkConfigToHaveNoValidationIssues(config: unknown): void {
     const linter = new Linter({ configType: 'flat' });
 
     const sourceFile = ts.createSourceFile('/foo.js', 'foo();', ts.ScriptTarget.Latest);
     const defaultCompilerHost = ts.createCompilerHost({});
     const customCompilerHost = {
         ...defaultCompilerHost,
-        getSourceFile(name: string, languageVersion: ts.ScriptTarget) {
+        getSourceFile(name: string, languageVersion: ts.ScriptTarget): ts.SourceFile | undefined {
             if (name === '/foo.js') {
                 return sourceFile;
             }
@@ -151,10 +172,10 @@ export function checkConfigToHaveNoValidationIssues(config: unknown) {
     };
     const program = ts.createProgram([ '/foo.js' ], {}, customCompilerHost);
 
-    function injectProgram(block: unknown) {
+    function injectProgram(block: unknown): Partial<ConfigBlock> {
         const typed = (block ?? {}) as Partial<ConfigBlock>;
-        const languageOptions = (typed.languageOptions ?? {}) as Record<string, unknown>;
-        const parserOptions = (typed.parserOptions ?? {}) as Record<string, unknown>;
+        const languageOptions = typed.languageOptions ?? {};
+        const parserOptions = typed.parserOptions ?? {};
         return {
             ...typed,
             languageOptions: {
@@ -174,16 +195,13 @@ export function checkConfigToHaveNoValidationIssues(config: unknown) {
     }, 'Linter.verify() failed for the given config');
 }
 
-export function checkConfigLanguageOptions(testCase: {
-    configLanguageOptions: unknown;
-    languageOptions?: unknown;
-}) {
+export function checkConfigLanguageOptions(testCase: LanguageOptionsTestCase): void {
     const { configLanguageOptions, languageOptions } = testCase;
 
     assert.deepStrictEqual(configLanguageOptions, languageOptions);
 }
 
-export function checkAllTestRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>) {
+export function checkAllTestRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {
     const { ruleConfigSet } = testCase;
 
     const testRuleNames = Object.keys(testRuleSet.rules);
@@ -201,10 +219,7 @@ export function checkAllTestRulesConfigured(testCase: Pick<RuleTestCase, 'ruleCo
     assert.deepStrictEqual(actual, expected, 'Common test rules could not be found');
 }
 
-export function checkAdditionalRulesConfigured(testCase: {
-    ruleConfigSet: RuleConfigSet;
-    additionalRules: RuleConfigSet;
-}) {
+export function checkAdditionalRulesConfigured(testCase: AdditionalRulesTestCase): void {
     const { ruleConfigSet, additionalRules } = testCase;
 
     const safeAdditionalRules = additionalRules ?? {};

@@ -38,14 +38,14 @@ suite('eslint-plugin preset', function () {
 
     test('the docs URL pattern is applied to require-meta-docs-url', function () {
         assert.deepStrictEqual(
-            eslintPluginConfig.rules['eslint-plugin/require-meta-docs-url'],
+            eslintPluginConfig.rules!['eslint-plugin/require-meta-docs-url'],
             [ 'error', { pattern: sampleDocsUrlPattern } ]
         );
     });
 
     test('the description pattern is applied to require-meta-docs-description', function () {
         assert.deepStrictEqual(
-            eslintPluginConfig.rules['eslint-plugin/require-meta-docs-description'],
+            eslintPluginConfig.rules!['eslint-plugin/require-meta-docs-description'],
             [ 'error', { pattern: sampleDescriptionPattern } ]
         );
     });
