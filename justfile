@@ -4,7 +4,8 @@ default:
     @just --list
 
 compile:
-    tsc --build
+    tsc -p configs/tsconfig.sources.json
+    tsc -p test/tsconfig.json
 
 eslint *OPTIONS:
     eslint . '.github/**/*.{yml,yaml,json,md}' --max-warnings 0 {{OPTIONS}}
@@ -15,8 +16,8 @@ lint: eslint
 
 lint-fix: eslint-fix
 
-test:
+test: compile
     mocha --config mocha.config.json
 
-packtory-dry-run:
+packtory-dry-run: compile
     packtory publish

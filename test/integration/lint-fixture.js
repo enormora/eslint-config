@@ -1,9 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { Linter } from 'eslint';
 
-const fixturesRoot = fileURLToPath(new URL('../fixtures/', import.meta.url));
+const fixturesRoot = path.join(process.cwd(), 'test/fixtures');
 
 export async function resolveFixture(comboName, filename) {
     const filePath = path.join(fixturesRoot, comboName, filename);

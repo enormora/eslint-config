@@ -3,21 +3,27 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const projectFolder = process.cwd();
-const sourcesFolder = path.join(projectFolder, 'configs');
+const sourcesFolder = path.join(projectFolder, 'target/build/configs');
+const presetMarkdownFolder = path.join(projectFolder, 'configs');
+const sharedSourceFiles = [
+    'constants.js',
+    'presets/base/base-shared.js',
+    'presets/base/cspell-config.js',
+    'presets/base/markdown-lint-rules.js',
+    'presets/base/package-json.js',
+    'rule-sets/best-practices.js',
+    'rule-sets/restricted-syntax.js',
+    'rule-sets/stylistic.js'
+];
 const noDuplicatedFilesAllowList = [
-    'LICENSE',
-    'configs/constants.js',
-    'configs/presets/base/base-shared.js',
-    'configs/presets/base/cspell-config.js',
-    'configs/presets/base/markdown-lint-rules.js',
-    'configs/presets/base/package-json.js',
-    'configs/rule-sets/best-practices.js',
-    'configs/rule-sets/restricted-syntax.js',
-    'configs/rule-sets/stylistic.js'
-]
-    .map(function toAbsolutePath(filePath) {
-        return path.join(projectFolder, filePath);
-    });
+    path.join(projectFolder, 'LICENSE'),
+    ...sharedSourceFiles.flatMap(function withSourceMap(relativePath) {
+        return [
+            path.join(sourcesFolder, relativePath),
+            path.join(sourcesFolder, `${relativePath}.map`)
+        ];
+    })
+];
 const publishingPeerDependencies = {
     eslint: '^10.0.0',
     prettier: '^3.0.0',
@@ -80,7 +86,7 @@ export async function buildConfig() {
                 },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/base/base.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/base/base.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -97,7 +103,7 @@ export async function buildConfig() {
                 },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/base-with-prettier/base-with-prettier.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/base-with-prettier/base-with-prettier.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -115,7 +121,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/node/node.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/node/node.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -129,7 +135,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/typescript/typescript.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/typescript/typescript.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -143,7 +149,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/test-base/test-base.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/test-base/test-base.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -158,7 +164,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/ava/ava.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/ava/ava.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -173,7 +179,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/mocha/mocha.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/mocha/mocha.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -187,7 +193,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/browser/browser.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/browser/browser.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -201,7 +207,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/eslint-plugin/eslint-plugin.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/eslint-plugin/eslint-plugin.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -215,7 +221,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/react/react.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react/react.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -230,7 +236,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-react' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/react-jsx/react-jsx.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react-jsx/react-jsx.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -245,7 +251,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-react-jsx' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/react-tsx/react-tsx.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react-tsx/react-tsx.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -259,7 +265,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/vue-ts/vue-ts.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/vue-ts/vue-ts.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -273,7 +279,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/astro/astro.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/astro/astro.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -288,7 +294,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-astro' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/astro-ts/astro-ts.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/astro-ts/astro-ts.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -303,7 +309,7 @@ export async function buildConfig() {
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/vitest/vitest.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/vitest/vitest.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
@@ -317,7 +323,7 @@ export async function buildConfig() {
                 bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(sourcesFolder, 'presets/aws-cdk/aws-cdk.md'),
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/aws-cdk/aws-cdk.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
