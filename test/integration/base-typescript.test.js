@@ -181,21 +181,21 @@ suite('base+typescript integration', function () {
         const { messages } = await lintFixture(configs, comboName, 'named-reference-shapes.ts');
         const flaggedLines = new Set(
             messages
-                .filter((message) => {
+                .filter(function isImmutableTypesMessage(message) {
                     return message.ruleId === 'functional/prefer-immutable-types';
                 })
-                .map((message) => {
+                .map(function toLine(message) {
                     return message.line;
                 })
         );
         const acceptedNamedReferenceLines = new Set([ 40, 41, 42, 43 ]);
         const expectedFlaggedLines = new Set([ 47, 50, 51 ]);
         const unexpectedNamedReferenceReports = Array.from(acceptedNamedReferenceLines).filter(
-            (line) => {
+            function isFlagged(line) {
                 return flaggedLines.has(line);
             }
         );
-        const missingFlaggedReports = Array.from(expectedFlaggedLines).filter((line) => {
+        const missingFlaggedReports = Array.from(expectedFlaggedLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(
@@ -214,19 +214,19 @@ suite('base+typescript integration', function () {
         const { messages } = await lintFixture(configs, comboName, 'named-reference-shapes.ts');
         const flaggedLines = new Set(
             messages
-                .filter((message) => {
+                .filter(function isTypeImmutabilityMessage(message) {
                     return message.ruleId === 'functional/type-declaration-immutability';
                 })
-                .map((message) => {
+                .map(function toLine(message) {
                     return message.line;
                 })
         );
         const acceptedAliasLines = new Set([ 54, 55, 56, 57 ]);
         const expectedFlaggedAliasLines = new Set([ 61, 65, 66 ]);
-        const unexpectedAliasReports = Array.from(acceptedAliasLines).filter((line) => {
+        const unexpectedAliasReports = Array.from(acceptedAliasLines).filter(function isFlagged(line) {
             return flaggedLines.has(line);
         });
-        const missingAliasReports = Array.from(expectedFlaggedAliasLines).filter((line) => {
+        const missingAliasReports = Array.from(expectedFlaggedAliasLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(
