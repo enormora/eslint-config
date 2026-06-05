@@ -3,6 +3,9 @@ export PATH := './node_modules/.bin:' + env_var('PATH')
 default:
     @just --list
 
+compile:
+    tsc --build
+
 eslint *OPTIONS:
     eslint . '.github/**/*.{yml,yaml,json,md}' --max-warnings 0 {{OPTIONS}}
 
