@@ -52,7 +52,7 @@ suite('eslint-plugin preset', function () {
 
     test('throws when docsUrlPattern does not contain the {{name}} placeholder', function () {
         assert.throws(
-            () => {
+            function createWithInvalidDocsUrlPattern() {
                 return createEslintPluginConfig({
                     docsUrlPattern: 'https://example.com/rules/foo.md',
                     descriptionPattern: sampleDescriptionPattern
@@ -64,7 +64,7 @@ suite('eslint-plugin preset', function () {
 
     test('throws when docsUrlPattern is not a string', function () {
         assert.throws(
-            () => {
+            function createWithMissingDocsUrlPattern() {
                 return createEslintPluginConfig({
                     docsUrlPattern: undefined,
                     descriptionPattern: sampleDescriptionPattern
@@ -76,7 +76,7 @@ suite('eslint-plugin preset', function () {
 
     test('throws when descriptionPattern is not a string', function () {
         assert.throws(
-            () => {
+            function createWithMissingDescriptionPattern() {
                 return createEslintPluginConfig({
                     docsUrlPattern: sampleDocsUrlPattern,
                     descriptionPattern: undefined
