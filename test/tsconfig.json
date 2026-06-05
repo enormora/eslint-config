@@ -3,13 +3,14 @@
     "compilerOptions": {
         "tsBuildInfoFile": "../target/buildcache/test.tsbuildinfo",
         "rootDir": "..",
-        "types": ["node"],
-        "allowJs": true,
+        "types": ["node", "mocha"],
         "composite": false,
         "declaration": false,
         "declarationMap": false,
-        "incremental": true
+        "incremental": true,
+        "noUncheckedIndexedAccess": false
     },
-    "include": ["./**/*.js", "./**/*.ts"],
+    "references": [{ "path": "../configs/tsconfig.sources.json" }],
+    "include": ["./**/*.ts", "../types/**/*.d.ts"],
     "exclude": ["./fixtures/**/*"]
 }

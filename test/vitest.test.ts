@@ -1,0 +1,37 @@
+import vitestPlugin from '@vitest/eslint-plugin';
+import { suite, test } from 'mocha';
+import { vitestConfig } from '../configs/presets/vitest/vitest.ts';
+import {
+    checkAllPluginRulesConfigured,
+    checkAllTestRulesConfigured,
+    checkConfigToHaveNoValidationIssues,
+    checkUnknownPluginRulesAreNotConfigured
+} from './rules-configuration.ts';
+
+suite('vitest preset', function () {
+    test('all @vitest/eslint-plugin rules are configured', function () {
+        checkAllPluginRulesConfigured({
+            ruleConfigSet: vitestConfig.rules,
+            pluginRules: vitestPlugin.rules,
+            pluginName: '@vitest/eslint-plugin'
+        });
+    });
+
+    test('no unknown @vitest/eslint-plugin rules are configured', function () {
+        checkUnknownPluginRulesAreNotConfigured({
+            ruleConfigSet: vitestConfig.rules,
+            pluginRules: vitestPlugin.rules,
+            pluginName: '@vitest/eslint-plugin'
+        });
+    });
+
+    test('all common test rules are configured', function () {
+        checkAllTestRulesConfigured({
+            ruleConfigSet: vitestConfig.rules
+        });
+    });
+
+    test('vitest preset config has no validation errors', function () {
+        checkConfigToHaveNoValidationIssues(vitestConfig);
+    });
+});

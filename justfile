@@ -7,7 +7,7 @@ compile:
     tsc -p configs/tsconfig.sources.json
     tsc -p test/tsconfig.json
 
-eslint *OPTIONS:
+eslint *OPTIONS: compile
     eslint . '.github/**/*.{yml,yaml,json,md}' --max-warnings 0 {{OPTIONS}}
 
 eslint-fix: (eslint '--fix')

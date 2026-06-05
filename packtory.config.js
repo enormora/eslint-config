@@ -103,7 +103,10 @@ export async function buildConfig() {
                 },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/base-with-prettier/base-with-prettier.md'),
+                        sourceFilePath: path.join(
+                            presetMarkdownFolder,
+                            'presets/base-with-prettier/base-with-prettier.md'
+                        ),
                         targetFilePath: 'readme.md'
                     }
                 ],
