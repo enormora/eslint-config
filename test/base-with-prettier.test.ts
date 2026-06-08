@@ -12,7 +12,7 @@ import {
 
 const baseWithPrettierConfigRules = mergeConfigRules(baseWithPrettierConfig);
 
-function pluginCoverageSuite(pluginName: string, pluginRules: Record<string, unknown> | undefined): void {
+function pluginCoverageSuite(pluginName: string, pluginRules: Readonly<Record<string, unknown>> | undefined): void {
     suite(pluginName, function () {
         test('all rules are configured', function () {
             checkAllPluginRulesConfigured({
