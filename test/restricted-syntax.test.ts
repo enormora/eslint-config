@@ -16,7 +16,11 @@ import {
     noTsEnumDeclarationRestriction
 } from '../configs/presets/typescript/typescript.ts';
 
-const noRestrictedSyntaxRule = builtinRules.get('no-restricted-syntax');
+const maybeNoRestrictedSyntaxRule = builtinRules.get('no-restricted-syntax');
+if (maybeNoRestrictedSyntaxRule === undefined) {
+    throw new Error('Expected eslint builtinRules to expose `no-restricted-syntax`');
+}
+const noRestrictedSyntaxRule = maybeNoRestrictedSyntaxRule;
 
 const javascriptRuleTester = new RuleTester({
     languageOptions: { ecmaVersion: 'latest', sourceType: 'module' }
@@ -31,10 +35,10 @@ const typescriptRuleTester = new RuleTester({
 });
 
 type SyntaxRestriction = { readonly selector: string; readonly message: string; };
-type InvalidCaseEntry = string | { code: string; readonly count: number; };
+type InvalidCaseEntry = string | { readonly code: string; readonly count: number; };
 type RuleCases = { readonly valid: readonly string[]; readonly invalid: readonly InvalidCaseEntry[]; };
 
-function runRuleCases(ruleTester: RuleTester, restriction: SyntaxRestriction, cases: RuleCases) {
+function runRuleCases(ruleTester: RuleTester, restriction: SyntaxRestriction, cases: RuleCases): void {
     const valid = cases.valid.map(function attachRestrictionOption(code) {
         return { code, options: [ restriction ] };
     });
@@ -51,7 +55,7 @@ function runRuleCases(ruleTester: RuleTester, restriction: SyntaxRestriction, ca
     });
 
     assert.doesNotThrow(function runWithoutThrowing() {
-        ruleTester.run('no-restricted-syntax', noRestrictedSyntaxRule!, { valid, invalid });
+        ruleTester.run('no-restricted-syntax', noRestrictedSyntaxRule, { valid, invalid });
     });
 }
 

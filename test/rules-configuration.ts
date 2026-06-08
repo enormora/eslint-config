@@ -63,7 +63,7 @@ function isRuleConfigured(ruleConfigSet: RuleConfigSet, ruleName: string): boole
 
 export function checkAllCoreRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {
     const { ruleConfigSet } = testCase;
-    const allRules = eslintCorePresets.configs.all.rules ?? {};
+    const allRules = eslintCorePresets.configs.all.rules;
     const ruleNames = Object.keys(allRules);
 
     assert.notStrictEqual(ruleNames.length, 0, 'ESLint core rules not found');
@@ -79,7 +79,7 @@ export function checkAllCoreRulesConfigured(testCase: Pick<RuleTestCase, 'ruleCo
 
 export function checkUnknownCoreRulesAreNotConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {
     const { ruleConfigSet } = testCase;
-    const allRules = eslintCorePresets.configs.all.rules ?? {};
+    const allRules = eslintCorePresets.configs.all.rules;
     const allCoreRuleNames = Object.keys(allRules);
     const configuredRuleNames = Object.keys(ruleConfigSet ?? {});
     const configuredCoreRuleNames = configuredRuleNames.filter(function isCoreRuleName(ruleName) {

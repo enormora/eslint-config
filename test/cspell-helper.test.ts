@@ -5,9 +5,7 @@ import { withCspellWords } from '../configs/presets/base/cspell-config.ts';
 
 function cloneOptions(value: unknown): unknown {
     if (Array.isArray(value)) {
-        return value.map(function cloneItem(item: unknown) {
-            return cloneOptions(item);
-        });
+        return value.map(cloneOptions);
     }
     if (value !== null && typeof value === 'object') {
         const result: Record<string, unknown> = {};

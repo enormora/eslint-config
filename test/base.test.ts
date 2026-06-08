@@ -12,7 +12,7 @@ import {
 
 const baseConfigRules = mergeConfigRules(baseConfig);
 
-function pluginCoverageSuite(pluginName: string, pluginRules: Record<string, unknown> | undefined) {
+function pluginCoverageSuite(pluginName: string, pluginRules: Record<string, unknown> | undefined): void {
     suite(pluginName, function () {
         test('all rules are configured', function () {
             checkAllPluginRulesConfigured({ ruleConfigSet: baseConfigRules, pluginRules, pluginName });

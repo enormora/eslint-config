@@ -1,8 +1,23 @@
+import type { Rule } from 'eslint';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
+
+type RestrictedSyntaxRestriction = {
+    readonly selector: string;
+    readonly message: string;
+};
+
+type RestrictedSyntaxPlugin = {
+    readonly rules: Record<string, Rule.RuleModule | undefined>;
+};
+
+type NoClassDeclarationOptions = {
+    readonly allowedSuperClassNamePattern: string;
+    readonly message: string;
+};
 
 const noRestrictedSyntaxRule = builtinRules.get('no-restricted-syntax');
 
-export function createRestrictedSyntaxPlugin(ruleNames: readonly string[]) {
+export function createRestrictedSyntaxPlugin(ruleNames: readonly string[]): RestrictedSyntaxPlugin {
     return {
         rules: Object.fromEntries(
             ruleNames.map(function toRuleEntry(ruleName: string) {
@@ -14,11 +29,15 @@ export function createRestrictedSyntaxPlugin(ruleNames: readonly string[]) {
 
 const defaultAllowedSuperClassNamePattern = '/Error$/';
 const defaultClassDeclarationMessage = 'Class declarations are not allowed except for extending errors.';
+const defaultNoClassDeclarationOptions: NoClassDeclarationOptions = {
+    allowedSuperClassNamePattern: defaultAllowedSuperClassNamePattern,
+    message: defaultClassDeclarationMessage
+};
 
-export function createNoClassDeclarationRestriction({
-    allowedSuperClassNamePattern = defaultAllowedSuperClassNamePattern,
-    message = defaultClassDeclarationMessage
-} = {}) {
+export function createNoClassDeclarationRestriction(
+    options: NoClassDeclarationOptions = defaultNoClassDeclarationOptions
+): RestrictedSyntaxRestriction {
+    const { allowedSuperClassNamePattern, message } = options;
     return {
         selector: `ClassDeclaration[superClass.name!=${allowedSuperClassNamePattern}]`,
         message
