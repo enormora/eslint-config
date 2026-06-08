@@ -36,7 +36,8 @@ const codeSpellCheckerRules = {
                     'setext',
                     'lookarounds',
                     'gypfile',
-                    'libc'
+                    'libc',
+                    'tses'
                 ]
             }
         }

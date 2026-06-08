@@ -1,0 +1,13 @@
+{
+    "diff": true,
+    "forbid-pending": true,
+    "extension": ["js"],
+    "spec": ["target/build/test/**/*.test.js"],
+    "exclude": ["target/build/test/integration/**"],
+    "jobs": 1,
+    "parallel": false,
+    "reporter": "dot",
+    "slow": 75,
+    "timeout": 2000,
+    "ui": "tdd"
+}

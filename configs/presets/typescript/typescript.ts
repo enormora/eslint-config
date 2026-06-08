@@ -1,13 +1,11 @@
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
-import typescriptParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
-import { createTypeScriptImportResolver } from 'eslint-import-resolver-typescript';
 import functionalPlugin from 'eslint-plugin-functional';
-import { createNodeResolver } from 'eslint-plugin-import-x';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
-import { javascriptExtensions, typescriptExtensions } from '../../constants.ts';
+import { enormoraTypescriptPlugin } from '../../plugins/enormora-typescript/enormora-typescript-plugin.ts';
 import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.ts';
 import { baseSharedConfig } from '../base/base-shared.ts';
+import { typescriptLanguageOptions, typescriptSettings } from './typescript-environment.ts';
 
 export const noTsEnumDeclarationRestriction = {
     selector: 'TSEnumDeclaration',
@@ -86,53 +84,14 @@ function configureWrappedCoreRule(
 }
 
 export const typescriptConfig = {
-    languageOptions: {
-        parser: typescriptParser,
-        parserOptions: {
-            warnOnUnsupportedTypeScriptVersion: false,
-            sourceType: 'module',
-            ecmaFeatures: {
-                jsx: false,
-                globalReturn: false
-            },
-            projectService: true
-        }
-    },
-    settings: {
-        'import/parsers': {
-            '@typescript-eslint/parser': typescriptExtensions
-        },
-        'import-x/resolver-next': [
-            createNodeResolver({
-                extensions: [ ...javascriptExtensions, ...typescriptExtensions ]
-            }),
-            createTypeScriptImportResolver()
-        ],
-        // The upstream defaults in `is-immutable-type` classify Date, URL,
-        // and URLSearchParams as Mutable, which poisons any union, record,
-        // or recursive value type that mentions them. We promote them — and
-        // a few more value-like built-ins — to ReadonlyShallow so consumers
-        // can use them without a Readonly<T> wrapper. Map and Set stay
-        // Mutable (via the upstream defaults) so the autofixer keeps
-        // rewriting them to ReadonlyMap/ReadonlySet.
-        immutability: {
-            overrides: [
-                { type: { from: 'lib', name: 'Date' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'RegExp' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'URL' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'URLSearchParams' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'WeakMap' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'WeakSet' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'Promise' }, to: 'ReadonlyShallow' },
-                { type: { from: 'lib', name: 'Error' }, to: 'ReadonlyShallow' }
-            ]
-        }
-    },
+    languageOptions: typescriptLanguageOptions,
+    settings: typescriptSettings,
     plugins: {
         '@typescript-eslint': typescriptPlugin,
         perfectionist: perfectionistPlugin,
         functional: functionalPlugin,
-        'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin
+        'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin,
+        'enormora-typescript': enormoraTypescriptPlugin
     },
     rules: {
         'restricted-syntax-typescript/no-ts-enum-declaration': [ 'error', noTsEnumDeclarationRestriction ],
@@ -241,6 +200,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-qualifier': 'error',
         '@typescript-eslint/no-unnecessary-type-arguments': 'error',
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
+        'enormora-typescript/no-impure-satisfies': 'error',
         '@typescript-eslint/no-unused-private-class-members': 'error',
         ...configureWrappedCoreRule('no-unused-vars', undefined),
         ...configureWrappedCoreRule('no-useless-constructor', undefined),

@@ -39,8 +39,10 @@ jobs:
               run: npm clean-install
             - name: Static code analysis
               run: npx just lint
-            - name: Run tests
-              run: npx just test
+            - name: Run unit tests
+              run: npx just test-unit
+            - name: Run integration tests
+              run: npx just test-integration
             - name: Packtory dry-run
               run: npx just packtory-dry-run
 
