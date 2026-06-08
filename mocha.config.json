@@ -2,7 +2,7 @@
     "diff": true,
     "forbid-pending": true,
     "extension": ["js"],
-    "spec": ["./test/**/*.test.js"],
+    "spec": ["./target/build/test/**/*.test.js"],
     "exclude": [],
     "jobs": 1,
     "parallel": false,

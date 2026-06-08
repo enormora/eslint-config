@@ -1,0 +1,16 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "../target/buildcache/test.tsbuildinfo",
+        "rootDir": "..",
+        "types": ["node", "mocha"],
+        "composite": false,
+        "declaration": false,
+        "declarationMap": false,
+        "incremental": true,
+        "noUncheckedIndexedAccess": false
+    },
+    "references": [{ "path": "../configs/tsconfig.sources.json" }],
+    "include": ["./**/*.ts", "../types/**/*.d.ts"],
+    "exclude": ["./fixtures/**/*"]
+}
