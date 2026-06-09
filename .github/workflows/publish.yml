@@ -34,7 +34,7 @@ jobs:
               run: npm clean-install --ignore-scripts
             - name: Evaluate GitHub release gate
               id: release-gate
-              run: npx github-release-gate
+              run: npx just release-gate
               env:
                   CI_WORKFLOW_FILE: continuous-integration.yml
                   DEFAULT_BRANCH: main
