@@ -22,7 +22,10 @@ export const markdownLintRules = {
     'markdown/no-html': 'error',
     'markdown/no-invalid-label-refs': 'error',
     'markdown/no-missing-atx-heading-space': 'error',
-    'markdown/no-missing-label-refs': 'error',
+    // Allow the three GFM task-list checkbox markers (`[ ]`, `[x]`, `[X]`). The commonmark
+    // language has no concept of task lists, so the rule otherwise reports the checkbox content
+    // as a missing label reference.
+    'markdown/no-missing-label-refs': [ 'error', { allowLabels: [ '', 'x', 'X' ] } ],
     'markdown/no-missing-link-fragments': 'error',
     'markdown/no-multiple-h1': 'error',
     'markdown/no-reference-like-urls': 'error',
