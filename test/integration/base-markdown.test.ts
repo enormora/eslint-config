@@ -1,4 +1,6 @@
 import assert from 'node:assert';
+import path from 'node:path';
+import { Linter } from 'eslint';
 import { suite, test } from 'mocha';
 import { baseConfig } from '../../configs/presets/base/base.ts';
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.ts';
@@ -58,5 +60,25 @@ suite('base markdown integration', function () {
         const secondPass = fixFixture(configs, firstPass.output, filePath);
         assert.strictEqual(secondPass.output, firstPass.output, 'second autofix pass changed the output');
         assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
+    });
+
+    test('autofix does not rewrite [text](text) markdown links to <text> autolinks', function () {
+        const filePath = path.join(process.cwd(), 'test/fixtures/base-markdown/regression-prefer-autolinks.md');
+        const source = '# regression\n\n[foo.md](foo.md)\n';
+        const linter = new Linter({ configType: 'flat' });
+        const messages = linter.verify(source, configs, filePath);
+        const preferAutolinkMessages = messages.filter(function isPreferAutolinkMessage(message) {
+            return message.ruleId === 'markdown-preferences/prefer-autolinks';
+        });
+        assert.deepStrictEqual(
+            preferAutolinkMessages,
+            [],
+            'markdown-preferences/prefer-autolinks must stay disabled in the base preset'
+        );
+        const fixResult = linter.verifyAndFix(source, configs, { filename: filePath });
+        assert.ok(
+            !fixResult.output.includes('<foo.md>'),
+            'autofix must not rewrite [foo.md](foo.md) to the invalid CommonMark autolink <foo.md>'
+        );
     });
 });

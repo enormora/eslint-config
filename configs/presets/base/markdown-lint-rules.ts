@@ -43,9 +43,14 @@ export const markdownLintRules = {
     'markdown-links/no-self-destination': 'error',
 
     // markdown-preferences: many rules overlap with the active markdown formatter (dprint or
-    // prettier, depending on which base preset is used). We enable only the 8 rules from this
+    // prettier, depending on which base preset is used). We enable only 7 rules from this
     // plugin's `recommended` config (none of which fight either formatter) and explicitly turn
-    // the other 45 off. Override individually if a stricter style is desired.
+    // the other 46 off. Override individually if a stricter style is desired.
+    //
+    // `prefer-autolinks` is intentionally disabled even though it is in `recommended`: its
+    // autofix rewrites any `[x](x)` to `<x>` without checking whether the URL has a scheme.
+    // CommonMark autolinks require an absolute URI, so a relative link like `[foo.md](foo.md)`
+    // becomes `<foo.md>`, which GitHub renders as an empty HTML tag (the link disappears).
     'markdown-preferences/atx-heading-closing-sequence': 'off',
     'markdown-preferences/atx-heading-closing-sequence-length': 'off',
     'markdown-preferences/blockquote-marker-alignment': 'error',
@@ -84,7 +89,7 @@ export const markdownLintRules = {
     'markdown-preferences/ordered-list-marker-style': 'off',
     'markdown-preferences/padded-custom-containers': 'off',
     'markdown-preferences/padding-line-between-blocks': 'off',
-    'markdown-preferences/prefer-autolinks': 'error',
+    'markdown-preferences/prefer-autolinks': 'off',
     'markdown-preferences/prefer-fenced-code-blocks': 'error',
     'markdown-preferences/prefer-inline-code-words': 'off',
     'markdown-preferences/prefer-link-reference-definitions': 'off',
