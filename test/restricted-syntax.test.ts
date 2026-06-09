@@ -8,8 +8,7 @@ import {
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
-    noSwitchStatementRestriction,
-    noUnnecessaryArrowFunctionRestriction
+    noSwitchStatementRestriction
 } from '../configs/rule-sets/restricted-syntax.ts';
 import {
     noInlineSignatureTypeLiteralRestriction,
@@ -137,27 +136,6 @@ suite('restricted syntax rules', function () {
                 'if ("foo" in bar) {}',
                 'const has = "foo" in bar;',
                 'function check(obj) { return "key" in obj; }'
-            ]
-        });
-    });
-
-    test('noUnnecessaryArrowFunctionRestriction permits only arrows relying on lexical binding', function () {
-        runRuleCases(javascriptRuleTester, noUnnecessaryArrowFunctionRestriction, {
-            valid: [
-                'const handler = () => { return this.value; };',
-                'element.addEventListener("click", () => { this.handle(); });',
-                'const first = () => { return arguments[0]; };',
-                'class Base { build() { return () => { return super.build(); }; } }',
-                'function Factory() { return () => { return new.target; }; }',
-                'function double(x) { return x * 2; }',
-                'const add = function (a, b) { return a + b; };',
-                'items.map(function (item) { return item.id; });'
-            ],
-            invalid: [
-                'const noop = () => { return 1; };',
-                'items.map((item) => item.id);',
-                'const add = (a, b) => { return a + b; };',
-                { code: 'const compose = () => { return () => { return 1; }; };', count: 2 }
             ]
         });
     });

@@ -3,24 +3,15 @@ import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comment
 import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { ecmaVersion, javascriptExtensions } from '../../constants.ts';
+import { restrictedSyntaxPlugin } from '../../plugins/restricted-syntax/restricted-syntax-plugin.ts';
 import { bestPracticesRuleSet } from '../../rule-sets/best-practices.ts';
 import {
-    createRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
-    noSwitchStatementRestriction,
-    noUnnecessaryArrowFunctionRestriction
+    noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.ts';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
-
-const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
-    'no-class-declaration',
-    'no-switch-statement',
-    'no-empty-function-body',
-    'no-in-operator',
-    'no-unnecessary-arrow-function'
-]);
 
 export const cspellSpellcheckerOptions = {
     autoFix: false,
@@ -158,7 +149,7 @@ export const baseSharedConfig = {
         'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
         'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
         'restricted-syntax/no-in-operator': [ 'error', noInOperatorRestriction ],
-        'restricted-syntax/no-unnecessary-arrow-function': [ 'error', noUnnecessaryArrowFunctionRestriction ],
+        'restricted-syntax/no-unnecessary-arrow-function': 'error',
         'no-return-assign': [ 'error', 'always' ],
         'no-self-assign': [ 'error', { props: true } ],
         'no-self-compare': 'error',

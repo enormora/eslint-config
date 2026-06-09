@@ -7,6 +7,8 @@ const sourcesFolder = path.join(projectFolder, 'target/build/configs');
 const presetMarkdownFolder = path.join(projectFolder, 'configs');
 const sharedSourceFiles = [
     'constants.js',
+    'plugins/restricted-syntax/no-unnecessary-arrow-function.js',
+    'plugins/restricted-syntax/restricted-syntax-plugin.js',
     'presets/base/base-shared.js',
     'presets/base/cspell-config.js',
     'presets/base/markdown-lint-rules.js',
