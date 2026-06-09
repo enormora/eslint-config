@@ -20,3 +20,9 @@ const answer = 42;
 | value 3  | value 4  |
 
 See the [reference](https://example.com/ref) for more details.
+
+GFM task-list checkboxes should not be flagged as missing label references:
+
+- [ ] open task
+- [x] completed task
+- plain list item without a checkbox
