@@ -29,3 +29,9 @@ export default [
     }
 ];
 ```
+
+## First-party rules
+
+This preset ships a first-party plugin under the namespace `enormora-typescript`:
+
+- `enormora-typescript/no-impure-satisfies` — flags every `satisfies` expression. Constraints that contain literal types (e.g. `{ kind: 'a' }`, `1`, `readonly [1, 2]`) are reported as `typeChangingSatisfies` because they pin the inferred type to specific literals. Constraints that are purely structural (e.g. `{ kind: string }`, `Handler`) are reported as `trivialSatisfies` because they impose no narrowing beyond what TypeScript already infers. The preset enables the rule with type-aware parsing (`parserOptions.projectService`).

@@ -16,8 +16,13 @@ lint: eslint
 
 lint-fix: eslint-fix
 
-test: compile
-    mocha --config mocha.config.json
+test-unit: compile
+    mocha --config mocha.unit.config.json
+
+test-integration: compile
+    mocha --config mocha.integration.config.json
+
+test: test-unit test-integration
 
 packtory-dry-run: compile
     packtory publish
