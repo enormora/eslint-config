@@ -17,19 +17,17 @@ import {
 } from '../../rule-sets/restricted-syntax.ts';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
 
-const noRestrictedSyntaxWrappers = createRestrictedSyntaxPlugin([
-    'no-class-declaration',
-    'no-switch-statement',
-    'no-empty-function-body',
-    'no-in-operator'
-]);
-
-const restrictedSyntaxPlugin = {
-    rules: {
-        ...noRestrictedSyntaxWrappers.rules,
+const noRestrictedSyntaxWrappers = createRestrictedSyntaxPlugin(
+    [
+        'no-class-declaration',
+        'no-switch-statement',
+        'no-empty-function-body',
+        'no-in-operator'
+    ],
+    {
         'no-unnecessary-arrow-function': noUnnecessaryArrowFunctionRule as unknown as Rule.RuleModule
     }
-};
+);
 
 export const cspellSpellcheckerOptions = {
     autoFix: false,
@@ -80,7 +78,7 @@ export const baseSharedConfig = {
         'eslint-comments': eslintCommentsPlugin,
         'no-secrets': noSecretsPlugin,
         '@cspell': codeSpellChecker,
-        'restricted-syntax': restrictedSyntaxPlugin
+        'restricted-syntax': noRestrictedSyntaxWrappers
     },
     settings: {
         ...stylisticRuleSet.settings,

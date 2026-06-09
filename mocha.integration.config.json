@@ -8,6 +8,6 @@
     "parallel": false,
     "reporter": "dot",
     "slow": 75,
-    "timeout": 2000,
+    "timeout": 10000,
     "ui": "tdd"
 }

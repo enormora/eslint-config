@@ -17,13 +17,17 @@ type NoClassDeclarationOptions = {
 
 const noRestrictedSyntaxRule = builtinRules.get('no-restricted-syntax');
 
-export function createRestrictedSyntaxPlugin(ruleNames: readonly string[]): RestrictedSyntaxPlugin {
+export function createRestrictedSyntaxPlugin(
+    ruleNames: readonly string[],
+    additionalRules: Readonly<Record<string, Rule.RuleModule>>
+): RestrictedSyntaxPlugin {
+    const wrapperEntries = Object.fromEntries(
+        ruleNames.map(function toRuleEntry(ruleName: string) {
+            return [ ruleName, noRestrictedSyntaxRule ];
+        })
+    );
     return {
-        rules: Object.fromEntries(
-            ruleNames.map(function toRuleEntry(ruleName: string) {
-                return [ ruleName, noRestrictedSyntaxRule ];
-            })
-        )
+        rules: { ...wrapperEntries, ...additionalRules }
     };
 }
 
