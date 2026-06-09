@@ -1,26 +1,35 @@
 import codeSpellChecker from '@cspell/eslint-plugin';
+import type { Rule } from 'eslint';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { ecmaVersion, javascriptExtensions } from '../../constants.ts';
+import {
+    noUnnecessaryArrowFunctionRule
+} from '../../plugins/restricted-syntax/no-unnecessary-arrow-function.ts';
 import { bestPracticesRuleSet } from '../../rule-sets/best-practices.ts';
 import {
     createRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
-    noSwitchStatementRestriction,
-    noUnnecessaryArrowFunctionRestriction
+    noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.ts';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
 
-const restrictedSyntaxPlugin = createRestrictedSyntaxPlugin([
+const noRestrictedSyntaxWrappers = createRestrictedSyntaxPlugin([
     'no-class-declaration',
     'no-switch-statement',
     'no-empty-function-body',
-    'no-in-operator',
-    'no-unnecessary-arrow-function'
+    'no-in-operator'
 ]);
+
+const restrictedSyntaxPlugin = {
+    rules: {
+        ...noRestrictedSyntaxWrappers.rules,
+        'no-unnecessary-arrow-function': noUnnecessaryArrowFunctionRule as unknown as Rule.RuleModule
+    }
+};
 
 export const cspellSpellcheckerOptions = {
     autoFix: false,
@@ -158,7 +167,7 @@ export const baseSharedConfig = {
         'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
         'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
         'restricted-syntax/no-in-operator': [ 'error', noInOperatorRestriction ],
-        'restricted-syntax/no-unnecessary-arrow-function': [ 'error', noUnnecessaryArrowFunctionRestriction ],
+        'restricted-syntax/no-unnecessary-arrow-function': 'error',
         'no-return-assign': [ 'error', 'always' ],
         'no-self-assign': [ 'error', { props: true } ],
         'no-self-compare': 'error',

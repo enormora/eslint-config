@@ -66,16 +66,3 @@ export const noInOperatorRestriction = {
     selector: 'BinaryExpression[operator="in"]',
     message: 'The `in` operator is not allowed. Use `Object.hasOwn` instead.'
 };
-
-const lexicalBindingReferences = [
-    'ThisExpression',
-    'Super',
-    'MetaProperty[meta.name="new"]',
-    'Identifier[name="arguments"]'
-]
-    .join(', ');
-
-export const noUnnecessaryArrowFunctionRestriction = {
-    selector: `ArrowFunctionExpression:not(:has(${lexicalBindingReferences}))`,
-    message: 'Arrow functions are only allowed when they use lexical `this`, `super`, `new.target`, or `arguments`.'
-};
