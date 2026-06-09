@@ -55,11 +55,14 @@ export const noPublicClassPropertyRestriction = {
     message: 'Class properties and accessors must be private or protected — only methods may be public.'
 };
 
-const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin([
-    'no-ts-enum-declaration',
-    'no-inline-signature-type-literal',
-    'no-public-class-property'
-]);
+const restrictedSyntaxTypescriptPlugin = createRestrictedSyntaxPlugin(
+    [
+        'no-ts-enum-declaration',
+        'no-inline-signature-type-literal',
+        'no-public-class-property'
+    ],
+    {}
+);
 
 function asArray(value: unknown): unknown[] {
     if (Array.isArray(value)) {
