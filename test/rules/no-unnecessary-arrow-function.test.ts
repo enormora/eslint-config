@@ -18,52 +18,6 @@ RuleTester.itOnly = function registerTestOnly(name: string, fn: () => void): voi
 
 const arrowFunctionNode = AST_NODE_TYPES.ArrowFunctionExpression;
 
-type LineColumn = {
-    readonly line: number;
-    readonly column: number;
-};
-
-type Location = {
-    readonly line: number;
-    readonly column: number;
-    readonly endLine: number;
-    readonly endColumn: number;
-};
-
-function positionOf(code: string, characterIndex: number): LineColumn {
-    const precedingText = code.slice(0, characterIndex);
-    const lastNewlineIndex = precedingText.lastIndexOf('\n');
-    const line = precedingText.split('\n').length;
-    const column = characterIndex - lastNewlineIndex;
-    return { line, column };
-}
-
-function locateArrow(code: string, marker: string): Location {
-    const startIndex = code.indexOf(marker);
-    if (startIndex === -1) {
-        throw new Error(`Marker not found in code: ${JSON.stringify(marker)}`);
-    }
-    if (code.slice(startIndex + 1).includes(marker)) {
-        throw new Error(`Marker is ambiguous (appears more than once): ${JSON.stringify(marker)}`);
-    }
-    const start = positionOf(code, startIndex);
-    const end = positionOf(code, startIndex + marker.length);
-    return { line: start.line, column: start.column, endLine: end.line, endColumn: end.column };
-}
-
-type ArrowErrorExpectation = Location & {
-    readonly messageId: 'unnecessaryArrow';
-    readonly type: typeof arrowFunctionNode;
-};
-
-function arrowError(code: string, marker: string): ArrowErrorExpectation {
-    return {
-        messageId: 'unnecessaryArrow',
-        type: arrowFunctionNode,
-        ...locateArrow(code, marker)
-    };
-}
-
 const ruleTester = new RuleTester({
     languageOptions: {
         parserOptions: {
@@ -73,147 +27,248 @@ const ruleTester = new RuleTester({
     }
 });
 
-const validBindingArrows = [
-    'const useThis = () => { return this.value; };',
-    'element.addEventListener("click", () => { this.handle(); });',
-    'const useArguments = () => { return arguments[0]; };',
-    'class Base { build() { return () => { return super.build(); }; } }',
-    'function Factory() { return () => { return new.target; }; }',
-    'const outerWithInnerArrowThis = () => { return () => { return this.x; }; };',
-    'const outerWithInnerFunctionThis = () => { return function () { return this.x; }; };'
-];
-
-const validNonArrows = [
-    'function double(x) { return x * 2; }',
-    'const add = function (a, b) { return a + b; };',
-    'items.map(function (item) { return item.id; });',
-    'const obj = { run() { return 1; } };',
-    'class Worker { handle() { return 1; } }'
-];
-
-const noParamsBlockCode = 'const noop = () => { return 1; };';
-const parenthesizedSingleParamCode = 'const identity = (x) => x;';
-const bareSingleParamCode = 'const identity = x => x;';
-const concisePropertyAccessCode = 'items.map((item) => item.id);';
-const multiParamBlockCode = 'const add = (a, b) => { return a + b; };';
-const conciseObjectLiteralCode = 'const make = () => ({ x: 1 });';
-const defaultValueParamCode = 'const init = (count = 1) => count;';
-const restParamCode = 'const collect = (...values) => values;';
-const destructuredParamCode = 'const pickA = ({ a }) => a;';
-const emptyBlockBodyCode = 'const skip = () => {};';
-const asyncParenthesizedCode = 'const fetchUser = async (id) => { return id; };';
-const asyncBareCode = 'const fetchUser = async id => id;';
-const asyncConciseCode = 'const fetchUser = async () => fetch();';
-const iifeArrowCode = '(() => 1)();';
-const nestedComposeCode = 'const compose = () => { return () => { return 1; }; };';
-const commentInSignatureCode = 'const tag = /* before */ (x) /* after */ => x;';
-const multiLineArrowCode = [
-    'const handler = (event) => {',
-    '    return event.target;',
-    '};'
-]
-    .join('\n');
-
 ruleTester.run('no-unnecessary-arrow-function', noUnnecessaryArrowFunctionRule, {
-    valid: [ ...validBindingArrows, ...validNonArrows ],
+    valid: [
+        'const useThis = () => { return this.value; };',
+        'element.addEventListener("click", () => { this.handle(); });',
+        'const useArguments = () => { return arguments[0]; };',
+        'class Base { build() { return () => { return super.build(); }; } }',
+        'function Factory() { return () => { return new.target; }; }',
+        'const outerWithInnerArrowThis = () => { return () => { return this.x; }; };',
+        'const outerWithInnerFunctionThis = () => { return function () { return this.x; }; };',
+        'function double(x) { return x * 2; }',
+        'const add = function (a, b) { return a + b; };',
+        'items.map(function (item) { return item.id; });',
+        'const obj = { run() { return 1; } };',
+        'class Worker { handle() { return 1; } }'
+    ],
     invalid: [
         {
-            code: noParamsBlockCode,
+            code: 'const noop = () => { return 1; };',
             output: 'const noop = function () { return 1; };',
-            errors: [ arrowError(noParamsBlockCode, '() => { return 1; }') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 14,
+                endLine: 1,
+                endColumn: 33
+            } ]
         },
         {
-            code: parenthesizedSingleParamCode,
+            code: 'const identity = (x) => x;',
             output: 'const identity = function (x) { return x; };',
-            errors: [ arrowError(parenthesizedSingleParamCode, '(x) => x') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 18,
+                endLine: 1,
+                endColumn: 26
+            } ]
         },
         {
-            code: bareSingleParamCode,
+            code: 'const identity = x => x;',
             output: 'const identity = function (x) { return x; };',
-            errors: [ arrowError(bareSingleParamCode, 'x => x') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 18,
+                endLine: 1,
+                endColumn: 24
+            } ]
         },
         {
-            code: concisePropertyAccessCode,
+            code: 'items.map((item) => item.id);',
             output: 'items.map(function (item) { return item.id; });',
-            errors: [ arrowError(concisePropertyAccessCode, '(item) => item.id') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 11,
+                endLine: 1,
+                endColumn: 28
+            } ]
         },
         {
-            code: multiParamBlockCode,
+            code: 'const add = (a, b) => { return a + b; };',
             output: 'const add = function (a, b) { return a + b; };',
-            errors: [ arrowError(multiParamBlockCode, '(a, b) => { return a + b; }') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 13,
+                endLine: 1,
+                endColumn: 40
+            } ]
         },
         {
-            code: conciseObjectLiteralCode,
+            code: 'const make = () => ({ x: 1 });',
             output: 'const make = function () { return { x: 1 }; };',
-            errors: [ arrowError(conciseObjectLiteralCode, '() => ({ x: 1 })') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 14,
+                endLine: 1,
+                endColumn: 30
+            } ]
         },
         {
-            code: defaultValueParamCode,
+            code: 'const init = (count = 1) => count;',
             output: 'const init = function (count = 1) { return count; };',
-            errors: [ arrowError(defaultValueParamCode, '(count = 1) => count') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 14,
+                endLine: 1,
+                endColumn: 34
+            } ]
         },
         {
-            code: restParamCode,
+            code: 'const collect = (...values) => values;',
             output: 'const collect = function (...values) { return values; };',
-            errors: [ arrowError(restParamCode, '(...values) => values') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 17,
+                endLine: 1,
+                endColumn: 38
+            } ]
         },
         {
-            code: destructuredParamCode,
+            code: 'const pickA = ({ a }) => a;',
             output: 'const pickA = function ({ a }) { return a; };',
-            errors: [ arrowError(destructuredParamCode, '({ a }) => a') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 15,
+                endLine: 1,
+                endColumn: 27
+            } ]
         },
         {
-            code: emptyBlockBodyCode,
+            code: 'const skip = () => {};',
             output: 'const skip = function () {};',
-            errors: [ arrowError(emptyBlockBodyCode, '() => {}') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 14,
+                endLine: 1,
+                endColumn: 22
+            } ]
         },
         {
-            code: asyncParenthesizedCode,
+            code: 'const fetchUser = async (id) => { return id; };',
             output: 'const fetchUser = async function (id) { return id; };',
-            errors: [ arrowError(asyncParenthesizedCode, 'async (id) => { return id; }') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 19,
+                endLine: 1,
+                endColumn: 47
+            } ]
         },
         {
-            code: asyncBareCode,
+            code: 'const fetchUser = async id => id;',
             output: 'const fetchUser = async function (id) { return id; };',
-            errors: [ arrowError(asyncBareCode, 'async id => id') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 19,
+                endLine: 1,
+                endColumn: 33
+            } ]
         },
         {
-            code: asyncConciseCode,
+            code: 'const fetchUser = async () => fetch();',
             output: 'const fetchUser = async function () { return fetch(); };',
-            errors: [ arrowError(asyncConciseCode, 'async () => fetch()') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 19,
+                endLine: 1,
+                endColumn: 38
+            } ]
         },
         {
-            code: iifeArrowCode,
+            code: '(() => 1)();',
             output: '(function () { return 1; })();',
-            errors: [ arrowError(iifeArrowCode, '() => 1') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 2,
+                endLine: 1,
+                endColumn: 9
+            } ]
         },
         {
-            code: nestedComposeCode,
+            code: 'const compose = () => { return () => { return 1; }; };',
             output: [
                 'const compose = function () { return () => { return 1; }; };',
                 'const compose = function () { return function () { return 1; }; };'
             ],
             errors: [
-                arrowError(nestedComposeCode, '() => { return () => { return 1; }; }'),
-                arrowError(nestedComposeCode, '() => { return 1; }')
+                {
+                    messageId: 'unnecessaryArrow',
+                    type: arrowFunctionNode,
+                    line: 1,
+                    column: 17,
+                    endLine: 1,
+                    endColumn: 54
+                },
+                {
+                    messageId: 'unnecessaryArrow',
+                    type: arrowFunctionNode,
+                    line: 1,
+                    column: 32,
+                    endLine: 1,
+                    endColumn: 51
+                }
             ]
         },
         {
-            code: commentInSignatureCode,
+            code: 'const tag = /* before */ (x) /* after */ => x;',
             output: 'const tag = /* before */ function (x) /* after */ { return x; };',
-            errors: [ arrowError(commentInSignatureCode, '(x) /* after */ => x') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 26,
+                endLine: 1,
+                endColumn: 46
+            } ]
         },
         {
-            code: multiLineArrowCode,
+            code: [
+                'const handler = (event) => {',
+                '    return event.target;',
+                '};'
+            ]
+                .join('\n'),
             output: [
                 'const handler = function (event) {',
                 '    return event.target;',
                 '};'
             ]
                 .join('\n'),
-            errors: [
-                arrowError(multiLineArrowCode, '(event) => {\n    return event.target;\n}')
-            ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 17,
+                endLine: 3,
+                endColumn: 2
+            } ]
         }
     ]
 });
@@ -227,12 +282,6 @@ const typescriptRuleTester = new RuleTester({
     }
 });
 
-const annotatedParamCode = 'const annotated = (x: number): number => x;';
-const optionalParamCode = 'const optional = (label?: string): string => label ?? "default";';
-const genericCode = 'const generic = <T>(value: T): T => value;';
-const asyncGenericCode = 'const asyncGeneric = async <T>(value: T): Promise<T> => value;';
-const unionReturnTypeCode = 'const orNull = <T>(value: T): T | null => value;';
-
 typescriptRuleTester.run('no-unnecessary-arrow-function (typescript)', noUnnecessaryArrowFunctionRule, {
     valid: [
         'const lexicalThis = (): unknown => { return this; };',
@@ -240,29 +289,64 @@ typescriptRuleTester.run('no-unnecessary-arrow-function (typescript)', noUnneces
     ],
     invalid: [
         {
-            code: annotatedParamCode,
+            code: 'const annotated = (x: number): number => x;',
             output: 'const annotated = function (x: number): number { return x; };',
-            errors: [ arrowError(annotatedParamCode, '(x: number): number => x') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 19,
+                endLine: 1,
+                endColumn: 43
+            } ]
         },
         {
-            code: optionalParamCode,
+            code: 'const optional = (label?: string): string => label ?? "default";',
             output: 'const optional = function (label?: string): string { return label ?? "default"; };',
-            errors: [ arrowError(optionalParamCode, '(label?: string): string => label ?? "default"') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 18,
+                endLine: 1,
+                endColumn: 64
+            } ]
         },
         {
-            code: genericCode,
+            code: 'const generic = <T>(value: T): T => value;',
             output: 'const generic = function <T>(value: T): T { return value; };',
-            errors: [ arrowError(genericCode, '<T>(value: T): T => value') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 17,
+                endLine: 1,
+                endColumn: 42
+            } ]
         },
         {
-            code: asyncGenericCode,
+            code: 'const asyncGeneric = async <T>(value: T): Promise<T> => value;',
             output: 'const asyncGeneric = async function <T>(value: T): Promise<T> { return value; };',
-            errors: [ arrowError(asyncGenericCode, 'async <T>(value: T): Promise<T> => value') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 22,
+                endLine: 1,
+                endColumn: 62
+            } ]
         },
         {
-            code: unionReturnTypeCode,
+            code: 'const orNull = <T>(value: T): T | null => value;',
             output: 'const orNull = function <T>(value: T): T | null { return value; };',
-            errors: [ arrowError(unionReturnTypeCode, '<T>(value: T): T | null => value') ]
+            errors: [ {
+                messageId: 'unnecessaryArrow',
+                type: arrowFunctionNode,
+                line: 1,
+                column: 16,
+                endLine: 1,
+                endColumn: 48
+            } ]
         }
     ]
 });
