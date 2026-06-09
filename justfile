@@ -21,3 +21,6 @@ test: compile
 
 packtory-dry-run: compile
     packtory publish
+
+packtory-publish: compile
+    packtory publish --no-dry-run
