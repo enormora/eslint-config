@@ -1,17 +1,35 @@
 import codeSpellChecker from '@cspell/eslint-plugin';
+import type { Rule } from 'eslint';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { ecmaVersion, javascriptExtensions } from '../../constants.ts';
-import { restrictedSyntaxPlugin } from '../../plugins/restricted-syntax/restricted-syntax-plugin.ts';
+import {
+    noUnnecessaryArrowFunctionRule
+} from '../../plugins/restricted-syntax/no-unnecessary-arrow-function.ts';
 import { bestPracticesRuleSet } from '../../rule-sets/best-practices.ts';
 import {
+    createRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
     noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.ts';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
+
+const noRestrictedSyntaxWrappers = createRestrictedSyntaxPlugin([
+    'no-class-declaration',
+    'no-switch-statement',
+    'no-empty-function-body',
+    'no-in-operator'
+]);
+
+const restrictedSyntaxPlugin = {
+    rules: {
+        ...noRestrictedSyntaxWrappers.rules,
+        'no-unnecessary-arrow-function': noUnnecessaryArrowFunctionRule as unknown as Rule.RuleModule
+    }
+};
 
 export const cspellSpellcheckerOptions = {
     autoFix: false,
