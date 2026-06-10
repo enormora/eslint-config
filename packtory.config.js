@@ -12,6 +12,7 @@ const sharedSourceFiles = [
     'presets/base/cspell-config.js',
     'presets/base/markdown-lint-rules.js',
     'presets/base/package-json.js',
+    'presets/base/plain-text-language.js',
     'rule-sets/best-practices.js',
     'rule-sets/restricted-syntax.js',
     'rule-sets/stylistic.js'
