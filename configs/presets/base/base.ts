@@ -1,11 +1,11 @@
 import dprintPlugin from '@ben_12/eslint-plugin-dprint';
-import simpleParser from '@ben_12/eslint-simple-parser';
 import type { Linter } from 'eslint';
 import { baseSharedConfig } from './base-shared.ts';
 import { jsonDprintConfig, tomlDprintConfig, typescriptDprintConfig, yamlDprintConfig } from './dprint-config.ts';
 import { dprintSettings } from './dprint-formatters.ts';
 import { markdownConfig } from './markdown.ts';
 import { packageJsonConfig } from './package-json.ts';
+import { plainTextLanguagePlugin } from './plain-text-language.ts';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -34,7 +34,15 @@ const baseJsConfig = {
 
 const dprintJsonConfig = {
     files: [ '**/*.json' ],
-    languageOptions: { parser: simpleParser },
+    ignores: [ '**/package.json' ],
+    language: 'plain-text/any',
+    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
+    settings: dprintSettings,
+    rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
+};
+
+const dprintPackageJsonConfig = {
+    files: [ '**/package.json' ],
     plugins: { dprint: dprintPlugin },
     settings: dprintSettings,
     rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
@@ -42,16 +50,16 @@ const dprintJsonConfig = {
 
 const dprintYamlConfig = {
     files: [ '**/*.{yml,yaml}' ],
-    languageOptions: { parser: simpleParser },
-    plugins: { dprint: dprintPlugin },
+    language: 'plain-text/any',
+    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
     settings: dprintSettings,
     rules: { 'dprint/yaml': [ 'error', { config: yamlDprintConfig } ] }
 };
 
 const dprintTomlConfig = {
     files: [ '**/*.toml' ],
-    languageOptions: { parser: simpleParser },
-    plugins: { dprint: dprintPlugin },
+    language: 'plain-text/any',
+    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
     settings: dprintSettings,
     rules: { 'dprint/toml': [ 'error', { config: tomlDprintConfig } ] }
 };
@@ -60,6 +68,7 @@ export const baseConfig = [
     baseJsConfig,
     dprintJsonConfig,
     packageJsonConfig,
+    dprintPackageJsonConfig,
     markdownConfig,
     dprintYamlConfig,
     dprintTomlConfig

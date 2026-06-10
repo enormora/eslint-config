@@ -1,9 +1,9 @@
-import simpleParser from '@ben_12/eslint-simple-parser';
 import type { Linter } from 'eslint';
 import prettierPlugin from 'eslint-plugin-prettier';
 import { baseSharedConfig } from '../base/base-shared.ts';
 import { markdownLintPlugins, markdownLintRules } from '../base/markdown-lint-rules.ts';
 import { packageJsonConfig } from '../base/package-json.ts';
+import { plainTextLanguagePlugin } from '../base/plain-text-language.ts';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -24,15 +24,22 @@ const baseJsConfig = {
 
 const prettierJsonConfig = {
     files: [ '**/*.json' ],
-    languageOptions: { parser: simpleParser },
+    ignores: [ '**/package.json' ],
+    language: 'plain-text/any',
+    plugins: { 'plain-text': plainTextLanguagePlugin, prettier: prettierPlugin },
+    rules: { 'prettier/prettier': 'error' }
+};
+
+const prettierPackageJsonConfig = {
+    files: [ '**/package.json' ],
     plugins: { prettier: prettierPlugin },
     rules: { 'prettier/prettier': 'error' }
 };
 
 const prettierYamlConfig = {
     files: [ '**/*.{yml,yaml}' ],
-    languageOptions: { parser: simpleParser },
-    plugins: { prettier: prettierPlugin },
+    language: 'plain-text/any',
+    plugins: { 'plain-text': plainTextLanguagePlugin, prettier: prettierPlugin },
     rules: { 'prettier/prettier': 'error' }
 };
 
@@ -55,6 +62,7 @@ export const baseWithPrettierConfig = [
     baseJsConfig,
     prettierJsonConfig,
     packageJsonConfig,
+    prettierPackageJsonConfig,
     markdownConfig,
     prettierYamlConfig
 ] as unknown as Linter.Config[];
