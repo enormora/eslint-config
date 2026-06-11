@@ -29,3 +29,22 @@ export default [
     }
 ];
 ```
+
+## `testSupportConfig`
+
+This package also re-exports `testSupportConfig` for test-related files that are not themselves test files (helpers, mocks, fixtures, setup). It applies the same shared relaxations as `vitestConfig` without enabling any `@vitest/*` rules or Vitest globals.
+
+```javascript
+import { testSupportConfig, vitestConfig } from '@enormora/eslint-config-vitest';
+
+export default [
+    {
+        ...vitestConfig,
+        files: [ '**/*.test.js' ]
+    },
+    {
+        ...testSupportConfig,
+        files: [ '**/test/helpers/**', '**/test/fixtures/**', '**/test/mocks/**' ]
+    }
+];
+```

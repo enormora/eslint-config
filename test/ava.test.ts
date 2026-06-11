@@ -1,6 +1,8 @@
+import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import avaPlugin from 'eslint-plugin-ava';
-import { avaConfig } from '../configs/presets/ava/ava.ts';
+import { avaConfig, testSupportConfig as avaTestSupportConfig } from '../configs/presets/ava/ava.ts';
+import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
@@ -33,5 +35,9 @@ suite('ava preset', function () {
 
     test('ava preset config has no validation errors', function () {
         checkConfigToHaveNoValidationIssues(avaConfig);
+    });
+
+    test('re-exports the canonical testSupportConfig', function () {
+        assert.strictEqual(avaTestSupportConfig, testSupportConfig);
     });
 });
