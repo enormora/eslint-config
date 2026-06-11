@@ -53,6 +53,7 @@ const expectedViolationRuleIds = [
     'complexity',
     'default-case',
     'dprint/typescript',
+    'enormora-typescript/prefer-readonly-types',
     'eqeqeq',
     'functional/no-this-expressions',
     'functional/prefer-immutable-types',

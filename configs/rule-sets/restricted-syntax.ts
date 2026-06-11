@@ -7,7 +7,7 @@ type RestrictedSyntaxRestriction = {
 };
 
 type RestrictedSyntaxPlugin = {
-    readonly rules: Record<string, Rule.RuleModule | undefined>;
+    readonly rules: Readonly<Record<string, Rule.RuleModule | undefined>>;
 };
 
 type NoClassDeclarationOptions = {

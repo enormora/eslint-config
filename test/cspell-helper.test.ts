@@ -26,7 +26,10 @@ suite('withCspellWords helper', function () {
 
     test('appends the provided words to the base cspell.words list', function () {
         const block = withCspellWords([ 'enormora', 'packtory' ]);
-        const [ , options ] = block.rules['@cspell/spellchecker'] as [string, { cspell: { words: string[]; }; }];
+        const [ , options ] = block.rules['@cspell/spellchecker'] as [
+            string,
+            { readonly cspell: { readonly words: readonly string[]; }; }
+        ];
         assert.deepStrictEqual(options.cspell.words, [ 'enormora', 'packtory' ]);
     });
 
