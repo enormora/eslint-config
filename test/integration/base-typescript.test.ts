@@ -55,7 +55,6 @@ const expectedViolationRuleIds = [
     'dprint/typescript',
     'enormora-typescript/prefer-readonly-types',
     'eqeqeq',
-    'functional/no-this-expressions',
     'functional/prefer-immutable-types',
     'functional/type-declaration-immutability',
     'id-length',
