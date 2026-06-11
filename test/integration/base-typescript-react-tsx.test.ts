@@ -24,6 +24,7 @@ const expectedViolationRuleIds = [
     'arrow-body-style',
     'destructuring/in-params',
     'dprint/typescript',
+    'enormora-typescript/prefer-readonly-types',
     'functional/prefer-immutable-types',
     'functional/type-declaration-immutability',
     'react-hooks/exhaustive-deps',

@@ -205,6 +205,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-type-assertion': 'error',
         'enormora-typescript/no-impure-satisfies': 'error',
         'enormora-typescript/prefer-named-callable-types': 'error',
+        'enormora-typescript/prefer-readonly-types': 'error',
         '@typescript-eslint/no-unused-private-class-members': 'error',
         ...configureWrappedCoreRule('no-unused-vars', undefined),
         ...configureWrappedCoreRule('no-useless-constructor', undefined),
