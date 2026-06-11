@@ -1,6 +1,10 @@
 import vitestPlugin from '@vitest/eslint-plugin';
 import { testRuleSet } from '../test-base/test-base.ts';
 
+/* eslint-disable no-barrel-files/no-barrel-files -- expose testSupportConfig as public API so consumers can apply the shared relaxations to non-test test files without depending on @enormora/eslint-config-test-base directly */
+export { testSupportConfig } from '../test-base/test-base.ts';
+/* eslint-enable no-barrel-files/no-barrel-files -- end of public re-exports */
+
 export const vitestConfig = {
     plugins: {
         vitest: vitestPlugin,

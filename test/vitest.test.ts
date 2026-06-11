@@ -1,6 +1,8 @@
+import assert from 'node:assert';
 import vitestPlugin from '@vitest/eslint-plugin';
 import { suite, test } from 'mocha';
-import { vitestConfig } from '../configs/presets/vitest/vitest.ts';
+import { testSupportConfig as vitestTestSupportConfig, vitestConfig } from '../configs/presets/vitest/vitest.ts';
+import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
@@ -33,5 +35,9 @@ suite('vitest preset', function () {
 
     test('vitest preset config has no validation errors', function () {
         checkConfigToHaveNoValidationIssues(vitestConfig);
+    });
+
+    test('re-exports the canonical testSupportConfig', function () {
+        assert.strictEqual(vitestTestSupportConfig, testSupportConfig);
     });
 });

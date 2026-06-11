@@ -29,3 +29,22 @@ export default [
     }
 ];
 ```
+
+## `testSupportConfig`
+
+This package also re-exports `testSupportConfig` for test-related files that are not themselves test files (helpers, mocks, fixtures, setup). It applies the same shared relaxations as `mochaConfig` without enabling any `mocha/*` rules.
+
+```javascript
+import { mochaConfig, testSupportConfig } from '@enormora/eslint-config-mocha';
+
+export default [
+    {
+        ...mochaConfig,
+        files: [ '**/*.test.js' ]
+    },
+    {
+        ...testSupportConfig,
+        files: [ '**/test/helpers/**', '**/test/fixtures/**', '**/test/mocks/**' ]
+    }
+];
+```

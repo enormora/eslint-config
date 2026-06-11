@@ -29,3 +29,22 @@ export default [
     }
 ];
 ```
+
+## `testSupportConfig`
+
+This package also re-exports `testSupportConfig` for test-related files that are not themselves test files (helpers, mocks, fixtures, setup). It applies the same shared relaxations as `avaConfig` without enabling any `ava/*` rules.
+
+```javascript
+import { avaConfig, testSupportConfig } from '@enormora/eslint-config-ava';
+
+export default [
+    {
+        ...avaConfig,
+        files: [ '**/*.test.js' ]
+    },
+    {
+        ...testSupportConfig,
+        files: [ '**/test/helpers/**', '**/test/fixtures/**', '**/test/mocks/**' ]
+    }
+];
+```

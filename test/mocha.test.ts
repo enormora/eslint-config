@@ -1,6 +1,8 @@
+import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import mochaPlugin from 'eslint-plugin-mocha';
-import { mochaConfig } from '../configs/presets/mocha/mocha.ts';
+import { mochaConfig, testSupportConfig as mochaTestSupportConfig } from '../configs/presets/mocha/mocha.ts';
+import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAdditionalRulesConfigured,
     checkAllPluginRulesConfigured,
@@ -50,5 +52,9 @@ suite('mocha preset', function () {
                 'prefer-arrow-callback': 'off'
             }
         });
+    });
+
+    test('re-exports the canonical testSupportConfig', function () {
+        assert.strictEqual(mochaTestSupportConfig, testSupportConfig);
     });
 });
