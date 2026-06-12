@@ -72,10 +72,14 @@ export async function buildConfig() {
                 }
             ],
             additionalPackageJsonAttributes: {
-                license: packageJson.license,
-                repository: packageJson.repository,
                 author: packageJson.author,
-                contributors: packageJson.contributors
+                bugs: {
+                    url: 'https://github.com/enormora/eslint-config/issues'
+                },
+                contributors: packageJson.contributors,
+                homepage: 'https://github.com/enormora/eslint-config#readme',
+                license: packageJson.license,
+                repository: packageJson.repository
             }
         },
         packages: [
