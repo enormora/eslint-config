@@ -1,5 +1,5 @@
 import type { Linter } from 'eslint';
-import * as eslintPluginPlugin from 'eslint-plugin-eslint-plugin';
+import eslintPluginPlugin from 'eslint-plugin-eslint-plugin';
 
 type EslintPluginConfigOptions = {
     readonly docsUrlPattern: string;
