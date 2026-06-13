@@ -58,6 +58,7 @@ const expectedViolationRuleIds = [
     'functional/prefer-immutable-types',
     'functional/type-declaration-immutability',
     'id-length',
+    'import/extensions',
     'import/no-duplicates',
     'init-declarations',
     'max-depth',
@@ -127,6 +128,18 @@ suite('base+typescript integration', function () {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
         assert.deepStrictEqual(detail, []);
+    });
+
+    test('base+typescript package imports do not require TypeScript extensions', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'package-imports.ts');
+        const extensionMessages = messages
+            .filter(function isImportExtensionMessage(message) {
+                return message.ruleId === 'import/extensions';
+            })
+            .map(function toRuleLocation(message) {
+                return { ruleId: message.ruleId, line: message.line, message: message.message };
+            });
+        assert.deepStrictEqual(extensionMessages, []);
     });
 
     test('base+typescript autofix is idempotent on the violations fixture', async function () {

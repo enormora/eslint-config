@@ -478,14 +478,15 @@ export const typescriptConfig = {
 
         'import/extensions': [
             'error',
+            'ignorePackages',
             {
-                ts: 'ignorePackages',
-                mts: 'ignorePackages',
-                cts: 'ignorePackages',
                 js: 'never',
                 mjs: 'never',
                 cjs: 'never',
-                json: 'ignorePackages'
+                json: 'always',
+                ts: 'always',
+                mts: 'always',
+                cts: 'always'
             }
         ],
 
