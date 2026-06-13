@@ -5,11 +5,12 @@
 import { writeFileSync } from 'fs';
 import fsDefault from 'fs';
 import { writeFileSync as writeAgain } from 'fs';
+import { greet } from './clean.js';
 
 var declaredWithVar = 1;
 var laterAssigned;
 laterAssigned = 2;
-console.log(declaredWithVar, laterAssigned, writeFileSync, fsDefault, writeAgain);
+console.log(declaredWithVar, laterAssigned, writeFileSync, fsDefault, writeAgain, greet);
 
 const concatenated = 'hello' + ' ' + 'world';
 const big = 10000000;
