@@ -2,7 +2,9 @@
 
 [![npm](https://img.shields.io/npm/v/@enormora/eslint-config-browser?label=)](https://www.npmjs.com/package/@enormora/eslint-config-browser)
 
-Config preset for browser environments, enabling specific rules and configures global variables.
+Config preset for browser environments, enabling browser-specific rules and globals.
+
+DOM-focused `eslint-plugin-unicorn` rules are enabled here instead of in the base preset.
 
 ## Install & Setup
 

@@ -14,6 +14,10 @@ const { RuleCreator: ruleCreator } = ESLintUtils;
 const buildRule = ruleCreator(ruleUrl);
 
 type CallableUtility = 'ConstructorParameters' | 'InstanceType' | 'Parameters' | 'ReturnType' | 'ThisParameterType';
+type LocalAlias = {
+    readonly alias: TsSymbol;
+    readonly fileName: string;
+};
 
 const callableUtilities: ReadonlySet<CallableUtility> = new Set([
     'ConstructorParameters',
@@ -106,7 +110,7 @@ function isExternalSourceFile(fileName: string): boolean {
     return fileName.includes('/node_modules/');
 }
 
-function findLocalAlias(type: Type): { readonly alias: TsSymbol; readonly fileName: string; } | undefined {
+function findLocalAlias(type: Type): LocalAlias | undefined {
     const { aliasSymbol } = type;
     if (aliasSymbol === undefined) {
         return undefined;
@@ -118,9 +122,7 @@ function findLocalAlias(type: Type): { readonly alias: TsSymbol; readonly fileNa
     return { alias: aliasSymbol, fileName };
 }
 
-function findFirstLocalAlias(
-    candidates: readonly Type[]
-): { readonly alias: TsSymbol; readonly fileName: string; } | undefined {
+function findFirstLocalAlias(candidates: readonly Type[]): LocalAlias | undefined {
     for (const candidate of candidates) {
         const found = findLocalAlias(candidate);
         if (found !== undefined) {

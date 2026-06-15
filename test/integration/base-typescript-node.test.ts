@@ -108,11 +108,14 @@ const expectedViolationRuleIds = [
     'unicorn/no-new-buffer',
     'unicorn/no-process-exit',
     'unicorn/no-this-assignment',
+    'unicorn/no-unreadable-new-expression',
+    'unicorn/no-useless-concat',
     'unicorn/numeric-separators-style',
     'unicorn/prefer-includes',
     'unicorn/prefer-math-trunc',
     'unicorn/prefer-node-protocol',
-    'unicorn/prefer-string-slice'
+    'unicorn/prefer-string-slice',
+    'unicorn/require-array-sort-compare'
 ];
 
 suite('base+typescript+node integration', function () {
