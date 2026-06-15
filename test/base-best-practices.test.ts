@@ -12,13 +12,31 @@ import {
 } from './rules-configuration.ts';
 
 const baseConfigRules = mergeConfigRules(baseConfig);
+const browserUnicornRules = [
+    'better-dom-traversing',
+    'dom-node-dataset',
+    'no-blob-to-file',
+    'no-canvas-to-image',
+    'no-incorrect-query-selector',
+    'no-invalid-file-input-accept',
+    'no-late-current-target-access',
+    'no-unsafe-dom-html',
+    'prefer-add-event-listener-options',
+    'prefer-dom-node-html-methods',
+    'prefer-location-assign',
+    'prefer-path2d',
+    'prefer-scoped-selector',
+    'require-css-escape',
+    'require-passive-events'
+];
 
 suite('base best practices rule set', function () {
     test('all eslint-plugin-unicorn rules are configured', function () {
         checkAllPluginRulesConfigured({
             ruleConfigSet: baseConfigRules,
             pluginRules: unicornPlugin.rules,
-            pluginName: 'eslint-plugin-unicorn'
+            pluginName: 'eslint-plugin-unicorn',
+            rulesToExclude: browserUnicornRules
         });
     });
 

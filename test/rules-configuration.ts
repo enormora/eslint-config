@@ -20,6 +20,7 @@ type ConfigBlock = {
     readonly languageOptions: Readonly<Record<string, unknown>>;
     readonly parserOptions: Readonly<Record<string, unknown>>;
 };
+type ConfigRulesBlock = Pick<ConfigBlock, 'rules'>;
 
 type RuleWithMeta = { readonly meta?: { readonly deprecated?: unknown; }; };
 
@@ -151,7 +152,7 @@ export function checkUnknownPluginRulesAreNotConfigured(
 export function mergeConfigRules(config: unknown): RuleConfigSet {
     const blocks = Array.isArray(config) ? config : [ config ];
     return blocks.reduce<RuleConfigSet>(function collectBlockRules(merged: RuleConfigSet, block: unknown) {
-        const blockRules = (block as { readonly rules?: RuleConfigSet; } | undefined)?.rules ?? {};
+        const blockRules = (block as Partial<ConfigRulesBlock> | undefined)?.rules ?? {};
         return { ...merged, ...blockRules };
     }, {});
 }

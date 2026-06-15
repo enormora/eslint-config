@@ -9,8 +9,8 @@ function cloneOptions(value: unknown): unknown {
     }
     if (value !== null && typeof value === 'object') {
         const result: Record<string, unknown> = {};
-        for (const key of Object.keys(value)) {
-            result[key] = cloneOptions((value as Record<string, unknown>)[key]);
+        for (const [ key, value_ ] of Object.entries(value)) {
+            result[key] = cloneOptions(value_);
         }
         return result;
     }
