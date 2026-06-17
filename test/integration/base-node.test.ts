@@ -69,6 +69,7 @@ const expectedViolationRuleIds = [
     'unicorn/no-lonely-if',
     'unicorn/no-new-buffer',
     'unicorn/no-process-exit',
+    'unicorn/no-top-level-assignment-in-function',
     'unicorn/no-unused-properties',
     'unicorn/no-useless-concat',
     'unicorn/numeric-separators-style',
