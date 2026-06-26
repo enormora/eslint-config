@@ -71,7 +71,7 @@
         "@typescript-eslint/rule-tester": "8.62.0",
         "eslint": "10.5.0",
         "mocha": "11.7.6",
-        "prettier": "3.8.4",
+        "prettier": "3.8.5",
         "rust-just": "1.54.0",
         "type-fest": "5.7.0",
         "typescript": "6.0.3"
