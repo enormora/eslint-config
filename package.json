@@ -17,7 +17,7 @@
     "dependencies": {
         "@ben_12/eslint-plugin-dprint": "1.22.0",
         "@cspell/eslint-plugin": "10.0.1",
-        "@dprint/json": "0.21.3",
+        "@dprint/json": "0.22.0",
         "@dprint/markdown": "0.22.1",
         "@dprint/toml": "0.7.0",
         "@dprint/typescript": "0.96.1",
