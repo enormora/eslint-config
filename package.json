@@ -72,7 +72,7 @@
         "eslint": "10.6.0",
         "mocha": "11.7.6",
         "prettier": "3.9.4",
-        "rust-just": "1.54.0",
+        "rust-just": "1.55.0",
         "type-fest": "5.7.0",
         "typescript": "6.0.3"
     },
