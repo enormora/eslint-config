@@ -13,6 +13,7 @@
         "treegrid",
         "spinbutton",
         "menuitemradio",
-        "menuitemcheckbox"
+        "menuitemcheckbox",
+        "misrefactored"
     ]
 }
