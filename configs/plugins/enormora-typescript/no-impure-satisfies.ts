@@ -60,19 +60,19 @@ function childrenOf(checker: TypeChecker, type: Type): readonly Type[] {
     return collectObjectTypeChildren(checker, type);
 }
 
-function containsLiteralComponent(checker: TypeChecker, rootType: Type, visited: WeakSet<Type>): boolean {
-    const queue: Type[] = [ rootType ];
-    while (queue.length > 0) {
-        const current = queue.shift() as Type;
-        if (!visited.has(current)) {
-            visited.add(current);
-            if (current.isLiteral()) {
-                return true;
-            }
-            queue.push(...childrenOf(checker, current));
+function containsLiteralComponent(checker: TypeChecker, rootType: Type): boolean {
+    const visitedTypes = new WeakSet<Type>();
+
+    function typeContainsLiteralComponent(type: Type): boolean {
+        if (visitedTypes.has(type)) {
+            return false;
         }
+        visitedTypes.add(type);
+        return type.isLiteral() ||
+            childrenOf(checker, type).some(typeContainsLiteralComponent);
     }
-    return false;
+
+    return typeContainsLiteralComponent(rootType);
 }
 
 const description = 'Disallow `satisfies` expressions that aren’t pure type checks: literal constraints or no-op.';
@@ -103,7 +103,7 @@ export const noImpureSatisfiesRule = buildRule({
             TSSatisfiesExpression(node: TSESTree.TSSatisfiesExpression) {
                 const satisfiesTypeNode = services.esTreeNodeToTSNodeMap.get(node.typeAnnotation) as TypeNode;
                 const satisfiesType = checker.getTypeFromTypeNode(satisfiesTypeNode);
-                const containsLiteral = containsLiteralComponent(checker, satisfiesType, new WeakSet());
+                const containsLiteral = containsLiteralComponent(checker, satisfiesType);
 
                 context.report({
                     node,

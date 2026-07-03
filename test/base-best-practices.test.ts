@@ -20,12 +20,17 @@ const browserUnicornRules = [
     'no-incorrect-query-selector',
     'no-invalid-file-input-accept',
     'no-late-current-target-access',
+    'no-late-event-control',
+    'no-selector-as-dom-name',
     'no-unsafe-dom-html',
     'prefer-add-event-listener-options',
     'prefer-dom-node-html-methods',
+    'prefer-dom-node-replace-children',
     'prefer-location-assign',
+    'prefer-observer-apis',
     'prefer-path2d',
     'prefer-scoped-selector',
+    'prefer-toggle-attribute',
     'require-css-escape',
     'require-passive-events'
 ];

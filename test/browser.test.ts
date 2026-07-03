@@ -13,12 +13,17 @@ const browserUnicornRules = [
     'unicorn/no-incorrect-query-selector',
     'unicorn/no-invalid-file-input-accept',
     'unicorn/no-late-current-target-access',
+    'unicorn/no-late-event-control',
+    'unicorn/no-selector-as-dom-name',
     'unicorn/no-unsafe-dom-html',
     'unicorn/prefer-add-event-listener-options',
     'unicorn/prefer-dom-node-html-methods',
+    'unicorn/prefer-dom-node-replace-children',
     'unicorn/prefer-location-assign',
+    'unicorn/prefer-observer-apis',
     'unicorn/prefer-path2d',
     'unicorn/prefer-scoped-selector',
+    'unicorn/prefer-toggle-attribute',
     'unicorn/require-css-escape',
     'unicorn/require-passive-events'
 ];
