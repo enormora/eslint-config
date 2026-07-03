@@ -24,6 +24,7 @@ export const astroRules = {
     'astro/no-deprecated-astro-resolve': 'error',
     'astro/no-deprecated-getentrybyslug': 'error',
     'astro/no-exports-from-components': 'off',
+    'astro/no-omitted-end-tags': 'error',
     'astro/no-prerender-export-outside-pages': 'off',
     'astro/no-set-html-directive': 'off',
     'astro/no-set-text-directive': 'off',
@@ -117,15 +118,7 @@ export const astroRules = {
         {
             ul: [ 'listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid' ],
             ol: [ 'listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid' ],
-            li: [
-                'menuitem',
-                'menuitemradio',
-                'menuitemcheckbox',
-                'option',
-                'row',
-                'tab',
-                'treeitem'
-            ],
+            li: [ 'menuitem', 'menuitemradio', 'menuitemcheckbox', 'option', 'row', 'tab', 'treeitem' ],
             table: [ 'grid' ],
             td: [ 'gridcell' ],
             fieldset: [ 'radiogroup', 'presentation' ]
