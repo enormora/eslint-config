@@ -6,7 +6,7 @@ import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -34,10 +34,18 @@ suite('ava preset', function () {
     });
 
     test('ava preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(avaConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(avaConfig),
+            [],
+            'AVA preset config must have no validation errors'
+        );
     });
 
     test('re-exports the canonical testSupportConfig', function () {
-        assert.strictEqual(avaTestSupportConfig, testSupportConfig);
+        assert.strictEqual(
+            avaTestSupportConfig,
+            testSupportConfig,
+            'AVA preset must re-export the canonical testSupportConfig'
+        );
     });
 });

@@ -7,7 +7,7 @@ import { typescriptConfig } from '../configs/presets/typescript/typescript.ts';
 import {
     checkAllPluginRulesConfigured,
     checkConfigLanguageOptions,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -95,6 +95,6 @@ suite('typescript preset', function () {
     });
 
     test('typescript preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(typescriptConfig);
+        assertConfigToHaveNoValidationIssues(typescriptConfig);
     });
 });

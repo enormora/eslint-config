@@ -157,7 +157,7 @@ export function mergeConfigRules(config: unknown): RuleConfigSet {
     }, {});
 }
 
-export function checkConfigToHaveNoValidationIssues(config: unknown): void {
+export function assertConfigToHaveNoValidationIssues(config: unknown): Linter.LintMessage[] {
     const linter = new Linter({ configType: 'flat' });
 
     const sourceFile = ts.createSourceFile('/foo.js', 'foo();', ts.ScriptTarget.Latest);
@@ -191,15 +191,17 @@ export function checkConfigToHaveNoValidationIssues(config: unknown): void {
 
     const verifiableConfig = Array.isArray(config) ? config.map(injectProgram) : injectProgram(config);
 
-    assert.doesNotThrow(function verifyConfig() {
-        linter.verify('foo();', verifiableConfig as unknown as Linter.Config[], '/foo.js');
-    }, 'Linter.verify() failed for the given config');
+    return linter
+        .verify('foo();', verifiableConfig as unknown as Linter.Config[], '/foo.js')
+        .filter(function isValidationError(message) {
+            return message.severity === 2;
+        });
 }
 
 export function checkConfigLanguageOptions(testCase: LanguageOptionsTestCase): void {
     const { configLanguageOptions, languageOptions } = testCase;
 
-    assert.deepStrictEqual(configLanguageOptions, languageOptions);
+    assert.deepStrictEqual(configLanguageOptions, languageOptions, 'Config language options do not match');
 }
 
 export function checkAllTestRulesConfigured(testCase: Pick<RuleTestCase, 'ruleConfigSet'>): void {

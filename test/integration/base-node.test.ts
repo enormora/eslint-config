@@ -83,7 +83,11 @@ const expectedViolationRuleIds = [
 suite('base+node integration', function () {
     test('base+node violations fixture reports the expected rule ids', async function () {
         const { messages } = await lintFixture(configs, comboName, 'violations.js');
-        assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
+        assert.deepStrictEqual(
+            uniqueSortedRuleIds(messages),
+            expectedViolationRuleIds,
+            'base+node violations fixture must report the expected rule ids'
+        );
     });
 
     test('base+node clean fixture produces no reports', async function () {
@@ -91,7 +95,7 @@ suite('base+node integration', function () {
         const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
-        assert.deepStrictEqual(detail, []);
+        assert.deepStrictEqual(detail, [], 'base+node clean fixture must produce no reports');
     });
 
     test('base+node autofix is idempotent on the violations fixture', async function () {

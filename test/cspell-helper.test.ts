@@ -21,7 +21,7 @@ suite('withCspellWords helper', function () {
     test('returns a config block with the @cspell/spellchecker rule at error severity', function () {
         const block = withCspellWords([ 'enormora' ]);
         const [ severity ] = block.rules['@cspell/spellchecker'];
-        assert.strictEqual(severity, 'error');
+        assert.strictEqual(severity, 'error', 'withCspellWords must configure @cspell/spellchecker as an error');
     });
 
     test('appends the provided words to the base cspell.words list', function () {
@@ -30,7 +30,11 @@ suite('withCspellWords helper', function () {
             string,
             { readonly cspell: { readonly words: readonly string[]; }; }
         ];
-        assert.deepStrictEqual(options.cspell.words, [ 'enormora', 'packtory' ]);
+        assert.deepStrictEqual(
+            options.cspell.words,
+            [ 'enormora', 'packtory' ],
+            'withCspellWords must append the provided words'
+        );
     });
 
     test('preserves the remaining options from the base config', function () {
@@ -40,17 +44,17 @@ suite('withCspellWords helper', function () {
             ...cspellSpellcheckerOptions,
             cspell: { ...cspellSpellcheckerOptions.cspell, words: [ 'foo' ] }
         };
-        assert.deepStrictEqual(options, expected);
+        assert.deepStrictEqual(options, expected, 'withCspellWords must preserve non-word spellchecker options');
     });
 
     test('does not mutate the shared base options', function () {
         const before = cloneOptions(cspellSpellcheckerOptions);
         withCspellWords([ 'mutates' ]);
-        assert.deepStrictEqual(cspellSpellcheckerOptions, before);
+        assert.deepStrictEqual(cspellSpellcheckerOptions, before, 'withCspellWords must not mutate shared options');
     });
 
     test('exposes only the rules key so it can be spread alongside other config blocks', function () {
         const block = withCspellWords([ 'foo' ]);
-        assert.deepStrictEqual(Object.keys(block), [ 'rules' ]);
+        assert.deepStrictEqual(Object.keys(block), [ 'rules' ], 'withCspellWords must only expose rules');
     });
 });

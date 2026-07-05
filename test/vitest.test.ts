@@ -6,7 +6,7 @@ import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -34,10 +34,18 @@ suite('vitest preset', function () {
     });
 
     test('vitest preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(vitestConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(vitestConfig),
+            [],
+            'Vitest preset config must have no validation errors'
+        );
     });
 
     test('re-exports the canonical testSupportConfig', function () {
-        assert.strictEqual(vitestTestSupportConfig, testSupportConfig);
+        assert.strictEqual(
+            vitestTestSupportConfig,
+            testSupportConfig,
+            'Vitest preset must re-export the canonical testSupportConfig'
+        );
     });
 });

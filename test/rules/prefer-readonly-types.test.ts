@@ -198,13 +198,13 @@ suite('prefer-readonly-types autofix convergence', function () {
         const input = 'type Nested = { readonly outer: string[][] };';
         const expected = 'type Nested = { readonly outer: readonly (readonly string[])[] };';
         const result = linter.verifyAndFix(input, configs, { filename: 'probe.ts' });
-        assert.strictEqual(result.output, expected);
+        assert.strictEqual(result.output, expected, 'nested array autofix must converge to readonly nesting');
     });
 
     test('tuple with rest of mutable array converges to nested readonly', function () {
         const input = 'type Nested = { readonly outer: [string, ...string[]] };';
         const expected = 'type Nested = { readonly outer: readonly [string, ...(readonly string[])] };';
         const result = linter.verifyAndFix(input, configs, { filename: 'probe.ts' });
-        assert.strictEqual(result.output, expected);
+        assert.strictEqual(result.output, expected, 'tuple rest autofix must converge to readonly nesting');
     });
 });

@@ -4,7 +4,7 @@ import { basePluginRuleSet } from './base-plugin-rule-set.ts';
 import {
     checkAllCoreRulesConfigured,
     checkAllPluginRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownCoreRulesAreNotConfigured,
     checkUnknownPluginRulesAreNotConfigured,
     mergeConfigRules
@@ -38,6 +38,6 @@ suite('base preset', function () {
     }
 
     test('base preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(baseConfig);
+        assertConfigToHaveNoValidationIssues(baseConfig);
     });
 });

@@ -8,7 +8,7 @@ import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
     checkConfigLanguageOptions,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -36,7 +36,11 @@ suite('mocha preset', function () {
     });
 
     test('mocha preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(mochaConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(mochaConfig),
+            [],
+            'Mocha preset config must have no validation errors'
+        );
     });
 
     test('mocha preset config has the correct language options defined', function () {
@@ -55,6 +59,10 @@ suite('mocha preset', function () {
     });
 
     test('re-exports the canonical testSupportConfig', function () {
-        assert.strictEqual(mochaTestSupportConfig, testSupportConfig);
+        assert.strictEqual(
+            mochaTestSupportConfig,
+            testSupportConfig,
+            'Mocha preset must re-export the canonical testSupportConfig'
+        );
     });
 });

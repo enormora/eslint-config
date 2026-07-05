@@ -43,7 +43,11 @@ const expectedViolationRuleIds = [
 suite('base markdown integration', function () {
     test('base markdown violations fixture reports the expected rule ids', async function () {
         const { messages } = await lintFixture(configs, comboName, 'violations.md');
-        assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
+        assert.deepStrictEqual(
+            uniqueSortedRuleIds(messages),
+            expectedViolationRuleIds,
+            'base markdown violations fixture must report the expected rule ids'
+        );
     });
 
     test('base markdown clean fixture produces no reports', async function () {
@@ -51,7 +55,7 @@ suite('base markdown integration', function () {
         const detail = messages.map(function toReportDetail(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
-        assert.deepStrictEqual(detail, []);
+        assert.deepStrictEqual(detail, [], 'base markdown clean fixture must produce no reports');
     });
 
     test('base markdown autofix is idempotent on the violations fixture', async function () {

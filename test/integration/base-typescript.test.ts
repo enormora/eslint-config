@@ -122,7 +122,11 @@ const expectedViolationRuleIds = [
 suite('base+typescript integration', function () {
     test('base+typescript violations fixture reports the expected rule ids', async function () {
         const { messages } = await lintFixture(configs, comboName, 'violations.ts');
-        assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
+        assert.deepStrictEqual(
+            uniqueSortedRuleIds(messages),
+            expectedViolationRuleIds,
+            'base+typescript violations fixture must report the expected rule ids'
+        );
     });
 
     test('base+typescript clean fixture produces no reports', async function () {
@@ -130,7 +134,7 @@ suite('base+typescript integration', function () {
         const detail = messages.map(function toRuleLocation(message) {
             return { ruleId: message.ruleId, line: message.line, message: message.message };
         });
-        assert.deepStrictEqual(detail, []);
+        assert.deepStrictEqual(detail, [], 'base+typescript clean fixture must produce no reports');
     });
 
     test('base+typescript package imports do not require TypeScript extensions', async function () {
@@ -142,7 +146,11 @@ suite('base+typescript integration', function () {
             .map(function toRuleLocation(message) {
                 return { ruleId: message.ruleId, line: message.line, message: message.message };
             });
-        assert.deepStrictEqual(extensionMessages, []);
+        assert.deepStrictEqual(
+            extensionMessages,
+            [],
+            'base+typescript package imports must not require TypeScript extensions'
+        );
     });
 
     test('base+typescript autofix is idempotent on the violations fixture', async function () {
@@ -163,7 +171,11 @@ suite('base+typescript integration', function () {
             .map(function toRuleLocation(message) {
                 return { ruleId: message.ruleId, line: message.line, message: message.message };
             });
-        assert.deepStrictEqual(immutabilityMessages, []);
+        assert.deepStrictEqual(
+            immutabilityMessages,
+            [],
+            'base+typescript built-in classes must not produce immutability reports'
+        );
     });
 
     test('base+typescript named class/interface parameters pass while inline mutable parameters are flagged', async function () {

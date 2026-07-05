@@ -1,11 +1,23 @@
 import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import { testRuleSet, testSupportConfig } from '../configs/presets/test-base/test-base.ts';
-import { checkConfigToHaveNoValidationIssues } from './rules-configuration.ts';
+import { assertConfigToHaveNoValidationIssues } from './rules-configuration.ts';
 
 suite('testSupportConfig', function () {
     test('exposes exactly the rules from testRuleSet', function () {
-        assert.deepStrictEqual(Object.keys(testSupportConfig.rules ?? {}), Object.keys(testRuleSet.rules));
+        assert.deepStrictEqual(
+            Object.keys(testSupportConfig.rules ?? {}),
+            Object.keys(testRuleSet.rules),
+            'testSupportConfig rules must match testRuleSet rules'
+        );
+    });
+
+    test('exposes exactly the plugins from testRuleSet', function () {
+        assert.deepStrictEqual(
+            Object.keys(testSupportConfig.plugins ?? {}),
+            Object.keys(testRuleSet.plugins),
+            'testSupportConfig plugins must match testRuleSet plugins'
+        );
     });
 
     test('has no rules outside testRuleSet', function () {
@@ -15,10 +27,14 @@ suite('testSupportConfig', function () {
             return !testRuleNames.includes(ruleName);
         });
 
-        assert.deepStrictEqual(extraneous, []);
+        assert.deepStrictEqual(extraneous, [], 'testSupportConfig must not expose rules outside testRuleSet');
     });
 
     test('config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(testSupportConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(testSupportConfig),
+            [],
+            'testSupportConfig must have no validation errors'
+        );
     });
 });

@@ -152,6 +152,7 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-test-base',
                 roots: { main: { js: 'presets/test-base/test-base.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-node-assert' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(presetMarkdownFolder, 'presets/test-base/test-base.md'),
@@ -160,6 +161,20 @@ export async function buildConfig() {
                 ],
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s shared ESLint rules for test files'
+                }
+            },
+            {
+                name: '@enormora/eslint-config-node-assert',
+                roots: { main: { js: 'presets/node-assert/node-assert.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/node-assert/node-assert.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint node:assert configuration'
                 }
             },
             {

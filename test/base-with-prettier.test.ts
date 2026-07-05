@@ -4,7 +4,7 @@ import { baseWithPrettierPluginRuleSet } from './base-with-prettier-plugin-rule-
 import {
     checkAllCoreRulesConfigured,
     checkAllPluginRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownCoreRulesAreNotConfigured,
     checkUnknownPluginRulesAreNotConfigured,
     mergeConfigRules
@@ -46,6 +46,6 @@ suite('base-with-prettier preset', function () {
     }
 
     test('base-with-prettier preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(baseWithPrettierConfig);
+        assertConfigToHaveNoValidationIssues(baseWithPrettierConfig);
     });
 });

@@ -8,6 +8,7 @@ export { testSupportConfig } from '../test-base/test-base.ts';
 
 export const mochaConfig = {
     plugins: {
+        ...testRuleSet.plugins,
         mocha: mochaPlugin
     },
     rules: {
