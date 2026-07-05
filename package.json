@@ -73,7 +73,7 @@
         "mocha": "11.7.6",
         "prettier": "3.9.4",
         "rust-just": "1.55.1",
-        "type-fest": "5.7.0",
+        "type-fest": "5.8.0",
         "typescript": "6.0.3"
     },
     "repository": {
