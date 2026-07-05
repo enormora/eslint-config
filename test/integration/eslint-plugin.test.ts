@@ -16,6 +16,6 @@ suite('eslint-plugin integration', function () {
             rules: { 'eslint-plugin/consistent-output': 'error' }
         } ], 'foo.js');
 
-        assert.deepStrictEqual(reports, []);
+        assert.deepStrictEqual(reports, [], 'eslint-plugin preset must resolve configured rules through ESLint');
     });
 });

@@ -8,7 +8,7 @@ import { vueConfig } from '../configs/presets/vue-ts/vue-ts.ts';
 import {
     checkAllPluginRulesConfigured,
     checkConfigLanguageOptions,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -35,7 +35,7 @@ suite('vue-ts preset', function () {
     });
 
     test('vue preset config has the correct processor set', function () {
-        assert.strictEqual(vueConfig.processor, 'vue/vue');
+        assert.strictEqual(vueConfig.processor, 'vue/vue', 'Vue preset must configure the Vue processor');
     });
 
     test('all eslint-plugin-vue rules are configured', function () {
@@ -55,6 +55,10 @@ suite('vue-ts preset', function () {
     });
 
     test('vue preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(vueConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(vueConfig),
+            [],
+            'Vue preset config must have no validation errors'
+        );
     });
 });

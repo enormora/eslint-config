@@ -5,7 +5,7 @@ import { reactJsxConfig } from '../configs/presets/react-jsx/react-jsx.ts';
 import {
     checkAllPluginRulesConfigured,
     checkConfigLanguageOptions,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -56,6 +56,6 @@ suite('react-jsx preset', function () {
     });
 
     test('react preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(reactJsxConfig);
+        assertConfigToHaveNoValidationIssues(reactJsxConfig);
     });
 });

@@ -21,6 +21,7 @@
         "@dprint/markdown": "0.22.1",
         "@dprint/toml": "0.7.0",
         "@dprint/typescript": "0.96.1",
+        "@enormora/eslint-plugin-node-assert": "0.0.1",
         "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
         "@eslint/markdown": "8.0.3",
         "@eslint/plugin-kit": "0.7.2",

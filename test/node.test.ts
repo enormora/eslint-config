@@ -3,7 +3,7 @@ import nodePlugin from 'eslint-plugin-n';
 import { nodeConfig, nodeConfigFileConfig, nodeEntryPointFileConfig } from '../configs/presets/node/node.ts';
 import {
     checkAllPluginRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -25,14 +25,14 @@ suite('node preset', function () {
     });
 
     test('node preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(nodeConfig);
+        assertConfigToHaveNoValidationIssues(nodeConfig);
     });
 
     test('node config file preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(nodeConfigFileConfig);
+        assertConfigToHaveNoValidationIssues(nodeConfigFileConfig);
     });
 
     test('node entry point file preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(nodeEntryPointFileConfig);
+        assertConfigToHaveNoValidationIssues(nodeEntryPointFileConfig);
     });
 });

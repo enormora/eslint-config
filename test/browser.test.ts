@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import { browserConfig } from '../configs/presets/browser/browser.ts';
 import { baseConfig } from '../configs/presets/base/base.ts';
-import { checkConfigToHaveNoValidationIssues, mergeConfigRules } from './rules-configuration.ts';
+import { assertConfigToHaveNoValidationIssues, mergeConfigRules } from './rules-configuration.ts';
 
 const browserConfigRules = mergeConfigRules(browserConfig);
 const browserUnicornRules = [
@@ -36,6 +36,10 @@ suite('browser preset', function () {
     });
 
     test('browser preset config has no validation errors with base', function () {
-        checkConfigToHaveNoValidationIssues([ ...baseConfig, browserConfig ]);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues([ ...baseConfig, browserConfig ]),
+            [],
+            'browser preset config must have no validation errors with base'
+        );
     });
 });

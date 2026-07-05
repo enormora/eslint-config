@@ -4,7 +4,7 @@ import hooksPlugin from 'eslint-plugin-react-hooks';
 import { reactConfig } from '../configs/presets/react/react.ts';
 import {
     checkAllPluginRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -42,6 +42,6 @@ suite('react preset', function () {
     });
 
     test('react preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(reactConfig);
+        assertConfigToHaveNoValidationIssues(reactConfig);
     });
 });

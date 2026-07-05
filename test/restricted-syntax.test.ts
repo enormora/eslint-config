@@ -1,4 +1,3 @@
-import assert from 'node:assert';
 import typescriptParser from '@typescript-eslint/parser';
 import { suite, test } from 'mocha';
 import { RuleTester } from 'eslint';
@@ -53,9 +52,7 @@ function runRuleCases(ruleTester: RuleTester, restriction: SyntaxRestriction, ca
         };
     });
 
-    assert.doesNotThrow(function runWithoutThrowing() {
-        ruleTester.run('no-restricted-syntax', noRestrictedSyntaxRule, { valid, invalid });
-    });
+    ruleTester.run('no-restricted-syntax', noRestrictedSyntaxRule, { valid, invalid });
 }
 
 suite('restricted syntax rules', function () {

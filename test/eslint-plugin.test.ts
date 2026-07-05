@@ -4,7 +4,7 @@ import eslintPluginPlugin from 'eslint-plugin-eslint-plugin';
 import { createEslintPluginConfig } from '../configs/presets/eslint-plugin/eslint-plugin.ts';
 import {
     checkAllPluginRulesConfigured,
-    checkConfigToHaveNoValidationIssues,
+    assertConfigToHaveNoValidationIssues,
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
@@ -33,14 +33,19 @@ suite('eslint-plugin preset', function () {
     });
 
     test('eslint-plugin preset config has no validation errors', function () {
-        checkConfigToHaveNoValidationIssues(eslintPluginConfig);
+        assert.deepStrictEqual(
+            assertConfigToHaveNoValidationIssues(eslintPluginConfig),
+            [],
+            'eslint-plugin preset config must have no validation errors'
+        );
     });
 
     test('the docs URL pattern is applied to require-meta-docs-url', function () {
         const rules = eslintPluginConfig.rules ?? {};
         assert.deepStrictEqual(
             rules['eslint-plugin/require-meta-docs-url'],
-            [ 'error', { pattern: sampleDocsUrlPattern } ]
+            [ 'error', { pattern: sampleDocsUrlPattern } ],
+            'eslint-plugin preset must configure the docs URL pattern'
         );
     });
 
@@ -48,7 +53,8 @@ suite('eslint-plugin preset', function () {
         const rules = eslintPluginConfig.rules ?? {};
         assert.deepStrictEqual(
             rules['eslint-plugin/require-meta-docs-description'],
-            [ 'error', { pattern: sampleDescriptionPattern } ]
+            [ 'error', { pattern: sampleDescriptionPattern } ],
+            'eslint-plugin preset must configure the description pattern'
         );
     });
 
@@ -60,7 +66,8 @@ suite('eslint-plugin preset', function () {
                     descriptionPattern: sampleDescriptionPattern
                 });
             },
-            TypeError
+            TypeError,
+            'createEslintPluginConfig must reject docs URL patterns without the rule name placeholder'
         );
     });
 
@@ -72,7 +79,8 @@ suite('eslint-plugin preset', function () {
                     descriptionPattern: sampleDescriptionPattern
                 });
             },
-            TypeError
+            TypeError,
+            'createEslintPluginConfig must reject non-string docs URL patterns'
         );
     });
 
@@ -84,7 +92,8 @@ suite('eslint-plugin preset', function () {
                     descriptionPattern: undefined as unknown as string
                 });
             },
-            TypeError
+            TypeError,
+            'createEslintPluginConfig must reject non-string description patterns'
         );
     });
 });
