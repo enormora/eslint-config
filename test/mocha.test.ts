@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import mochaPlugin from 'eslint-plugin-mocha';
 import { mochaConfig, testSupportConfig as mochaTestSupportConfig } from '../configs/presets/mocha/mocha.ts';
+import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
 import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAdditionalRulesConfigured,
@@ -33,6 +34,20 @@ suite('mocha preset', function () {
         checkAllTestRulesConfigured({
             ruleConfigSet: mochaConfig.rules
         });
+    });
+
+    test('does not include node assert rules by default', function () {
+        const configuredNodeAssertRuleNames = Object.keys(nodeAssertConfig.rules ?? {}).filter(
+            function isConfiguredNodeAssertRuleName(ruleName) {
+                return Object.hasOwn(mochaConfig.rules ?? {}, ruleName);
+            }
+        );
+
+        assert.deepStrictEqual(
+            configuredNodeAssertRuleNames,
+            [],
+            'Mocha preset must not include node assert rules by default'
+        );
     });
 
     test('mocha preset config has no validation errors', function () {

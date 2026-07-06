@@ -157,6 +157,15 @@ export function mergeConfigRules(config: unknown): RuleConfigSet {
     }, {});
 }
 
+export function findMissingConfiguredRuleNames(
+    expectedRules: RuleConfigSet,
+    configuredRules: RuleConfigSet
+): string[] {
+    return Object.keys(expectedRules ?? {}).filter(function isMissingRuleName(ruleName) {
+        return !Object.hasOwn(configuredRules ?? {}, ruleName);
+    });
+}
+
 export function assertConfigToHaveNoValidationIssues(config: unknown): Linter.LintMessage[] {
     const linter = new Linter({ configType: 'flat' });
 

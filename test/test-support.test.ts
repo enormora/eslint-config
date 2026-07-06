@@ -12,11 +12,11 @@ suite('testSupportConfig', function () {
         );
     });
 
-    test('exposes exactly the plugins from testRuleSet', function () {
+    test('does not expose plugins', function () {
         assert.deepStrictEqual(
-            Object.keys(testSupportConfig.plugins ?? {}),
-            Object.keys(testRuleSet.plugins),
-            'testSupportConfig plugins must match testRuleSet plugins'
+            testSupportConfig.plugins,
+            undefined,
+            'testSupportConfig must not expose framework-specific or assertion-specific plugins'
         );
     });
 
