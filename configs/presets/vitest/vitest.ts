@@ -7,7 +7,6 @@ export { testSupportConfig } from '../test-base/test-base.ts';
 
 export const vitestConfig = {
     plugins: {
-        ...testRuleSet.plugins,
         vitest: vitestPlugin,
         '@vitest': vitestPlugin
     },

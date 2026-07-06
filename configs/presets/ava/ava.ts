@@ -7,7 +7,6 @@ export { testSupportConfig } from '../test-base/test-base.ts';
 
 export const avaConfig = {
     plugins: {
-        ...testRuleSet.plugins,
         ava: avaPlugin
     },
     rules: {

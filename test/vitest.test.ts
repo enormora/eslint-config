@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 import vitestPlugin from '@vitest/eslint-plugin';
 import { suite, test } from 'mocha';
+import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
 import { testSupportConfig as vitestTestSupportConfig, vitestConfig } from '../configs/presets/vitest/vitest.ts';
 import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
@@ -31,6 +32,20 @@ suite('vitest preset', function () {
         checkAllTestRulesConfigured({
             ruleConfigSet: vitestConfig.rules
         });
+    });
+
+    test('does not include node assert rules by default', function () {
+        const configuredNodeAssertRuleNames = Object.keys(nodeAssertConfig.rules ?? {}).filter(
+            function isConfiguredNodeAssertRuleName(ruleName) {
+                return Object.hasOwn(vitestConfig.rules, ruleName);
+            }
+        );
+
+        assert.deepStrictEqual(
+            configuredNodeAssertRuleNames,
+            [],
+            'Vitest preset must not include node assert rules by default'
+        );
     });
 
     test('vitest preset config has no validation errors', function () {

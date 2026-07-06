@@ -2,6 +2,7 @@ import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import avaPlugin from 'eslint-plugin-ava';
 import { avaConfig, testSupportConfig as avaTestSupportConfig } from '../configs/presets/ava/ava.ts';
+import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
 import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
@@ -31,6 +32,20 @@ suite('ava preset', function () {
         checkAllTestRulesConfigured({
             ruleConfigSet: avaConfig.rules
         });
+    });
+
+    test('does not include node assert rules by default', function () {
+        const configuredNodeAssertRuleNames = Object.keys(nodeAssertConfig.rules ?? {}).filter(
+            function isConfiguredNodeAssertRuleName(ruleName) {
+                return Object.hasOwn(avaConfig.rules, ruleName);
+            }
+        );
+
+        assert.deepStrictEqual(
+            configuredNodeAssertRuleNames,
+            [],
+            'AVA preset must not include node assert rules by default'
+        );
     });
 
     test('ava preset config has no validation errors', function () {

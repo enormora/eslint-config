@@ -4,9 +4,7 @@
 
 Shared relaxations for test code. The framework presets (`@enormora/eslint-config-ava`, `@enormora/eslint-config-mocha`, `@enormora/eslint-config-vitest`) consume this package transitively and apply these relaxations on top of their framework-specific rules.
 
-This package includes the shared `@enormora/eslint-config-node-assert` preset.
-
-This package also exposes `testSupportConfig` for direct use on test-related files that are not themselves test files, e.g. test helpers, mocks, fixtures, or setup files. It applies the same relaxations and Node.js `node:assert` rules as the framework presets without enabling any framework-specific rules.
+This package also exposes `testSupportConfig` for direct use on test-related files that are not themselves test files, e.g. test helpers, mocks, fixtures, or setup files. It applies the same shared relaxations as the framework presets without enabling any framework-specific rules.
 
 ## Usage
 

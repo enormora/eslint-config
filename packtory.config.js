@@ -152,7 +152,6 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-test-base',
                 roots: { main: { js: 'presets/test-base/test-base.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
-                bundleDependencies: [ '@enormora/eslint-config-node-assert' ],
                 additionalFiles: [
                     {
                         sourceFilePath: path.join(presetMarkdownFolder, 'presets/test-base/test-base.md'),
@@ -193,6 +192,21 @@ export async function buildConfig() {
                 }
             },
             {
+                name: '@enormora/eslint-config-ava-node-assert',
+                roots: { main: { js: 'presets/ava-node-assert/ava-node-assert.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-ava', '@enormora/eslint-config-node-assert' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/ava-node-assert/ava-node-assert.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint AVA configuration with node:assert rules'
+                }
+            },
+            {
                 name: '@enormora/eslint-config-mocha',
                 roots: { main: { js: 'presets/mocha/mocha.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
@@ -205,6 +219,24 @@ export async function buildConfig() {
                 ],
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint mocha configuration'
+                }
+            },
+            {
+                name: '@enormora/eslint-config-mocha-node-assert',
+                roots: { main: { js: 'presets/mocha-node-assert/mocha-node-assert.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-mocha', '@enormora/eslint-config-node-assert' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(
+                            presetMarkdownFolder,
+                            'presets/mocha-node-assert/mocha-node-assert.md'
+                        ),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Mocha configuration with node:assert rules'
                 }
             },
             {
@@ -335,6 +367,24 @@ export async function buildConfig() {
                 ],
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint Vitest configuration'
+                }
+            },
+            {
+                name: '@enormora/eslint-config-vitest-node-assert',
+                roots: { main: { js: 'presets/vitest-node-assert/vitest-node-assert.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                bundleDependencies: [ '@enormora/eslint-config-vitest', '@enormora/eslint-config-node-assert' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(
+                            presetMarkdownFolder,
+                            'presets/vitest-node-assert/vitest-node-assert.md'
+                        ),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Vitest configuration with node:assert rules'
                 }
             },
             {
