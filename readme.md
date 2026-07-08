@@ -10,6 +10,10 @@ The config presets are distributed in multiple packages and only work with the [
 
 Enormora provides a collection of shareable ESLint config presets to cater to various project types and requirements. Choose the configuration that best aligns with your project's needs for seamless linting and consistent coding styles.
 
+## Scope of the base preset
+
+The base preset is deliberately environment-, framework-, and library-agnostic: it enables only rules that hold for any ESM project. Any rule whose correctness depends on a specific runtime, framework, test runner, or library lives in the matching preset (`node`, `react`, `vue-ts`, `mocha`, `ava`, `vitest`, `aws-cdk`, …) so it applies only where that dependency is actually present.
+
 | Package                                                                                                    | Version                                                                                                                                                            | Description                                                                                     |
 | :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------- |
 | [`@enormora/eslint-config-base`](./configs/presets/base/base.md)                                           | [![npm](https://img.shields.io/npm/v/@enormora/eslint-config-base?label=)](https://www.npmjs.com/package/@enormora/eslint-config-base)                             | Base config, environment-, framework-, and library-agnostic. Uses dprint for formatting.        |

@@ -337,7 +337,7 @@ export const bestPracticesRuleSet = {
         'sonarjs/array-callback-without-return': 'error',
         'sonarjs/array-constructor': 'off',
         'sonarjs/arrow-function-convention': 'off',
-        'sonarjs/assertions-in-tests': 'error',
+        'sonarjs/assertions-in-tests': 'off',
         'sonarjs/async-test-assertions': 'error',
         'sonarjs/aws-apigateway-public-api': 'error',
         'sonarjs/aws-ec2-rds-dms-public': 'error',
