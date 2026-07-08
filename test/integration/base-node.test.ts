@@ -105,4 +105,33 @@ suite('base+node integration', function () {
         assert.strictEqual(secondPass.output, firstPass.output, 'second autofix pass changed the output');
         assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
     });
+
+    test('base+node flags global number constants and rewrites them to Number properties', async function () {
+        const { messages, code, filePath } = await lintFixture(configs, comboName, 'number-constants-global.js');
+        assert.deepStrictEqual(
+            uniqueSortedRuleIds(messages),
+            [ 'unicorn/prefer-number-properties' ],
+            'global NaN/Infinity must be flagged only by unicorn/prefer-number-properties'
+        );
+        const { output } = fixFixture(configs, code, filePath);
+        assert.strictEqual(
+            output,
+            [
+                'export const notANumber = Number.NaN;',
+                'export const positiveInfinity = Number.POSITIVE_INFINITY;',
+                'export const negativeInfinity = Number.NEGATIVE_INFINITY;',
+                ''
+            ]
+                .join('\n'),
+            'autofix must rewrite global number constants to Number properties'
+        );
+    });
+
+    test('base+node does not flag Number property constants', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'number-constants-namespaced.js');
+        const detail = messages.map(function toReportDetail(message) {
+            return { ruleId: message.ruleId, line: message.line, message: message.message };
+        });
+        assert.deepStrictEqual(detail, [], 'Number.NaN/Number.POSITIVE_INFINITY must not be flagged');
+    });
 });
