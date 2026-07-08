@@ -180,7 +180,7 @@ export const bestPracticesRuleSet = {
         'unicorn/require-module-specifiers': 'error',
         'unicorn/no-useless-collection-argument': 'error',
         'unicorn/prefer-response-static-json': 'error',
-        'unicorn/consistent-conditional-object-spread': 'error',
+        'unicorn/consistent-conditional-object-spread': [ 'error', 'ternary' ],
         'unicorn/consistent-tuple-labels': 'error',
         'unicorn/default-export-style': 'off',
         'unicorn/no-accidental-bitwise-operator': 'error',
