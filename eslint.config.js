@@ -1,6 +1,6 @@
 import cspellPlugin from '@cspell/eslint-plugin';
 import { baseConfig } from './target/build/configs/presets/base/base.js';
-import { mochaConfig } from './target/build/configs/presets/mocha/mocha.js';
+import { mochaNodeAssertConfig } from './target/build/configs/presets/mocha-node-assert/mocha-node-assert.js';
 import { nodeConfig } from './target/build/configs/presets/node/node.js';
 import { typescriptConfig } from './target/build/configs/presets/typescript/typescript.js';
 
@@ -107,14 +107,14 @@ export default [
         }
     },
     {
-        ...mochaConfig,
+        ...mochaNodeAssertConfig,
         files: [ 'test/**/*.test.ts', 'test/rules-configuration.ts' ],
         plugins: {
-            ...mochaConfig.plugins,
+            ...mochaNodeAssertConfig.plugins,
             '@cspell': cspellPlugin
         },
         rules: {
-            ...mochaConfig.rules,
+            ...mochaNodeAssertConfig.rules,
             ...codeSpellCheckerRules
         }
     }
