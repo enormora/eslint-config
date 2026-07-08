@@ -1,12 +1,17 @@
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
 
 export const reactConfig = {
     plugins: {
         react: reactPlugin,
-        'react-hooks': hooksPlugin
+        'react-hooks': hooksPlugin,
+        sonarjs: sonarjsPlugin
     },
     rules: {
+        'sonarjs/no-uniq-key': 'error',
+        'sonarjs/no-useless-react-setstate': 'error',
+
         'react/boolean-prop-naming': 'off',
         'react/button-has-type': 'error',
         'react/default-props-match-prop-types': 'off',
