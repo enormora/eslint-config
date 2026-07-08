@@ -31,7 +31,7 @@ export const nodeAssertConfig = {
         'node-assert/prefer-deep-equality': 'error',
         'node-assert/prefer-match': 'error',
         'node-assert/prefer-partial-deep-strict-equal': 'error',
-        'node-assert/require-custom-message': 'error',
+        'node-assert/require-custom-message': 'off',
         'node-assert/require-error-matcher': 'error',
         'node-assert/require-strict': [ 'error', { mode: 'explicit' } ],
         'node-assert/require-valid-error-validator-return': 'error'
