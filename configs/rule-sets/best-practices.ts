@@ -264,7 +264,7 @@ export const bestPracticesRuleSet = {
         'unicorn/no-exports-in-scripts': 'error',
         'unicorn/no-for-each': 'off',
         'unicorn/no-global-object-property-assignment': 'error',
-        'unicorn/no-incorrect-template-string-interpolation': 'error',
+        'unicorn/no-incorrect-template-string-interpolation': 'off',
         'unicorn/no-invalid-argument-count': 'error',
         'unicorn/no-manually-wrapped-comments': 'off',
         'unicorn/no-mismatched-map-key': 'error',
