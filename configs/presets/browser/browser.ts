@@ -9,6 +9,8 @@ export const browserConfig = {
         'no-script-url': 'error',
         'no-restricted-globals': [ 'error', 'event' ],
 
+        'sonarjs/post-message': 'error',
+
         'unicorn/better-dom-traversing': 'error',
         'unicorn/dom-node-dataset': 'error',
         'unicorn/no-blob-to-file': 'error',

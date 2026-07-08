@@ -1,4 +1,5 @@
 import nodePlugin from 'eslint-plugin-n';
+import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import globals from 'globals';
 
 export const nodeConfig = {
@@ -6,9 +7,21 @@ export const nodeConfig = {
         globals: globals.nodeBuiltin
     },
     plugins: {
-        node: nodePlugin
+        node: nodePlugin,
+        sonarjs: sonarjsPlugin
     },
     rules: {
+        'sonarjs/encryption-secure-mode': 'error',
+        'sonarjs/file-permissions': 'error',
+        'sonarjs/hashing': 'error',
+        'sonarjs/no-os-command-from-path': 'error',
+        'sonarjs/no-weak-cipher': 'error',
+        'sonarjs/no-weak-keys': 'error',
+        'sonarjs/publicly-writable-directories': 'error',
+        'sonarjs/unverified-certificate': 'error',
+        'sonarjs/unverified-hostname': 'error',
+        'sonarjs/weak-ssl': 'error',
+
         'node/no-unpublished-bin': 'off',
         'node/no-unsupported-features/node-builtins': 'error',
         'node/no-unsupported-features/es-syntax': 'error',

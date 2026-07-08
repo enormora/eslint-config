@@ -17,6 +17,8 @@ export const reactTsxConfig = {
     rules: {
         ...reactJsxConfig.rules,
 
+        'sonarjs/prefer-read-only-props': 'error',
+
         'import/extensions': [
             'error',
             {
