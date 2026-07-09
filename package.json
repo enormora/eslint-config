@@ -67,7 +67,7 @@
     "devDependencies": {
         "@eslint/js": "10.0.1",
         "@packtory/cli": "0.0.61",
-        "@packtory/github-release-gate": "0.0.28",
+        "@packtory/github-release-gate": "0.0.29",
         "@types/mocha": "10.0.10",
         "@typescript-eslint/rule-tester": "8.63.0",
         "eslint": "10.6.0",
