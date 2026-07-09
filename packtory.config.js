@@ -400,6 +400,20 @@ export async function buildConfig() {
                 additionalPackageJsonAttributes: {
                     description: 'Enormora’s ESLint AWS CDK configuration'
                 }
+            },
+            {
+                name: '@enormora/eslint-config-zod',
+                roots: { main: { js: 'presets/zod/zod.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                additionalFiles: [
+                    {
+                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/zod/zod.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageJsonAttributes: {
+                    description: 'Enormora’s ESLint Zod configuration enforcing Zod Mini and Zod core'
+                }
             }
         ]
     };
