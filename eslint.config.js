@@ -67,8 +67,13 @@ export default [
     {
         // `eslint/use-at-your-own-risk` is the only published path to `builtinRules`, and the
         // entire module is marked `@deprecated` — by intent, not as a deprecation with a
-        // replacement. The `no-restricted-syntax` rule is composed from it.
-        files: [ 'configs/rule-sets/restricted-syntax.ts', 'test/restricted-syntax.test.ts' ],
+        // replacement. The `no-restricted-syntax` and `no-restricted-imports` rules are
+        // composed from it.
+        files: [
+            'configs/rule-sets/restricted-syntax.ts',
+            'configs/rule-sets/restricted-imports.ts',
+            'test/restricted-syntax.test.ts'
+        ],
         rules: {
             'sonarjs/deprecation': 'off'
         }
