@@ -52,6 +52,7 @@ export function createEslintPluginConfig(options: EslintPluginConfigOptions): Li
             'eslint-plugin/require-meta-docs-url': [ 'error', { pattern: docsUrlPattern } ],
             'eslint-plugin/require-meta-fixable': 'error',
             'eslint-plugin/require-meta-has-suggestions': 'error',
+            'eslint-plugin/require-meta-languages': 'error',
             'eslint-plugin/require-meta-schema': 'error',
             'eslint-plugin/require-meta-schema-description': 'error',
             'eslint-plugin/require-meta-type': 'error',
