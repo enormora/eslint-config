@@ -25,21 +25,9 @@ const noNativeEnumSchemaRestriction = {
     message: 'Use a union of z.literal() schemas instead of z.nativeEnum().'
 };
 
-const lengthCheckedArraySelector = [
-    "CallExpression[callee.property.name='check']",
-    "[callee.object.callee.object.name='z'][callee.object.callee.property.name='array']",
-    ":has(> CallExpression[callee.object.name='z'][callee.property.name=/^(minLength|maxLength|length)$/])"
-]
-    .join('');
-
-const noLengthCheckedArraySchemaRestriction = {
-    selector: lengthCheckedArraySelector,
-    message: 'Use z.tuple() instead of a z.array() with a length check.'
-};
-
 const restrictedImportsWrappers = createRestrictedImportsPlugin([ 'no-regular-zod-import' ]);
 const restrictedSyntaxWrappers = createRestrictedSyntaxPlugin(
-    [ 'no-enum-schema', 'no-native-enum-schema', 'no-length-checked-array-schema' ],
+    [ 'no-enum-schema', 'no-native-enum-schema' ],
     {}
 );
 
@@ -59,13 +47,16 @@ export const zodConfig = {
         'zod-mini/consistent-schema-var-name': 'error',
         'zod-mini/no-any-schema': 'error',
         'zod-mini/no-coerce-boolean': 'error',
+        'zod-mini/no-conflicting-checks': 'error',
         'zod-mini/no-duplicate-schema-methods': 'error',
         'zod-mini/no-empty-custom-schema': 'error',
         'zod-mini/no-throw-in-refine': 'error',
         'zod-mini/no-transform-in-record-key': 'error',
         'zod-mini/no-unknown-schema': 'off',
+        'zod-mini/no-unnecessary-readonly': 'error',
         'zod-mini/prefer-enum-over-literal-union': 'off',
         'zod-mini/prefer-meta': 'error',
+        'zod-mini/prefer-tuple-over-array-length': 'error',
         'zod-mini/require-brand-type-parameter': 'error',
         'zod-mini/require-error-message': 'error',
         'zod-mini/schema-error-property-style': 'off',
@@ -74,12 +65,10 @@ export const zodConfig = {
         'zod-core/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
 
         'enormora-zod/require-readonly-schema': 'error',
-        'enormora-zod/no-unnecessary-readonly-schema': 'error',
 
         'restricted-imports/no-regular-zod-import': [ 'error', regularZodImportRestriction ],
 
         'restricted-syntax-zod/no-enum-schema': [ 'error', noEnumSchemaRestriction ],
-        'restricted-syntax-zod/no-native-enum-schema': [ 'error', noNativeEnumSchemaRestriction ],
-        'restricted-syntax-zod/no-length-checked-array-schema': [ 'error', noLengthCheckedArraySchemaRestriction ]
+        'restricted-syntax-zod/no-native-enum-schema': [ 'error', noNativeEnumSchemaRestriction ]
     }
 };
