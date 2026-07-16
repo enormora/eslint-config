@@ -38,7 +38,7 @@
         "eslint-plugin-astro": "2.1.1",
         "eslint-plugin-ava": "17.0.1",
         "eslint-plugin-destructuring": "2.2.1",
-        "eslint-plugin-eslint-plugin": "7.4.2",
+        "eslint-plugin-eslint-plugin": "7.5.0",
         "eslint-plugin-functional": "10.0.0",
         "eslint-plugin-import-x": "4.17.1",
         "eslint-plugin-json-schema-validator": "6.3.0",
