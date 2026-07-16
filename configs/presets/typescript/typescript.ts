@@ -321,7 +321,6 @@ export const typescriptConfig = {
             { prefer: 'type-imports', fixStyle: 'inline-type-imports', disallowTypeAnnotations: true }
         ],
         '@typescript-eslint/consistent-indexed-object-style': [ 'error', 'record' ],
-        '@typescript-eslint/no-loop-func': 'off',
         '@typescript-eslint/no-unnecessary-type-constraint': 'error',
         '@typescript-eslint/no-confusing-void-expression': [
             'error',
