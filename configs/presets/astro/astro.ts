@@ -24,7 +24,6 @@ export const astroRules = {
     'astro/no-deprecated-astro-resolve': 'error',
     'astro/no-deprecated-getentrybyslug': 'error',
     'astro/no-exports-from-components': 'off',
-    'astro/no-omitted-end-tags': 'error',
     'astro/no-prerender-export-outside-pages': 'off',
     'astro/no-set-html-directive': 'off',
     'astro/no-set-text-directive': 'off',
@@ -36,7 +35,6 @@ export const astroRules = {
     'astro/prefer-split-class-list': 'off',
     'astro/semi': 'off',
     'astro/sort-attributes': 'off',
-    'astro/valid-compile': 'error',
 
     'astro/jsx-a11y/alt-text': 'error',
     'astro/jsx-a11y/anchor-ambiguous-text': 'off',
