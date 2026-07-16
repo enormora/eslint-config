@@ -14,7 +14,7 @@ import {
 const regularZodImportRuleId = 'restricted-imports/no-regular-zod-import';
 const enumSchemaRuleId = 'restricted-syntax-zod/no-enum-schema';
 const nativeEnumSchemaRuleId = 'restricted-syntax-zod/no-native-enum-schema';
-const lengthCheckedArrayRuleId = 'restricted-syntax-zod/no-length-checked-array-schema';
+const lengthCheckedArrayRuleId = 'zod-mini/prefer-tuple-over-array-length';
 const zodMiniPluginRules = (zodMiniPlugin as ESLint.Plugin).rules;
 const zodCorePluginRules = (zodCorePlugin as ESLint.Plugin).rules;
 
@@ -164,7 +164,7 @@ suite('zod preset', function () {
             assert.strictEqual(messages.length, 1, 'A length-checked z.array() must be reported');
             assert.match(
                 messages[0]?.message ?? '',
-                /Use z\.tuple\(\) instead of a z\.array\(\) with a length check\./u
+                /Prefer `z\.tuple\(\)` over a length-constrained `z\.array\(\)`/u
             );
         });
 
