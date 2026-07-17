@@ -1,31 +1,15 @@
 {
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
     "extends": [
-        "config:base",
-        "helpers:pinGitHubActionDigests"
+        "github>enormora/renovate-config#1.0.0",
+        "github>enormora/renovate-config:github-automerge#1.0.0",
+        "github>enormora/renovate-config:node22#1.0.0"
     ],
-    "commitMessagePrefix": "⬆️ ",
-    "labels": [
-        "renovate",
-        "upgrade"
-    ],
-    "dependencyDashboard": false,
-    "rebaseStalePrs": true,
-    "automerge": true,
-    "automergeType": "pr",
-    "lockFileMaintenance": {
-        "enabled": true,
-        "automerge": true
-    },
     "packageRules": [
         {
-            "matchPackageNames": [
-                "eslint",
-                "@eslint/js",
-                "eslint-plugin-ava"
-            ],
-            "groupName": "ESLint packages"
+            "matchPackageNames": ["/^@typescript-eslint\\//"],
+            "groupName": "Linting-related dependencies",
+            "groupSlug": "linting"
         }
-    ],
-    "platformAutomerge": true,
-    "automergeStrategy": "merge-commit"
+    ]
 }
