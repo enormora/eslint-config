@@ -75,7 +75,8 @@ export async function buildConfig() {
                 license: packageJson.license,
                 repository: packageJson.repository,
                 author: packageJson.author,
-                contributors: packageJson.contributors
+                contributors: packageJson.contributors,
+                engines: packageJson.engines
             }
         },
         packages: [
