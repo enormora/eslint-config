@@ -1,7 +1,13 @@
 {
-    "extends": ["config:base", "helpers:pinGitHubActionDigests"],
+    "extends": [
+        "config:base",
+        "helpers:pinGitHubActionDigests"
+    ],
     "commitMessagePrefix": "⬆️ ",
-    "labels": ["renovate", "upgrade"],
+    "labels": [
+        "renovate",
+        "upgrade"
+    ],
     "dependencyDashboard": false,
     "rebaseStalePrs": true,
     "automerge": true,
@@ -12,8 +18,14 @@
     },
     "packageRules": [
         {
-            "matchPackageNames": ["eslint", "@eslint/js", "eslint-plugin-ava"],
+            "matchPackageNames": [
+                "eslint",
+                "@eslint/js",
+                "eslint-plugin-ava"
+            ],
             "groupName": "ESLint packages"
         }
-    ]
+    ],
+    "platformAutomerge": true,
+    "automergeStrategy": "merge-commit"
 }
