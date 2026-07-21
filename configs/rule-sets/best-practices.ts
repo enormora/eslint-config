@@ -274,7 +274,7 @@ export const bestPracticesRuleSet = {
         'unicorn/no-useless-continue': 'error',
         'unicorn/no-useless-else': 'error',
         'unicorn/no-useless-override': 'error',
-        'unicorn/no-useless-recursion': 'error',
+        'unicorn/no-useless-recursion': 'off',
         'unicorn/no-useless-template-literals': 'error',
         'unicorn/operator-assignment': 'off',
         'unicorn/prefer-array-from-map': 'error',
