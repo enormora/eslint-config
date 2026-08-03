@@ -333,7 +333,6 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unsafe-argument': 'error',
         '@typescript-eslint/prefer-return-this-type': 'error',
         '@typescript-eslint/no-meaningless-void-operator': 'error',
-        '@typescript-eslint/no-restricted-imports': 'error',
         '@typescript-eslint/no-non-null-asserted-nullish-coalescing': 'error',
         '@typescript-eslint/consistent-type-exports': 'error',
         '@typescript-eslint/no-redundant-type-constituents': 'error',
