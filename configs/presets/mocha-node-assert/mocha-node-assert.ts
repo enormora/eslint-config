@@ -1,6 +1,7 @@
 import type { Linter } from 'eslint';
-import { mochaConfig, testSupportConfig as baseTestSupportConfig } from '../mocha/mocha.ts';
+import { mochaConfig } from '../mocha/mocha.ts';
 import { nodeAssertConfig } from '../node-assert/node-assert.ts';
+import { testSupportConfig as baseTestSupportConfig } from '../test-base/test-base.ts';
 
 export const mochaNodeAssertConfig = {
     ...mochaConfig,

@@ -1,6 +1,7 @@
 import type { Linter } from 'eslint';
-import { avaConfig, testSupportConfig as baseTestSupportConfig } from '../ava/ava.ts';
+import { avaConfig } from '../ava/ava.ts';
 import { nodeAssertConfig } from '../node-assert/node-assert.ts';
+import { testSupportConfig as baseTestSupportConfig } from '../test-base/test-base.ts';
 
 export const avaNodeAssertConfig = {
     ...avaConfig,
