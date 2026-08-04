@@ -56,6 +56,7 @@ export const zodConfig = {
         'zod-mini/no-unnecessary-readonly': 'error',
         'zod-mini/prefer-enum-over-literal-union': 'off',
         'zod-mini/prefer-meta': 'error',
+        'zod-mini/prefer-nullish': 'off',
         'zod-mini/prefer-tuple-over-array-length': 'error',
         'zod-mini/require-brand-type-parameter': 'error',
         'zod-mini/require-error-message': 'error',
