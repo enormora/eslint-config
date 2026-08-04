@@ -1,9 +1,12 @@
 import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import avaPlugin from 'eslint-plugin-ava';
-import { avaConfig, testSupportConfig as avaTestSupportConfig } from '../configs/presets/ava/ava.ts';
+import { avaConfig } from '../configs/presets/ava/ava.ts';
 import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
-import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
+import {
+    testSupportConfig,
+    testSupportConfig as avaTestSupportConfig
+} from '../configs/presets/test-base/test-base.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,

@@ -1,9 +1,12 @@
 import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import mochaPlugin from 'eslint-plugin-mocha';
-import { mochaConfig, testSupportConfig as mochaTestSupportConfig } from '../configs/presets/mocha/mocha.ts';
+import { mochaConfig } from '../configs/presets/mocha/mocha.ts';
 import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
-import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
+import {
+    testSupportConfig,
+    testSupportConfig as mochaTestSupportConfig
+} from '../configs/presets/test-base/test-base.ts';
 import {
     checkAdditionalRulesConfigured,
     checkAllPluginRulesConfigured,

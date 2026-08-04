@@ -2,8 +2,11 @@ import assert from 'node:assert';
 import vitestPlugin from '@vitest/eslint-plugin';
 import { suite, test } from 'mocha';
 import { nodeAssertConfig } from '../configs/presets/node-assert/node-assert.ts';
-import { testSupportConfig as vitestTestSupportConfig, vitestConfig } from '../configs/presets/vitest/vitest.ts';
-import { testSupportConfig } from '../configs/presets/test-base/test-base.ts';
+import {
+    testSupportConfig,
+    testSupportConfig as vitestTestSupportConfig
+} from '../configs/presets/test-base/test-base.ts';
+import { vitestConfig } from '../configs/presets/vitest/vitest.ts';
 import {
     checkAllPluginRulesConfigured,
     checkAllTestRulesConfigured,
