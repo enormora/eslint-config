@@ -1,7 +1,6 @@
 import type { Linter } from 'eslint';
 import { nodeAssertConfig } from '../node-assert/node-assert.ts';
-import { testSupportConfig as baseTestSupportConfig } from '../test-base/test-base.ts';
-import { vitestConfig } from '../vitest/vitest.ts';
+import { testSupportConfig as baseTestSupportConfig, vitestConfig } from '../vitest/vitest.ts';
 
 export const vitestNodeAssertConfig = {
     ...vitestConfig,
