@@ -52,6 +52,16 @@ export default [
     { ...nodeConfig, files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx}' ] },
     { ...typescriptConfig, files: [ '**/*.ts' ] },
     {
+        files: [
+            'configs/presets/ava-node-assert/ava-node-assert.ts',
+            'configs/presets/mocha-node-assert/mocha-node-assert.ts',
+            'configs/presets/vitest-node-assert/vitest-node-assert.ts'
+        ],
+        rules: {
+            'no-barrel-files/prefer-source-imports': 'off'
+        }
+    },
+    {
         // ESLint plugin packages (`@ben_12/eslint-plugin-dprint`, `eslint-plugin-perfectionist`,
         // `eslint-plugin-functional`, …) expose types that are not assignable to
         // `Linter.Config['plugins']`, so each preset's final cast to `Linter.Config[]` has to
