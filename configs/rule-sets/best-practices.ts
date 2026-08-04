@@ -632,12 +632,7 @@ export const bestPracticesRuleSet = {
         'promise/prefer-catch': 'error',
 
         'no-barrel-files/no-barrel-files': 'error',
-        'no-barrel-files/prefer-source-imports': [
-            'error',
-            {
-                ignore: [ '../ava/ava.ts', '../mocha/mocha.ts', '../vitest/vitest.ts' ]
-            }
-        ],
+        'no-barrel-files/prefer-source-imports': 'error',
 
         // eslint-plugin-regexp — purely additive on top of core / unicorn / sonarjs regex coverage.
         // Rules with a working equivalent already in core, unicorn, or sonarjs are turned off here so
