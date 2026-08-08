@@ -98,6 +98,7 @@ const expectedViolationRuleIds = [
     'sonarjs/no-unused-collection',
     'sonarjs/prefer-promise-shorthand',
     'unicorn/catch-error-name',
+    'unicorn/consistent-arrow-return-style',
     'unicorn/error-message',
     'unicorn/no-array-sort',
     'unicorn/no-await-expression-member',

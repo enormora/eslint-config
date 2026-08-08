@@ -39,7 +39,8 @@ const expectedViolationRuleIds = [
     'react/react-in-jsx-scope',
     'restricted-syntax-typescript/no-inline-signature-type-literal',
     'restricted-syntax/no-unnecessary-arrow-function',
-    'sonarjs/prefer-read-only-props'
+    'sonarjs/prefer-read-only-props',
+    'unicorn/consistent-arrow-return-style'
 ];
 
 suite('base+typescript+react-tsx integration', function () {

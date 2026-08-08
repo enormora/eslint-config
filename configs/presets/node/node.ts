@@ -22,6 +22,8 @@ export const nodeConfig = {
         'sonarjs/unverified-hostname': 'error',
         'sonarjs/weak-ssl': 'error',
 
+        'unicorn/no-unsafe-sqlite-interpolation': 'error',
+
         'node/no-unpublished-bin': 'off',
         'node/no-unsupported-features/node-builtins': 'error',
         'node/no-unsupported-features/es-syntax': 'error',
