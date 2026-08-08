@@ -32,7 +32,9 @@ const publishingPeerDependencies = {
     typescript: '>=4.8.4 <6.1.0'
 };
 
-/** @returns {Promise<import('@packtory/cli').PacktoryConfig>} */
+/**
+ * @returns {Promise<import('@packtory/cli').PacktoryConfig>}
+ */
 export async function buildConfig() {
     const packageJsonContent = await fs.readFile(path.join(projectFolder, './package.json'), { encoding: 'utf8' });
     const packageJson = JSON.parse(packageJsonContent);
