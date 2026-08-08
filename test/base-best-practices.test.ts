@@ -34,7 +34,6 @@ const browserUnicornRules = [
     'require-css-escape',
     'require-passive-events'
 ];
-const nodeUnicornRules = [ 'no-unsafe-sqlite-interpolation' ];
 
 suite('base best practices rule set', function () {
     test('all eslint-plugin-unicorn rules are configured', function () {
@@ -42,7 +41,7 @@ suite('base best practices rule set', function () {
             ruleConfigSet: baseConfigRules,
             pluginRules: unicornPlugin.rules,
             pluginName: 'eslint-plugin-unicorn',
-            rulesToExclude: [ ...browserUnicornRules, ...nodeUnicornRules ]
+            rulesToExclude: browserUnicornRules
         });
     });
 

@@ -269,6 +269,7 @@ export const bestPracticesRuleSet = {
         'unicorn/no-unreadable-object-destructuring': 'error',
         'unicorn/no-unsafe-buffer-conversion': 'error',
         'unicorn/no-unsafe-property-key': 'error',
+        'unicorn/no-unsafe-sqlite-interpolation': 'off',
         'unicorn/no-unsafe-string-replacement': 'error',
         'unicorn/no-unused-array-method-return': 'error',
         'unicorn/no-useless-boolean-cast': 'error',
