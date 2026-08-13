@@ -36,6 +36,7 @@ export const nodeConfig = {
         'node/prefer-global/text-encoder': [ 'error', 'always' ],
         'node/prefer-global/url-search-params': [ 'error', 'always' ],
         'node/prefer-global/url': [ 'error', 'always' ],
+        'node/prefer-import/assert-strict': 'off',
         'node/prefer-promises/dns': 'error',
         'node/prefer-promises/fs': 'error',
         'node/callback-return': 'off',
@@ -64,6 +65,7 @@ export const nodeConfig = {
         'node/process-exit-as-throw': 'error',
         'node/hashbang': 'off',
         'node/prefer-node-protocol': 'off', // already covered by unicorn/prefer-node-protocol
+        'node/prefer-process-get-builtin-module': 'off',
         'node/no-top-level-await': 'off'
     }
 };
