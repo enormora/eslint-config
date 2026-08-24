@@ -76,7 +76,8 @@ export const markdownDprintConfig = {
     newLineKind: 'lf',
     textWrap: 'maintain',
     emphasisKind: 'underscores',
-    strongKind: 'asterisks'
+    strongKind: 'asterisks',
+    listIndentKind: 'pythonMarkdown'
 };
 
 export const yamlDprintConfig = {
