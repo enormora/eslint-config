@@ -66,6 +66,13 @@ suite('base markdown integration', function () {
         assert.strictEqual(secondPass.fixed, false, 'second autofix pass reported further fixes');
     });
 
+    test('base markdown autofix uses four-space list indentation', function () {
+        const filePath = path.join(process.cwd(), 'test/fixtures/base-markdown/list-indent.md');
+        const source = '- parent\n  - child\n';
+        const fixResult = fixFixture(configs, source, filePath);
+        assert.strictEqual(fixResult.output, '- parent\n    - child\n');
+    });
+
     test('autofix does not rewrite [text](text) markdown links to <text> autolinks', function () {
         const filePath = path.join(process.cwd(), 'test/fixtures/base-markdown/regression-prefer-autolinks.md');
         const source = '# regression\n\n[foo.md](foo.md)\n';

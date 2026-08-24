@@ -6,43 +6,44 @@ Base ESLint config preset, agnostic to any environment, framework, or library. T
 
 Code formatting is handled by [dprint](https://dprint.dev/), wired into ESLint via the
 [`@ben_12/eslint-plugin-dprint`](https://www.npmjs.com/package/@ben_12/eslint-plugin-dprint) plugin. TypeScript/JavaScript
-files are formatted via the `dprint/typescript` rule, and JSON, Markdown, YAML, and TOML files are formatted via
-their respective `dprint/*` rules — so a single `eslint --fix` covers everything and there is no need for a separate
+files are formatted via the `dprint/typescript` rule, and JSON, Markdown, YAML, and TOML files are formatted via their
+respective `dprint/*` rules. A single `eslint --fix` covers everything and there is no need for a separate
 formatter step. The dprint configuration ships inline with this preset, so no `dprint.json` is required at the consumer
-project root. If you'd rather use prettier, use [`@enormora/eslint-config-base-with-prettier`](../base-with-prettier/base-with-prettier.md)
-instead — it is an alternative base preset and is not meant to be combined with this one.
+project root. Markdown list formatting uses dprint's `pythonMarkdown` indentation style, with nested list items indented
+by four spaces. If you'd rather use prettier, use [`@enormora/eslint-config-base-with-prettier`](../base-with-prettier/base-with-prettier.md)
+instead. It is an alternative base preset and is not meant to be combined with this one.
 
 `package.json` files get dedicated semantic linting through two plugins, parsed by
 [`jsonc-eslint-parser`](https://github.com/ota-meshi/jsonc-eslint-parser):
 
-- **[`eslint-plugin-package-json`](https://github.com/JoshuaKGoldberg/eslint-plugin-package-json)** (`package-json/*`)
-  — validates the shape of every field that is present (author, repository, engines, exports, scripts, peers, etc.),
-  catches duplicate dependencies across `dependencies`/`devDependencies`/`peerDependencies`, sorts collections, and
-  enforces `repository` shorthand. The opinionated `require-*` rules (which would demand every package declare e.g.
-  `funding` or `cpu`) and `order-properties` are off; opt in by overriding individual rules in your own config.
+- **[`eslint-plugin-package-json`](https://github.com/JoshuaKGoldberg/eslint-plugin-package-json)** (`package-json/*`):
+    validates the shape of every field that is present (author, repository, engines, exports, scripts, peers, etc.),
+    catches duplicate dependencies across `dependencies`/`devDependencies`/`peerDependencies`, sorts collections, and
+    enforces `repository` shorthand. The opinionated `require-*` rules (which would demand every package declare e.g.
+    `funding` or `cpu`) and `order-properties` are off; opt in by overriding individual rules in your own config.
 - **[`eslint-plugin-json-schema-validator`](https://github.com/ota-meshi/eslint-plugin-json-schema-validator)**
-  (`json-schema-validator/no-invalid`) — validates the file against [schemastore.org](https://www.schemastore.org/)'s
-  `package.json` schema, catching invalid values that the field-shape rules above can't see (e.g. unknown
-  `engines.node` operators, malformed `exports` conditions).
+    (`json-schema-validator/no-invalid`): validates the file against [schemastore.org](https://www.schemastore.org/)'s
+    `package.json` schema, catching invalid values that the field-shape rules above can't see (e.g. unknown
+    `engines.node` operators, malformed `exports` conditions).
 
 Markdown files additionally get semantic linting through three language-aware plugins, all riding on
 [`@eslint/markdown`](https://github.com/eslint/markdown)'s `language: "markdown/commonmark"`:
 
-- **`@eslint/markdown`** (`markdown/*`) — heading order, missing alt text, broken link fragments, fenced-code
-  language, duplicate definitions, etc. (the official ESLint markdown plugin).
+- **`@eslint/markdown`** (`markdown/*`): heading order, missing alt text, broken link fragments, fenced-code
+    language, duplicate definitions, etc. (the official ESLint markdown plugin).
 - **[`eslint-plugin-markdown-links`](https://github.com/ota-meshi/eslint-plugin-markdown-links)** (`markdown-links/*`)
-  — checks local file paths in markdown links/images exist on disk, that same-file `#fragment` targets exist, and
-  flags self-destination links. The network-based `no-dead-urls` is off by default to keep CI deterministic; flip it
-  on locally if you want it.
+    checks local file paths in markdown links/images exist on disk, that same-file `#fragment` targets exist, and
+    flags self-destination links. The network-based `no-dead-urls` is off by default to keep CI deterministic; flip it
+    on locally if you want it.
 - **[`eslint-plugin-markdown-preferences`](https://github.com/ota-meshi/eslint-plugin-markdown-preferences)**
-  (`markdown-preferences/*`) — only the 8 rules from this plugin's `recommended` config are on (blockquote alignment,
-  hard-linebreak style, no-laziness blockquotes, prefer-autolinks, prefer-fenced-code-blocks, etc.). The other 45 are
-  off because they overlap with dprint formatting; flip on individually if a stricter style fits your project.
+    (`markdown-preferences/*`): only the 8 rules from this plugin's `recommended` config are on (blockquote alignment,
+    hard-linebreak style, no-laziness blockquotes, prefer-autolinks, prefer-fenced-code-blocks, etc.). The other 45 are
+    off because they overlap with dprint formatting; flip on individually if a stricter style fits your project.
 
 `@eslint/markdown` declares `language: "markdown/commonmark"` for `.md` files, so the AST root becomes an mdast
 `root` node rather than an ESTree `Program`; a small in-repo adapter wraps `dprint/markdown` so it fires on the mdast
-`root` selector and runs in the same pass as the linters. The published rule is `dprint-markdown/markdown` — same
-behavior, same config, just adapted to the markdown language.
+`root` selector and runs in the same pass as the linters. The published rule is `dprint-markdown/markdown` with the
+same behavior and config, just adapted to the markdown language.
 
 (Why commonmark and not gfm? `@eslint/markdown@8.0.2`'s `MarkdownSourceCode` does not implement `getLoc()` for
 GFM-specific nodes such as autolinks and table cells; under `language: "markdown/gfm"`, rules like `markdown/no-bare-urls`
@@ -114,7 +115,7 @@ therefore:
 
 ### Customizing or disabling a formatter
 
-Because the formatter blocks are plain flat config, you override them the same way as any other ESLint config — by
+Because the formatter blocks are plain flat config, you override them the same way as any other ESLint config by
 adding a later block whose `files` glob overlaps the one you want to change. Later blocks win.
 
 Disable a formatter entirely:
@@ -147,8 +148,8 @@ export default [
 
 ### Tweaking markdown lint rules
 
-To override any markdown rule (from `@eslint/markdown`, `markdown-links`, or `markdown-preferences`), add a later
-block — the same pattern as for any other ESLint rule:
+To override any markdown rule (from `@eslint/markdown`, `markdown-links`, or `markdown-preferences`), add a later block
+with the same pattern as for any other ESLint rule:
 
 ```javascript
 export default [

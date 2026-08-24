@@ -5,7 +5,7 @@
 Drop-in alternative to [`@enormora/eslint-config-base`](../base/base.md) that formats with
 [prettier](https://prettier.io/) instead of dprint.
 
-This preset is itself a base preset — pick this one **or** `@enormora/eslint-config-base`, never both. It contains the
+This preset is itself a base preset. Pick this one **or** `@enormora/eslint-config-base`, never both. It contains the
 same set of lint rules as the regular base preset, including the semantic markdown linting stack
 (`@eslint/markdown`, `eslint-plugin-markdown-links`, `eslint-plugin-markdown-preferences`) and the dedicated
 `package.json` linting stack (`eslint-plugin-package-json`, `eslint-plugin-json-schema-validator`). The only
@@ -75,7 +75,7 @@ ESLint explicitly. The recommended lint script is therefore:
 
 ### Customizing or disabling the formatter on a file family
 
-Because the blocks are plain flat config, override them the same way as any other ESLint config — add a later block
+Because the blocks are plain flat config, override them the same way as any other ESLint config. Add a later block
 whose `files` glob overlaps the one you want to change. Later blocks win.
 
 Disable prettier formatting for JSON entirely:
@@ -99,7 +99,7 @@ export default [
 ### Tweaking markdown lint rules
 
 To override any markdown rule (from `@eslint/markdown`, `markdown-links`, or `markdown-preferences`), add a later
-block — the same pattern as for any other ESLint rule:
+block with the same pattern as for any other ESLint rule:
 
 ```javascript
 export default [
@@ -119,5 +119,5 @@ export default [
 ## Limitations
 
 - **No TOML coverage.** Prettier does not natively format `.toml` files. If you need TOML formatting, either use
-  [`@enormora/eslint-config-base`](../base/base.md) (which formats TOML via dprint) or wire your own prettier plugin
-  for TOML.
+    [`@enormora/eslint-config-base`](../base/base.md) (which formats TOML via dprint) or wire your own prettier plugin
+    for TOML.
