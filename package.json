@@ -18,7 +18,7 @@
         "@ben_12/eslint-plugin-dprint": "1.24.0",
         "@cspell/eslint-plugin": "10.1.1",
         "@dprint/json": "0.23.0",
-        "@dprint/markdown": "0.22.1",
+        "@dprint/markdown": "0.23.0",
         "@dprint/toml": "0.8.0",
         "@dprint/typescript": "0.96.1",
         "@enormora/eslint-plugin-node-assert": "0.0.1",
