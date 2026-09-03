@@ -76,7 +76,7 @@
         "mocha": "11.8.0",
         "prettier": "3.9.6",
         "rust-just": "1.57.0",
-        "type-fest": "5.8.0",
+        "type-fest": "5.9.0",
         "typescript": "6.0.3"
     },
     "repository": {
