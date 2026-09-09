@@ -83,6 +83,7 @@ export const vueConfig = {
         'vue/no-reserved-component-names': 'error',
         'vue/no-reserved-keys': 'error',
         'vue/no-reserved-props': 'error',
+        'vue/no-shadow-native-events': 'error',
         'vue/no-shared-component-data': 'error',
         'vue/no-side-effects-in-computed-properties': 'error',
         'vue/no-template-key': 'error',
