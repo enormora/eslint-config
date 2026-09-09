@@ -66,6 +66,7 @@ export const packageJsonConfig = {
         'package-json/exports-subpaths-style': 'off',
         'package-json/no-local-dependencies': 'off',
         'package-json/order-properties': 'off',
+        'package-json/prefer-rolling-workspace-spec': 'off',
         'package-json/require-attribution': 'off',
         'package-json/require-author': 'off',
         'package-json/require-bin': 'off',
