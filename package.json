@@ -22,7 +22,7 @@
         "@dprint/toml": "0.8.0",
         "@dprint/typescript": "0.96.1",
         "@enormora/eslint-plugin-node-assert": "0.0.1",
-        "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
+        "@eslint-community/eslint-plugin-eslint-comments": "4.8.0",
         "@eslint/markdown": "8.0.3",
         "@eslint/plugin-kit": "0.7.3",
         "@stylistic/eslint-plugin": "5.10.0",
