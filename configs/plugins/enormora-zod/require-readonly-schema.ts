@@ -51,10 +51,7 @@ function getZodFactoryName(node: TSESTree.CallExpression): string | undefined {
 
 function isWrappedInReadonly(node: TSESTree.CallExpression): boolean {
     const parent = readParent(node);
-    if (parent?.type !== AST_NODE_TYPES.CallExpression) {
-        return false;
-    }
-    if (getZodFactoryName(parent) !== readonlyFactory) {
+    if (parent?.type !== AST_NODE_TYPES.CallExpression || getZodFactoryName(parent) !== readonlyFactory) {
         return false;
     }
     return parent.arguments[0] === node;
@@ -82,10 +79,7 @@ export const requireReadonlySchemaRule = buildRule({
         return {
             CallExpression(node: TSESTree.CallExpression) {
                 const factory = getZodFactoryName(node);
-                if (factory === undefined || !mutableSchemaFactories.has(factory)) {
-                    return;
-                }
-                if (isWrappedInReadonly(node)) {
+                if (factory === undefined || !mutableSchemaFactories.has(factory) || isWrappedInReadonly(node)) {
                     return;
                 }
                 context.report({
