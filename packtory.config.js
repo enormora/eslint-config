@@ -7,6 +7,8 @@ const sourcesFolder = path.join(projectFolder, 'target/build/configs');
 const presetMarkdownFolder = path.join(projectFolder, 'configs');
 const sharedSourceFiles = [
     'constants.js',
+    'plugins/enormora/enormora-plugin.js',
+    'plugins/enormora/prefer-ternary-for-value-selection.js',
     'plugins/restricted-syntax/no-unnecessary-arrow-function.js',
     'presets/base/base-shared.js',
     'presets/base/cspell-config.js',
