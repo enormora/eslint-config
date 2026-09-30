@@ -131,4 +131,21 @@ suite('base+node integration', function () {
         });
         assert.deepStrictEqual(detail, [], 'Number.NaN/Number.POSITIVE_INFINITY must not be flagged');
     });
+
+    test('base+node array callback returns reject forEach values and require map values', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'array-callback-return.js');
+        const arrayCallbackReturnLines = messages
+            .filter(function isArrayCallbackReturnMessage(message) {
+                return message.ruleId === 'array-callback-return';
+            })
+            .map(function getLine(message) {
+                return message.line;
+            });
+
+        assert.deepStrictEqual(
+            arrayCallbackReturnLines,
+            [ 7, 8, 18, 20 ],
+            'array callbacks must reject forEach values, require map values, and reject void workarounds'
+        );
+    });
 });
