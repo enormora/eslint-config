@@ -4,12 +4,14 @@ import promisePlugin from 'eslint-plugin-promise';
 import * as regexpPlugin from 'eslint-plugin-regexp';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
+import { enormoraPlugin } from '../plugins/enormora/enormora-plugin.ts';
 
 const maxSwitchCases = 6;
 
 export const bestPracticesRuleSet = {
     plugins: {
         unicorn: unicornPlugin,
+        enormora: enormoraPlugin,
         promise: promisePlugin,
         'array-func': arrayFunctionPlugin,
         sonarjs: sonarjsPlugin,
@@ -18,6 +20,7 @@ export const bestPracticesRuleSet = {
     },
     settings: {},
     rules: {
+        'enormora/prefer-ternary-for-value-selection': 'error',
         'unicorn/string-content': 'off',
         'unicorn/consistent-template-literal-escape': 'error',
         'unicorn/prefer-string-trim-start-end': 'error',
@@ -73,7 +76,7 @@ export const bestPracticesRuleSet = {
         'unicorn/import-style': 'off',
         'unicorn/numeric-separators-style': 'error',
         'unicorn/prefer-math-trunc': 'error',
-        'unicorn/prefer-ternary': 'error',
+        'unicorn/prefer-ternary': 'off',
         'unicorn/prefer-array-some': 'error',
         'unicorn/prefer-default-parameters': 'error',
         'unicorn/no-lonely-if': 'error',

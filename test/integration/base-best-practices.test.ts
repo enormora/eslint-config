@@ -30,6 +30,29 @@ function bestPracticesReports(sourceCode: string, ruleName: string): Linter.Lint
 }
 
 suite('base best practices', function () {
+    suite('local value selection', function () {
+        test('accepts explicit return branches without converting them to ternaries', function () {
+            const sourceCode =
+                "export function describeValue(value) { if (value === undefined) { return 'missing'; } return 'present'; }";
+            const actualReports = bestPracticesReports(sourceCode, 'enormora/prefer-ternary-for-value-selection');
+            assert.deepStrictEqual(actualReports, []);
+
+            const linter = new Linter({ configType: 'flat' });
+            const actualFixedSource = linter.verifyAndFix(sourceCode, baseConfig, filePath).output;
+            assert.strictEqual(actualFixedSource.includes('?'), false);
+            assert.strictEqual(actualFixedSource.includes('if (value === undefined)'), true);
+        });
+
+        test('reports simple value selection under the local rule', function () {
+            const actualReports = bestPracticesReports(
+                "export function choose(condition) { if (condition) { return 'first'; } else { return 'second'; } }",
+                'enormora/prefer-ternary-for-value-selection'
+            );
+            assert.strictEqual(actualReports.length, 1);
+            assert.strictEqual(actualReports[0]?.severity, 2);
+        });
+    });
+
     test('reports the logical short-circuit form', function () {
         const logicalForm = 'const props = {};\n' +
             'export const result = { ...(props.onClick !== undefined && { onClick: props.onClick }) };\n';
