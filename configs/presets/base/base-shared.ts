@@ -92,7 +92,14 @@ export const baseSharedConfig = {
         ...stylisticRuleSet.rules,
         ...bestPracticesRuleSet.rules,
 
-        'array-callback-return': 'error',
+        'array-callback-return': [
+            'error',
+            {
+                allowImplicit: false,
+                checkForEach: true,
+                allowVoid: false
+            }
+        ],
         camelcase: 'off',
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
