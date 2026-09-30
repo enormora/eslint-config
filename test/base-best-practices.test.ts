@@ -4,6 +4,7 @@ import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 import promisePlugin from 'eslint-plugin-promise';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
+import { enormoraPlugin } from '../configs/plugins/enormora/enormora-plugin.ts';
 import { baseConfig } from '../configs/presets/base/base.ts';
 import {
     checkAllPluginRulesConfigured,
@@ -36,20 +37,38 @@ const browserUnicornRules = [
 ];
 
 suite('base best practices rule set', function () {
-    test('all eslint-plugin-unicorn rules are configured', function () {
-        checkAllPluginRulesConfigured({
-            ruleConfigSet: baseConfigRules,
-            pluginRules: unicornPlugin.rules,
-            pluginName: 'eslint-plugin-unicorn',
-            rulesToExclude: browserUnicornRules
+    suite('Unicorn and local rule coverage', function () {
+        test('all local best practices rules are configured', function () {
+            checkAllPluginRulesConfigured({
+                ruleConfigSet: baseConfigRules,
+                pluginRules: enormoraPlugin.rules,
+                pluginName: 'enormora'
+            });
         });
-    });
 
-    test('no unknown eslint-plugin-unicorn rules are configured', function () {
-        checkUnknownPluginRulesAreNotConfigured({
-            ruleConfigSet: baseConfigRules,
-            pluginRules: unicornPlugin.rules,
-            pluginName: 'eslint-plugin-unicorn'
+        test('no unknown local best practices rules are configured', function () {
+            checkUnknownPluginRulesAreNotConfigured({
+                ruleConfigSet: baseConfigRules,
+                pluginRules: enormoraPlugin.rules,
+                pluginName: 'enormora'
+            });
+        });
+
+        test('all eslint-plugin-unicorn rules are configured', function () {
+            checkAllPluginRulesConfigured({
+                ruleConfigSet: baseConfigRules,
+                pluginRules: unicornPlugin.rules,
+                pluginName: 'eslint-plugin-unicorn',
+                rulesToExclude: browserUnicornRules
+            });
+        });
+
+        test('no unknown eslint-plugin-unicorn rules are configured', function () {
+            checkUnknownPluginRulesAreNotConfigured({
+                ruleConfigSet: baseConfigRules,
+                pluginRules: unicornPlugin.rules,
+                pluginName: 'eslint-plugin-unicorn'
+            });
         });
     });
 

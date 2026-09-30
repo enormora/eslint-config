@@ -4,12 +4,14 @@ import promisePlugin from 'eslint-plugin-promise';
 import * as regexpPlugin from 'eslint-plugin-regexp';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
+import { enormoraPlugin } from '../plugins/enormora/enormora-plugin.ts';
 
 const maxSwitchCases = 6;
 
 export const bestPracticesRuleSet = {
     plugins: {
         unicorn: unicornPlugin,
+        enormora: enormoraPlugin,
         promise: promisePlugin,
         'array-func': arrayFunctionPlugin,
         sonarjs: sonarjsPlugin,
@@ -18,6 +20,7 @@ export const bestPracticesRuleSet = {
     },
     settings: {},
     rules: {
+        'enormora/prefer-ternary-for-value-selection': 'error',
         'unicorn/string-content': 'off',
         'unicorn/consistent-template-literal-escape': 'error',
         'unicorn/prefer-string-trim-start-end': 'error',
@@ -73,7 +76,7 @@ export const bestPracticesRuleSet = {
         'unicorn/import-style': 'off',
         'unicorn/numeric-separators-style': 'error',
         'unicorn/prefer-math-trunc': 'error',
-        'unicorn/prefer-ternary': 'error',
+        'unicorn/prefer-ternary': 'off',
         'unicorn/prefer-array-some': 'error',
         'unicorn/prefer-default-parameters': 'error',
         'unicorn/no-lonely-if': 'error',
@@ -271,7 +274,7 @@ export const bestPracticesRuleSet = {
         'unicorn/no-unsafe-property-key': 'error',
         'unicorn/no-unsafe-sqlite-interpolation': 'off',
         'unicorn/no-unsafe-string-replacement': 'error',
-        'unicorn/no-unused-array-method-return': 'error',
+        'unicorn/no-unused-builtin-method-return': 'error',
         'unicorn/no-useless-boolean-cast': 'error',
         'unicorn/no-useless-coercion': 'error',
         'unicorn/no-useless-concat': 'error',
@@ -336,6 +339,25 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-then-catch': 'error',
         'unicorn/require-frontmatter-fields': 'off',
         'unicorn/single-line-block-comment-style': 'error',
+        'unicorn/no-async-iterator-callback': 'error',
+        'unicorn/no-deprecated-css-features': 'off',
+        'unicorn/no-duplicate-css-selectors': 'off',
+        'unicorn/no-duplicate-font-family-names': 'off',
+        'unicorn/no-invalid-media-features': 'off',
+        'unicorn/no-nesting-with-mixed-specificity': 'off',
+        'unicorn/no-redundant-nested-style-rules': 'off',
+        'unicorn/no-unknown-css-annotations': 'off',
+        'unicorn/no-unknown-pseudo-selectors': 'off',
+        'unicorn/no-unscoped-css-nesting-selector': 'off',
+        'unicorn/no-unused-iterator-helper': 'error',
+        'unicorn/no-useless-set-construction': 'error',
+        'unicorn/no-using-resource-escape': 'error',
+        'unicorn/prefer-combined-guards': 'error',
+        'unicorn/prefer-iterator-zip': 'off',
+        'unicorn/prefer-json-import': 'off',
+        'unicorn/prefer-media-feature-range-syntax': 'off',
+        'unicorn/prefer-temporal-conversion': 'off',
+        'unicorn/prefer-uint8array-hex': 'off',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
