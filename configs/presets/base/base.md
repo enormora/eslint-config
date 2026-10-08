@@ -4,6 +4,13 @@
 
 Base ESLint config preset, agnostic to any environment, framework, or library. Targets ESM-only projects.
 
+The local `enormora/prefer-ternary-for-value-selection` rule reports simple `if/else` returns,
+assignments to the same variable, and an initialized `let` followed by a conditional reassignment.
+Guard returns followed by a fallback return remain allowed. The rule skips multiline or nested
+expressions, complex branches, property assignments, and commented decisions. Conditional reassignment
+checks also exclude initializers or conditions with potential side effects and reads of the selected
+variable. It reports diagnostics without autofixes. `unicorn/prefer-ternary` is disabled.
+
 Code formatting is handled by [dprint](https://dprint.dev/), wired into ESLint via the
 [`@ben_12/eslint-plugin-dprint`](https://www.npmjs.com/package/@ben_12/eslint-plugin-dprint) plugin. TypeScript/JavaScript
 files are formatted via the `dprint/typescript` rule, and JSON, Markdown, YAML, and TOML files are formatted via their

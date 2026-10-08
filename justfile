@@ -1,4 +1,5 @@
 export PATH := './node_modules/.bin:' + env_var('PATH')
+export NODE_OPTIONS := "--max-old-space-size=8192"
 
 default:
     @just --list

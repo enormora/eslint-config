@@ -51,10 +51,7 @@ function readParent(node: TSESTree.Node): TSESTree.Node | undefined {
 function hasTypeLiteralOrInterfaceBodyAncestor(node: TSESTree.Node): boolean {
     let current = readParent(node);
     while (current !== undefined) {
-        if (current.type === AST_NODE_TYPES.TSTypeLiteral) {
-            return true;
-        }
-        if (current.type === AST_NODE_TYPES.TSInterfaceBody) {
+        if (current.type === AST_NODE_TYPES.TSTypeLiteral || current.type === AST_NODE_TYPES.TSInterfaceBody) {
             return true;
         }
         current = readParent(current);
@@ -191,10 +188,7 @@ function reportRecordReference(
 }
 
 function shouldInspectNamedReference(node: TSESTree.TSTypeReference, name: string): boolean {
-    if (namedReferenceReadonlyForms.has(name)) {
-        return false;
-    }
-    if (!hasTypeLiteralOrInterfaceBodyAncestor(node)) {
+    if (namedReferenceReadonlyForms.has(name) || !hasTypeLiteralOrInterfaceBodyAncestor(node)) {
         return false;
     }
     return !isWrappedInReadonlyUtility(node);
@@ -234,10 +228,7 @@ export const preferReadonlyTypesRule = buildRule({
 
         return {
             TSPropertySignature(node: TSESTree.TSPropertySignature) {
-                if (node.readonly) {
-                    return;
-                }
-                if (!isMemberOfNestedTypeLiteral(node)) {
+                if (node.readonly || !isMemberOfNestedTypeLiteral(node)) {
                     return;
                 }
                 context.report({
@@ -251,10 +242,7 @@ export const preferReadonlyTypesRule = buildRule({
             },
 
             TSIndexSignature(node: TSESTree.TSIndexSignature) {
-                if (node.readonly) {
-                    return;
-                }
-                if (!isMemberOfNestedTypeLiteral(node)) {
+                if (node.readonly || !isMemberOfNestedTypeLiteral(node)) {
                     return;
                 }
                 context.report({
@@ -267,10 +255,7 @@ export const preferReadonlyTypesRule = buildRule({
             },
 
             TSArrayType(node: TSESTree.TSArrayType) {
-                if (isWrappedInReadonlyOperator(node)) {
-                    return;
-                }
-                if (!hasTypeLiteralOrInterfaceBodyAncestor(node)) {
+                if (isWrappedInReadonlyOperator(node) || !hasTypeLiteralOrInterfaceBodyAncestor(node)) {
                     return;
                 }
                 context.report({
@@ -283,10 +268,7 @@ export const preferReadonlyTypesRule = buildRule({
             },
 
             TSTupleType(node: TSESTree.TSTupleType) {
-                if (isWrappedInReadonlyOperator(node)) {
-                    return;
-                }
-                if (!hasTypeLiteralOrInterfaceBodyAncestor(node)) {
+                if (isWrappedInReadonlyOperator(node) || !hasTypeLiteralOrInterfaceBodyAncestor(node)) {
                     return;
                 }
                 context.report({
@@ -299,10 +281,7 @@ export const preferReadonlyTypesRule = buildRule({
             },
 
             TSMappedType(node: TSESTree.TSMappedType) {
-                if (isMappedTypeReadonly(node)) {
-                    return;
-                }
-                if (!hasTypeLiteralOrInterfaceBodyAncestor(node)) {
+                if (isMappedTypeReadonly(node) || !hasTypeLiteralOrInterfaceBodyAncestor(node)) {
                     return;
                 }
                 const openBracketToken = sourceCode.getFirstToken(node, function isOpenBracket(token) {
