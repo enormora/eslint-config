@@ -23,6 +23,7 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/no-explicit-any',
     '@typescript-eslint/no-extraneous-class',
     '@typescript-eslint/no-floating-promises',
+    '@typescript-eslint/no-generated-empty-object-type',
     '@typescript-eslint/no-inferrable-types',
     '@typescript-eslint/no-magic-numbers',
     '@typescript-eslint/no-namespace',

@@ -357,6 +357,8 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unsafe-type-assertion': 'error',
         '@typescript-eslint/related-getter-setter-pairs': 'error',
         '@typescript-eslint/no-misused-spread': 'error',
+        '@typescript-eslint/no-generated-empty-object-type': 'error',
+        '@typescript-eslint/no-unsafe-enum-assignment': 'error',
 
         'functional/functional-parameters': 'off',
         'functional/immutable-data': 'off',
