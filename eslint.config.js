@@ -37,7 +37,8 @@ const codeSpellCheckerRules = {
                     'lookarounds',
                     'gypfile',
                     'libc',
-                    'tses'
+                    'tses',
+                    'networkidle'
                 ]
             }
         }
