@@ -68,7 +68,8 @@ export const jsonDprintConfig = {
     lineWidth,
     indentWidth,
     newLineKind: 'lf',
-    useTabs: false
+    useTabs: false,
+    'packageJson.applyConventions': false
 };
 
 export const markdownDprintConfig = {

@@ -28,6 +28,7 @@ instead. It is an alternative base preset and is not meant to be combined with t
     catches duplicate dependencies across `dependencies`/`devDependencies`/`peerDependencies`, sorts collections, and
     enforces `repository` shorthand. The opinionated `require-*` rules (which would demand every package declare e.g.
     `funding` or `cpu`) and `order-properties` are off; opt in by overriding individual rules in your own config.
+    For the same reason, dprint's `packageJson.applyConventions` sorting is disabled in `jsonDprintConfig`.
 - **[`eslint-plugin-json-schema-validator`](https://github.com/ota-meshi/eslint-plugin-json-schema-validator)**
     (`json-schema-validator/no-invalid`): validates the file against [schemastore.org](https://www.schemastore.org/)'s
     `package.json` schema, catching invalid values that the field-shape rules above can't see (e.g. unknown
