@@ -49,7 +49,9 @@ export const zodConfig = {
         'zod-mini/no-coerce-boolean': 'error',
         'zod-mini/no-conflicting-checks': 'error',
         'zod-mini/no-duplicate-schema-methods': 'error',
+        'zod-mini/no-dynamic-schema-value': 'off',
         'zod-mini/no-empty-custom-schema': 'error',
+        'zod-mini/no-function-scoped-schema': 'off',
         'zod-mini/no-native-enum': 'off',
         'zod-mini/no-promise-schema': 'error',
         'zod-mini/no-throw-in-refine': 'error',
@@ -62,12 +64,14 @@ export const zodConfig = {
         'zod-mini/prefer-nullish': 'off',
         'zod-mini/prefer-string-length-over-min-max': 'error',
         'zod-mini/prefer-tuple-over-array-length': 'error',
+        'zod-mini/prefer-validate': 'error',
         'zod-mini/require-brand-type-parameter': 'error',
         'zod-mini/require-error-message': 'error',
         'zod-mini/schema-error-property-style': 'off',
 
         'zod-core/consistent-import': [ 'error', { syntax: 'named' } ],
         'zod-core/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
+        'zod-core/prefer-validate': 'error',
 
         'enormora-zod/require-readonly-schema': 'error',
 

@@ -37,6 +37,10 @@ continuation without `>` marker
 
 [link to nowhere](#does-not-exist)
 
+[](https://example.com/empty-link-text)
+
+[run script](javascript:alert(1))
+
 (reversed)[https://example.com/reversed]
 
 Label with whitespace: [ spaced label ][ref-with-space]

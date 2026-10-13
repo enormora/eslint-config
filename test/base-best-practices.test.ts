@@ -19,9 +19,13 @@ const browserUnicornRules = [
     'no-blob-to-file',
     'no-canvas-to-image',
     'no-incorrect-query-selector',
+    'no-invalid-boolean-attribute-value',
+    'no-invalid-dom-token',
     'no-invalid-file-input-accept',
+    'no-invalid-style-set-property',
     'no-late-current-target-access',
     'no-late-event-control',
+    'no-prevent-default-in-passive-listener',
     'no-selector-as-dom-name',
     'no-unsafe-dom-html',
     'prefer-add-event-listener-options',
@@ -34,6 +38,11 @@ const browserUnicornRules = [
     'prefer-toggle-attribute',
     'require-css-escape',
     'require-passive-events'
+];
+const jsxUnicornRules = [
+    'no-conflicting-constraints',
+    'no-ineffective-csp-directives',
+    'no-invalid-integrity'
 ];
 
 suite('base best practices rule set', function () {
@@ -59,7 +68,7 @@ suite('base best practices rule set', function () {
                 ruleConfigSet: baseConfigRules,
                 pluginRules: unicornPlugin.rules,
                 pluginName: 'eslint-plugin-unicorn',
-                rulesToExclude: browserUnicornRules
+                rulesToExclude: [ ...browserUnicornRules, ...jsxUnicornRules ]
             });
         });
 

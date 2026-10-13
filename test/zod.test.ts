@@ -15,6 +15,8 @@ const regularZodImportRuleId = 'restricted-imports/no-regular-zod-import';
 const enumSchemaRuleId = 'restricted-syntax-zod/no-enum-schema';
 const nativeEnumSchemaRuleId = 'restricted-syntax-zod/no-native-enum-schema';
 const lengthCheckedArrayRuleId = 'zod-mini/prefer-tuple-over-array-length';
+const preferValidateMiniRuleId = 'zod-mini/prefer-validate';
+const preferValidateCoreRuleId = 'zod-core/prefer-validate';
 const zodMiniPluginRules = (zodMiniPlugin as ESLint.Plugin).rules;
 const zodCorePluginRules = (zodCorePlugin as ESLint.Plugin).rules;
 
@@ -180,6 +182,40 @@ suite('zod preset', function () {
             const messages = collectRuleMessages(source, lengthCheckedArrayRuleId);
 
             assert.deepStrictEqual(messages, [], 'A string length check must not be reported');
+        });
+    });
+
+    suite('boolean validation', function () {
+        test('reports a safeParse() result that is only read for success', function () {
+            const source = "import { z } from 'zod/mini';\nconst nameSchema = z.string();\n" +
+                'export const isValid = nameSchema.safeParse(input).success;';
+            const messages = collectRuleMessages(source, preferValidateMiniRuleId);
+
+            assert.strictEqual(messages.length, 1, 'Reading only success from safeParse() must be reported');
+        });
+
+        test('allows z.validate()', function () {
+            const source = "import { z } from 'zod/mini';\nconst nameSchema = z.string();\n" +
+                'export const isValid = z.validate(nameSchema, input);';
+            const messages = collectRuleMessages(source, preferValidateMiniRuleId);
+
+            assert.deepStrictEqual(messages, [], 'z.validate() must not be reported');
+        });
+
+        test('allows a safeParse() result whose data is used', function () {
+            const source = "import { z } from 'zod/mini';\nconst nameSchema = z.string();\n" +
+                'const result = nameSchema.safeParse(input);\nexport const name = result.success ? result.data : null;';
+            const messages = collectRuleMessages(source, preferValidateMiniRuleId);
+
+            assert.deepStrictEqual(messages, [], 'Using the parsed data must not be reported');
+        });
+
+        test('reports a core safeParse() result that is only read for success', function () {
+            const source = "import * as core from 'zod/v4/core';\n" +
+                'export const isValid = core.safeParse(nameSchema, input).success;';
+            const messages = collectRuleMessages(source, preferValidateCoreRuleId);
+
+            assert.strictEqual(messages.length, 1, 'Reading only success from core.safeParse() must be reported');
         });
     });
 });

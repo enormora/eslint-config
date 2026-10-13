@@ -23,6 +23,7 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/no-explicit-any',
     '@typescript-eslint/no-extraneous-class',
     '@typescript-eslint/no-floating-promises',
+    '@typescript-eslint/no-generated-empty-object-type',
     '@typescript-eslint/no-inferrable-types',
     '@typescript-eslint/no-magic-numbers',
     '@typescript-eslint/no-namespace',
@@ -113,6 +114,7 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-includes',
     'unicorn/prefer-math-trunc',
     'unicorn/prefer-node-protocol',
+    'unicorn/prefer-promise-static-methods',
     'unicorn/prefer-string-slice',
     'unicorn/require-array-sort-compare'
 ];

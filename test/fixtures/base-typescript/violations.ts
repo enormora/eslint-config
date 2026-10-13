@@ -272,6 +272,8 @@ const nullable: number | null = null;
 const fallback = nullable !== null && nullable !== undefined ? nullable : 0;
 console.log(fallback);
 
+export type AnyNonNullish = NonNullable<unknown>;
+
 const literalAs = 'hello' as 'hello';
 console.log(literalAs);
 

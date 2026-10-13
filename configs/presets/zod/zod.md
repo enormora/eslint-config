@@ -75,3 +75,16 @@ Conversely, `z.readonly()` on an already-immutable schema (a primitive such as `
 z.readonly(z.string()); // error → z.string()
 z.string(); // ok
 ```
+
+## Boolean validation
+
+A `safeParse()` result that is only read for `success` is reported; `z.validate()` returns the same boolean without building a result object. Keep `safeParse()` when the parsed data or the error is used. The rule needs Zod 4.6 or later and offers editor suggestions rather than an autofix:
+
+```javascript
+schema.safeParse(input).success; // error
+z.validate(schema, input); // ok
+const result = schema.safeParse(input); // ok: result.data is used
+if (result.success) {
+    use(result.data);
+}
+```

@@ -2,11 +2,13 @@ import markdownPlugin from '@eslint/markdown';
 import type { ESLint } from 'eslint';
 import markdownLinksPlugin from 'eslint-plugin-markdown-links';
 import markdownPreferencesPlugin from 'eslint-plugin-markdown-preferences';
+import unicornPlugin from 'eslint-plugin-unicorn';
 
 export const markdownLintPlugins: Record<string, ESLint.Plugin> = {
     markdown: markdownPlugin,
     'markdown-links': markdownLinksPlugin,
-    'markdown-preferences': markdownPreferencesPlugin
+    'markdown-preferences': markdownPreferencesPlugin,
+    unicorn: unicornPlugin
 };
 
 export const markdownLintRules = {
@@ -103,5 +105,9 @@ export const markdownLintRules = {
     'markdown-preferences/table-pipe-spacing': 'off',
     'markdown-preferences/thematic-break-character-style': 'off',
     'markdown-preferences/thematic-break-length': 'off',
-    'markdown-preferences/thematic-break-sequence-pattern': 'off'
+    'markdown-preferences/thematic-break-sequence-pattern': 'off',
+
+    'unicorn/no-empty-link-text': 'error',
+    'unicorn/no-javascript-url': 'error',
+    'unicorn/no-leading-empty-lines': 'error'
 };

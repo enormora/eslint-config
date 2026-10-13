@@ -7,7 +7,8 @@ Drop-in alternative to [`@enormora/eslint-config-base`](../base/base.md) that fo
 
 This preset is itself a base preset. Pick this one **or** `@enormora/eslint-config-base`, never both. It contains the
 same set of lint rules as the regular base preset, including the semantic markdown linting stack
-(`@eslint/markdown`, `eslint-plugin-markdown-links`, `eslint-plugin-markdown-preferences`) and the dedicated
+(`@eslint/markdown`, `eslint-plugin-markdown-links`, `eslint-plugin-markdown-preferences`, the Markdown-aware
+`eslint-plugin-unicorn` rules) and the dedicated
 `package.json` linting stack (`eslint-plugin-package-json`, `eslint-plugin-json-schema-validator`). The only
 differences are the formatter integration and that TOML is not covered (prettier has no native TOML support; see
 [Limitations](#limitations) below).
@@ -51,13 +52,13 @@ export default [
 the lint rules; the remaining blocks each scope `prettier/prettier` to one file family, with the markdown block
 additionally enabling the semantic markdown linters.
 
-| Block         | Files                                      | Rule(s)                                                                         |
-| :------------ | :----------------------------------------- | :------------------------------------------------------------------------------ |
-| JavaScript/TS | `**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}` | base lint rules + `prettier/prettier`                                           |
-| JSON          | `**/*.json`                                | `prettier/prettier`                                                             |
-| package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                            |
-| Markdown      | `**/*.md`                                  | `prettier/prettier`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*` |
-| YAML          | `**/*.{yml,yaml}`                          | `prettier/prettier`                                                             |
+| Block         | Files                                      | Rule(s)                                                                                      |
+| :------------ | :----------------------------------------- | :------------------------------------------------------------------------------------------- |
+| JavaScript/TS | `**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}` | base lint rules + `prettier/prettier`                                                        |
+| JSON          | `**/*.json`                                | `prettier/prettier`                                                                          |
+| package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                         |
+| Markdown      | `**/*.md`                                  | `prettier/prettier`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*`, `unicorn/*` |
+| YAML          | `**/*.{yml,yaml}`                          | `prettier/prettier`                                                                          |
 
 ### Linting hidden directories
 
