@@ -73,57 +73,97 @@ suite('base best practices', function () {
         );
     });
 
-    test('reports discarded array method return values under the replacement rule', function () {
-        const actualReports = bestPracticesReports('[1, 2].slice(1);', 'unicorn/no-unused-builtin-method-return');
-        assert.strictEqual(actualReports.length, 1);
-        assert.strictEqual(actualReports[0]?.severity, 2);
+    suite('built-in method return values', function () {
+        test('reports discarded array method return values under the replacement rule', function () {
+            const actualReports = bestPracticesReports('[1, 2].slice(1);', 'unicorn/no-unused-builtin-method-return');
+            assert.strictEqual(actualReports.length, 1);
+            assert.strictEqual(actualReports[0]?.severity, 2);
+        });
+
+        test('reports discarded set method return values under the replacement rule', function () {
+            const actualReports = bestPracticesReports(
+                'new Set([1, 2]).has(1);',
+                'unicorn/no-unused-builtin-method-return'
+            );
+            assert.strictEqual(actualReports.length, 1);
+        });
+
+        test('accepts consumed built-in method return values', function () {
+            const actualReports = bestPracticesReports(
+                'export const remaining = [1, 2].slice(1);\nexport const contains = new Set([1, 2]).has(1);',
+                'unicorn/no-unused-builtin-method-return'
+            );
+            assert.deepStrictEqual(actualReports, []);
+        });
     });
 
-    test('reports discarded set method return values under the replacement rule', function () {
-        const actualReports = bestPracticesReports(
-            'new Set([1, 2]).has(1);',
-            'unicorn/no-unused-builtin-method-return'
-        );
-        assert.strictEqual(actualReports.length, 1);
+    suite('iterator helpers', function () {
+        test('reports asynchronous callbacks passed to synchronous iterator helpers', function () {
+            const actualReports = bestPracticesReports(
+                '[1, 2].values().forEach(async function consume(value) { await consumeValue(value); });',
+                'unicorn/no-async-iterator-callback'
+            );
+            assert.strictEqual(actualReports.length, 1);
+        });
+
+        test('accepts synchronous iterator callbacks', function () {
+            const actualReports = bestPracticesReports(
+                '[1, 2].values().forEach(function consume(value) { consumeValue(value); });',
+                'unicorn/no-async-iterator-callback'
+            );
+            assert.deepStrictEqual(actualReports, []);
+        });
+
+        test('reports discarded lazy iterator helpers', function () {
+            const actualReports = bestPracticesReports(
+                '[1, 2].values().map(function double(value) { return value * 2; });',
+                'unicorn/no-unused-iterator-helper'
+            );
+            assert.strictEqual(actualReports.length, 1);
+        });
+
+        test('accepts consumed lazy iterator helpers', function () {
+            const actualReports = bestPracticesReports(
+                'export const doubled = [1, 2].values().map(function double(value) { return value * 2; }).toArray();',
+                'unicorn/no-unused-iterator-helper'
+            );
+            assert.deepStrictEqual(actualReports, []);
+        });
     });
 
-    test('accepts consumed built-in method return values', function () {
-        const actualReports = bestPracticesReports(
-            'export const remaining = [1, 2].slice(1);\nexport const contains = new Set([1, 2]).has(1);',
-            'unicorn/no-unused-builtin-method-return'
-        );
-        assert.deepStrictEqual(actualReports, []);
+    suite('JSON serialization', function () {
+        test('reports values that JSON serialization cannot represent', function () {
+            const actualReports = bestPracticesReports(
+                "JSON.stringify({ permissions: new Set(['read']) });",
+                'unicorn/no-unsafe-json-serialization'
+            );
+            assert.strictEqual(actualReports.length, 1);
+        });
+
+        test('accepts JSON-representable values', function () {
+            const actualReports = bestPracticesReports(
+                "export const serialized = JSON.stringify({ permissions: ['read'] });",
+                'unicorn/no-unsafe-json-serialization'
+            );
+            assert.deepStrictEqual(actualReports, []);
+        });
     });
 
-    test('reports asynchronous callbacks passed to synchronous iterator helpers', function () {
-        const actualReports = bestPracticesReports(
-            '[1, 2].values().forEach(async function consume(value) { await consumeValue(value); });',
-            'unicorn/no-async-iterator-callback'
-        );
-        assert.strictEqual(actualReports.length, 1);
-    });
+    suite('unnecessary parameters', function () {
+        test('reports parameters that receive the same argument at every call', function () {
+            const actualReports = bestPracticesReports(
+                "function log(message, level) { console.log(level, message); }\nlog('start', 'info');\nlog('done', 'info');",
+                'unicorn/no-unnecessary-parameters'
+            );
+            assert.strictEqual(actualReports.length, 1);
+        });
 
-    test('accepts synchronous iterator callbacks', function () {
-        const actualReports = bestPracticesReports(
-            '[1, 2].values().forEach(function consume(value) { consumeValue(value); });',
-            'unicorn/no-async-iterator-callback'
-        );
-        assert.deepStrictEqual(actualReports, []);
-    });
-
-    test('reports discarded lazy iterator helpers', function () {
-        const actualReports = bestPracticesReports(
-            '[1, 2].values().map(function double(value) { return value * 2; });',
-            'unicorn/no-unused-iterator-helper'
-        );
-        assert.strictEqual(actualReports.length, 1);
-    });
-
-    test('accepts consumed lazy iterator helpers', function () {
-        const actualReports = bestPracticesReports(
-            'export const doubled = [1, 2].values().map(function double(value) { return value * 2; }).toArray();',
-            'unicorn/no-unused-iterator-helper'
-        );
-        assert.deepStrictEqual(actualReports, []);
+        test('accepts parameters that receive different arguments', function () {
+            const actualReports = bestPracticesReports(
+                "function log(message, level) { console.log(level, message); }\nlog('start', 'info');\nlog('done', 'warn');",
+                'unicorn/no-unnecessary-parameters'
+            );
+            assert.deepStrictEqual(actualReports, []);
+        });
     });
 });

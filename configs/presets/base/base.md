@@ -33,7 +33,7 @@ instead. It is an alternative base preset and is not meant to be combined with t
     `package.json` schema, catching invalid values that the field-shape rules above can't see (e.g. unknown
     `engines.node` operators, malformed `exports` conditions).
 
-Markdown files additionally get semantic linting through three language-aware plugins, all riding on
+Markdown files additionally get semantic linting through four language-aware plugins, all riding on
 [`@eslint/markdown`](https://github.com/eslint/markdown)'s `language: "markdown/commonmark"`:
 
 - **`@eslint/markdown`** (`markdown/*`): heading order, missing alt text, broken link fragments, fenced-code
@@ -46,6 +46,8 @@ Markdown files additionally get semantic linting through three language-aware pl
     (`markdown-preferences/*`): only the 8 rules from this plugin's `recommended` config are on (blockquote alignment,
     hard-linebreak style, no-laziness blockquotes, prefer-autolinks, prefer-fenced-code-blocks, etc.). The other 45 are
     off because they overlap with dprint formatting; flip on individually if a stricter style fits your project.
+- **[`eslint-plugin-unicorn`](https://github.com/sindresorhus/eslint-plugin-unicorn)** (`unicorn/*`): the three
+    Markdown-aware rules `no-empty-link-text`, `no-javascript-url`, and `no-leading-empty-lines`.
 
 `@eslint/markdown` declares `language: "markdown/commonmark"` for `.md` files, so the AST root becomes an mdast
 `root` node rather than an ESTree `Program`; a small in-repo adapter wraps `dprint/markdown` so it fires on the mdast
@@ -96,14 +98,14 @@ export default [
 `baseConfig` is an array of flat config blocks. The first block targets `**/*.{js,mjs,cjs}` and carries the lint rules.
 The remaining blocks each enable one formatter or linter scoped to a default file glob:
 
-| Block         | Files                                      | Rule(s)                                                                                |
-| :------------ | :----------------------------------------- | :------------------------------------------------------------------------------------- |
-| JavaScript/TS | `**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}` | `dprint/typescript`                                                                    |
-| JSON          | `**/*.json`                                | `dprint/json`                                                                          |
-| package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                   |
-| Markdown      | `**/*.md`                                  | `dprint-markdown/markdown`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*` |
-| YAML          | `**/*.{yml,yaml}`                          | `dprint/yaml`                                                                          |
-| TOML          | `**/*.toml`                                | `dprint/toml`                                                                          |
+| Block         | Files                                      | Rule(s)                                                                                             |
+| :------------ | :----------------------------------------- | :-------------------------------------------------------------------------------------------------- |
+| JavaScript/TS | `**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}` | `dprint/typescript`                                                                                 |
+| JSON          | `**/*.json`                                | `dprint/json`                                                                                       |
+| package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                                |
+| Markdown      | `**/*.md`                                  | `dprint-markdown/markdown`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*`, `unicorn/*` |
+| YAML          | `**/*.{yml,yaml}`                          | `dprint/yaml`                                                                                       |
+| TOML          | `**/*.toml`                                | `dprint/toml`                                                                                       |
 
 ### Linting hidden directories
 

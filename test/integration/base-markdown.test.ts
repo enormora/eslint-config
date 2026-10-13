@@ -37,7 +37,9 @@ const expectedViolationRuleIds = [
     'markdown/no-reversed-media-syntax',
     'markdown/no-space-in-emphasis',
     'markdown/no-unused-definitions',
-    'markdown/require-alt-text'
+    'markdown/require-alt-text',
+    'unicorn/no-empty-link-text',
+    'unicorn/no-javascript-url'
 ];
 
 suite('base markdown integration', function () {

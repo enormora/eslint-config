@@ -18,6 +18,10 @@ export const reactJsxConfig = {
     rules: {
         ...reactConfig.rules,
 
+        'unicorn/no-conflicting-constraints': 'error',
+        'unicorn/no-ineffective-csp-directives': 'error',
+        'unicorn/no-invalid-integrity': 'error',
+
         'jsx-quotes': [ 'error', 'prefer-single' ],
         'jsx-sort-props': 'off',
 

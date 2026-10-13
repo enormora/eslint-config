@@ -4,6 +4,9 @@
 
 Config preset for react and JSX, enabling specific rules and compiler settings.
 
+The JSX markup checks from `eslint-plugin-unicorn` (`no-conflicting-constraints`, `no-ineffective-csp-directives`,
+`no-invalid-integrity`) are enabled here instead of in the base preset.
+
 ## Install & Setup
 
 Install the `@enormora/eslint-config-react-jsx` and the base preset package via npm:

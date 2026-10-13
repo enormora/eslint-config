@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import { suite, test } from 'mocha';
 import reactPlugin from 'eslint-plugin-react';
 import hooksPlugin from 'eslint-plugin-react-hooks';
@@ -9,7 +10,19 @@ import {
     checkUnknownPluginRulesAreNotConfigured
 } from './rules-configuration.ts';
 
+const jsxUnicornRules = [
+    'unicorn/no-conflicting-constraints',
+    'unicorn/no-ineffective-csp-directives',
+    'unicorn/no-invalid-integrity'
+];
+
 suite('react-jsx preset', function () {
+    test('jsx-owned unicorn rules are configured', function () {
+        for (const ruleName of jsxUnicornRules) {
+            assert.ok(Object.hasOwn(reactJsxConfig.rules, ruleName), `${ruleName} not configured`);
+        }
+    });
+
     test('react preset config has the correct language options defined', function () {
         checkConfigLanguageOptions({
             configLanguageOptions: reactJsxConfig.languageOptions,
