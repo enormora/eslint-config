@@ -12,7 +12,7 @@
     ],
     "license": "MIT",
     "engines": {
-        "node": "^22.13.0 || >=24"
+        "node": ">=24"
     },
     "dependencies": {
         "@ben_12/eslint-plugin-dprint": "1.29.0",

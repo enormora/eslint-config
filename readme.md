@@ -4,6 +4,8 @@
 
 Shareable ESLint config presets from Enormora.
 
+All presets require Node.js 24 or later.
+
 The config presets are distributed in multiple packages and only work with the [new flat config system](https://eslint.org/docs/latest/use/configure/configuration-files-new) of ESLint.
 
 ## Presets Overview
