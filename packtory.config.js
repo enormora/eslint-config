@@ -341,7 +341,7 @@ export async function buildConfiguration() {
                 ],
                 additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint Astro configuration',
-                    engines: { node: '^22.22.3 || ^24.16.0 || >=26.3.0' }
+                    engines: { node: '^24.16.0 || >=26.3.0' }
                 }
             },
             {
@@ -356,7 +356,7 @@ export async function buildConfiguration() {
                 ],
                 additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint Astro with TypeScript configuration',
-                    engines: { node: '^22.22.3 || ^24.16.0 || >=26.3.0' }
+                    engines: { node: '^24.16.0 || >=26.3.0' }
                 }
             },
             {
