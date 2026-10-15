@@ -33,3 +33,6 @@ packtory-publish: compile
 
 release-gate: compile
     github-release-gate
+
+check-packages: compile
+    packtory tree @enormora/eslint-config-base

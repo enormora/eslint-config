@@ -8,6 +8,8 @@ All presets require Node.js 24 or later.
 
 The config presets are distributed in multiple packages and only work with the [new flat config system](https://eslint.org/docs/latest/use/configure/configuration-files-new) of ESLint.
 
+The default Node.js range is `^22.22.2 || >=24.15.0`. Presets including `node:assert` require `>=26.0.0`; Astro presets require `^22.22.3 || ^24.16.0 || >=26.3.0` to match their dependencies.
+
 ## Presets Overview
 
 Enormora provides a collection of shareable ESLint config presets to cater to various project types and requirements. Choose the configuration that best aligns with your project's needs for seamless linting and consistent coding styles.

@@ -43,8 +43,8 @@ jobs:
               run: npx just test-unit
             - name: Run integration tests
               run: npx just test-integration
-            - name: Packtory dry-run
-              run: npx just packtory-dry-run
+            - name: Check packages
+              run: npx just check-packages
 
     workflow-security:
         runs-on: ubuntu-24.04
