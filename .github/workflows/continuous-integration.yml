@@ -43,7 +43,7 @@ jobs:
               run: npx just test-unit
             - name: Run integration tests
               run: npx just test-integration
-            - name: Packtory dry-run
+            - name: Publish dry run
               run: npx just packtory-dry-run
 
     workflow-security:

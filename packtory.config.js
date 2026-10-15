@@ -35,9 +35,9 @@ const publishingPeerDependencies = {
 };
 
 /**
- * @returns {Promise<import('@packtory/cli').PacktoryConfig>}
+ * @returns {Promise<import('@packtory/cli').PacktoryConfiguration>}
  */
-export async function buildConfig() {
+export async function buildConfiguration() {
     const packageJsonContent = await fs.readFile(path.join(projectFolder, './package.json'), { encoding: 'utf8' });
     const packageJson = JSON.parse(packageJsonContent);
     const packtoryMainPackageJson = {
@@ -50,32 +50,38 @@ export async function buildConfig() {
 
     return {
         registrySettings: {
-            auth: {
-                publish: { type: 'npm-oidc', provider: 'auto' },
-                metadata: 'auto'
+            authentication: {
+                publish: { type: 'npm-open-identity-connect', provider: 'automatic' },
+                metadata: 'automatic'
             }
         },
         checks: {
             noDuplicatedFiles: {
                 enabled: true,
                 allowList: noDuplicatedFilesAllowList
-            }
+            },
+            noDevelopmentDependencyImports: { enabled: true },
+            noUnusedBundleDependencies: { enabled: true },
+            uniqueTargetPaths: { enabled: true },
+            noUnexposedExecutables: { enabled: true },
+            nodeEngineCompatibility: { enabled: true },
+            requiredFiles: { enabled: true, files: [ 'LICENSE', 'readme.md' ] }
         },
         commonPackageSettings: {
             sourcesFolder,
-            mainPackageJson: packtoryMainPackageJson,
+            mainPackageManifest: packtoryMainPackageJson,
             includeSourceMapFiles: true,
             publishSettings: {
                 access: 'public',
-                provenance: { type: 'auto' }
+                provenance: { type: 'automatic' }
             },
             additionalFiles: [
                 {
-                    sourceFilePath: path.join(projectFolder, 'LICENSE'),
+                    inputFilePath: path.join(projectFolder, 'LICENSE'),
                     targetFilePath: 'LICENSE'
                 }
             ],
-            additionalPackageJsonAttributes: {
+            additionalPackageManifestAttributes: {
                 license: packageJson.license,
                 repository: packageJson.repository,
                 author: packageJson.author,
@@ -88,16 +94,16 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-base',
                 roots: {
                     main: {
-                        js: 'presets/base/base.js'
+                        javaScript: 'presets/base/base.js'
                     }
                 },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/base/base.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/base/base.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint base configuration'
                 }
             },
@@ -105,19 +111,19 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-base-with-prettier',
                 roots: {
                     main: {
-                        js: 'presets/base-with-prettier/base-with-prettier.js'
+                        javaScript: 'presets/base-with-prettier/base-with-prettier.js'
                     }
                 },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(
+                        inputFilePath: path.join(
                             presetMarkdownFolder,
                             'presets/base-with-prettier/base-with-prettier.md'
                         ),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint base configuration formatted with prettier'
                 }
             },
@@ -125,298 +131,291 @@ export async function buildConfig() {
                 name: '@enormora/eslint-config-node',
                 roots: {
                     main: {
-                        js: 'presets/node/node.js'
+                        javaScript: 'presets/node/node.js'
                     }
                 },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/node/node.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/node/node.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint node.js configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-typescript',
-                roots: { main: { js: 'presets/typescript/typescript.js' } },
+                roots: { main: { javaScript: 'presets/typescript/typescript.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/typescript/typescript.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/typescript/typescript.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint typescript configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-test-base',
-                roots: { main: { js: 'presets/test-base/test-base.js' } },
+                roots: { main: { javaScript: 'presets/test-base/test-base.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/test-base/test-base.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/test-base/test-base.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s shared ESLint rules for test files'
                 }
             },
             {
                 name: '@enormora/eslint-config-node-assert',
-                roots: { main: { js: 'presets/node-assert/node-assert.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/node-assert/node-assert.js' } },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/node-assert/node-assert.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/node-assert/node-assert.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint node:assert configuration'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint node:assert configuration',
+                    engines: { node: '>=26.0.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-ava',
-                roots: { main: { js: 'presets/ava/ava.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/ava/ava.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/ava/ava.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/ava/ava.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint ava configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-ava-node-assert',
-                roots: { main: { js: 'presets/ava-node-assert/ava-node-assert.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/ava-node-assert/ava-node-assert.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-ava', '@enormora/eslint-config-node-assert' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/ava-node-assert/ava-node-assert.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/ava-node-assert/ava-node-assert.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint AVA configuration with node:assert rules'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint AVA configuration with node:assert rules',
+                    engines: { node: '>=26.0.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-mocha',
-                roots: { main: { js: 'presets/mocha/mocha.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/mocha/mocha.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/mocha/mocha.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/mocha/mocha.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint mocha configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-mocha-node-assert',
-                roots: { main: { js: 'presets/mocha-node-assert/mocha-node-assert.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/mocha-node-assert/mocha-node-assert.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-mocha', '@enormora/eslint-config-node-assert' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(
+                        inputFilePath: path.join(
                             presetMarkdownFolder,
                             'presets/mocha-node-assert/mocha-node-assert.md'
                         ),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint Mocha configuration with node:assert rules'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint Mocha configuration with node:assert rules',
+                    engines: { node: '>=26.0.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-browser',
-                roots: { main: { js: 'presets/browser/browser.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/browser/browser.js' } },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/browser/browser.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/browser/browser.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint browser configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-eslint-plugin',
-                roots: { main: { js: 'presets/eslint-plugin/eslint-plugin.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/eslint-plugin/eslint-plugin.js' } },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/eslint-plugin/eslint-plugin.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/eslint-plugin/eslint-plugin.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint configuration for authoring ESLint plugins'
                 }
             },
             {
                 name: '@enormora/eslint-config-react',
-                roots: { main: { js: 'presets/react/react.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/react/react.js' } },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react/react.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/react/react.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint react configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-react-jsx',
-                roots: { main: { js: 'presets/react-jsx/react-jsx.js' } },
+                roots: { main: { javaScript: 'presets/react-jsx/react-jsx.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 bundleDependencies: [ '@enormora/eslint-config-react' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react-jsx/react-jsx.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/react-jsx/react-jsx.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint react with JSX configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-react-tsx',
-                roots: { main: { js: 'presets/react-tsx/react-tsx.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                roots: { main: { javaScript: 'presets/react-tsx/react-tsx.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 bundleDependencies: [ '@enormora/eslint-config-react-jsx' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/react-tsx/react-tsx.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/react-tsx/react-tsx.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint react with TSX and typescript configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-vue-ts',
-                roots: { main: { js: 'presets/vue-ts/vue-ts.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                roots: { main: { javaScript: 'presets/vue-ts/vue-ts.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-typescript' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/vue-ts/vue-ts.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/vue-ts/vue-ts.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint Vue with TypeScript configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-astro',
-                roots: { main: { js: 'presets/astro/astro.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/astro/astro.js' } },
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/astro/astro.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/astro/astro.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint Astro configuration'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint Astro configuration',
+                    engines: { node: '^24.16.0 || >=26.3.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-astro-ts',
-                roots: { main: { js: 'presets/astro-ts/astro-ts.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                roots: { main: { javaScript: 'presets/astro-ts/astro-ts.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-astro' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/astro-ts/astro-ts.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/astro-ts/astro-ts.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint Astro with TypeScript configuration'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint Astro with TypeScript configuration',
+                    engines: { node: '^24.16.0 || >=26.3.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-vitest',
-                roots: { main: { js: 'presets/vitest/vitest.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/vitest/vitest.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-test-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/vitest/vitest.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/vitest/vitest.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint Vitest configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-vitest-node-assert',
-                roots: { main: { js: 'presets/vitest-node-assert/vitest-node-assert.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
+                roots: { main: { javaScript: 'presets/vitest-node-assert/vitest-node-assert.js' } },
                 bundleDependencies: [ '@enormora/eslint-config-vitest', '@enormora/eslint-config-node-assert' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(
+                        inputFilePath: path.join(
                             presetMarkdownFolder,
                             'presets/vitest-node-assert/vitest-node-assert.md'
                         ),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
-                    description: 'Enormora’s ESLint Vitest configuration with node:assert rules'
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint Vitest configuration with node:assert rules',
+                    engines: { node: '>=26.0.0' }
                 }
             },
             {
                 name: '@enormora/eslint-config-aws-cdk',
-                roots: { main: { js: 'presets/aws-cdk/aws-cdk.js' } },
-                bundlePeerDependencies: [ '@enormora/eslint-config-base', '@enormora/eslint-config-typescript' ],
+                roots: { main: { javaScript: 'presets/aws-cdk/aws-cdk.js' } },
+                bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/aws-cdk/aws-cdk.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/aws-cdk/aws-cdk.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint AWS CDK configuration'
                 }
             },
             {
                 name: '@enormora/eslint-config-zod',
-                roots: { main: { js: 'presets/zod/zod.js' } },
+                roots: { main: { javaScript: 'presets/zod/zod.js' } },
                 bundlePeerDependencies: [ '@enormora/eslint-config-base' ],
                 additionalFiles: [
                     {
-                        sourceFilePath: path.join(presetMarkdownFolder, 'presets/zod/zod.md'),
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/zod/zod.md'),
                         targetFilePath: 'readme.md'
                     }
                 ],
-                additionalPackageJsonAttributes: {
+                additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint Zod configuration enforcing Zod Mini and Zod core'
                 }
             }
