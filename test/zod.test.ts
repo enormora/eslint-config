@@ -185,6 +185,40 @@ suite('zod preset', function () {
         });
     });
 
+    suite('core import syntax', function () {
+        test('allows namespace imports from zod/v4/core', function () {
+            const messages = collectRuleMessages(
+                "import * as core from 'zod/v4/core';",
+                'zod-core/consistent-import'
+            );
+
+            assert.deepStrictEqual(messages, [], 'Zod core namespace imports must not be reported');
+        });
+
+        test('rewrites named Zod core imports and their references to namespace imports', function () {
+            const source = "import { safeParse } from 'zod/v4/core';\n" +
+                'export const result = safeParse(nameSchema, input);';
+            const messages = collectRuleMessages(source, 'zod-core/consistent-import');
+            const linter = new Linter({ configType: 'flat' });
+            const result = linter.verifyAndFix(source, [ zodConfig ] as unknown as Linter.Config[], 'schema.js');
+
+            assert.deepStrictEqual(
+                messages.map(function getMessageId(message) {
+                    return message.messageId;
+                }),
+                [ 'changeImportSyntax', 'convertUsage' ],
+                'The named Zod core import and its reference must both be reported'
+            );
+            assert.strictEqual(result.fixed, true, 'Named Zod core imports must be fixed');
+            assert.strictEqual(
+                result.output,
+                "import * as z from 'zod/v4/core';\nexport const result = z.safeParse(nameSchema, input);",
+                'The namespace import and its references must use the same binding'
+            );
+            assert.deepStrictEqual(result.messages, [], 'The fixed Zod core import must have no reports');
+        });
+    });
+
     suite('boolean validation', function () {
         test('reports a safeParse() result that is only read for success', function () {
             const source = "import { z } from 'zod/mini';\nconst nameSchema = z.string();\n" +

@@ -31,12 +31,12 @@ export default [
 
 ## Enforcing Zod Mini
 
-Importing from the regular `zod` entry points is reported, while `zod/mini` and `zod/v4/core` are allowed:
+Importing from the regular `zod` entry points is reported. Use named imports for `zod/mini` and namespace imports for `zod/v4/core`:
 
 ```javascript
 import { z } from 'zod'; // error: Use zod/mini or zod/v4/core instead.
 import { z } from 'zod/mini'; // ok
-import { $ZodType } from 'zod/v4/core'; // ok
+import * as core from 'zod/v4/core'; // ok
 ```
 
 ## Banned schemas
