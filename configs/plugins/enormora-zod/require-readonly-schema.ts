@@ -40,10 +40,10 @@ function getZodFactoryName(node: TSESTree.CallExpression): string | undefined {
         return undefined;
     }
     const { object, property } = callee;
-    if (object.type !== AST_NODE_TYPES.Identifier || object.name !== zodNamespace) {
-        return undefined;
-    }
-    if (property.type !== AST_NODE_TYPES.Identifier) {
+    if (
+        object.type !== AST_NODE_TYPES.Identifier || object.name !== zodNamespace ||
+        property.type !== AST_NODE_TYPES.Identifier
+    ) {
         return undefined;
     }
     return property.name;

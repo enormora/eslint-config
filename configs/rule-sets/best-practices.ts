@@ -366,6 +366,8 @@ export const bestPracticesRuleSet = {
         'unicorn/no-invalid-url-protocol-comparison': 'error',
         'unicorn/no-url-in-search-params': 'error',
         'unicorn/no-invalid-response-options': 'error',
+        'unicorn/no-repeated-call-wrappers': 'error',
+        'unicorn/no-unnecessary-default-arguments': 'off',
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',

@@ -33,10 +33,7 @@ function isCallableUtility(name: string): name is CallableUtility {
 
 function getUtilityName(typeReference: TSESTree.TSTypeReference): CallableUtility | undefined {
     const { typeName } = typeReference;
-    if (typeName.type !== AST_NODE_TYPES.Identifier) {
-        return undefined;
-    }
-    if (!isCallableUtility(typeName.name)) {
+    if (typeName.type !== AST_NODE_TYPES.Identifier || !isCallableUtility(typeName.name)) {
         return undefined;
     }
     return typeName.name;
@@ -140,10 +137,7 @@ function getEnclosingUtilityTypeReference(
         return undefined;
     }
     const reference = instantiation.parent;
-    if (reference.type !== AST_NODE_TYPES.TSTypeReference) {
-        return undefined;
-    }
-    if (reference.typeArguments !== instantiation) {
+    if (reference.type !== AST_NODE_TYPES.TSTypeReference || reference.typeArguments !== instantiation) {
         return undefined;
     }
     return reference;

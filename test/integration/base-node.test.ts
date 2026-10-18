@@ -63,6 +63,7 @@ const expectedViolationRuleIds = [
     'unicorn/no-array-sort',
     'unicorn/no-await-expression-member',
     'unicorn/no-for-loop',
+    'unicorn/no-immediate-mutation',
     'unicorn/no-lonely-if',
     'unicorn/no-new-buffer',
     'unicorn/no-process-exit',
