@@ -25,9 +25,14 @@ const noNativeEnumSchemaRestriction = {
     message: 'Use a union of z.literal() schemas instead of z.nativeEnum().'
 };
 
+const noCoreNamespaceImportRestriction = {
+    selector: "ImportDeclaration[source.value='zod/v4/core'] > ImportNamespaceSpecifier",
+    message: 'Use named imports from zod/v4/core instead.'
+};
+
 const restrictedImportsWrappers = createRestrictedImportsPlugin([ 'no-regular-zod-import' ]);
 const restrictedSyntaxWrappers = createRestrictedSyntaxPlugin(
-    [ 'no-enum-schema', 'no-native-enum-schema' ],
+    [ 'no-enum-schema', 'no-native-enum-schema', 'no-core-namespace-import' ],
     {}
 );
 
@@ -69,7 +74,7 @@ export const zodConfig = {
         'zod-mini/require-error-message': 'error',
         'zod-mini/schema-error-property-style': 'off',
 
-        'zod-core/consistent-import': [ 'error', { syntax: 'namespace' } ],
+        'zod-core/consistent-import': 'off',
         'zod-core/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
         'zod-core/prefer-validate': 'error',
 
@@ -78,6 +83,7 @@ export const zodConfig = {
         'restricted-imports/no-regular-zod-import': [ 'error', regularZodImportRestriction ],
 
         'restricted-syntax-zod/no-enum-schema': [ 'error', noEnumSchemaRestriction ],
-        'restricted-syntax-zod/no-native-enum-schema': [ 'error', noNativeEnumSchemaRestriction ]
+        'restricted-syntax-zod/no-native-enum-schema': [ 'error', noNativeEnumSchemaRestriction ],
+        'restricted-syntax-zod/no-core-namespace-import': [ 'error', noCoreNamespaceImportRestriction ]
     }
 };
