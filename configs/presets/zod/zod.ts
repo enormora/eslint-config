@@ -69,7 +69,7 @@ export const zodConfig = {
         'zod-mini/require-error-message': 'error',
         'zod-mini/schema-error-property-style': 'off',
 
-        'zod-core/consistent-import': [ 'error', { syntax: 'named' } ],
+        'zod-core/consistent-import': [ 'error', { syntax: 'namespace' } ],
         'zod-core/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
         'zod-core/prefer-validate': 'error',
 
