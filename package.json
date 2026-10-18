@@ -57,7 +57,7 @@
         "eslint-plugin-react-hooks": "7.1.1",
         "eslint-plugin-regexp": "3.3.1",
         "eslint-plugin-sonarjs": "4.2.2",
-        "eslint-plugin-unicorn": "77.0.0",
+        "eslint-plugin-unicorn": "78.0.0",
         "eslint-plugin-vue": "10.11.1",
         "eslint-plugin-zod-core": "2.0.1",
         "eslint-plugin-zod-mini": "2.0.1",
