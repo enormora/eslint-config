@@ -182,8 +182,7 @@ export async function buildConfiguration() {
                     }
                 ],
                 additionalPackageManifestAttributes: {
-                    description: 'Enormora’s ESLint node:assert configuration',
-                    engines: { node: '>=26.0.0' }
+                    description: 'Enormora’s ESLint node:assert configuration'
                 }
             },
             {
@@ -211,8 +210,7 @@ export async function buildConfiguration() {
                     }
                 ],
                 additionalPackageManifestAttributes: {
-                    description: 'Enormora’s ESLint AVA configuration with node:assert rules',
-                    engines: { node: '>=26.0.0' }
+                    description: 'Enormora’s ESLint AVA configuration with node:assert rules'
                 }
             },
             {
@@ -243,8 +241,7 @@ export async function buildConfiguration() {
                     }
                 ],
                 additionalPackageManifestAttributes: {
-                    description: 'Enormora’s ESLint Mocha configuration with node:assert rules',
-                    engines: { node: '>=26.0.0' }
+                    description: 'Enormora’s ESLint Mocha configuration with node:assert rules'
                 }
             },
             {
@@ -387,8 +384,7 @@ export async function buildConfiguration() {
                     }
                 ],
                 additionalPackageManifestAttributes: {
-                    description: 'Enormora’s ESLint Vitest configuration with node:assert rules',
-                    engines: { node: '>=26.0.0' }
+                    description: 'Enormora’s ESLint Vitest configuration with node:assert rules'
                 }
             },
             {
