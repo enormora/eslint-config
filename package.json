@@ -72,7 +72,7 @@
         "@packtory/github-release-gate": "0.0.85",
         "@types/mocha": "10.0.10",
         "@typescript-eslint/rule-tester": "8.71.2",
-        "eslint": "10.12.0",
+        "eslint": "10.13.0",
         "mocha": "12.0.3",
         "prettier": "3.9.10",
         "rust-just": "1.57.0",
