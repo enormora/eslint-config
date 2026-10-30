@@ -20,9 +20,6 @@ type ConfigBlock = {
     readonly languageOptions: Readonly<Record<string, unknown>>;
     readonly parserOptions: Readonly<Record<string, unknown>>;
 };
-type ConfigRulesBlock = Pick<ConfigBlock, 'rules'>;
-
-type RuleWithMeta = { readonly meta?: { readonly deprecated?: unknown; }; };
 
 type LanguageOptionsTestCase = {
     readonly configLanguageOptions: unknown;
@@ -53,6 +50,7 @@ function extractShortName(pluginName: string): string {
 }
 
 function isRuleDeprecated(rule: unknown): boolean {
+    type RuleWithMeta = { readonly meta?: { readonly deprecated?: unknown; }; };
     const ruleWithMeta = rule as RuleWithMeta | undefined;
     return Boolean(ruleWithMeta?.meta?.deprecated);
 }
@@ -152,6 +150,7 @@ export function checkUnknownPluginRulesAreNotConfigured(
 export function mergeConfigRules(config: unknown): RuleConfigSet {
     const blocks = Array.isArray(config) ? config : [ config ];
     return blocks.reduce<RuleConfigSet>(function collectBlockRules(merged: RuleConfigSet, block: unknown) {
+        type ConfigRulesBlock = Pick<ConfigBlock, 'rules'>;
         const blockRules = (block as Partial<ConfigRulesBlock> | undefined)?.rules ?? {};
         return { ...merged, ...blockRules };
     }, {});

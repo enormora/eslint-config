@@ -12,9 +12,6 @@ function ruleUrl(ruleName: string): string {
 const { RuleCreator: ruleCreator } = ESLintUtils;
 const buildRule = ruleCreator(ruleUrl);
 
-type Fixer = TSESLint.RuleFixer;
-type FixResult = TSESLint.RuleFix;
-
 const zodNamespace = 'z';
 const readonlyFactory = 'readonly';
 
@@ -78,6 +75,8 @@ export const requireReadonlySchemaRule = buildRule({
 
         return {
             CallExpression(node: TSESTree.CallExpression) {
+                type FixResult = TSESLint.RuleFix;
+                type Fixer = TSESLint.RuleFixer;
                 const factory = getZodFactoryName(node);
                 if (factory === undefined || !mutableSchemaFactories.has(factory) || isWrappedInReadonly(node)) {
                     return;
