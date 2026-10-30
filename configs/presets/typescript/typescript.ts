@@ -539,6 +539,7 @@ export const typescriptConfig = {
         'perfectionist/sort-array-includes': 'off',
         'perfectionist/sort-arrays': 'off',
         'perfectionist/sort-classes': 'off',
+        'perfectionist/sort-constructor-parameters': 'off',
         'perfectionist/sort-enums': 'off',
         'perfectionist/sort-exports': 'off',
         'perfectionist/sort-export-attributes': 'off',

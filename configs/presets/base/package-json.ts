@@ -64,6 +64,8 @@ export const packageJsonConfig = {
 
         // Too opinionated for a base preset — consumers can opt in.
         'package-json/bin-name-casing': 'off',
+        'package-json/consistent-package-manager-declaration': 'off',
+        'package-json/consistent-property-aliases': 'off',
         'package-json/exports-subpaths-style': 'off',
         'package-json/no-local-dependencies': 'off',
         'package-json/order-properties': 'off',
