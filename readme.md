@@ -4,7 +4,7 @@
 
 Shareable ESLint config presets from Enormora.
 
-All presets require Node.js 24.15 or later. Astro presets require `^24.16.0 || >=26.3.0` to match their dependencies.
+All presets support only Node.js 26.x. Astro presets require Node.js 26.3 or later within that release line to match their dependencies.
 
 The config presets are distributed in multiple packages and only work with the [new flat config system](https://eslint.org/docs/latest/use/configure/configuration-files-new) of ESLint.
 
