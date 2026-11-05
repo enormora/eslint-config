@@ -2,6 +2,7 @@ import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import typescriptParser from '@typescript-eslint/parser';
 import { suite, test } from 'mocha';
 import functionalPlugin from 'eslint-plugin-functional';
+import noObjectComparisonPlugin from 'eslint-plugin-no-object-comparison';
 import { rules as perfectionistRules } from 'eslint-plugin-perfectionist';
 import { typescriptConfig } from '../configs/presets/typescript/typescript.ts';
 import {
@@ -12,6 +13,22 @@ import {
 } from './rules-configuration.ts';
 
 suite('typescript preset', function () {
+    test('all eslint-plugin-no-object-comparison rules are configured', function () {
+        checkAllPluginRulesConfigured({
+            ruleConfigSet: typescriptConfig.rules,
+            pluginRules: noObjectComparisonPlugin.rules,
+            pluginName: 'eslint-plugin-no-object-comparison'
+        });
+    });
+
+    test('no unknown eslint-plugin-no-object-comparison rules are configured', function () {
+        checkUnknownPluginRulesAreNotConfigured({
+            ruleConfigSet: typescriptConfig.rules,
+            pluginRules: noObjectComparisonPlugin.rules,
+            pluginName: 'eslint-plugin-no-object-comparison'
+        });
+    });
+
     test('typescript preset config has the correct language options defined', function () {
         checkConfigLanguageOptions({
             configLanguageOptions: typescriptConfig.languageOptions,

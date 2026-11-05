@@ -2,6 +2,7 @@ import { rules as eslintCommentsPluginRules } from '@eslint-community/eslint-plu
 import markdownPlugin from '@eslint/markdown';
 import { rules as importPluginRules } from 'eslint-plugin-import-x';
 import { rules as jsonSchemaValidatorPluginRules } from 'eslint-plugin-json-schema-validator';
+import { rules as mathPluginRules } from 'eslint-plugin-math';
 import { rules as markdownLinksPluginRules } from 'eslint-plugin-markdown-links';
 import { rules as markdownPreferencesPluginRules } from 'eslint-plugin-markdown-preferences';
 import { rules as noSecretsPluginRules } from 'eslint-plugin-no-secrets';
@@ -9,6 +10,7 @@ import { rules as packageJsonPluginRules } from 'eslint-plugin-package-json';
 import { rules as regexpPluginRules } from 'eslint-plugin-regexp';
 
 export const basePluginRuleSet = {
+    'eslint-plugin-math': mathPluginRules,
     'eslint-plugin-no-secrets': noSecretsPluginRules,
     'eslint-plugin-import': importPluginRules,
     'eslint-plugin-eslint-comments': eslintCommentsPluginRules,

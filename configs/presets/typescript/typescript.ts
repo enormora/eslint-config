@@ -1,8 +1,10 @@
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import type { Linter } from 'eslint';
 import functionalPlugin from 'eslint-plugin-functional';
+import noObjectComparisonPlugin from 'eslint-plugin-no-object-comparison';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { enormoraTypescriptPlugin } from '../../plugins/enormora-typescript/enormora-typescript-plugin.ts';
+import { disable } from '../../rule-severity.ts';
 import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.ts';
 import { baseSharedConfig } from '../base/base-shared.ts';
 import { typescriptLanguageOptions, typescriptSettings } from './typescript-environment.ts';
@@ -93,10 +95,36 @@ export const typescriptConfig = {
         '@typescript-eslint': typescriptPlugin,
         perfectionist: perfectionistPlugin,
         functional: functionalPlugin,
+        'no-object-comparison': noObjectComparisonPlugin,
         'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin,
         'enormora-typescript': enormoraTypescriptPlugin
     },
     rules: {
+        'no-object-comparison/object-equality': disable<'Object identity comparisons are intentional'>(),
+        'no-object-comparison/object-relational': 'error',
+        'no-object-comparison/loose-type': disable<'Comparisons with unknown are valid type narrowing'>(),
+        'no-object-comparison/nan-comparison': disable<'Covered by use-isnan'>(),
+        'no-object-comparison/self-comparison': disable<'Covered by no-self-compare'>(),
+        'no-object-comparison/floating-point-equality': 'error',
+        'no-object-comparison/string-number-relational': 'error',
+        'no-object-comparison/symbol-literal-comparison': disable<
+            'Overlaps no-self-compare and sonarjs/no-identical-expressions'
+        >(),
+        'no-object-comparison/array-includes-object': [ 'error', { indirectReferences: 'none' } ],
+        'no-object-comparison/collection-reference-lookup': [ 'error', { indirectReferences: 'none' } ],
+        'no-object-comparison/json-stringify-comparison': disable<
+            'Comparing intentionally serialized representations is valid'
+        >(),
+        'no-object-comparison/object-literal-switch-case': disable<
+            'Switch statements are already prohibited by restricted-syntax/no-switch-statement'
+        >(),
+        'no-object-comparison/boxed-primitive-comparison': disable<
+            'Wrapper construction and wrapper types are already prohibited'
+        >(),
+        'no-object-comparison/collection-object-key': disable<
+            'Object collection keys are valid when their references are shared'
+        >(),
+
         'restricted-syntax-typescript/no-ts-enum-declaration': [ 'error', noTsEnumDeclarationRestriction ],
         'restricted-syntax-typescript/no-inline-signature-type-literal': [
             'error',
