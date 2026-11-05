@@ -4,23 +4,6 @@
 
 Config preset for typescript, enabling specific rules and compiler settings.
 
-## Comparison checks
-
-[`eslint-plugin-no-object-comparison`](https://github.com/vekexasia/eslint-plugin-no-object-comparison)
-adds type-aware checks for relational comparisons of objects without primitive coercion, numeric-looking
-string comparisons, and fresh object references passed to array searches or Map/Set lookups. It also
-reports equality comparisons containing decimal arithmetic. These checks run with the preset's existing
-`projectService` configuration. The preset requires TypeScript `>=5.0.0 <6.1.0` to satisfy the plugin's
-peer dependency.
-
-Array and collection lookups use `indirectReferences: 'none'`, so existing object references remain valid.
-Object identity comparisons, object keys, and JSON string comparisons remain allowed. Date comparisons
-are accepted because dates support numeric coercion.
-
-The plugin's NaN, self-comparison, symbol, boxed-primitive, and switch-case checks are disabled in favor
-of existing core, TypeScript, and syntax rules. Its blanket checks for object equality, comparisons with
-`any`/`unknown`, and object collection keys are also disabled.
-
 ## Install & Setup
 
 Install the `@enormora/eslint-config-typescript` and the base preset package via npm:
