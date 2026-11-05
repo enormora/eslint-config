@@ -7,6 +7,7 @@ import * as regexpPlugin from 'eslint-plugin-regexp';
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import { enormoraPlugin } from '../plugins/enormora/enormora-plugin.ts';
+import { disable } from '../rule-severity.ts';
 
 const maxSwitchCases = 6;
 
@@ -23,33 +24,39 @@ export const bestPracticesRuleSet = {
     },
     settings: {},
     rules: {
-        'math/abs': 'off',
+        'math/abs': disable<'Covered by unicorn/prefer-math-abs'>(),
         'math/no-static-infinity-calculations': 'error',
         'math/no-static-nan-calculations': 'error',
-        'math/prefer-exponentiation-operator': 'off',
+        'math/prefer-exponentiation-operator': disable<'Covered by prefer-exponentiation-operator'>(),
         'math/prefer-math-cbrt': 'error',
-        'math/prefer-math-e': 'off',
-        'math/prefer-math-hypot': 'off',
-        'math/prefer-math-ln10': 'off',
-        'math/prefer-math-ln2': 'off',
-        'math/prefer-math-log10': 'off',
-        'math/prefer-math-log10e': 'off',
-        'math/prefer-math-log2': 'off',
-        'math/prefer-math-log2e': 'off',
-        'math/prefer-math-pi': 'off',
+        'math/prefer-math-e': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-hypot': disable<'Overlaps unicorn/prefer-modern-math-apis'>(),
+        'math/prefer-math-ln10': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-ln2': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-log10': disable<'Overlaps unicorn/prefer-modern-math-apis'>(),
+        'math/prefer-math-log10e': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-log2': disable<'Overlaps unicorn/prefer-modern-math-apis'>(),
+        'math/prefer-math-log2e': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-pi': disable<'Overlaps unicorn/prefer-math-constants'>(),
         'math/prefer-math-sqrt': 'error',
-        'math/prefer-math-sqrt1-2': 'off',
-        'math/prefer-math-sqrt2': 'off',
-        'math/prefer-math-sum-precise': 'off',
-        'math/prefer-math-trunc': 'off',
+        'math/prefer-math-sqrt1-2': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-sqrt2': disable<'Overlaps unicorn/prefer-math-constants'>(),
+        'math/prefer-math-sum-precise': disable<
+            'Runtime support and changed summation rounding require explicit opt-in'
+        >(),
+        'math/prefer-math-trunc': disable<'Covered by unicorn/prefer-math-trunc'>(),
         'math/prefer-number-epsilon': 'error',
-        'math/prefer-number-is-finite': 'off',
-        'math/prefer-number-is-integer': 'off',
-        'math/prefer-number-is-nan': 'off',
-        'math/prefer-number-is-safe-integer': 'off',
+        'math/prefer-number-is-finite': disable<'Overlaps unicorn/prefer-number-properties'>(),
+        'math/prefer-number-is-integer': disable<'Overlaps unicorn/prefer-number-is-safe-integer'>(),
+        'math/prefer-number-is-nan': disable<
+            'Overlaps use-isnan, no-self-compare and unicorn/prefer-number-properties'
+        >(),
+        'math/prefer-number-is-safe-integer': disable<'Overlaps unicorn/prefer-number-is-safe-integer'>(),
         'math/prefer-number-max-safe-integer': 'error',
         'math/prefer-number-max-value': 'error',
-        'math/prefer-number-min-safe-integer': 'off',
+        'math/prefer-number-min-safe-integer': disable<
+            'math/prefer-number-max-safe-integer already reports the literal inside negative bounds'
+        >(),
         'math/prefer-number-min-value': 'error',
 
         'enormora/prefer-ternary-for-value-selection': 'error',
