@@ -1,6 +1,7 @@
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 import type { Linter } from 'eslint';
 import functionalPlugin from 'eslint-plugin-functional';
+import noObjectComparisonPlugin from 'eslint-plugin-no-object-comparison';
 import perfectionistPlugin from 'eslint-plugin-perfectionist';
 import { enormoraTypescriptPlugin } from '../../plugins/enormora-typescript/enormora-typescript-plugin.ts';
 import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.ts';
@@ -93,10 +94,26 @@ export const typescriptConfig = {
         '@typescript-eslint': typescriptPlugin,
         perfectionist: perfectionistPlugin,
         functional: functionalPlugin,
+        'no-object-comparison': noObjectComparisonPlugin,
         'restricted-syntax-typescript': restrictedSyntaxTypescriptPlugin,
         'enormora-typescript': enormoraTypescriptPlugin
     },
     rules: {
+        'no-object-comparison/object-equality': 'off',
+        'no-object-comparison/object-relational': 'error',
+        'no-object-comparison/loose-type': 'off',
+        'no-object-comparison/nan-comparison': 'off',
+        'no-object-comparison/self-comparison': 'off',
+        'no-object-comparison/floating-point-equality': 'error',
+        'no-object-comparison/string-number-relational': 'error',
+        'no-object-comparison/symbol-literal-comparison': 'off',
+        'no-object-comparison/array-includes-object': [ 'error', { indirectReferences: 'none' } ],
+        'no-object-comparison/collection-reference-lookup': [ 'error', { indirectReferences: 'none' } ],
+        'no-object-comparison/json-stringify-comparison': 'off',
+        'no-object-comparison/object-literal-switch-case': 'off',
+        'no-object-comparison/boxed-primitive-comparison': 'off',
+        'no-object-comparison/collection-object-key': 'off',
+
         'restricted-syntax-typescript/no-ts-enum-declaration': [ 'error', noTsEnumDeclarationRestriction ],
         'restricted-syntax-typescript/no-inline-signature-type-literal': [
             'error',

@@ -31,7 +31,7 @@ const noDuplicatedFilesAllowList = [
 const publishingPeerDependencies = {
     eslint: '^10.0.0',
     prettier: '^3.0.0',
-    typescript: '>=4.8.4 <6.1.0'
+    typescript: '>=5.0.0 <6.1.0'
 };
 
 /**
