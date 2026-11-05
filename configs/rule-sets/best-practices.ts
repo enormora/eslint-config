@@ -1,4 +1,6 @@
+import type { ESLint } from 'eslint';
 import arrayFunctionPlugin from 'eslint-plugin-array-func';
+import mathPlugin from 'eslint-plugin-math';
 import noBarrelFiles from 'eslint-plugin-no-barrel-files';
 import promisePlugin from 'eslint-plugin-promise';
 import * as regexpPlugin from 'eslint-plugin-regexp';
@@ -16,10 +18,40 @@ export const bestPracticesRuleSet = {
         'array-func': arrayFunctionPlugin,
         sonarjs: sonarjsPlugin,
         'no-barrel-files': noBarrelFiles,
-        regexp: regexpPlugin
+        regexp: regexpPlugin,
+        math: mathPlugin as ESLint.Plugin
     },
     settings: {},
     rules: {
+        'math/abs': 'off',
+        'math/no-static-infinity-calculations': 'error',
+        'math/no-static-nan-calculations': 'error',
+        'math/prefer-exponentiation-operator': 'off',
+        'math/prefer-math-cbrt': 'error',
+        'math/prefer-math-e': 'off',
+        'math/prefer-math-hypot': 'off',
+        'math/prefer-math-ln10': 'off',
+        'math/prefer-math-ln2': 'off',
+        'math/prefer-math-log10': 'off',
+        'math/prefer-math-log10e': 'off',
+        'math/prefer-math-log2': 'off',
+        'math/prefer-math-log2e': 'off',
+        'math/prefer-math-pi': 'off',
+        'math/prefer-math-sqrt': 'error',
+        'math/prefer-math-sqrt1-2': 'off',
+        'math/prefer-math-sqrt2': 'off',
+        'math/prefer-math-sum-precise': 'off',
+        'math/prefer-math-trunc': 'off',
+        'math/prefer-number-epsilon': 'error',
+        'math/prefer-number-is-finite': 'off',
+        'math/prefer-number-is-integer': 'off',
+        'math/prefer-number-is-nan': 'off',
+        'math/prefer-number-is-safe-integer': 'off',
+        'math/prefer-number-max-safe-integer': 'error',
+        'math/prefer-number-max-value': 'error',
+        'math/prefer-number-min-safe-integer': 'off',
+        'math/prefer-number-min-value': 'error',
+
         'enormora/prefer-ternary-for-value-selection': 'error',
         'unicorn/string-content': 'off',
         'unicorn/consistent-template-literal-escape': 'error',

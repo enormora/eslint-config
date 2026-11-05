@@ -1,0 +1,13 @@
+export const overflow = 1 / 0;
+export const invalid = Math.sqrt(-1);
+export const cubeRoot = value ** (1 / 3);
+export const squareRoot = value ** 0.5;
+export const epsilon = 2 ** -52;
+export const largestInteger = 9_007_199_254_740_991;
+export const smallestInteger = -9_007_199_254_740_991;
+export const largestNumber = 1.7976931348623157e308;
+export const smallestNumber = 5e-324;
+export const truncated = ~~value;
+export const distance = Math.sqrt(value ** 2 + other ** 2);
+export const integer = value % 1 === 0;
+export const valid = [Math.cbrt(value), Math.sqrt(value), Number.EPSILON, Number.MAX_SAFE_INTEGER, Number.MIN_SAFE_INTEGER, Number.MAX_VALUE, Number.MIN_VALUE];

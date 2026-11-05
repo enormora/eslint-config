@@ -4,6 +4,17 @@
 
 Base ESLint config preset, agnostic to any environment, framework, or library. Targets ESM-only projects.
 
+[`eslint-plugin-math`](https://github.com/ota-meshi/eslint-plugin-math) adds checks for static calculations
+producing NaN or infinity, square and cube root expressions, and numeric constants (`Number.EPSILON`,
+`Number.MAX_SAFE_INTEGER`, `Number.MAX_VALUE`, and `Number.MIN_VALUE`). The same checks ship in the
+base-with-prettier preset.
+
+Core and Unicorn retain ownership of overlapping exponentiation, absolute value, truncation, hypotenuse,
+logarithm, mathematical constant, and numeric predicate checks. `math/prefer-number-min-safe-integer` is
+off because `math/prefer-number-max-safe-integer` already reports the positive literal inside a negative
+safe-integer bound. `math/prefer-math-sum-precise` remains opt-in because it requires runtime support for
+`Math.sumPrecise()` and changes summation rounding.
+
 The local `enormora/prefer-ternary-for-value-selection` rule reports simple `if/else` returns,
 assignments to the same variable, and an initialized `let` followed by a conditional reassignment.
 Guard returns followed by a fallback return remain allowed. The rule skips multiline or nested
