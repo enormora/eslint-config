@@ -116,8 +116,8 @@ The remaining blocks each enable one formatter or linter scoped to a default fil
 
 `.sh` files are linted as POSIX shell with explicitly configured rules from
 [`@eslint/shell`](https://github.com/eslint/shell). These catch unquoted expansions, unused variables, unsafe `read`,
-unguarded `cd`, and other common mistakes. All shell rules are errors except for a warning for expansions
-inside single quotes. Shell formatting is not included, and these rules do not replace the full ShellCheck rule set.
+unguarded `cd`, and other common mistakes. All shell rules report errors. Shell formatting is not included, and these
+rules do not replace the full ShellCheck rule set.
 
 The configured dialect controls parsing, regardless of the shebang. For Bash scripts, apply
 [`@enormora/eslint-config-bash`](../bash/bash.md) after base. It switches `.sh` to Bash and adds `.bash` files.

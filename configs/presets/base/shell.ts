@@ -7,7 +7,7 @@ export const shellConfig = {
     plugins: { shell: shellPlugin },
     rules: {
         'shell/no-backticks': 'error',
-        'shell/no-expansions-in-single-quotes': 'warn',
+        'shell/no-expansions-in-single-quotes': 'error',
         'shell/no-ls-iteration': 'error',
         'shell/no-unquoted-expansions': 'error',
         'shell/no-unused-vars': 'error',

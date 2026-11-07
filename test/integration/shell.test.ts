@@ -33,8 +33,8 @@ for (
         test('reports the shell rule violations', async function () {
             const { messages } = await lintFixture(configs, 'shell', 'violations.sh');
             assert.deepStrictEqual(uniqueSortedRuleIds(messages), expectedViolationRuleIds);
-            assert.ok(messages.every(function isRuleReport(message) {
-                return message.fatal !== true;
+            assert.ok(messages.every(function isErrorReport(message) {
+                return message.severity === 2 && message.fatal !== true;
             }));
         });
 
@@ -90,8 +90,8 @@ for (
                 assert.ok(messages.some(function isUnusedVariableReport(message) {
                     return message.ruleId === 'shell/no-unused-vars';
                 }));
-                assert.ok(messages.every(function isRuleReport(message) {
-                    return message.fatal !== true;
+                assert.ok(messages.every(function isErrorReport(message) {
+                    return message.severity === 2 && message.fatal !== true;
                 }));
             }
         });
