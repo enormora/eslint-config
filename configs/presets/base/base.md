@@ -109,7 +109,19 @@ The remaining blocks each enable one formatter or linter scoped to a default fil
 | package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                                |
 | Markdown      | `**/*.md`                                  | `dprint-markdown/markdown`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*`, `unicorn/*` |
 | YAML          | `**/*.{yml,yaml}`                          | `dprint/yaml`                                                                                       |
+| Shell         | `**/*.sh`                                  | `shell/*` (POSIX)                                                                                   |
 | TOML          | `**/*.toml`                                | `dprint/toml`                                                                                       |
+
+### Shell scripts
+
+`.sh` files are linted as POSIX shell with the recommended rules from
+[`@eslint/shell`](https://github.com/eslint/shell). These catch unquoted expansions, unused variables, unsafe `read`,
+unguarded `cd`, and other common mistakes. Recommended severities are preserved, including a warning for expansions
+inside single quotes. Shell formatting is not included, and these rules do not replace the full ShellCheck rule set.
+
+The configured dialect controls parsing, regardless of the shebang. For Bash scripts, apply
+[`@enormora/eslint-config-bash`](../bash/bash.md) after base. It switches `.sh` to Bash and adds `.bash` files.
+Narrow its `files` patterns when mixing POSIX and Bash scripts. Extensionless scripts require an explicit `files` pattern.
 
 ### Linting hidden directories
 

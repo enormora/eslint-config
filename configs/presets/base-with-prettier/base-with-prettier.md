@@ -59,6 +59,19 @@ additionally enabling the semantic markdown linters.
 | package.json  | `**/package.json`                          | `package-json/*`, `json-schema-validator/no-invalid`                                         |
 | Markdown      | `**/*.md`                                  | `prettier/prettier`, `markdown/*`, `markdown-links/*`, `markdown-preferences/*`, `unicorn/*` |
 | YAML          | `**/*.{yml,yaml}`                          | `prettier/prettier`                                                                          |
+| Shell         | `**/*.sh`                                  | `shell/*` (POSIX)                                                                            |
+
+### Shell scripts
+
+`.sh` files use the same POSIX shell linting as the regular base preset, powered by the recommended rules from
+[`@eslint/shell`](https://github.com/eslint/shell). Recommended severities are preserved, including a warning for
+expansions inside single quotes. Shell formatting is not included, and these rules do not replace the full ShellCheck
+rule set.
+
+The configured dialect controls parsing, regardless of the shebang. Apply
+[`@enormora/eslint-config-bash`](../bash/bash.md) after this preset for Bash scripts. It switches `.sh` to Bash and
+adds `.bash` files. Narrow its `files` patterns when mixing dialects. Extensionless scripts require an explicit
+`files` pattern.
 
 ### Linting hidden directories
 

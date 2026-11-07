@@ -1,5 +1,6 @@
 import { rules as eslintCommentsPluginRules } from '@eslint-community/eslint-plugin-eslint-comments';
 import markdownPlugin from '@eslint/markdown';
+import shellPlugin from '@eslint/shell';
 import { rules as importPluginRules } from 'eslint-plugin-import-x';
 import { rules as jsonSchemaValidatorPluginRules } from 'eslint-plugin-json-schema-validator';
 import { rules as mathPluginRules } from 'eslint-plugin-math';
@@ -15,6 +16,7 @@ export const basePluginRuleSet = {
     'eslint-plugin-import': importPluginRules,
     'eslint-plugin-eslint-comments': eslintCommentsPluginRules,
     '@eslint/markdown': markdownPlugin.rules,
+    shell: shellPlugin.rules,
     'eslint-plugin-markdown-links': markdownLinksPluginRules,
     'eslint-plugin-markdown-preferences': markdownPreferencesPluginRules,
     'eslint-plugin-regexp': regexpPluginRules,
