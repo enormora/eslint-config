@@ -7,6 +7,7 @@ const sourcesFolder = path.join(projectFolder, 'target/build/configs');
 const presetMarkdownFolder = path.join(projectFolder, 'configs');
 const sharedSourceFiles = [
     'constants.js',
+    'rule-severity.js',
     'plugins/enormora/enormora-plugin.js',
     'plugins/enormora/prefer-ternary-for-value-selection.js',
     'plugins/restricted-syntax/no-unnecessary-arrow-function.js',
@@ -31,7 +32,7 @@ const noDuplicatedFilesAllowList = [
 const publishingPeerDependencies = {
     eslint: '^10.0.0',
     prettier: '^3.0.0',
-    typescript: '>=4.8.4 <6.1.0'
+    typescript: '>=5.0.0 <6.1.0'
 };
 
 /**
