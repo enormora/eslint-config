@@ -2,7 +2,7 @@
 
 [![npm](https://img.shields.io/npm/v/@enormora/eslint-config-bash?label=)](https://www.npmjs.com/package/@enormora/eslint-config-bash)
 
-Lints `.sh` and `.bash` files as Bash using the recommended rules from
+Lints `.sh` and `.bash` files as Bash using explicitly configured rules from
 [`@eslint/shell`](https://github.com/eslint/shell). Apply `bashConfig` after either base preset to override its
 POSIX dialect for `.sh` files. The preset also works alone for shell-only projects.
 

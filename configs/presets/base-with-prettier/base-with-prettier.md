@@ -63,8 +63,8 @@ additionally enabling the semantic markdown linters.
 
 ### Shell scripts
 
-`.sh` files use the same POSIX shell linting as the regular base preset, powered by the recommended rules from
-[`@eslint/shell`](https://github.com/eslint/shell). Recommended severities are preserved, including a warning for
+`.sh` files use the same POSIX shell linting as the regular base preset, with explicitly configured rules from
+[`@eslint/shell`](https://github.com/eslint/shell). All shell rules are errors except for a warning for
 expansions inside single quotes. Shell formatting is not included, and these rules do not replace the full ShellCheck
 rule set.
 
