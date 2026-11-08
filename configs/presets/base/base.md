@@ -11,6 +11,9 @@ expressions, complex branches, property assignments, and commented decisions. Co
 checks also exclude initializers or conditions with potential side effects and reads of the selected
 variable. It reports diagnostics without autofixes. `unicorn/prefer-ternary` is disabled.
 
+Multiline TypeScript unions and intersections place `|` and `&` at the end of the preceding line,
+matching `@stylistic/operator-linebreak`.
+
 Code formatting is handled by [dprint](https://dprint.dev/), wired into ESLint via the
 [`@ben_12/eslint-plugin-dprint`](https://www.npmjs.com/package/@ben_12/eslint-plugin-dprint) plugin. TypeScript/JavaScript
 files are formatted via the `dprint/typescript` rule, and JSON, Markdown, YAML, and TOML files are formatted via their

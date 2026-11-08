@@ -6,10 +6,11 @@ import { typescriptConfig } from '../../configs/presets/typescript/typescript.ts
 import { fixFixture, lintFixture, resolveFixture, uniqueSortedRuleIds } from './lint-fixture.ts';
 
 const comboName = 'base-typescript-react-tsx';
-const configs = [ ...baseConfig, { ...typescriptConfig, files: [ '**/*.tsx' ] }, {
-    ...reactTsxConfig,
-    files: [ '**/*.tsx' ]
-} ];
+const configs = [
+    ...baseConfig,
+    { ...typescriptConfig, files: [ '**/*.tsx' ] },
+    { ...reactTsxConfig, files: [ '**/*.tsx' ] }
+];
 
 const expectedViolationRuleIds = [
     '@stylistic/array-bracket-spacing',
