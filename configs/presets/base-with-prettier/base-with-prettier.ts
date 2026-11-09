@@ -4,6 +4,7 @@ import { baseSharedConfig } from '../base/base-shared.ts';
 import { markdownLintPlugins, markdownLintRules } from '../base/markdown-lint-rules.ts';
 import { packageJsonConfig } from '../base/package-json.ts';
 import { plainTextLanguagePlugin } from '../base/plain-text-language.ts';
+import { shellConfig } from '../base/shell.ts';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -64,7 +65,8 @@ export const baseWithPrettierConfig = [
     packageJsonConfig,
     prettierPackageJsonConfig,
     markdownConfig,
-    prettierYamlConfig
+    prettierYamlConfig,
+    shellConfig
 ] as unknown as Linter.Config[];
 
 /* eslint-disable no-barrel-files/no-barrel-files -- expose cspell helper as public API so consumers can spread or call it when customizing */

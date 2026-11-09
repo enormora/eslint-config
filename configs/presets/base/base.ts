@@ -6,6 +6,7 @@ import { dprintSettings } from './dprint-formatters.ts';
 import { markdownConfig } from './markdown.ts';
 import { packageJsonConfig } from './package-json.ts';
 import { plainTextLanguagePlugin } from './plain-text-language.ts';
+import { shellConfig } from './shell.ts';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -71,7 +72,8 @@ export const baseConfig = [
     dprintPackageJsonConfig,
     markdownConfig,
     dprintYamlConfig,
-    dprintTomlConfig
+    dprintTomlConfig,
+    shellConfig
 ] as unknown as Linter.Config[];
 
 /* eslint-disable no-barrel-files/no-barrel-files -- expose dprint configs and cspell helper as public API so consumers can spread or call them when customizing */

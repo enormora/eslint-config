@@ -16,6 +16,7 @@ const sharedSourceFiles = [
     'presets/base/markdown-lint-rules.js',
     'presets/base/package-json.js',
     'presets/base/plain-text-language.js',
+    'presets/base/shell.js',
     'rule-sets/best-practices.js',
     'rule-sets/restricted-syntax.js',
     'rule-sets/stylistic.js'
@@ -126,6 +127,19 @@ export async function buildConfiguration() {
                 ],
                 additionalPackageManifestAttributes: {
                     description: 'Enormora’s ESLint base configuration formatted with prettier'
+                }
+            },
+            {
+                name: '@enormora/eslint-config-bash',
+                roots: { main: { javaScript: 'presets/bash/bash.js' } },
+                additionalFiles: [
+                    {
+                        inputFilePath: path.join(presetMarkdownFolder, 'presets/bash/bash.md'),
+                        targetFilePath: 'readme.md'
+                    }
+                ],
+                additionalPackageManifestAttributes: {
+                    description: 'Enormora’s ESLint Bash configuration'
                 }
             },
             {
