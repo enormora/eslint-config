@@ -20,7 +20,7 @@
         "@dprint/json": "0.26.0",
         "@dprint/markdown": "0.29.0",
         "@dprint/toml": "0.10.0",
-        "@dprint/typescript": "0.99.1",
+        "@dprint/typescript": "0.99.2",
         "@enormora/eslint-plugin-node-assert": "0.0.6",
         "@eslint-community/eslint-plugin-eslint-comments": "4.8.1",
         "@eslint/markdown": "8.0.3",
