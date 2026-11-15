@@ -408,6 +408,10 @@ export const baseSharedConfig = {
         'eslint-comments/no-use': 'off',
         'eslint-comments/require-description': 'error',
 
+        'import/avoid-barrel-files': 'off',
+        'import/avoid-importing-barrel-files': 'off',
+        'import/avoid-namespace-import': 'off',
+        'import/avoid-re-export-all': 'off',
         'import/no-deprecated': 'error',
         'import/exports-last': 'off',
         'import/dynamic-import-chunkname': 'off',
