@@ -29,7 +29,8 @@ instead. It is an alternative base preset and is not meant to be combined with t
 - **[`eslint-plugin-package-json`](https://github.com/JoshuaKGoldberg/eslint-plugin-package-json)** (`package-json/*`):
     validates the shape of every field that is present (author, repository, engines, exports, scripts, peers, etc.),
     catches duplicate dependencies across `dependencies`/`devDependencies`/`peerDependencies`, sorts collections, and
-    enforces `repository` shorthand. The opinionated `require-*` rules (which would demand every package declare e.g.
+    enforces `repository` shorthand and version-qualified npm override selectors. Package naming scopes remain unrestricted.
+    The metadata `require-*` rules (which would demand every package declare e.g.
     `funding` or `cpu`) and `order-properties` are off; opt in by overriding individual rules in your own config.
     For the same reason, dprint's `packageJson.applyConventions` sorting is disabled in `jsonDprintConfig`.
 - **[`eslint-plugin-json-schema-validator`](https://github.com/ota-meshi/eslint-plugin-json-schema-validator)**
