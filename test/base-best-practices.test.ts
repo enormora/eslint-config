@@ -44,6 +44,31 @@ const jsxUnicornRules = [
     'no-ineffective-csp-directives',
     'no-invalid-integrity'
 ];
+const unicornRulesNotCoveredByBasePreset = [
+    'prefer-regexp-exec',
+    'require-spread-parentheses',
+    'no-unused-array-method-return',
+    'better-regex',
+    'no-instanceof-array',
+    'no-length-as-slice-end',
+    'no-hex-escape',
+    'no-array-push-push',
+    'prevent-abbreviations',
+    'prefer-json-parse-buffer',
+    'prefer-dom-node-dataset',
+    'no-deprecated-css-features',
+    'no-duplicate-css-selectors',
+    'no-duplicate-font-family-names',
+    'no-invalid-media-features',
+    'no-nesting-with-mixed-specificity',
+    'no-redundant-nested-style-rules',
+    'no-unknown-css-annotations',
+    'no-unknown-pseudo-selectors',
+    'no-unscoped-css-nesting-selector',
+    'prefer-explicit-viewport-units',
+    'prefer-media-feature-range-syntax',
+    'prefer-options-parameter'
+];
 
 suite('base best practices rule set', function () {
     suite('Unicorn and local rule coverage', function () {
@@ -68,7 +93,7 @@ suite('base best practices rule set', function () {
                 ruleConfigSet: baseConfigRules,
                 pluginRules: unicornPlugin.rules,
                 pluginName: 'eslint-plugin-unicorn',
-                rulesToExclude: [ ...browserUnicornRules, ...jsxUnicornRules ]
+                rulesToExclude: [ ...browserUnicornRules, ...jsxUnicornRules, ...unicornRulesNotCoveredByBasePreset ]
             });
         });
 

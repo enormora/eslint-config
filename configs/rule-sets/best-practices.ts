@@ -413,7 +413,7 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-simple-sort-comparator': 'error',
         'unicorn/prefer-single-array-predicate': 'error',
         'unicorn/prefer-single-object-destructuring': 'error',
-        'unicorn/prefer-smaller-scope': 'error',
+        'unicorn/prefer-smaller-scope': [ 'error', { checkTypeAliases: false } ],
         'unicorn/prefer-split-limit': 'error',
         'unicorn/prefer-string-match-all': 'error',
         'unicorn/prefer-string-pad-start-end': 'error',
