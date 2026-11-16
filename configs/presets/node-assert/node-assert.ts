@@ -1,5 +1,6 @@
 import nodeAssertPlugin from '@enormora/eslint-plugin-node-assert';
 import type { Linter } from 'eslint';
+import { disable } from '../../rule-severity.ts';
 
 export const nodeAssertConfig = {
     plugins: {
@@ -31,7 +32,9 @@ export const nodeAssertConfig = {
         'node-assert/prefer-deep-equality': 'error',
         'node-assert/prefer-match': 'error',
         'node-assert/prefer-partial-deep-strict-equal': 'error',
-        'node-assert/require-custom-message': 'off',
+        'node-assert/require-custom-message': disable<
+            'Custom messages depend on assertion diagnostics and cannot be required generically'
+        >(),
         'node-assert/require-error-matcher': 'error',
         'node-assert/require-strict': [ 'error', { mode: 'explicit' } ],
         'node-assert/require-valid-error-validator-return': 'error'

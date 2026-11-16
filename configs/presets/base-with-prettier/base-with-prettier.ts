@@ -5,6 +5,7 @@ import { markdownLintPlugins, markdownLintRules } from '../base/markdown-lint-ru
 import { packageJsonConfig } from '../base/package-json.ts';
 import { plainTextLanguagePlugin } from '../base/plain-text-language.ts';
 import { shellConfig } from '../base/shell.ts';
+import { disable } from '../../rule-severity.ts';
 
 const baseJsConfig = {
     files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
@@ -19,7 +20,9 @@ const baseJsConfig = {
         'prettier/prettier': 'error',
 
         // Prettier owns TypeScript member delimiter formatting; the stylistic rule would only fight it.
-        '@stylistic/member-delimiter-style': 'off'
+        '@stylistic/member-delimiter-style': disable<
+            'Conflicts with the active formatter over type member delimiters'
+        >()
     }
 };
 

@@ -5,6 +5,7 @@
 Config preset for browser environments, enabling browser-specific rules and globals.
 
 DOM-focused `eslint-plugin-unicorn` rules are enabled here instead of in the base preset.
+`unicorn/prefer-modern-dom-apis` prefers modern DOM methods such as `replaceWith()` over `replaceChild()`.
 
 ## Install & Setup
 

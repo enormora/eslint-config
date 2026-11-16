@@ -18,6 +18,8 @@ The base preset's JavaScript rules are deliberately environment-, framework-, an
 
 Both base variants also lint common project files, including `.sh` scripts as POSIX shell. Apply the `bash` preset after base to switch `.sh` to Bash and include `.bash` files. Dialects are configured explicitly rather than inferred from shebangs.
 
+Disabled rules in preset sources use `disable<'Concrete reason'>()`. Name the replacement rule, preset boundary, or deliberate policy decision. Reasons are checked by TypeScript and erased from emitted JavaScript.
+
 | Package                                                                                                    | Version                                                                                                                                                            | Description                                                                                                      |
 | :--------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------- |
 | [`@enormora/eslint-config-base`](./configs/presets/base/base.md)                                           | [![npm](https://img.shields.io/npm/v/@enormora/eslint-config-base?label=)](https://www.npmjs.com/package/@enormora/eslint-config-base)                             | Base config, environment-, framework-, and library-agnostic. Uses dprint for formatting.                         |

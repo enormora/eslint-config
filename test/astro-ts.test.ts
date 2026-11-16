@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import typescriptParser from '@typescript-eslint/parser';
-import * as astroParser from 'astro-eslint-parser';
+import { meta as astroParserMetadata, parseForESLint } from 'astro-eslint-parser';
 import astroPlugin, { rules as astroPluginRules } from 'eslint-plugin-astro';
 import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
@@ -27,7 +27,7 @@ suite('astro-ts preset', function () {
 
     test('astro-ts preset config has the correct astro language options defined', function () {
         assert.deepStrictEqual(astroConfig[1].languageOptions, {
-            parser: astroParser,
+            parser: { meta: astroParserMetadata, parseForESLint },
             globals: {
                 ...globals.node,
                 ...globals.es2025,

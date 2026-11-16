@@ -45,6 +45,17 @@ const expectedViolationRuleIds = [
 ];
 
 suite('base+typescript+react-tsx integration', function () {
+    test('reports unused TypeScript props while accepting consumed and forwarded props', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'unused-props.tsx');
+        const relevantReports = messages.filter(function isUnusedPropOrFatal(message) {
+            return message.fatal === true || message.ruleId === 'react/no-unused-prop-types';
+        });
+        assert.strictEqual(relevantReports.length, 1);
+        assert.strictEqual(relevantReports[0]?.ruleId, 'react/no-unused-prop-types');
+        assert.strictEqual(relevantReports[0]?.line, 5);
+        assert.strictEqual(relevantReports[0]?.severity, 2);
+    });
+
     test('base+typescript+react-tsx violations fixture reports the expected rule ids', async function () {
         const { messages } = await lintFixture(configs, comboName, 'violations.tsx');
         assert.deepStrictEqual(

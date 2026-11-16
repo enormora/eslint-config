@@ -1,4 +1,5 @@
 import globals from 'globals';
+import { disable } from '../../rule-severity.ts';
 
 export const browserConfig = {
     languageOptions: {
@@ -14,7 +15,7 @@ export const browserConfig = {
         'unicorn/better-dom-traversing': 'error',
         'unicorn/dom-node-dataset': 'error',
         'unicorn/no-blob-to-file': 'error',
-        'unicorn/no-canvas-to-image': 'off',
+        'unicorn/no-canvas-to-image': disable<'Canvas and image APIs serve different application needs'>(),
         'unicorn/no-incorrect-query-selector': 'error',
         'unicorn/no-invalid-boolean-attribute-value': 'error',
         'unicorn/no-invalid-dom-token': 'error',
@@ -26,11 +27,14 @@ export const browserConfig = {
         'unicorn/no-selector-as-dom-name': 'error',
         'unicorn/no-unsafe-dom-html': 'error',
         'unicorn/prefer-add-event-listener-options': 'error',
-        'unicorn/prefer-dom-node-html-methods': 'off',
+        'unicorn/prefer-dom-node-html-methods': disable<
+            'HTML insertion methods are not preferred over explicit DOM operations'
+        >(),
         'unicorn/prefer-dom-node-replace-children': 'error',
         'unicorn/prefer-location-assign': 'error',
+        'unicorn/prefer-modern-dom-apis': 'error',
         'unicorn/prefer-observer-apis': 'error',
-        'unicorn/prefer-path2d': 'off',
+        'unicorn/prefer-path2d': disable<'Direct canvas drawing commands are allowed'>(),
         'unicorn/prefer-scoped-selector': 'error',
         'unicorn/prefer-toggle-attribute': 'error',
         'unicorn/require-css-escape': 'error',

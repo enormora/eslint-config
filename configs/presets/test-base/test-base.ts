@@ -1,5 +1,6 @@
 import type { Linter } from 'eslint';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
+import { disable } from '../../rule-severity.ts';
 
 type TestRuleSet = {
     readonly rules: NonNullable<Linter.Config['rules']>;
@@ -16,9 +17,11 @@ export const testRuleSet: TestRuleSet = {
                 ignoreStrings: true
             }
         ],
-        '@typescript-eslint/no-unsafe-type-assertion': 'off',
-        'no-magic-numbers': 'off',
-        '@typescript-eslint/no-magic-numbers': 'off'
+        '@typescript-eslint/no-unsafe-type-assertion': disable<'Test doubles may require deliberate type assertions'>(),
+        'no-magic-numbers': disable<'Numeric literals make test inputs and expected values readable'>(),
+        '@typescript-eslint/no-magic-numbers': disable<
+            'Numeric literals make test inputs and expected values readable'
+        >()
     }
 };
 

@@ -59,7 +59,7 @@ export default [
             'configs/presets/vitest-node-assert/vitest-node-assert.ts'
         ],
         rules: {
-            'no-barrel-files/prefer-source-imports': 'off'
+            'no-barrel-files/prefer-source-imports': 'off' // These presets re-export their public test support API.
         }
     },
     {
@@ -97,9 +97,9 @@ export default [
         // their plugin as the default export.
         files: [ 'types/**/*.d.ts' ],
         rules: {
-            '@typescript-eslint/consistent-type-imports': 'off',
-            'import/no-default-export': 'off',
-            'no-duplicate-imports': 'off'
+            '@typescript-eslint/consistent-type-imports': 'off', // Ambient shims require inline import types.
+            'import/no-default-export': 'off', // Match the third-party modules being declared.
+            'no-duplicate-imports': 'off' // Separate ambient declarations describe distinct third-party modules.
         }
     },
     {
@@ -118,7 +118,7 @@ export default [
             '@cspell': cspellPlugin
         },
         rules: {
-            'import/no-default-export': 'off',
+            'import/no-default-export': 'off', // Tool configuration files require default exports.
             ...codeSpellCheckerRules
         }
     },

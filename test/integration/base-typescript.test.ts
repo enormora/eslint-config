@@ -100,6 +100,7 @@ const expectedViolationRuleIds = [
     'sonarjs/prefer-promise-shorthand',
     'unicorn/catch-error-name',
     'unicorn/consistent-arrow-return-style',
+    'unicorn/consistent-function-scoping',
     'unicorn/error-message',
     'unicorn/no-array-sort',
     'unicorn/no-await-expression-member',
@@ -117,10 +118,23 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-node-protocol',
     'unicorn/prefer-promise-static-methods',
     'unicorn/prefer-string-slice',
+    'unicorn/prefer-top-level-await',
     'unicorn/require-array-sort-compare'
 ];
 
 suite('base+typescript integration', function () {
+    test('requires return await for local error handling without prescribing ordinary return style', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'return-await.ts');
+        const returnAwaitReports = messages.filter(function isReturnAwaitReport(message) {
+            return message.ruleId === '@typescript-eslint/return-await';
+        });
+        const reportedLocations = returnAwaitReports.map(function toRuleLocation(message) {
+            return { ruleId: message.ruleId, line: message.line };
+        });
+
+        assert.deepStrictEqual(reportedLocations, [ { ruleId: '@typescript-eslint/return-await', line: 3 } ]);
+    });
+
     test('base+typescript violations fixture reports the expected rule ids', async function () {
         const { messages } = await lintFixture(configs, comboName, 'violations.ts');
         assert.deepStrictEqual(

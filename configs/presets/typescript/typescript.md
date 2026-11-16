@@ -4,6 +4,9 @@
 
 Config preset for typescript, enabling specific rules and compiler settings.
 
+`@typescript-eslint/return-await` requires awaiting returned promises where local error handling needs it.
+Ordinary promise returns may use either style.
+
 ## Install & Setup
 
 Install the `@enormora/eslint-config-typescript` and the base preset package via npm:

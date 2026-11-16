@@ -17,14 +17,22 @@ export async function resolveFixture(comboName: string, filename: string): Promi
     return { filePath, code };
 }
 
+export function lintSource(
+    configs: readonly unknown[],
+    code: string,
+    filePath: string
+): Linter.LintMessage[] {
+    const linter = new Linter({ configType: 'flat' });
+    return linter.verify(code, configs as Linter.Config[], filePath);
+}
+
 export async function lintFixture(
     configs: readonly unknown[],
     comboName: string,
     filename: string
 ): Promise<LintedFixture> {
     const { code, filePath } = await resolveFixture(comboName, filename);
-    const linter = new Linter({ configType: 'flat' });
-    const messages = linter.verify(code, configs as Linter.Config[], filePath);
+    const messages = lintSource(configs, code, filePath);
     return { code, filePath, messages };
 }
 

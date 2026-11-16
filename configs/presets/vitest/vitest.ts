@@ -1,5 +1,6 @@
 import vitestPlugin from '@vitest/eslint-plugin';
 import { testRuleSet } from '../test-base/test-base.ts';
+import { disable } from '../../rule-severity.ts';
 
 /* eslint-disable no-barrel-files/no-barrel-files -- expose testSupportConfig as public API so consumers can apply the shared relaxations to non-test test files without depending on @enormora/eslint-config-test-base directly */
 export { testSupportConfig } from '../test-base/test-base.ts';
@@ -38,14 +39,16 @@ export const vitestConfig = {
         '@vitest/no-hooks': 'error',
         '@vitest/no-restricted-vi-methods': 'error',
         '@vitest/consistent-test-filename': 'error',
-        '@vitest/max-expects': 'off',
+        '@vitest/max-expects': disable<
+            'Assertion expressiveness can require multiple checks; an arbitrary maximum is not useful'
+        >(),
         '@vitest/no-alias-methods': 'error',
         '@vitest/no-commented-out-tests': 'error',
         '@vitest/no-conditional-expect': 'error',
         '@vitest/no-conditional-in-test': 'error',
         '@vitest/no-disabled-tests': 'error',
         '@vitest/no-duplicate-hooks': 'error',
-        '@vitest/no-large-snapshots': 'off',
+        '@vitest/no-large-snapshots': disable<'Snapshot size is judged in context rather than by a fixed limit'>(),
         '@vitest/no-interpolation-in-snapshots': 'error',
         '@vitest/no-mocks-import': 'error',
         '@vitest/no-restricted-matchers': 'error',
@@ -57,9 +60,9 @@ export const vitestConfig = {
         '@vitest/require-awaited-expect-poll': 'error',
         '@vitest/valid-title': 'error',
         '@vitest/valid-expect': 'error',
-        '@vitest/prefer-to-be-falsy': 'off',
+        '@vitest/prefer-to-be-falsy': disable<'Conflicts with @vitest/prefer-strict-boolean-matchers'>(),
         '@vitest/prefer-to-be-object': 'error',
-        '@vitest/prefer-to-be-truthy': 'off',
+        '@vitest/prefer-to-be-truthy': disable<'Conflicts with @vitest/prefer-strict-boolean-matchers'>(),
         '@vitest/prefer-to-have-length': 'error',
         '@vitest/prefer-equality-matcher': 'error',
         '@vitest/prefer-strict-equal': 'error',
@@ -72,15 +75,17 @@ export const vitestConfig = {
         '@vitest/prefer-vi-mocked': 'error',
         '@vitest/prefer-snapshot-hint': 'error',
         '@vitest/valid-describe-callback': 'error',
-        '@vitest/require-top-level-describe': 'off',
-        '@vitest/require-to-throw-message': 'off',
+        '@vitest/require-top-level-describe': disable<'Standalone tests are allowed'>(),
+        '@vitest/require-to-throw-message': disable<'Tests may assert error type without matching message text'>(),
         '@vitest/require-hook': 'error',
         '@vitest/prefer-todo': 'error',
         '@vitest/prefer-spy-on': 'error',
         '@vitest/prefer-comparison-matcher': 'error',
         '@vitest/prefer-describe-function-title': 'error',
         '@vitest/prefer-to-contain': 'error',
-        '@vitest/prefer-expect-assertions': 'off',
+        '@vitest/prefer-expect-assertions': disable<
+            'Assertion-count guards are situational, such as callback paths that might skip assertions'
+        >(),
         '@vitest/padding-around-after-all-blocks': 'error',
         '@vitest/padding-around-after-each-blocks': 'error',
         '@vitest/padding-around-all': 'error',
@@ -91,15 +96,15 @@ export const vitestConfig = {
         '@vitest/padding-around-test-blocks': 'error',
         '@vitest/valid-expect-in-promise': 'error',
         '@vitest/prefer-strict-boolean-matchers': 'error',
-        '@vitest/require-mock-type-parameters': 'off',
-        '@vitest/no-importing-vitest-globals': 'off',
+        '@vitest/require-mock-type-parameters': disable<'Mock types may be inferred'>(),
+        '@vitest/no-importing-vitest-globals': disable<'Conflicts with @vitest/prefer-importing-vitest-globals'>(),
         '@vitest/no-unneeded-async-expect-function': 'error',
         '@vitest/prefer-importing-vitest-globals': 'error',
         '@vitest/prefer-called-once': 'error',
-        '@vitest/prefer-called-times': 'off',
+        '@vitest/prefer-called-times': disable<'Call counts use @vitest/prefer-to-have-been-called-times'>(),
         '@vitest/prefer-mock-return-shorthand': 'error',
         '@vitest/prefer-to-have-been-called-times': 'error',
-        '@vitest/require-test-timeout': 'off',
+        '@vitest/require-test-timeout': disable<'Tests may inherit the configured runner timeout'>(),
         '@vitest/warn-todo': 'error',
         '@vitest/hoisted-apis-on-top': 'error',
         '@vitest/prefer-expect-type-of': 'error',

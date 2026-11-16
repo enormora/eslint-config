@@ -1,5 +1,5 @@
 import typescriptParser from '@typescript-eslint/parser';
-import * as astroParser from 'astro-eslint-parser';
+import { meta as astroParserMetadata, parseForESLint } from 'astro-eslint-parser';
 import type { Linter } from 'eslint';
 import { astroClientScriptGlobals, astroComponentGlobals, astroPluginConfig, astroRules } from '../astro/astro.ts';
 
@@ -8,7 +8,7 @@ export const astroConfig = [
     {
         files: [ '*.astro', '**/*.astro' ],
         languageOptions: {
-            parser: astroParser,
+            parser: { meta: astroParserMetadata, parseForESLint },
             globals: astroComponentGlobals,
             parserOptions: {
                 parser: typescriptParser,

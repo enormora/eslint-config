@@ -1,5 +1,6 @@
 import type { Linter } from 'eslint';
 import eslintPluginPlugin from 'eslint-plugin-eslint-plugin';
+import { disable } from '../../rule-severity.ts';
 
 type EslintPluginConfigOptions = {
     readonly docsUrlPattern: string;
@@ -64,9 +65,9 @@ export function createEslintPluginConfig(options: EslintPluginConfigOptions): Li
             'eslint-plugin/test-case-shorthand-strings': 'error',
             'eslint-plugin/unique-test-case-names': 'error',
 
-            // Type-checked rule that requires the `@typescript-eslint` parser and a TS-aware program.
-            // Off by default so the preset works on plain JS plugins; opt in from a TS preset layer.
-            'eslint-plugin/no-property-in-node': 'off'
+            'eslint-plugin/no-property-in-node': disable<
+                'Requires type information that plain JavaScript plugin projects do not provide'
+            >()
         }
     } as unknown as Linter.Config;
 }

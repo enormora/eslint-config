@@ -1,72 +1,17 @@
-import dprintPlugin from '@ben_12/eslint-plugin-dprint';
 import type { Linter } from 'eslint';
-import { baseSharedConfig } from './base-shared.ts';
-import { jsonDprintConfig, tomlDprintConfig, typescriptDprintConfig, yamlDprintConfig } from './dprint-config.ts';
-import { dprintSettings } from './dprint-formatters.ts';
+import {
+    dprintJsConfig,
+    dprintJsonConfig,
+    dprintPackageJsonConfig,
+    dprintYamlConfig,
+    dprintTomlConfig
+} from './dprint.ts';
 import { markdownConfig } from './markdown.ts';
 import { packageJsonConfig } from './package-json.ts';
-import { plainTextLanguagePlugin } from './plain-text-language.ts';
 import { shellConfig } from './shell.ts';
 
-const baseJsConfig = {
-    files: [ '**/*.{js,cjs,mjs,jsx,ts,cts,mts,tsx,vue}' ],
-    ...baseSharedConfig,
-    plugins: {
-        ...baseSharedConfig.plugins,
-        dprint: dprintPlugin
-    },
-    settings: { ...baseSharedConfig.settings, ...dprintSettings },
-    rules: {
-        ...baseSharedConfig.rules,
-
-        'dprint/typescript': [ 'error', { config: typescriptDprintConfig } ],
-        'dprint/json': 'off',
-        'dprint/markdown': 'off',
-        'dprint/toml': 'off',
-        'dprint/dockerfile': 'off',
-        'dprint/malva': 'off',
-        'dprint/markup': 'off',
-        'dprint/yaml': 'off',
-        'dprint/graphql': 'off',
-
-        '@stylistic/member-delimiter-style': 'off'
-    }
-};
-
-const dprintJsonConfig = {
-    files: [ '**/*.json' ],
-    ignores: [ '**/package.json' ],
-    language: 'plain-text/any',
-    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
-    settings: dprintSettings,
-    rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
-};
-
-const dprintPackageJsonConfig = {
-    files: [ '**/package.json' ],
-    plugins: { dprint: dprintPlugin },
-    settings: dprintSettings,
-    rules: { 'dprint/json': [ 'error', { config: jsonDprintConfig } ] }
-};
-
-const dprintYamlConfig = {
-    files: [ '**/*.{yml,yaml}' ],
-    language: 'plain-text/any',
-    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
-    settings: dprintSettings,
-    rules: { 'dprint/yaml': [ 'error', { config: yamlDprintConfig } ] }
-};
-
-const dprintTomlConfig = {
-    files: [ '**/*.toml' ],
-    language: 'plain-text/any',
-    plugins: { 'plain-text': plainTextLanguagePlugin, dprint: dprintPlugin },
-    settings: dprintSettings,
-    rules: { 'dprint/toml': [ 'error', { config: tomlDprintConfig } ] }
-};
-
 export const baseConfig = [
-    baseJsConfig,
+    dprintJsConfig,
     dprintJsonConfig,
     packageJsonConfig,
     dprintPackageJsonConfig,

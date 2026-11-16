@@ -14,12 +14,12 @@ export const noTsEnumDeclarationRestriction = {
     message: 'Use a string union type instead'
 };
 
-const namedReferenceTypePrefix = String.raw`(?:(?:keyof)?typeof)?`;
+const namedReferenceTypePrefix = '(?:(?:keyof)?typeof)?';
 const mutableContainerLookahead = String
     .raw`(?!(?:Array|ReadonlyArray|Map|ReadonlyMap|Set|ReadonlySet|Record|Readonly)\b)`;
 const namedReferenceBody = String.raw`[A-Z][\w$]*(?:\.[A-Z][\w$]*)*(?:<.*>)?`;
 const namedReferenceAtom = `${namedReferenceTypePrefix}${mutableContainerLookahead}${namedReferenceBody}`;
-const namedReferenceIgnorePattern = String.raw`^${namedReferenceAtom}(?:[|&]${namedReferenceAtom})*$`;
+const namedReferenceIgnorePattern = `^${namedReferenceAtom}(?:[|&]${namedReferenceAtom})*$`;
 
 const functionLikeNodes = [
     'FunctionDeclaration',
@@ -83,7 +83,7 @@ function configureWrappedCoreRule(
     const options = optionsOverrides === undefined ? coreRuleOptions : asArray(optionsOverrides);
 
     return {
-        [name]: 'off',
+        [name]: disable<'Replaced by the corresponding @typescript-eslint extension rule'>(),
         [`@typescript-eslint/${name}`]: [ coreRuleSeverity, ...options ]
     };
 }
@@ -203,7 +203,9 @@ export const typescriptConfig = {
         // TS already validates return types, and the SonarJS heuristic
         // misfires on intentional tagged-union returns (e.g. `Value | Sentinel`)
         // even when expressed as a single named alias.
-        'sonarjs/function-return-type': 'off',
+        'sonarjs/function-return-type': disable<
+            'TypeScript validates return types and intentional tagged unions need not share a primitive type'
+        >(),
         ...configureWrappedCoreRule('max-params', undefined),
         '@typescript-eslint/member-ordering': 'error',
         ...configureWrappedCoreRule('no-array-constructor', undefined),
@@ -263,7 +265,9 @@ export const typescriptConfig = {
         ],
         '@typescript-eslint/prefer-regexp-exec': 'error',
         '@typescript-eslint/unified-signatures': 'error',
-        '@typescript-eslint/require-await': 'off',
+        '@typescript-eslint/require-await': disable<
+            'Async functions may implement a promise-returning contract without awaiting'
+        >(),
         '@typescript-eslint/strict-boolean-expressions': [
             'error',
             {
@@ -287,8 +291,12 @@ export const typescriptConfig = {
         ...configureWrappedCoreRule('default-param-last', undefined),
         ...configureWrappedCoreRule('dot-notation', undefined),
         '@typescript-eslint/explicit-member-accessibility': [ 'error', { accessibility: 'explicit' } ],
-        '@typescript-eslint/explicit-module-boundary-types': 'off',
-        '@typescript-eslint/init-declarations': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': disable<
+            'Return annotations are handled by @typescript-eslint/explicit-function-return-type'
+        >(),
+        '@typescript-eslint/init-declarations': disable<
+            'The existing core init-declarations rule remains enabled'
+        >(),
         '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members', undefined),
@@ -321,8 +329,9 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unsafe-return': [ 'error' ],
         ...configureWrappedCoreRule('no-use-before-define', undefined),
         '@typescript-eslint/prefer-as-const': [ 'error' ],
-        // disabled because we use functional/prefer-immutable-types.md
-        '@typescript-eslint/prefer-readonly-parameter-types': [ 'off' ],
+        '@typescript-eslint/prefer-readonly-parameter-types': [
+            disable<'Readonly parameters are handled by functional/prefer-immutable-types'>()
+        ],
         '@typescript-eslint/prefer-reduce-type-parameter': [ 'error' ],
         '@typescript-eslint/ban-ts-comment': [
             'error',
@@ -334,14 +343,26 @@ export const typescriptConfig = {
                 minimumDescriptionLength: 10
             }
         ],
-        '@typescript-eslint/restrict-template-expressions': [ 'off' ],
-        '@typescript-eslint/return-await': [ 'off' ],
+        '@typescript-eslint/restrict-template-expressions': [
+            disable<
+                'Implicit conversion of non-string values is allowed; object coercion is checked by no-base-to-string'
+            >()
+        ],
+        '@typescript-eslint/return-await': [ 'error', 'error-handling-correctness-only' ],
         '@typescript-eslint/switch-exhaustiveness-check': [ 'error' ],
-        '@typescript-eslint/unbound-method': [ 'off' ],
-        '@typescript-eslint/ban-tslint-comment': [ 'off' ],
+        '@typescript-eslint/unbound-method': [
+            disable<'Blanket method binding is not required and may add unnecessary allocation overhead'>()
+        ],
+        '@typescript-eslint/ban-tslint-comment': [
+            disable<'TSLint is not used in the intended toolchain, so directive checks add no value'>()
+        ],
         '@typescript-eslint/no-confusing-non-null-assertion': [ 'error' ],
-        '@typescript-eslint/prefer-enum-initializers': [ 'off' ],
-        '@typescript-eslint/prefer-literal-enum-member': [ 'off' ],
+        '@typescript-eslint/prefer-enum-initializers': [
+            disable<'Enums are prohibited by restricted-syntax-typescript/no-ts-enum-declaration'>()
+        ],
+        '@typescript-eslint/prefer-literal-enum-member': [
+            disable<'Enums are prohibited by restricted-syntax-typescript/no-ts-enum-declaration'>()
+        ],
         ...configureWrappedCoreRule('no-redeclare', undefined),
         ...configureWrappedCoreRule('no-shadow', undefined),
         '@typescript-eslint/consistent-type-imports': [
@@ -357,7 +378,9 @@ export const typescriptConfig = {
                 ignoreVoidOperator: false
             }
         ],
-        '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+        '@typescript-eslint/non-nullable-type-assertion-style': disable<
+            'Conflicts with @typescript-eslint/no-non-null-assertion'
+        >(),
         '@typescript-eslint/no-unsafe-argument': 'error',
         '@typescript-eslint/prefer-return-this-type': 'error',
         '@typescript-eslint/no-meaningless-void-operator': 'error',
@@ -379,7 +402,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-unnecessary-type-conversion': 'error',
         ...configureWrappedCoreRule('prefer-promise-reject-errors', undefined),
         '@typescript-eslint/prefer-find': 'error',
-        '@typescript-eslint/no-deprecated': 'off',
+        '@typescript-eslint/no-deprecated': disable<'Deprecation checks are handled by sonarjs/deprecation'>(),
         '@typescript-eslint/no-unnecessary-parameter-property-assignment': 'error',
         '@typescript-eslint/no-unnecessary-type-parameters': 'error',
         '@typescript-eslint/no-unsafe-type-assertion': 'error',
@@ -388,20 +411,42 @@ export const typescriptConfig = {
         '@typescript-eslint/no-generated-empty-object-type': 'error',
         '@typescript-eslint/no-unsafe-enum-assignment': 'error',
 
-        'functional/functional-parameters': 'off',
-        'functional/immutable-data': 'off',
-        'functional/no-classes': 'off',
-        'functional/no-conditional-statements': 'off',
-        'functional/no-expression-statements': 'off',
-        'functional/no-let': 'off',
-        'functional/no-loop-statements': 'off',
-        'functional/no-mixed-types': 'off',
-        'functional/no-promise-reject': 'off',
-        'functional/no-return-void': 'off',
-        'functional/no-this-expressions': 'off',
-        'functional/no-throw-statements': 'off',
-        'functional/no-try-statements': 'off',
-        'functional/prefer-property-signatures': 'off',
+        'functional/functional-parameters': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/immutable-data': disable<
+            'Avoid false positives and deep readonly requirements that can need extra utility type dependencies'
+        >(),
+        'functional/no-classes': disable<'Class declarations are handled by restricted-syntax/no-class-declaration'>(),
+        'functional/no-conditional-statements': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-expression-statements': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-let': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-loop-statements': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-mixed-types': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-promise-reject': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-return-void': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-this-expressions': disable<'Covered by enormora-typescript/no-this-expressions'>(),
+        'functional/no-throw-statements': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/no-try-statements': disable<
+            'Broad functional restrictions produce too many false positives for the intended style'
+        >(),
+        'functional/prefer-property-signatures': disable<'Covered by @typescript-eslint/method-signature-style'>(),
         'functional/prefer-immutable-types': [
             'error',
             {
@@ -416,11 +461,11 @@ export const typescriptConfig = {
                 fixer: {
                     ReadonlyShallow: [
                         {
-                            pattern: '^([_$a-zA-Z\\xA0-\\uFFFF][_$a-zA-Z0-9\\xA0-\\uFFFF]*\\[\\])$',
+                            pattern: String.raw`^([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*\[\])$`,
                             replace: 'readonly $1'
                         },
                         {
-                            pattern: '^(\\[.+\\])$',
+                            pattern: String.raw`^(\[.+\])$`,
                             replace: 'readonly $1'
                         },
                         {
@@ -432,7 +477,7 @@ export const typescriptConfig = {
                             replace: 'Readonly<Record<$1>>'
                         },
                         {
-                            pattern: '^\\{ \\[([^\\]]+)\\]: (.+?);? \\}$',
+                            pattern: String.raw`^\{ \[([^\]]+)\]: (.+?);? \}$`,
                             replace: '{ readonly [$1]: $2; }'
                         },
                         // Iterative one-property-per-pass prefix for object
@@ -442,7 +487,7 @@ export const typescriptConfig = {
                         // boundaries inside an object type match; function
                         // parameters are inside "(" and never matched.
                         {
-                            pattern: '(^\\{ |; )(?!readonly )([\\w$]+\\??: )',
+                            pattern: String.raw`(^\{ |; )(?!readonly )([\w$]+\??: )`,
                             replace: '$1readonly $2'
                         }
                     ]
@@ -460,7 +505,9 @@ export const typescriptConfig = {
         ],
         'functional/prefer-tacit': 'error',
         'functional/readonly-type': [ 'error', 'keyword' ],
-        'functional/no-class-inheritance': 'off',
+        'functional/no-class-inheritance': disable<
+            'Class declarations are handled by restricted-syntax/no-class-declaration'
+        >(),
         'functional/type-declaration-immutability': [
             'error',
             {
@@ -471,11 +518,11 @@ export const typescriptConfig = {
                         comparator: 'AtLeast',
                         fixer: [
                             {
-                                pattern: '^([_$a-zA-Z\\xA0-\\uFFFF][_$a-zA-Z0-9\\xA0-\\uFFFF]*\\[\\])$',
+                                pattern: String.raw`^([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*\[\])$`,
                                 replace: 'readonly $1'
                             },
                             {
-                                pattern: '^(\\[.+\\])$',
+                                pattern: String.raw`^(\[.+\])$`,
                                 replace: 'readonly $1'
                             },
                             {
@@ -487,11 +534,11 @@ export const typescriptConfig = {
                                 replace: 'Readonly<Record<$1>>'
                             },
                             {
-                                pattern: '^\\{ \\[([^\\]]+)\\]: (.+?);? \\}$',
+                                pattern: String.raw`^\{ \[([^\]]+)\]: (.+?);? \}$`,
                                 replace: '{ readonly [$1]: $2; }'
                             },
                             {
-                                pattern: '(^\\{ |; )(?!readonly )([\\w$]+\\??: )',
+                                pattern: String.raw`(^\{ |; )(?!readonly )([\w$]+\??: )`,
                                 replace: '$1readonly $2'
                             }
                         ]
@@ -564,27 +611,41 @@ export const typescriptConfig = {
                 ]
             }
         ],
-        'perfectionist/sort-array-includes': 'off',
-        'perfectionist/sort-arrays': 'off',
-        'perfectionist/sort-classes': 'off',
-        'perfectionist/sort-constructor-parameters': 'off',
-        'perfectionist/sort-enums': 'off',
-        'perfectionist/sort-exports': 'off',
-        'perfectionist/sort-export-attributes': 'off',
-        'perfectionist/sort-imports': 'off',
-        'perfectionist/sort-interfaces': 'off',
-        'perfectionist/sort-jsx-props': 'off',
-        'perfectionist/sort-import-attributes': 'off',
-        'perfectionist/sort-maps': 'off',
-        'perfectionist/sort-named-exports': 'off',
-        'perfectionist/sort-named-imports': 'off',
-        'perfectionist/sort-object-types': 'off',
-        'perfectionist/sort-objects': 'off',
-        'perfectionist/sort-switch-case': 'off',
-        'perfectionist/sort-variable-declarations': 'off',
-        'perfectionist/sort-sets': 'off',
-        'perfectionist/sort-heritage-clauses': 'off',
-        'perfectionist/sort-decorators': 'off',
-        'perfectionist/sort-modules': 'off'
+        'perfectionist/sort-array-includes': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-arrays': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-classes': disable<
+            'Class member ordering is configured by @typescript-eslint/member-ordering'
+        >(),
+        'perfectionist/sort-constructor-parameters': disable<
+            'Preserve domain order instead of imposing automatic sorting'
+        >(),
+        'perfectionist/sort-enums': disable<
+            'Enums are prohibited by restricted-syntax-typescript/no-ts-enum-declaration'
+        >(),
+        'perfectionist/sort-exports': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-export-attributes': disable<
+            'Preserve domain order instead of imposing automatic sorting'
+        >(),
+        'perfectionist/sort-imports': disable<'Import ordering is handled by import/order'>(),
+        'perfectionist/sort-interfaces': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-jsx-props': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-import-attributes': disable<
+            'Preserve domain order instead of imposing automatic sorting'
+        >(),
+        'perfectionist/sort-maps': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-named-exports': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-named-imports': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-object-types': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-objects': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-switch-case': disable<
+            'Switch statements are prohibited by restricted-syntax/no-switch-statement'
+        >(),
+        'perfectionist/sort-variable-declarations': disable<
+            'Preserve domain order instead of imposing automatic sorting'
+        >(),
+        'perfectionist/sort-sets': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-heritage-clauses': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-decorators': disable<'Preserve domain order instead of imposing automatic sorting'>(),
+        'perfectionist/sort-modules': disable<'Preserve domain order instead of imposing automatic sorting'>()
     }
 } as unknown as Linter.Config;

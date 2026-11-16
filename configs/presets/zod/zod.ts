@@ -4,6 +4,7 @@ import zodMiniPlugin from 'eslint-plugin-zod-mini';
 import { enormoraZodPlugin } from '../../plugins/enormora-zod/enormora-zod-plugin.ts';
 import { createRestrictedImportsPlugin } from '../../rule-sets/restricted-imports.ts';
 import { createRestrictedSyntaxPlugin } from '../../rule-sets/restricted-syntax.ts';
+import { disable } from '../../rule-severity.ts';
 
 const useZodMiniOrCoreMessage = 'Use zod/mini or zod/v4/core instead.';
 
@@ -47,34 +48,38 @@ export const zodConfig = {
     rules: {
         'zod-mini/consistent-import': [ 'error', { syntax: 'named' } ],
         'zod-mini/consistent-import-source': [ 'error', { sources: [ 'zod/mini' ] } ],
-        'zod-mini/consistent-object-schema-type': 'off',
+        'zod-mini/consistent-object-schema-type': disable<'Object strictness depends on the schema boundary'>(),
         'zod-mini/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
         'zod-mini/consistent-schema-var-name': 'error',
         'zod-mini/no-any-schema': 'error',
         'zod-mini/no-coerce-boolean': 'error',
         'zod-mini/no-conflicting-checks': 'error',
         'zod-mini/no-duplicate-schema-methods': 'error',
-        'zod-mini/no-dynamic-schema-value': 'off',
+        'zod-mini/no-dynamic-schema-value': disable<'Schemas may be parameterized by runtime values'>(),
         'zod-mini/no-empty-custom-schema': 'error',
-        'zod-mini/no-function-scoped-schema': 'off',
-        'zod-mini/no-native-enum': 'off',
+        'zod-mini/no-function-scoped-schema': disable<'Schema factories may construct schemas inside functions'>(),
+        'zod-mini/no-native-enum': disable<'Covered by restricted-syntax-zod/no-native-enum-schema'>(),
         'zod-mini/no-promise-schema': 'error',
         'zod-mini/no-throw-in-refine': 'error',
         'zod-mini/no-transform-in-record-key': 'error',
-        'zod-mini/no-unknown-schema': 'off',
+        'zod-mini/no-unknown-schema': disable<'Unknown is a valid boundary type before further validation'>(),
         'zod-mini/no-unnecessary-readonly': 'error',
-        'zod-mini/prefer-enum-over-literal-union': 'off',
+        'zod-mini/prefer-enum-over-literal-union': disable<'Conflicts with restricted-syntax-zod/no-enum-schema'>(),
         'zod-mini/prefer-map-set-size-over-min-max': 'error',
         'zod-mini/prefer-meta': 'error',
-        'zod-mini/prefer-nullish': 'off',
+        'zod-mini/prefer-nullish': disable<'Null and undefined acceptance should remain explicit in schemas'>(),
         'zod-mini/prefer-string-length-over-min-max': 'error',
         'zod-mini/prefer-tuple-over-array-length': 'error',
         'zod-mini/prefer-validate': 'error',
         'zod-mini/require-brand-type-parameter': 'error',
         'zod-mini/require-error-message': 'error',
-        'zod-mini/schema-error-property-style': 'off',
+        'zod-mini/schema-error-property-style': disable<
+            'Schema errors may use literals, constants, callbacks, or translation helpers'
+        >(),
 
-        'zod-core/consistent-import': 'off',
+        'zod-core/consistent-import': disable<
+            'Named core imports are enforced by restricted-syntax-zod/no-core-namespace-import'
+        >(),
         'zod-core/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
         'zod-core/prefer-validate': 'error',
 
