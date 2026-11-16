@@ -74,7 +74,9 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-includes',
     'unicorn/prefer-math-trunc',
     'unicorn/prefer-node-protocol',
+    'unicorn/prefer-spread',
     'unicorn/prefer-string-slice',
+    'unicorn/prefer-top-level-await',
     'unicorn/require-array-sort-compare'
 ];
 

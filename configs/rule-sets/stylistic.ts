@@ -1,6 +1,7 @@
 import stylisticPlugin from '@stylistic/eslint-plugin';
 import destructuringPlugin from 'eslint-plugin-destructuring';
 import { indentSize } from '../constants.ts';
+import { disable } from '../rule-severity.ts';
 
 export const stylisticRuleSet = {
     plugins: {
@@ -13,9 +14,9 @@ export const stylisticRuleSet = {
     rules: {
         'destructuring/in-methods-params': 'error',
         'destructuring/in-params': [ 'error', { 'max-params': 0 } ],
-        'destructuring/no-rename': 'off',
+        'destructuring/no-rename': disable<'Destructured bindings may be renamed to express their local role'>(),
 
-        '@stylistic/array-bracket-newline': 'off',
+        '@stylistic/array-bracket-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
         '@stylistic/array-element-newline': [ 'error', 'consistent' ],
         '@stylistic/arrow-parens': [ 'error', 'always' ],
@@ -26,7 +27,7 @@ export const stylisticRuleSet = {
                 after: true
             }
         ],
-        '@stylistic/block-spacing': 'off',
+        '@stylistic/block-spacing': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/brace-style': [ 'error', '1tbs', { allowSingleLine: false } ],
         '@stylistic/comma-dangle': [ 'error', 'never' ],
         '@stylistic/comma-spacing': [
@@ -46,14 +47,16 @@ export const stylisticRuleSet = {
         ],
         '@stylistic/dot-location': [ 'error', 'property' ],
         '@stylistic/eol-last': 'error',
-        '@stylistic/exp-list-style': 'off',
-        '@stylistic/exp-jsx-props-style': 'off',
+        '@stylistic/exp-list-style': disable<'Experimental list layout rules are not part of the enforced style'>(),
+        '@stylistic/exp-jsx-props-style': disable<
+            'Experimental JSX prop layout rules are not part of the enforced style'
+        >(),
         '@stylistic/function-call-spacing': [ 'error', 'never' ],
         '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
-        '@stylistic/function-paren-newline': 'off',
+        '@stylistic/function-paren-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/generator-star-spacing': [ 'error', { before: false, after: true } ],
         '@stylistic/indent-binary-ops': [ 'error', indentSize ],
-        '@stylistic/implicit-arrow-linebreak': 'off',
+        '@stylistic/implicit-arrow-linebreak': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/indent': [
             'error',
             indentSize,
@@ -63,23 +66,23 @@ export const stylisticRuleSet = {
                 MemberExpression: 1
             }
         ],
-        '@stylistic/jsx-child-element-spacing': 'off',
-        '@stylistic/jsx-closing-bracket-location': 'off',
-        '@stylistic/jsx-closing-tag-location': 'off',
-        '@stylistic/jsx-curly-brace-presence': 'off',
-        '@stylistic/jsx-curly-newline': 'off',
-        '@stylistic/jsx-curly-spacing': 'off',
-        '@stylistic/jsx-equals-spacing': 'off',
-        '@stylistic/jsx-first-prop-new-line': 'off',
-        '@stylistic/jsx-indent-props': 'off',
-        '@stylistic/jsx-max-props-per-line': 'off',
-        '@stylistic/jsx-newline': 'off',
-        '@stylistic/jsx-one-expression-per-line': 'off',
-        '@stylistic/jsx-self-closing-comp': 'off',
-        '@stylistic/jsx-tag-spacing': 'off',
-        '@stylistic/jsx-quotes': 'off',
-        '@stylistic/jsx-wrap-multilines': 'off',
-        '@stylistic/jsx-function-call-newline': 'off',
+        '@stylistic/jsx-child-element-spacing': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-closing-bracket-location': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-closing-tag-location': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-curly-brace-presence': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-curly-newline': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-curly-spacing': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-equals-spacing': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-first-prop-new-line': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-indent-props': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-max-props-per-line': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-newline': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-one-expression-per-line': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-self-closing-comp': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-tag-spacing': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-quotes': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-wrap-multilines': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-function-call-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/key-spacing': [
             'error',
             {
@@ -102,7 +105,7 @@ export const stylisticRuleSet = {
                 exceptAfterSingleLine: true
             }
         ],
-        '@stylistic/lines-around-comment': 'off',
+        '@stylistic/lines-around-comment': disable<'Comments need not have surrounding blank lines'>(),
         '@stylistic/max-len': [
             'error',
             {
@@ -130,24 +133,24 @@ export const stylisticRuleSet = {
                 }
             }
         ],
-        '@stylistic/multiline-ternary': 'off',
+        '@stylistic/multiline-ternary': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/new-parens': 'error',
-        '@stylistic/newline-per-chained-call': 'off',
+        '@stylistic/newline-per-chained-call': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/no-confusing-arrow': 'error',
         '@stylistic/no-extra-parens': 'error',
         '@stylistic/no-extra-semi': 'error',
         '@stylistic/no-floating-decimal': 'error',
-        '@stylistic/no-mixed-operators': 'off',
+        '@stylistic/no-mixed-operators': disable<'Standard operator precedence is allowed without extra parentheses'>(),
         '@stylistic/no-mixed-spaces-and-tabs': 'error',
         '@stylistic/no-multi-spaces': 'error',
         '@stylistic/no-multiple-empty-lines': [ 'error', { max: 1 } ],
         '@stylistic/no-tabs': 'error',
         '@stylistic/no-trailing-spaces': 'error',
         '@stylistic/no-whitespace-before-property': 'error',
-        '@stylistic/nonblock-statement-body-position': 'off',
-        '@stylistic/object-curly-newline': 'off',
+        '@stylistic/nonblock-statement-body-position': disable<'Block bodies are already required by curly'>(),
+        '@stylistic/object-curly-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/object-curly-spacing': [ 'error', 'always' ],
-        '@stylistic/object-property-newline': 'off',
+        '@stylistic/object-property-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/one-var-declaration-per-line': 'error',
         '@stylistic/operator-linebreak': [ 'error', 'after', { overrides: { '?': 'before', ':': 'before' } } ],
         '@stylistic/padded-blocks': [
@@ -216,17 +219,17 @@ export const stylisticRuleSet = {
                 before: false
             }
         ],
-        '@stylistic/curly-newline': 'off',
+        '@stylistic/curly-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/template-curly-spacing': 'error',
         '@stylistic/template-tag-spacing': [ 'error', 'never' ],
         '@stylistic/type-annotation-spacing': 'error',
         '@stylistic/type-generic-spacing': 'error',
         '@stylistic/type-named-tuple-spacing': 'error',
         '@stylistic/wrap-iife': [ 'error', 'inside' ],
-        '@stylistic/wrap-regex': 'off',
+        '@stylistic/wrap-regex': disable<'Regular expression literals need not have extra parentheses'>(),
         '@stylistic/yield-star-spacing': [ 'error', { before: false, after: true } ],
-        '@stylistic/jsx-pascal-case': 'off',
-        '@stylistic/line-comment-position': 'off',
-        '@stylistic/multiline-comment-style': 'off'
+        '@stylistic/jsx-pascal-case': disable<'JSX component casing is configured by the JSX presets'>(),
+        '@stylistic/line-comment-position': disable<'Comments may appear above or beside the code they explain'>(),
+        '@stylistic/multiline-comment-style': disable<'Line and block comments are both allowed'>()
     }
 };

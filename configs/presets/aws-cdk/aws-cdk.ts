@@ -1,5 +1,6 @@
 import sonarjsPlugin from 'eslint-plugin-sonarjs';
 import { createNoClassDeclarationRestriction } from '../../rule-sets/restricted-syntax.ts';
+import { disable } from '../../rule-severity.ts';
 
 const cdkClassDeclarationRestriction = createNoClassDeclarationRestriction({
     allowedSuperClassNamePattern: '/(Error|Construct|Stack|Stage|App|Resource)$/',
@@ -12,8 +13,10 @@ export const awsCdkConfig = {
     },
     rules: {
         'restricted-syntax/no-class-declaration': [ 'error', cdkClassDeclarationRestriction ],
-        'no-new': 'off',
-        'sonarjs/constructor-for-side-effects': 'off',
+        'no-new': disable<'CDK constructs register infrastructure through constructor side effects'>(),
+        'sonarjs/constructor-for-side-effects': disable<
+            'CDK constructs register infrastructure through constructor side effects'
+        >(),
 
         'sonarjs/aws-apigateway-public-api': 'error',
         'sonarjs/aws-ec2-rds-dms-public': 'error',

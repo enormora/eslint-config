@@ -1,5 +1,6 @@
 import { javascriptExtensions } from '../../constants.ts';
 import { reactConfig } from '../react/react.ts';
+import { disable } from '../../rule-severity.ts';
 
 export const reactJsxConfig = {
     languageOptions: {
@@ -23,7 +24,7 @@ export const reactJsxConfig = {
         'unicorn/no-invalid-integrity': 'error',
 
         'jsx-quotes': [ 'error', 'prefer-single' ],
-        'jsx-sort-props': 'off',
+        'jsx-sort-props': disable<'JSX properties may follow domain order'>(),
 
         'react/jsx-boolean-value': [ 'error', 'always' ],
         'react/jsx-key': 'error',

@@ -1,8 +1,9 @@
-import * as astroParser from 'astro-eslint-parser';
+import { meta as astroParserMetadata, parseForESLint } from 'astro-eslint-parser';
 import type { Linter } from 'eslint';
 import astroPlugin from 'eslint-plugin-astro';
 import jsxAccessibilityPlugin from 'eslint-plugin-jsx-a11y';
 import globals from 'globals';
+import { disable } from '../../rule-severity.ts';
 
 export const astroComponentGlobals = {
     ...globals.node,
@@ -23,21 +24,25 @@ export const astroRules = {
     'astro/no-deprecated-astro-fetchcontent': 'error',
     'astro/no-deprecated-astro-resolve': 'error',
     'astro/no-deprecated-getentrybyslug': 'error',
-    'astro/no-exports-from-components': 'off',
-    'astro/no-prerender-export-outside-pages': 'off',
-    'astro/no-set-html-directive': 'off',
-    'astro/no-set-text-directive': 'off',
-    'astro/no-unsafe-inline-scripts': 'off',
-    'astro/no-unused-css-selector': 'off',
+    'astro/no-exports-from-components': disable<'Component modules may expose named exports'>(),
+    'astro/no-prerender-export-outside-pages': disable<
+        'Page discovery depends on the consuming Astro project layout'
+    >(),
+    'astro/no-set-html-directive': disable<'Original rationale undocumented; retained pending review'>(),
+    'astro/no-set-text-directive': disable<'Explicit text insertion directives are allowed'>(),
+    'astro/no-unsafe-inline-scripts': disable<'Inline script policy depends on the consuming application'>(),
+    'astro/no-unused-css-selector': disable<'CSS linting is outside the supported preset scope'>(),
     'astro/no-unused-define-vars-in-style': 'error',
-    'astro/prefer-class-list-directive': 'off',
-    'astro/prefer-object-class-list': 'off',
-    'astro/prefer-split-class-list': 'off',
-    'astro/semi': 'off',
-    'astro/sort-attributes': 'off',
+    'astro/prefer-class-list-directive': disable<'Class strings and class:list directives are both allowed'>(),
+    'astro/prefer-object-class-list': disable<'Array and object class lists are both allowed'>(),
+    'astro/prefer-split-class-list': disable<'Class list grouping is left to readability'>(),
+    'astro/semi': disable<'Semicolon formatting is handled by the active formatter'>(),
+    'astro/sort-attributes': disable<'Attributes may follow domain order'>(),
 
     'astro/jsx-a11y/alt-text': 'error',
-    'astro/jsx-a11y/anchor-ambiguous-text': 'off',
+    'astro/jsx-a11y/anchor-ambiguous-text': disable<
+        'Accessibility enforcement depends on product and UX requirements'
+    >(),
     'astro/jsx-a11y/anchor-has-content': 'error',
     'astro/jsx-a11y/anchor-is-valid': 'error',
     'astro/jsx-a11y/aria-activedescendant-has-tabindex': 'error',
@@ -48,7 +53,7 @@ export const astroRules = {
     'astro/jsx-a11y/autocomplete-valid': 'error',
     'astro/jsx-a11y/click-events-have-key-events': 'error',
     'astro/jsx-a11y/control-has-associated-label': [
-        'off',
+        disable<'Accessibility enforcement depends on product and UX requirements'>(),
         {
             ignoreElements: [ 'audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video' ],
             ignoreRoles: [
@@ -77,11 +82,13 @@ export const astroRules = {
         }
     ],
     'astro/jsx-a11y/label-has-associated-control': 'error',
-    'astro/jsx-a11y/lang': 'off',
+    'astro/jsx-a11y/lang': disable<'Accessibility enforcement depends on product and UX requirements'>(),
     'astro/jsx-a11y/media-has-caption': 'error',
     'astro/jsx-a11y/mouse-events-have-key-events': 'error',
     'astro/jsx-a11y/no-access-key': 'error',
-    'astro/jsx-a11y/no-aria-hidden-on-focusable': 'off',
+    'astro/jsx-a11y/no-aria-hidden-on-focusable': disable<
+        'Accessibility enforcement depends on product and UX requirements'
+    >(),
     'astro/jsx-a11y/no-autofocus': 'error',
     'astro/jsx-a11y/no-distracting-elements': 'error',
     'astro/jsx-a11y/no-interactive-element-to-noninteractive-role': [
@@ -138,7 +145,9 @@ export const astroRules = {
             handlers: [ 'onClick', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp' ]
         }
     ],
-    'astro/jsx-a11y/prefer-tag-over-role': 'off',
+    'astro/jsx-a11y/prefer-tag-over-role': disable<
+        'Accessibility enforcement depends on product and UX requirements'
+    >(),
     'astro/jsx-a11y/role-has-required-aria-props': 'error',
     'astro/jsx-a11y/role-supports-aria-props': 'error',
     'astro/jsx-a11y/scope': 'error',
@@ -157,7 +166,7 @@ export const astroConfig = [
     {
         files: [ '*.astro', '**/*.astro' ],
         languageOptions: {
-            parser: astroParser,
+            parser: { meta: astroParserMetadata, parseForESLint },
             globals: astroComponentGlobals,
             parserOptions: {
                 extraFileExtensions: [ '.astro' ],

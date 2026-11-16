@@ -1,33 +1,18 @@
 import codeSpellChecker from '@cspell/eslint-plugin';
-import type { Rule } from 'eslint';
 import eslintCommentsPlugin from '@eslint-community/eslint-plugin-eslint-comments';
 import importPlugin, { createNodeResolver } from 'eslint-plugin-import-x';
 import noSecretsPlugin from 'eslint-plugin-no-secrets';
 import { ecmaVersion, javascriptExtensions } from '../../constants.ts';
-import {
-    noUnnecessaryArrowFunctionRule
-} from '../../plugins/restricted-syntax/no-unnecessary-arrow-function.ts';
 import { bestPracticesRuleSet } from '../../rule-sets/best-practices.ts';
 import {
-    createRestrictedSyntaxPlugin,
+    baseRestrictedSyntaxPlugin,
     noClassDeclarationRestriction,
     noEmptyFunctionBodyRestriction,
     noInOperatorRestriction,
     noSwitchStatementRestriction
 } from '../../rule-sets/restricted-syntax.ts';
 import { stylisticRuleSet } from '../../rule-sets/stylistic.ts';
-
-const noRestrictedSyntaxWrappers = createRestrictedSyntaxPlugin(
-    [
-        'no-class-declaration',
-        'no-switch-statement',
-        'no-empty-function-body',
-        'no-in-operator'
-    ],
-    {
-        'no-unnecessary-arrow-function': noUnnecessaryArrowFunctionRule as unknown as Rule.RuleModule
-    }
-);
+import { disable } from '../../rule-severity.ts';
 
 export const cspellSpellcheckerOptions = {
     autoFix: false,
@@ -78,7 +63,7 @@ export const baseSharedConfig = {
         'eslint-comments': eslintCommentsPlugin,
         'no-secrets': noSecretsPlugin,
         '@cspell': codeSpellChecker,
-        'restricted-syntax': noRestrictedSyntaxWrappers
+        'restricted-syntax': baseRestrictedSyntaxPlugin
     },
     settings: {
         ...stylisticRuleSet.settings,
@@ -100,7 +85,7 @@ export const baseSharedConfig = {
                 allowVoid: false
             }
         ],
-        camelcase: 'off',
+        camelcase: disable<'External property names need not use camelCase'>(),
         'no-array-constructor': 'error',
         'no-bitwise': 'error',
         'no-caller': 'error',
@@ -123,7 +108,7 @@ export const baseSharedConfig = {
         'no-else-return': [ 'error', { allowElseIf: false } ],
         'no-empty': [ 'error', { allowEmptyCatch: true } ],
         'no-empty-character-class': 'error',
-        'no-empty-function': 'off',
+        'no-empty-function': disable<'Covered by restricted-syntax/no-empty-function-body'>(),
         'no-empty-pattern': 'error',
         'no-empty-static-block': 'error',
         'no-eq-null': 'error',
@@ -138,10 +123,10 @@ export const baseSharedConfig = {
         'no-implicit-coercion': 'error',
         'no-implicit-globals': 'error',
         'no-implied-eval': 'error',
-        'no-inline-comments': 'off',
+        'no-inline-comments': disable<'Inline explanations are allowed'>(),
         'no-inner-declarations': [ 'error', 'functions' ],
         'no-invalid-regexp': 'error',
-        'no-invalid-this': 'off',
+        'no-invalid-this': disable<'JavaScript callbacks may intentionally bind this'>(),
         'no-irregular-whitespace': 'error',
         'no-iterator': 'error',
         'no-label-var': 'error',
@@ -152,7 +137,7 @@ export const baseSharedConfig = {
         'no-new-native-nonconstructor': 'error',
         'no-multi-str': 'error',
         'no-global-assign': 'error',
-        'no-negated-condition': 'off',
+        'no-negated-condition': disable<'Covered by unicorn/no-negated-condition'>(),
         'no-nested-ternary': 'error',
         'no-new': 'error',
         'no-new-func': 'error',
@@ -167,7 +152,7 @@ export const baseSharedConfig = {
         'no-prototype-builtins': 'error',
         'no-redeclare': [ 'error', { builtinGlobals: true } ],
         'no-regex-spaces': 'error',
-        'no-restricted-syntax': 'off',
+        'no-restricted-syntax': disable<'Restrictions use individually configurable restricted-syntax rules'>(),
         'restricted-syntax/no-class-declaration': [ 'error', noClassDeclarationRestriction ],
         'restricted-syntax/no-switch-statement': [ 'error', noSwitchStatementRestriction ],
         'restricted-syntax/no-empty-function-body': [ 'error', noEmptyFunctionBodyRestriction ],
@@ -180,13 +165,13 @@ export const baseSharedConfig = {
         'no-shadow': [ 'error', { builtinGlobals: true } ],
         'no-shadow-restricted-names': 'error',
         'no-sparse-arrays': 'error',
-        'no-ternary': 'off',
+        'no-ternary': disable<'Ternaries are preferred for value selection'>(),
         'no-this-before-super': 'error',
         'no-throw-literal': 'error',
         'no-unassigned-vars': 'error',
         'no-undef': [ 'error', { typeof: true } ],
-        'no-undef-init': 'error',
-        'no-undefined': 'off',
+        'no-undef-init': disable<'Conflicts with init-declarations when explicit undefined initialization is needed'>(),
+        'no-undefined': disable<'Explicit undefined values are allowed'>(),
         'no-unexpected-multiline': 'error',
         'no-underscore-dangle': 'error',
         'no-unmodified-loop-condition': 'error',
@@ -266,7 +251,7 @@ export const baseSharedConfig = {
                 enforceForClassMembers: true
             }
         ],
-        'block-scoped-var': 'off',
+        'block-scoped-var': disable<'Use block-scoped declarations enforced by no-var'>(),
         complexity: [ 'error', { max: 6 } ],
         'consistent-return': 'error',
         'consistent-this': [ 'error', 'self' ],
@@ -275,8 +260,8 @@ export const baseSharedConfig = {
         'default-case': 'error',
         'dot-notation': 'error',
         eqeqeq: 'error',
-        'func-names': 'off',
-        'func-style': 'off',
+        'func-names': disable<'Function names are required only when they clarify intent'>(),
+        'func-style': disable<'Declarations and expressions are both allowed'>(),
         'guard-for-in': 'error',
         'id-length': [ 'error', { min: 2, properties: 'never' } ],
         'init-declarations': [ 'error', 'always' ],
@@ -295,26 +280,26 @@ export const baseSharedConfig = {
         'object-shorthand': [ 'error', 'always' ],
         'one-var': [ 'error', 'never' ],
         'operator-assignment': [ 'error', 'always' ],
-        'prefer-arrow-callback': 'off',
+        'prefer-arrow-callback': disable<'Named function callbacks are allowed when they clarify intent'>(),
         'prefer-rest-params': 'error',
         radix: 'error',
-        'id-match': 'off',
+        'id-match': disable<'No universal identifier pattern is prescribed'>(),
         'require-yield': 'error',
-        'sort-vars': 'off',
-        'sort-imports': 'off',
+        'sort-vars': disable<'Declarations may follow logical dependency order'>(),
+        'sort-imports': disable<'Import ordering is handled by import/order'>(),
         strict: [ 'error', 'safe' ],
         'unicode-bom': [ 'error', 'never' ],
         'use-isnan': 'error',
         'valid-typeof': 'error',
         'vars-on-top': 'error',
         yoda: [ 'error', 'never' ],
-        'capitalized-comments': 'off',
+        'capitalized-comments': disable<'Comments need not start with a capital letter'>(),
         'class-methods-use-this': 'error',
-        'func-name-matching': 'off',
-        'no-await-in-loop': 'off',
+        'func-name-matching': disable<'Function names may describe a different role from their binding'>(),
+        'no-await-in-loop': disable<'Sequential asynchronous work is allowed'>(),
         'no-compare-neg-zero': 'error',
         'no-multi-assign': 'error',
-        'no-restricted-properties': 'off',
+        'no-restricted-properties': disable<'Property restrictions depend on the consuming project'>(),
         'no-template-curly-in-string': 'error',
         'no-unsafe-negation': 'error',
         'no-useless-return': 'error',
@@ -341,8 +326,8 @@ export const baseSharedConfig = {
                 allowEmptyReject: false
             }
         ],
-        'require-await': 'off',
-        'sort-keys': 'off',
+        'require-await': disable<'Async functions may implement a promise-returning contract without awaiting'>(),
+        'sort-keys': disable<'Object properties may follow domain order'>(),
         'symbol-description': 'error',
         'for-direction': 'error',
         'getter-return': [
@@ -351,24 +336,30 @@ export const baseSharedConfig = {
                 allowImplicit: false
             }
         ],
-        'max-classes-per-file': 'off',
-        'max-lines-per-function': 'off',
+        'max-classes-per-file': disable<
+            'Class declarations are already prohibited by restricted-syntax/no-class-declaration'
+        >(),
+        'max-lines-per-function': disable<
+            'Nested function bodies count against the enclosing function line limit'
+        >(),
         'prefer-object-spread': 'error',
         'no-async-promise-executor': 'error',
         'no-misleading-character-class': 'error',
         'default-param-last': 'error',
         'prefer-regex-literals': 'error',
-        'require-unicode-regexp': 'off',
+        'require-unicode-regexp': 'error',
         'no-useless-catch': 'error',
         'prefer-named-capture-group': 'error',
         'no-import-assign': 'error',
         'require-atomic-updates': 'error',
 
-        'no-restricted-imports': 'off',
+        'no-restricted-imports': disable<
+            'Import restrictions use individually configurable restricted-imports rules'
+        >(),
 
-        'no-alert': 'off',
-        'no-script-url': 'off',
-        'no-restricted-globals': 'off',
+        'no-alert': disable<'Enabled only in the browser preset'>(),
+        'no-script-url': disable<'Enabled only in the browser preset'>(),
+        'no-restricted-globals': disable<'Enabled only in the browser preset'>(),
 
         'grouped-accessor-pairs': [ 'error', 'getBeforeSet' ],
         'no-constructor-return': 'error',
@@ -377,9 +368,9 @@ export const baseSharedConfig = {
         'prefer-exponentiation-operator': 'error',
 
         'default-case-last': 'error',
-        'no-restricted-exports': 'off',
+        'no-restricted-exports': disable<'Export restrictions depend on the consuming project'>(),
         'no-useless-backreference': 'error',
-        'id-denylist': 'off',
+        'id-denylist': disable<'Identifier deny lists depend on the consuming project'>(),
         'no-loss-of-precision': 'error',
         'no-promise-executor-return': 'error',
         'no-unreachable-loop': 'error',
@@ -392,7 +383,9 @@ export const baseSharedConfig = {
         'no-useless-assignment': 'error',
 
         'no-secrets/no-secrets': [ 'error', { tolerance: 5 } ],
-        'no-secrets/no-pattern-match': 'off',
+        'no-secrets/no-pattern-match': disable<
+            'Secret scanning uses no-secrets/no-secrets without a project-specific pattern list'
+        >(),
 
         'eslint-comments/disable-enable-pair': [
             'error',
@@ -403,37 +396,39 @@ export const baseSharedConfig = {
         'eslint-comments/no-aggregating-enable': 'error',
         'eslint-comments/no-duplicate-disable': 'error',
         'eslint-comments/no-unused-enable': 'error',
-        'eslint-comments/no-restricted-disable': 'off',
+        'eslint-comments/no-restricted-disable': disable<'Any rule may be disabled with an explanation'>(),
         'eslint-comments/no-unlimited-disable': 'error',
-        'eslint-comments/no-use': 'off',
+        'eslint-comments/no-use': disable<'Explained inline configuration is allowed'>(),
         'eslint-comments/require-description': 'error',
 
-        'import/avoid-barrel-files': 'off',
-        'import/avoid-importing-barrel-files': 'off',
-        'import/avoid-namespace-import': 'off',
-        'import/avoid-re-export-all': 'off',
+        'import/avoid-barrel-files': disable<'Covered by no-barrel-files/no-barrel-files'>(),
+        'import/avoid-importing-barrel-files': disable<'Covered by no-barrel-files/prefer-source-imports'>(),
+        'import/avoid-namespace-import': disable<'Covered by sonarjs/no-wildcard-import'>(),
+        'import/avoid-re-export-all': disable<'Barrel exports are handled by no-barrel-files/no-barrel-files'>(),
         'import/no-deprecated': 'error',
-        'import/exports-last': 'off',
-        'import/dynamic-import-chunkname': 'off',
-        'import/unambiguous': 'off',
+        'import/exports-last': disable<'Exports may appear with their declarations'>(),
+        'import/dynamic-import-chunkname': disable<'Chunk naming depends on the consuming bundler'>(),
+        'import/unambiguous': disable<'The preset explicitly selects module source type'>(),
         'import/no-dynamic-require': 'error',
-        'import/no-named-export': 'off',
+        'import/no-named-export': disable<'Named exports are preferred'>(),
         'import/no-default-export': 'error',
-        'import/prefer-default-export': 'off',
+        'import/prefer-default-export': disable<'Conflicts with import/no-default-export'>(),
         'import/newline-after-import': 'error',
-        'import/no-nodejs-modules': 'off',
+        'import/no-nodejs-modules': disable<'Node.js built-ins are allowed in projects that target Node.js'>(),
         'import/max-dependencies': [ 'error', { max: 10 } ],
         'import/first': 'error',
         'import/no-unused-modules': [ 'error', { unusedExports: true, suppressMissingFileEnumeratorAPIWarning: true } ],
-        'import/no-anonymous-default-export': 'off',
-        'import/no-named-default': 'off',
+        'import/no-anonymous-default-export': disable<
+            'Default exports are already prohibited by import/no-default-export'
+        >(),
+        'import/no-named-default': disable<'Covered by unicorn/no-named-default'>(),
         'import/no-cycle': 'error',
-        'import/no-relative-parent-imports': 'off',
-        'import/group-exports': 'off',
-        'import/no-internal-modules': 'off',
-        'import/no-restricted-paths': 'off',
-        'import/named': 'off',
-        'import/no-namespace': 'off',
+        'import/no-relative-parent-imports': disable<'Relative imports across parent directories are allowed'>(),
+        'import/group-exports': disable<'Exports may appear with their declarations'>(),
+        'import/no-internal-modules': disable<'Public subpath imports are allowed'>(),
+        'import/no-restricted-paths': disable<'Import boundaries depend on the consuming project'>(),
+        'import/named': disable<'TypeScript is preferred for named import validation'>(),
+        'import/no-namespace': disable<'Covered by sonarjs/no-wildcard-import'>(),
         'import/default': 'error',
         'import/export': 'error',
         'import/extensions': [
@@ -473,14 +468,15 @@ export const baseSharedConfig = {
                 allow: []
             }
         ],
-        // this rule doesn’t work correctly for ESM modules which use the exports field in package.json instead of main, see also https://github.com/import-js/eslint-plugin-import/issues/2703
-        'import/no-unresolved': 'off',
-        'import/no-relative-packages': 'off',
-        'import/no-import-module-exports': 'off',
+        'import/no-unresolved': disable<'Resolution can misreport ESM packages that use package.json exports'>(),
+        'import/no-relative-packages': disable<'Relative workspace imports are allowed'>(),
+        'import/no-import-module-exports': disable<'CommonJS imports are already prohibited by import/no-commonjs'>(),
         'import/no-empty-named-blocks': 'error',
-        'import/consistent-type-specifier-style': 'off',
-        'import/no-rename-default': 'off',
-        'import/prefer-namespace-import': 'off',
+        'import/consistent-type-specifier-style': disable<
+            'Type import style is configured by @typescript-eslint/consistent-type-imports'
+        >(),
+        'import/no-rename-default': disable<'Default import names may reflect their local role'>(),
+        'import/prefer-namespace-import': disable<'Named imports are allowed'>(),
 
         '@cspell/spellchecker': [ 'error', cspellSpellcheckerOptions ]
     }

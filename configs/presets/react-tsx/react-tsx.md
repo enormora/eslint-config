@@ -4,6 +4,9 @@
 
 Config preset for react and JSX per typescript, enabling specific rules and compiler settings.
 
+`react/no-unused-prop-types` checks unused props declared with supported TypeScript type syntax.
+The check uses local syntax analysis and does not resolve every imported or computed type.
+
 ## Install & Setup
 
 Install the `@enormora/eslint-config-react-tsx`, the base preset and the typescript package via npm:

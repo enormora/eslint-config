@@ -4,6 +4,30 @@
 
 Base ESLint config preset, agnostic to any environment, framework, or library. Targets ESM-only projects.
 
+`unicorn/consistent-function-scoping` requires nested functions that do not depend on their enclosing scope
+to move to an outer scope.
+
+Variable declarations require initializers. Explicit `undefined` initializers are allowed.
+
+`unicorn/prefer-top-level-await` prefers top-level `await` for module initialization.
+`unicorn/prefer-spread` prefers spread syntax for array construction, concatenation, and copying.
+The conflicting `array-func/prefer-array-from` rule is disabled.
+
+`unicorn/consistent-destructuring` requires reusing existing destructured bindings.
+`unicorn/prefer-string-raw` prefers `String.raw` where it avoids escaped backslashes.
+
+Array `.join()` calls require a separator, and number `.toFixed()` calls require a precision argument.
+Arguments matching a local function's declared defaults should be omitted.
+
+Borrowed built-in methods use explicit prototype references. Independent declarations belong after guard clauses
+that can exit before those declarations are needed.
+
+Regular expressions require Unicode mode (`u` or `v`) through the core `require-unicode-regexp` rule.
+
+Nested function and constructor calls are limited to three levels by `unicorn/max-nested-calls`.
+
+Namespace imports and wildcard re-exports are prohibited by `sonarjs/no-wildcard-import`.
+
 The local `enormora/prefer-ternary-for-value-selection` rule reports simple `if/else` returns,
 assignments to the same variable, and an initialized `let` followed by a conditional reassignment.
 Guard returns followed by a fallback return remain allowed. The rule skips multiline or nested

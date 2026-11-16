@@ -1,11 +1,12 @@
 import type { Linter } from 'eslint';
 import jsonSchemaValidatorPlugin from 'eslint-plugin-json-schema-validator';
 import packageJsonPlugin from 'eslint-plugin-package-json';
-import * as jsoncParser from 'jsonc-eslint-parser';
+import { meta as jsonParserMetadata, parseForESLint } from 'jsonc-eslint-parser';
+import { disable } from '../../rule-severity.ts';
 
 export const packageJsonConfig = {
     files: [ '**/package.json' ],
-    languageOptions: { parser: jsoncParser },
+    languageOptions: { parser: { meta: jsonParserMetadata, parseForESLint } },
     plugins: {
         'package-json': packageJsonPlugin,
         'json-schema-validator': jsonSchemaValidatorPlugin
@@ -63,59 +64,82 @@ export const packageJsonConfig = {
         'package-json/valid-version': 'error',
         'package-json/valid-workspaces': 'error',
 
-        // Too opinionated for a base preset — consumers can opt in.
-        'package-json/bin-name-casing': 'off',
-        'package-json/consistent-package-manager-declaration': 'off',
-        'package-json/consistent-property-aliases': 'off',
-        'package-json/exports-subpaths-style': 'off',
-        'package-json/no-local-dependencies': 'off',
-        'package-json/order-properties': 'off',
-        'package-json/prefer-rolling-workspace-spec': 'off',
-        'package-json/prefer-scoped-name': 'off',
-        'package-json/require-attribution': 'off',
-        'package-json/require-author': 'off',
-        'package-json/require-bin': 'off',
-        'package-json/require-browser': 'off',
-        'package-json/require-bugs': 'off',
-        'package-json/require-bundleDependencies': 'off',
-        'package-json/require-config': 'off',
-        'package-json/require-contributors': 'off',
-        'package-json/require-cpu': 'off',
-        'package-json/require-dependencies': 'off',
-        'package-json/require-description': 'off',
-        'package-json/require-devDependencies': 'off',
-        'package-json/require-devEngines': 'off',
-        'package-json/require-directories': 'off',
-        'package-json/require-engines': 'off',
-        'package-json/require-exports': 'off',
-        'package-json/require-files': 'off',
-        'package-json/require-funding': 'off',
-        'package-json/require-gypfile': 'off',
-        'package-json/require-homepage': 'off',
-        'package-json/require-keywords': 'off',
-        'package-json/require-libc': 'off',
-        'package-json/require-license': 'off',
-        'package-json/require-main': 'off',
-        'package-json/require-man': 'off',
-        'package-json/require-module': 'off',
-        'package-json/require-name': 'off',
-        'package-json/require-optionalDependencies': 'off',
-        'package-json/require-os': 'off',
-        'package-json/require-packageManager': 'off',
-        'package-json/require-package-json-export': 'off',
-        'package-json/require-peerDependencies': 'off',
-        'package-json/require-peerDependenciesMeta': 'off',
-        'package-json/require-private': 'off',
-        'package-json/require-publishConfig': 'off',
-        'package-json/require-repository': 'off',
-        'package-json/require-scripts': 'off',
-        'package-json/require-sideEffects': 'off',
-        'package-json/require-type': 'off',
-        'package-json/require-types': 'off',
-        'package-json/require-version': 'off',
-        'package-json/restrict-dependency-ranges': 'off',
-        'package-json/restrict-top-level-properties': 'off',
-        'package-json/specify-peers-locally': 'off',
+        'package-json/bin-name-casing': disable<'Executable names may follow external command conventions'>(),
+        'package-json/consistent-package-manager-declaration': disable<
+            'Package manager declaration strategy belongs to the consuming project'
+        >(),
+        'package-json/consistent-property-aliases': disable<'Supported package metadata aliases are allowed'>(),
+        'package-json/exports-subpaths-style': disable<'Equivalent export subpath layouts are allowed'>(),
+        'package-json/no-local-dependencies': disable<
+            'Local dependencies are allowed for workspaces and development'
+        >(),
+        'package-json/order-properties': disable<'Package properties may follow project conventions'>(),
+        'package-json/prefer-rolling-workspace-spec': disable<
+            'Workspace version range policy belongs to the consuming project'
+        >(),
+        'package-json/prefer-scoped-name': disable<'Unscoped package names are allowed'>(),
+        'package-json/require-attribution': disable<
+            'Author and contributor attribution requirements depend on the consuming project'
+        >(),
+        'package-json/require-author': disable<'The author field is not required for every package'>(),
+        'package-json/require-bin': disable<'The bin field is not required for every package'>(),
+        'package-json/require-browser': disable<'The browser field is not required for every package'>(),
+        'package-json/require-bugs': disable<'The bugs field is not required for every package'>(),
+        'package-json/require-bundleDependencies': disable<
+            'The bundleDependencies field is not required for every package'
+        >(),
+        'package-json/require-config': disable<'The config field is not required for every package'>(),
+        'package-json/require-contributors': disable<'The contributors field is not required for every package'>(),
+        'package-json/require-cpu': disable<'The cpu field is not required for every package'>(),
+        'package-json/require-dependencies': disable<'The dependencies field is not required for every package'>(),
+        'package-json/require-description': disable<'The description field is not required for every package'>(),
+        'package-json/require-devDependencies': disable<
+            'The devDependencies field is not required for every package'
+        >(),
+        'package-json/require-devEngines': disable<'The devEngines field is not required for every package'>(),
+        'package-json/require-directories': disable<'The directories field is not required for every package'>(),
+        'package-json/require-engines': disable<'The engines field is not required for every package'>(),
+        'package-json/require-exports': disable<'The exports field is not required for every package'>(),
+        'package-json/require-files': disable<'The files field is not required for every package'>(),
+        'package-json/require-funding': disable<'The funding field is not required for every package'>(),
+        'package-json/require-gypfile': disable<'The gypfile field is not required for every package'>(),
+        'package-json/require-homepage': disable<'The homepage field is not required for every package'>(),
+        'package-json/require-keywords': disable<'The keywords field is not required for every package'>(),
+        'package-json/require-libc': disable<'The libc field is not required for every package'>(),
+        'package-json/require-license': disable<'The license field is not required for every package'>(),
+        'package-json/require-main': disable<'The main field is not required for every package'>(),
+        'package-json/require-man': disable<'The man field is not required for every package'>(),
+        'package-json/require-module': disable<'The module field is not required for every package'>(),
+        'package-json/require-name': disable<'The name field is not required for every package'>(),
+        'package-json/require-optionalDependencies': disable<
+            'The optionalDependencies field is not required for every package'
+        >(),
+        'package-json/require-os': disable<'The os field is not required for every package'>(),
+        'package-json/require-packageManager': disable<'The packageManager field is not required for every package'>(),
+        'package-json/require-package-json-export': disable<
+            'Packages need not expose package.json through their exports map'
+        >(),
+        'package-json/require-peerDependencies': disable<
+            'The peerDependencies field is not required for every package'
+        >(),
+        'package-json/require-peerDependenciesMeta': disable<
+            'The peerDependenciesMeta field is not required for every package'
+        >(),
+        'package-json/require-private': disable<'The private field is not required for every package'>(),
+        'package-json/require-publishConfig': disable<'The publishConfig field is not required for every package'>(),
+        'package-json/require-repository': disable<'The repository field is not required for every package'>(),
+        'package-json/require-scripts': disable<'The scripts field is not required for every package'>(),
+        'package-json/require-sideEffects': disable<'The sideEffects field is not required for every package'>(),
+        'package-json/require-type': disable<'The type field is not required for every package'>(),
+        'package-json/require-types': disable<'The types field is not required for every package'>(),
+        'package-json/require-version': disable<'The version field is not required for every package'>(),
+        'package-json/restrict-dependency-ranges': disable<
+            'Dependency range policy belongs to the consuming project'
+        >(),
+        'package-json/restrict-top-level-properties': disable<'Project-specific package metadata is allowed'>(),
+        'package-json/specify-peers-locally': disable<
+            'Peer dependency installation strategy belongs to the consuming project'
+        >(),
 
         'json-schema-validator/no-invalid': 'error'
     }

@@ -17,6 +17,7 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/consistent-type-definitions',
     '@typescript-eslint/default-param-last',
     '@typescript-eslint/explicit-member-accessibility',
+    '@typescript-eslint/init-declarations',
     '@typescript-eslint/max-params',
     '@typescript-eslint/method-signature-style',
     '@typescript-eslint/naming-convention',
@@ -57,7 +58,6 @@ const expectedViolationRuleIds = [
     'functional/type-declaration-immutability',
     'id-length',
     'import/no-duplicates',
-    'init-declarations',
     'max-depth',
     'max-statements',
     'no-bitwise',
@@ -113,7 +113,9 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-includes',
     'unicorn/prefer-math-trunc',
     'unicorn/prefer-node-protocol',
+    'unicorn/prefer-spread',
     'unicorn/prefer-string-slice',
+    'unicorn/prefer-top-level-await',
     'unicorn/require-array-sort-compare'
 ];
 

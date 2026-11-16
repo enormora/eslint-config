@@ -3,6 +3,7 @@ import type { ESLint } from 'eslint';
 import markdownLinksPlugin from 'eslint-plugin-markdown-links';
 import markdownPreferencesPlugin from 'eslint-plugin-markdown-preferences';
 import unicornPlugin from 'eslint-plugin-unicorn';
+import { disable } from '../../rule-severity.ts';
 
 export const markdownLintPlugins: Record<string, ESLint.Plugin> = {
     markdown: markdownPlugin,
@@ -13,7 +14,7 @@ export const markdownLintPlugins: Record<string, ESLint.Plugin> = {
 
 export const markdownLintRules = {
     'markdown/fenced-code-language': 'error',
-    'markdown/fenced-code-meta': 'off',
+    'markdown/fenced-code-meta': disable<'Fence metadata conventions depend on the consuming renderer'>(),
     'markdown/heading-increment': 'error',
     'markdown/no-bare-urls': 'error',
     'markdown/no-duplicate-definitions': 'error',
@@ -39,7 +40,7 @@ export const markdownLintRules = {
 
     // markdown-links: external network check is opt-in to keep CI deterministic;
     // local-path and fragment checks are pure wins.
-    'markdown-links/no-dead-urls': 'off',
+    'markdown-links/no-dead-urls': disable<'Network availability must not make lint results nondeterministic'>(),
     'markdown-links/no-missing-fragments': 'error',
     'markdown-links/no-missing-path': 'error',
     'markdown-links/no-self-destination': 'error',
@@ -53,59 +54,83 @@ export const markdownLintRules = {
     // autofix rewrites any `[x](x)` to `<x>` without checking whether the URL has a scheme.
     // CommonMark autolinks require an absolute URI, so a relative link like `[foo.md](foo.md)`
     // becomes `<foo.md>`, which GitHub renders as an empty HTML tag (the link disappears).
-    'markdown-preferences/atx-heading-closing-sequence': 'off',
-    'markdown-preferences/atx-heading-closing-sequence-length': 'off',
+    'markdown-preferences/atx-heading-closing-sequence': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/atx-heading-closing-sequence-length': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
     'markdown-preferences/blockquote-marker-alignment': 'error',
-    'markdown-preferences/bullet-list-marker-style': 'off',
-    'markdown-preferences/canonical-code-block-language': 'off',
-    'markdown-preferences/code-fence-length': 'off',
-    'markdown-preferences/code-fence-spacing': 'off',
-    'markdown-preferences/code-fence-style': 'off',
-    'markdown-preferences/custom-container-marker-spacing': 'off',
-    'markdown-preferences/definitions-last': 'off',
-    'markdown-preferences/emoji-notation': 'off',
-    'markdown-preferences/emphasis-delimiters-style': 'off',
+    'markdown-preferences/bullet-list-marker-style': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/canonical-code-block-language': disable<'Equivalent code language aliases are allowed'>(),
+    'markdown-preferences/code-fence-length': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/code-fence-spacing': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/code-fence-style': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/custom-container-marker-spacing': disable<
+        'Custom container syntax belongs to the consuming Markdown renderer'
+    >(),
+    'markdown-preferences/definitions-last': disable<'Link definitions may stay near the text that uses them'>(),
+    'markdown-preferences/emoji-notation': disable<'Unicode and named emoji notation are both allowed'>(),
+    'markdown-preferences/emphasis-delimiters-style': disable<'Markdown layout is handled by the active formatter'>(),
     'markdown-preferences/hard-linebreak-style': 'error',
-    'markdown-preferences/heading-casing': 'off',
-    'markdown-preferences/indent': 'off',
-    'markdown-preferences/level1-heading-style': 'off',
-    'markdown-preferences/level2-heading-style': 'off',
-    'markdown-preferences/link-bracket-newline': 'off',
-    'markdown-preferences/link-bracket-spacing': 'off',
-    'markdown-preferences/link-destination-style': 'off',
-    'markdown-preferences/link-paren-newline': 'off',
-    'markdown-preferences/link-paren-spacing': 'off',
-    'markdown-preferences/link-title-style': 'off',
+    'markdown-preferences/heading-casing': disable<'Heading casing follows the document language and terminology'>(),
+    'markdown-preferences/indent': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/level1-heading-style': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/level2-heading-style': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/link-bracket-newline': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/link-bracket-spacing': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/link-destination-style': disable<'Inline and reference link destinations are both allowed'>(),
+    'markdown-preferences/link-paren-newline': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/link-paren-spacing': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/link-title-style': disable<'Equivalent link title delimiters are allowed'>(),
     'markdown-preferences/list-marker-alignment': 'error',
-    'markdown-preferences/max-len': 'off',
-    'markdown-preferences/no-heading-trailing-punctuation': 'off',
+    'markdown-preferences/max-len': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/no-heading-trailing-punctuation': disable<'Heading punctuation may carry meaning'>(),
     'markdown-preferences/no-implicit-block-closing': 'error',
     'markdown-preferences/no-laziness-blockquotes': 'error',
-    'markdown-preferences/no-multi-spaces': 'off',
-    'markdown-preferences/no-multiple-empty-lines': 'off',
-    'markdown-preferences/no-tabs': 'off',
+    'markdown-preferences/no-multi-spaces': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/no-multiple-empty-lines': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/no-tabs': disable<'Markdown layout is handled by the active formatter'>(),
     'markdown-preferences/no-text-backslash-linebreak': 'error',
-    'markdown-preferences/no-trailing-spaces': 'off',
-    'markdown-preferences/ordered-list-marker-sequence': 'off',
-    'markdown-preferences/ordered-list-marker-start': 'off',
-    'markdown-preferences/ordered-list-marker-style': 'off',
-    'markdown-preferences/padded-custom-containers': 'off',
-    'markdown-preferences/padding-line-between-blocks': 'off',
-    'markdown-preferences/prefer-autolinks': 'off',
+    'markdown-preferences/no-trailing-spaces': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/ordered-list-marker-sequence': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/ordered-list-marker-start': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/ordered-list-marker-style': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/padded-custom-containers': disable<
+        'Custom container syntax belongs to the consuming Markdown renderer'
+    >(),
+    'markdown-preferences/padding-line-between-blocks': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/prefer-autolinks': disable<
+        'Autofix can turn relative links into invalid CommonMark autolinks'
+    >(),
     'markdown-preferences/prefer-fenced-code-blocks': 'error',
-    'markdown-preferences/prefer-inline-code-words': 'off',
-    'markdown-preferences/prefer-link-reference-definitions': 'off',
-    'markdown-preferences/prefer-linked-words': 'off',
-    'markdown-preferences/setext-heading-underline-length': 'off',
-    'markdown-preferences/sort-definitions': 'off',
-    'markdown-preferences/strikethrough-delimiters-style': 'off',
-    'markdown-preferences/table-header-casing': 'off',
-    'markdown-preferences/table-leading-trailing-pipes': 'off',
-    'markdown-preferences/table-pipe-alignment': 'off',
-    'markdown-preferences/table-pipe-spacing': 'off',
-    'markdown-preferences/thematic-break-character-style': 'off',
-    'markdown-preferences/thematic-break-length': 'off',
-    'markdown-preferences/thematic-break-sequence-pattern': 'off',
+    'markdown-preferences/prefer-inline-code-words': disable<'Inline code markup depends on the meaning of the word'>(),
+    'markdown-preferences/prefer-link-reference-definitions': disable<'Inline and reference links are both allowed'>(),
+    'markdown-preferences/prefer-linked-words': disable<'Link label wording is left to document context'>(),
+    'markdown-preferences/setext-heading-underline-length': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/sort-definitions': disable<'Link definitions may follow document order'>(),
+    'markdown-preferences/strikethrough-delimiters-style': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/table-header-casing': disable<
+        'Table header casing follows the document language and terminology'
+    >(),
+    'markdown-preferences/table-leading-trailing-pipes': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/table-pipe-alignment': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/table-pipe-spacing': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/thematic-break-character-style': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
+    'markdown-preferences/thematic-break-length': disable<'Markdown layout is handled by the active formatter'>(),
+    'markdown-preferences/thematic-break-sequence-pattern': disable<
+        'Markdown layout is handled by the active formatter'
+    >(),
 
     'unicorn/no-empty-link-text': 'error',
     'unicorn/no-javascript-url': 'error',

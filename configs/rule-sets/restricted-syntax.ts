@@ -1,5 +1,6 @@
 import type { Rule } from 'eslint';
 import { builtinRules } from 'eslint/use-at-your-own-risk';
+import { noUnnecessaryArrowFunctionRule } from '../plugins/restricted-syntax/no-unnecessary-arrow-function.ts';
 
 type RestrictedSyntaxRestriction = {
     readonly selector: string;
@@ -70,3 +71,15 @@ export const noInOperatorRestriction = {
     selector: 'BinaryExpression[operator="in"]',
     message: 'The `in` operator is not allowed. Use `Object.hasOwn` instead.'
 };
+
+export const baseRestrictedSyntaxPlugin = createRestrictedSyntaxPlugin(
+    [
+        'no-class-declaration',
+        'no-switch-statement',
+        'no-empty-function-body',
+        'no-in-operator'
+    ],
+    {
+        'no-unnecessary-arrow-function': noUnnecessaryArrowFunctionRule as unknown as Rule.RuleModule
+    }
+);

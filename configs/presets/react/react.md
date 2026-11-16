@@ -4,6 +4,11 @@
 
 Config preset for react, enabling specific rules.
 
+`react/no-unescaped-entities` requires escaping apostrophes, quotes, and other characters covered by the rule in JSX text.
+
+Effects may update local state synchronously. Memoization is not required for effect dependencies.
+React Compiler configuration, gating, syntax, and memoization-preservation checks are disabled.
+
 ## Install & Setup
 
 Install the `@enormora/eslint-config-react` and the base preset package via npm:
