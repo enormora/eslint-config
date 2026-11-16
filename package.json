@@ -70,6 +70,7 @@
         "vue-eslint-parser": "10.4.2"
     },
     "devDependencies": {
+        "@enormora/tsconfig-node": "0.0.2",
         "@eslint/js": "10.0.1",
         "@packtory/cli": "0.0.125",
         "@packtory/github-release-gate": "0.0.86",
