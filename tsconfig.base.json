@@ -2,6 +2,7 @@
     "extends": "@enormora/tsconfig-node/tsconfig.json",
     "compilerOptions": {
         "importHelpers": true,
+        "noPropertyAccessFromIndexSignature": false,
         "outDir": "./target/build",
         "skipLibCheck": true
     }
