@@ -3,14 +3,26 @@
     "compilerOptions": {
         "tsBuildInfoFile": "../target/buildcache/test.tsbuildinfo",
         "rootDir": "..",
-        "types": ["node", "mocha"],
+        "types": [
+            "@enormora/tsconfig-node",
+            "mocha"
+        ],
         "composite": false,
         "declaration": false,
         "declarationMap": false,
         "incremental": true,
         "noUncheckedIndexedAccess": false
     },
-    "references": [{ "path": "../configs/tsconfig.sources.json" }],
-    "include": ["./**/*.ts", "../types/**/*.d.ts"],
-    "exclude": ["./fixtures/**/*"]
+    "references": [
+        {
+            "path": "../configs/tsconfig.sources.json"
+        }
+    ],
+    "include": [
+        "./**/*.ts",
+        "../types/**/*.d.ts"
+    ],
+    "exclude": [
+        "./fixtures/**/*"
+    ]
 }

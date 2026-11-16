@@ -36,7 +36,7 @@ const eslintPluginPrefix = 'eslint-plugin-';
 const scopedEslintPluginSuffix = '/eslint-plugin';
 
 function extractScopedShortName(pluginName: string): string {
-    return scopedPluginShortNamePattern.exec(pluginName)?.groups?.shortName ?? pluginName;
+    return scopedPluginShortNamePattern.exec(pluginName)?.groups?.['shortName'] ?? pluginName;
 }
 
 function extractShortName(pluginName: string): string {
