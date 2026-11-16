@@ -7,6 +7,9 @@ Config preset for typescript, enabling specific rules and compiler settings.
 `@typescript-eslint/return-await` requires awaiting returned promises where local error handling needs it.
 Ordinary promise returns may use either style.
 
+The base preset's `dot-notation` rule remains enabled for TypeScript, including index signatures.
+`noPropertyAccessFromIndexSignature` does not relax this rule. Disable that compiler option to avoid conflicting diagnostics.
+
 ## Install & Setup
 
 Install the `@enormora/eslint-config-typescript` and the base preset package via npm:

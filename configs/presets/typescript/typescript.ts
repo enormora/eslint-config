@@ -289,7 +289,9 @@ export const typescriptConfig = {
         '@typescript-eslint/class-literal-property-style': [ 'error', 'fields' ],
         '@typescript-eslint/consistent-type-definitions': [ 'error', 'type' ],
         ...configureWrappedCoreRule('default-param-last', undefined),
-        ...configureWrappedCoreRule('dot-notation', undefined),
+        '@typescript-eslint/dot-notation': disable<
+            'The core dot-notation rule enforces dot access regardless of noPropertyAccessFromIndexSignature'
+        >(),
         '@typescript-eslint/explicit-member-accessibility': [ 'error', { accessibility: 'explicit' } ],
         '@typescript-eslint/explicit-module-boundary-types': disable<
             'Return annotations are handled by @typescript-eslint/explicit-function-return-type'
