@@ -123,6 +123,19 @@ const expectedViolationRuleIds = [
 ];
 
 suite('base+typescript integration', function () {
+    test('checks smaller-scope variables without flagging type aliases', async function () {
+        const { messages } = await lintFixture(configs, comboName, 'prefer-smaller-scope.ts');
+        const smallerScopeMessages = messages.filter(function isSmallerScopeMessage(message) {
+            return message.ruleId === 'unicorn/prefer-smaller-scope';
+        });
+        assert.deepStrictEqual(
+            smallerScopeMessages.map(function extractMessageText(message) {
+                return message.message;
+            }),
+            [ 'Move `enabledMessage` into the block where it is used.' ]
+        );
+    });
+
     test('requires return await for local error handling without prescribing ordinary return style', async function () {
         const { messages } = await lintFixture(configs, comboName, 'return-await.ts');
         const returnAwaitReports = messages.filter(function isReturnAwaitReport(message) {
