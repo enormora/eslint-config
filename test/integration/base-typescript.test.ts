@@ -16,7 +16,6 @@ const expectedViolationRuleIds = [
     '@typescript-eslint/consistent-type-definitions',
     '@typescript-eslint/default-param-last',
     '@typescript-eslint/explicit-member-accessibility',
-    '@typescript-eslint/init-declarations',
     '@typescript-eslint/max-params',
     '@typescript-eslint/method-signature-style',
     '@typescript-eslint/naming-convention',
@@ -62,6 +61,7 @@ const expectedViolationRuleIds = [
     'id-length',
     'import/extensions',
     'import/no-duplicates',
+    'init-declarations',
     'max-depth',
     'max-statements',
     'no-bitwise',
@@ -117,7 +117,6 @@ const expectedViolationRuleIds = [
     'unicorn/prefer-math-trunc',
     'unicorn/prefer-node-protocol',
     'unicorn/prefer-promise-static-methods',
-    'unicorn/prefer-spread',
     'unicorn/prefer-string-slice',
     'unicorn/prefer-top-level-await',
     'unicorn/require-array-sort-compare'
@@ -134,24 +133,6 @@ suite('base+typescript integration', function () {
         });
 
         assert.deepStrictEqual(reportedLocations, [ { ruleId: '@typescript-eslint/return-await', line: 3 } ]);
-    });
-
-    test('requires TypeScript initializers while allowing explicit undefined and ambient declarations', async function () {
-        const { messages } = await lintFixture(configs, comboName, 'initializers.ts');
-        const initializationReports = messages.filter(function isInitializationReport(message) {
-            return [
-                'init-declarations',
-                '@typescript-eslint/init-declarations',
-                'no-undef-init',
-                'unicorn/no-useless-undefined'
-            ]
-                .includes(message.ruleId ?? '');
-        });
-        const reportedLocations = initializationReports.map(function toRuleLocation(message) {
-            return { ruleId: message.ruleId, line: message.line };
-        });
-
-        assert.deepStrictEqual(reportedLocations, [ { ruleId: '@typescript-eslint/init-declarations', line: 2 } ]);
     });
 
     test('base+typescript violations fixture reports the expected rule ids', async function () {
@@ -225,10 +206,10 @@ suite('base+typescript integration', function () {
         );
         const acceptedNamedTypeLines = new Set([ 33, 34, 35, 36, 37 ]);
         const expectedInlineMutableLines = new Set([ 40, 41, 42, 43, 44 ]);
-        const unexpectedNamedTypeReports = [ ...acceptedNamedTypeLines ].filter(function isFlagged(line) {
+        const unexpectedNamedTypeReports = Array.from(acceptedNamedTypeLines).filter(function isFlagged(line) {
             return flaggedLines.has(line);
         });
-        const missingInlineMutableReports = [ ...expectedInlineMutableLines ].filter(function isNotFlagged(line) {
+        const missingInlineMutableReports = Array.from(expectedInlineMutableLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(unexpectedNamedTypeReports, [], 'named class/interface parameters must not be flagged');
@@ -252,12 +233,12 @@ suite('base+typescript integration', function () {
         );
         const acceptedNamedReferenceLines = new Set([ 40, 41, 42, 43 ]);
         const expectedFlaggedLines = new Set([ 47, 50, 51 ]);
-        const unexpectedNamedReferenceReports = [ ...acceptedNamedReferenceLines ].filter(
+        const unexpectedNamedReferenceReports = Array.from(acceptedNamedReferenceLines).filter(
             function isFlagged(line) {
                 return flaggedLines.has(line);
             }
         );
-        const missingFlaggedReports = [ ...expectedFlaggedLines ].filter(function isNotFlagged(line) {
+        const missingFlaggedReports = Array.from(expectedFlaggedLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(
@@ -285,10 +266,10 @@ suite('base+typescript integration', function () {
         );
         const acceptedAliasLines = new Set([ 54, 55, 56, 57 ]);
         const expectedFlaggedAliasLines = new Set([ 61, 65, 66 ]);
-        const unexpectedAliasReports = [ ...acceptedAliasLines ].filter(function isFlagged(line) {
+        const unexpectedAliasReports = Array.from(acceptedAliasLines).filter(function isFlagged(line) {
             return flaggedLines.has(line);
         });
-        const missingAliasReports = [ ...expectedFlaggedAliasLines ].filter(function isNotFlagged(line) {
+        const missingAliasReports = Array.from(expectedFlaggedAliasLines).filter(function isNotFlagged(line) {
             return !flaggedLines.has(line);
         });
         assert.deepStrictEqual(

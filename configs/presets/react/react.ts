@@ -128,8 +128,8 @@ export const reactConfig = {
         'react-hooks/capitalized-calls': disable<
             'Overlaps new-cap; additional React-specific capitalized call restrictions are not enforced'
         >(),
-        'react-hooks/config': disable<'React Compiler is outside the supported and recommended toolchain'>(),
-        'react-hooks/gating': disable<'React Compiler is outside the supported and recommended toolchain'>(),
+        'react-hooks/config': 'error',
+        'react-hooks/gating': 'error',
         'react-hooks/globals': 'error',
         'react-hooks/hooks': disable<'Hook call legality is handled by react-hooks/rules-of-hooks'>(),
         'react-hooks/refs': 'error',
@@ -150,9 +150,7 @@ export const reactConfig = {
         'react-hooks/memoized-effect-dependencies': disable<
             'Memoization should follow demonstrated need rather than be required for effect dependencies'
         >(),
-        'react-hooks/preserve-manual-memoization': disable<
-            'React Compiler is outside the supported and recommended toolchain'
-        >(),
+        'react-hooks/preserve-manual-memoization': 'error',
         'react-hooks/purity': 'error',
         'react-hooks/rule-suppression': disable<'Explained rule suppressions are allowed'>(),
         'react-hooks/set-state-in-effect': disable<
@@ -163,9 +161,7 @@ export const reactConfig = {
         'react-hooks/syntax': disable<'React Compiler is outside the supported and recommended toolchain'>(),
         'react-hooks/todo': disable<'React Compiler is outside the supported and recommended toolchain'>(),
         'react-hooks/use-memo': 'error',
-        'react-hooks/unsupported-syntax': disable<
-            'React Compiler is outside the supported and recommended toolchain'
-        >(),
+        'react-hooks/unsupported-syntax': 'error',
         'react-hooks/void-use-memo': 'error'
     }
 };

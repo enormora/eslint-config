@@ -106,7 +106,7 @@ export const bestPracticesRuleSet = {
         'unicorn/prefer-dom-node-remove': 'error',
         'unicorn/prefer-query-selector': 'error',
         'unicorn/prefer-reflect-apply': 'error',
-        'unicorn/prefer-spread': 'error',
+        'unicorn/prefer-spread': disable<'Conflicts with the existing array-func/prefer-array-from rule'>(),
         'unicorn/prefer-string-starts-ends-with': 'error',
         'unicorn/prefer-string-slice': 'error',
         'unicorn/prefer-dom-node-text-content': 'error',
@@ -480,7 +480,7 @@ export const bestPracticesRuleSet = {
 
         'array-func/from-map': 'error',
         'array-func/no-unnecessary-this-arg': 'error',
-        'array-func/prefer-array-from': disable<'Conflicts with unicorn/prefer-spread'>(),
+        'array-func/prefer-array-from': 'error',
         'array-func/avoid-reverse': 'error',
         'array-func/prefer-flat-map': 'error',
         'array-func/prefer-flat': 'error',

@@ -170,7 +170,7 @@ export const baseSharedConfig = {
         'no-throw-literal': 'error',
         'no-unassigned-vars': 'error',
         'no-undef': [ 'error', { typeof: true } ],
-        'no-undef-init': disable<'Conflicts with init-declarations when explicit undefined initialization is needed'>(),
+        'no-undef-init': 'error',
         'no-undefined': disable<'Explicit undefined values are allowed'>(),
         'no-unexpected-multiline': 'error',
         'no-underscore-dangle': 'error',

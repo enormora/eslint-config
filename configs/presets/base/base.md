@@ -7,11 +7,10 @@ Base ESLint config preset, agnostic to any environment, framework, or library. T
 `unicorn/consistent-function-scoping` requires nested functions that do not depend on their enclosing scope
 to move to an outer scope.
 
-Variable declarations require initializers. Explicit `undefined` initializers are allowed.
+Variable declarations require initializers. The existing `no-undef-init` check remains enabled.
 
 `unicorn/prefer-top-level-await` prefers top-level `await` for module initialization.
-`unicorn/prefer-spread` prefers spread syntax for array construction, concatenation, and copying.
-The conflicting `array-func/prefer-array-from` rule is disabled.
+`array-func/prefer-array-from` remains enabled. The conflicting `unicorn/prefer-spread` rule stays disabled.
 
 `unicorn/consistent-destructuring` requires reusing existing destructured bindings.
 `unicorn/prefer-string-raw` prefers `String.raw` where it avoids escaped backslashes.

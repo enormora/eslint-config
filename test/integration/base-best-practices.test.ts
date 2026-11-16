@@ -235,18 +235,19 @@ suite('base best practices', function () {
             });
         });
 
-        suite('array spread', function () {
-            test('reports array copying through slice', function () {
-                const actualReports = bestPracticesReports(
-                    'export function copyValues(values) { return values.slice(); }',
-                    'unicorn/prefer-spread'
-                );
-                assert.strictEqual(actualReports.length, 1);
-                assert.strictEqual(actualReports[0]?.severity, 2);
+        suite('iterable conversion', function () {
+            test('preserves the existing Array.from preference', function () {
+                const reports = bestPracticesReports('export const copy = [...values];', [
+                    'unicorn/prefer-spread',
+                    'array-func/prefer-array-from'
+                ]);
+                assert.strictEqual(reports.length, 1);
+                assert.strictEqual(reports[0]?.ruleId, 'array-func/prefer-array-from');
+                assert.strictEqual(reports[0]?.severity, 2);
             });
 
-            test('accepts array copying through spread', function () {
-                const conversionReports = bestPracticesReports('export const copy = [...values];', [
+            test('accepts Array.from without conflicting diagnostics', function () {
+                const conversionReports = bestPracticesReports('export const copy = Array.from(values);', [
                     'unicorn/prefer-spread',
                     'array-func/prefer-array-from'
                 ]);
@@ -292,7 +293,7 @@ suite('base best practices', function () {
     });
 
     suite('variable initialization', function () {
-        test('allows explicit undefined initializers without conflicting diagnostics', function () {
+        test('preserves the existing prohibition on undefined initializers', function () {
             const sourceCode = 'export let value = undefined;';
             const linter = new Linter({ configType: 'flat' });
             const messages = linter.verify(sourceCode, baseConfig, filePath);
@@ -301,7 +302,9 @@ suite('base best practices', function () {
                     .includes(message.ruleId ?? '');
             });
 
-            assert.deepStrictEqual(initializationReports, []);
+            assert.strictEqual(initializationReports.length, 1);
+            assert.strictEqual(initializationReports[0]?.ruleId, 'no-undef-init');
+            assert.strictEqual(initializationReports[0]?.severity, 2);
         });
 
         test('requires an initializer when a variable is declared', function () {

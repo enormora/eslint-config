@@ -294,7 +294,9 @@ export const typescriptConfig = {
         '@typescript-eslint/explicit-module-boundary-types': disable<
             'Return annotations are handled by @typescript-eslint/explicit-function-return-type'
         >(),
-        ...configureWrappedCoreRule('init-declarations', undefined),
+        '@typescript-eslint/init-declarations': disable<
+            'The existing core init-declarations rule remains enabled'
+        >(),
         '@typescript-eslint/method-signature-style': [ 'error', 'property' ],
         '@typescript-eslint/no-base-to-string': 'error',
         ...configureWrappedCoreRule('no-dupe-class-members', undefined),

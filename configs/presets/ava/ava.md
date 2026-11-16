@@ -4,8 +4,6 @@
 
 Config preset for ava, enabling specific rules.
 
-The JSON-only `ava/no-ava-in-dependencies` rule is disabled in this JavaScript preset.
-
 `ava/use-t-throws-async-well` is disabled in favor of TypeScript's `no-floating-promises` check. JavaScript-only projects do not receive that check.
 
 ## Install & Setup

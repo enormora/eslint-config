@@ -22,9 +22,7 @@ export const avaConfig = {
             'Assertion expressiveness can require multiple checks; an arbitrary maximum is not useful'
         >(),
         'ava/no-async-fn-without-await': 'error',
-        'ava/no-ava-in-dependencies': disable<
-            'Requires a JSON language configuration; this preset targets JavaScript tests'
-        >(),
+        'ava/no-ava-in-dependencies': 'error',
         'ava/no-commented-tests': 'error',
         'ava/no-conditional-assertion': 'error',
         'ava/no-duplicate-hooks': 'error',

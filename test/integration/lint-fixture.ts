@@ -43,7 +43,7 @@ export function uniqueSortedRuleIds(messages: readonly Linter.LintMessage[]): re
     const definedRuleIds = ruleIds.filter(function keepDefinedRuleId(ruleId): ruleId is string {
         return ruleId !== null;
     });
-    return [ ...new Set(definedRuleIds) ].toSorted(function compareLocale(left, right) {
+    return Array.from(new Set(definedRuleIds)).toSorted(function compareLocale(left, right) {
         return left.localeCompare(right);
     });
 }
