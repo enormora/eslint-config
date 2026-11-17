@@ -8,6 +8,12 @@ All presets support only Node.js 26.x. Astro presets require Node.js 26.3 or lat
 
 The config presets are distributed in multiple packages and only work with the [new flat config system](https://eslint.org/docs/latest/use/configure/configuration-files-new) of ESLint.
 
+## Publishing
+
+Scheduled publishing evaluates the release gate. To publish immediately, run the `Publish` workflow with `publish_now` enabled and `confirmation` set to `publish eslint-config packages`.
+
+Both inputs are required to bypass the gate. An incorrect or missing confirmation fails the override. Publishing uses the checked-out `main` commit and retains registry signature and provenance checks.
+
 ## Presets Overview
 
 Enormora provides a collection of shareable ESLint config presets to cater to various project types and requirements. Choose the configuration that best aligns with your project's needs for seamless linting and consistent coding styles.
