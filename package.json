@@ -72,8 +72,8 @@
     "devDependencies": {
         "@enormora/tsconfig-node": "0.0.3",
         "@eslint/js": "10.0.1",
-        "@packtory/cli": "0.0.126",
-        "@packtory/github-release-gate": "0.0.87",
+        "@packtory/cli": "0.0.127",
+        "@packtory/github-release-gate": "0.0.88",
         "@types/mocha": "10.0.10",
         "@typescript-eslint/rule-tester": "8.72.2",
         "eslint": "10.15.0",
