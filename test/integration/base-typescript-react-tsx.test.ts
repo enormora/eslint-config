@@ -13,7 +13,7 @@ const configs = [
 ];
 
 const expectedViolationRuleIds = [
-    '@stylistic/array-bracket-spacing',
+    '@stylistic/list-style',
     '@stylistic/no-extra-parens',
     '@typescript-eslint/explicit-function-return-type',
     '@typescript-eslint/no-unsafe-assignment',

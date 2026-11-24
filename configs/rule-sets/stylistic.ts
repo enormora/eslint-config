@@ -16,9 +16,6 @@ export const stylisticRuleSet = {
         'destructuring/in-params': [ 'error', { 'max-params': 0 } ],
         'destructuring/no-rename': disable<'Destructured bindings may be renamed to express their local role'>(),
 
-        '@stylistic/array-bracket-newline': disable<'Layout is handled by the active formatter'>(),
-        '@stylistic/array-bracket-spacing': [ 'error', 'always' ],
-        '@stylistic/array-element-newline': [ 'error', 'consistent' ],
         '@stylistic/arrow-parens': [ 'error', 'always' ],
         '@stylistic/arrow-spacing': [
             'error',
@@ -47,13 +44,10 @@ export const stylisticRuleSet = {
         ],
         '@stylistic/dot-location': [ 'error', 'property' ],
         '@stylistic/eol-last': 'error',
-        '@stylistic/exp-list-style': disable<'Experimental list layout rules are not part of the enforced style'>(),
         '@stylistic/exp-jsx-props-style': disable<
             'Experimental JSX prop layout rules are not part of the enforced style'
         >(),
         '@stylistic/function-call-spacing': [ 'error', 'never' ],
-        '@stylistic/function-call-argument-newline': [ 'error', 'consistent' ],
-        '@stylistic/function-paren-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/generator-star-spacing': [ 'error', { before: false, after: true } ],
         '@stylistic/indent-binary-ops': [ 'error', indentSize ],
         '@stylistic/implicit-arrow-linebreak': disable<'Layout is handled by the active formatter'>(),
@@ -106,6 +100,17 @@ export const stylisticRuleSet = {
             }
         ],
         '@stylistic/lines-around-comment': disable<'Comments need not have surrounding blank lines'>(),
+        '@stylistic/list-style': [
+            'error',
+            {
+                singleLine: { spacing: 'never' },
+                overrides: {
+                    '[]': { singleLine: { spacing: 'always' } },
+                    '{}': { singleLine: { spacing: 'always' } },
+                    TSTupleType: { singleLine: { spacing: 'never' } }
+                }
+            }
+        ],
         '@stylistic/max-len': [
             'error',
             {
@@ -148,9 +153,6 @@ export const stylisticRuleSet = {
         '@stylistic/no-trailing-spaces': 'error',
         '@stylistic/no-whitespace-before-property': 'error',
         '@stylistic/nonblock-statement-body-position': disable<'Block bodies are already required by curly'>(),
-        '@stylistic/object-curly-newline': disable<'Layout is handled by the active formatter'>(),
-        '@stylistic/object-curly-spacing': [ 'error', 'always' ],
-        '@stylistic/object-property-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/one-var-declaration-per-line': 'error',
         '@stylistic/operator-linebreak': [ 'error', 'after', { overrides: { '?': 'before', ':': 'before' } } ],
         '@stylistic/padded-blocks': [

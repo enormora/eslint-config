@@ -8,7 +8,7 @@ const comboName = 'base-typescript';
 const configs = [ ...baseConfig, { ...typescriptConfig, files: [ '**/*.ts' ] } ];
 
 const expectedViolationRuleIds = [
-    '@stylistic/array-bracket-spacing',
+    '@stylistic/list-style',
     '@stylistic/no-extra-parens',
     '@typescript-eslint/array-type',
     '@typescript-eslint/ban-ts-comment',
