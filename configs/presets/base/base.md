@@ -82,10 +82,10 @@ Markdown files additionally get semantic linting through four language-aware plu
 `root` selector and runs in the same pass as the linters. The published rule is `dprint-markdown/markdown` with the
 same behavior and config, just adapted to the markdown language.
 
-(Why commonmark and not gfm? `@eslint/markdown@8.0.2`'s `MarkdownSourceCode` does not implement `getLoc()` for
-GFM-specific nodes such as autolinks and table cells; under `language: "markdown/gfm"`, rules like `markdown/no-bare-urls`
-and `markdown/table-column-count` crash ESLint 10's reporter. This is pinned to `commonmark` until upstream ships a
-fix.)
+(Why commonmark and not gfm? `@eslint/markdown@9.0.0`'s GFM language splits autolink literals into text nodes without
+position info, so rules like `markdown/no-invalid-label-refs` crash ESLint on input such as `(text)[https://example.com]`.
+This is pinned to `commonmark` until upstream ships a fix. The GFM-only rules `markdown/no-bare-urls` and
+`markdown/table-column-count` are therefore off.)
 
 Because `language: "markdown/commonmark"` overrides parsing for `.md` files, any later config block that targets all
 files with JS-only rules (e.g. `eslint-plugin-n`) will try to run on `.md` and crash. When layering additional presets,

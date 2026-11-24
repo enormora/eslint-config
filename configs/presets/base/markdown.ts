@@ -37,11 +37,9 @@ export const markdownConfig = {
         ...markdownLintPlugins,
         'dprint-markdown': dprintMarkdownLanguageAdapter
     },
-    // Pinned to commonmark because @eslint/markdown@8.0.2's MarkdownSourceCode does not implement
-    // getLoc() for GFM-specific nodes (autolinks, tableCell, etc.). Rules such as
-    // markdown/no-bare-urls and markdown/table-column-count fire under gfm but then crash ESLint
-    // 10's reporter ("Custom getLoc() method must be implemented in the subclass"). Revisit once
-    // @eslint/markdown ships a fix.
+    // Pinned to commonmark because @eslint/markdown@9.0.0's gfm language splits autolink literals
+    // into text nodes without position info. Rules such as markdown/no-invalid-label-refs then crash
+    // ESLint on input like `(text)[https://example.com]`. Revisit once @eslint/markdown ships a fix.
     language: 'markdown/commonmark',
     settings: dprintSettings,
     rules: {
