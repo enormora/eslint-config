@@ -73,6 +73,12 @@ export const stylisticRuleSet = {
         '@stylistic/jsx-newline': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/jsx-one-expression-per-line': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/jsx-self-closing-comp': disable<'Layout is handled by the active formatter'>(),
+        '@stylistic/jsx-shorthand-boolean': disable<
+            'JSX conventions are enforced by the react-jsx and react-tsx presets'
+        >(),
+        '@stylistic/jsx-shorthand-fragment': disable<
+            'JSX conventions are enforced by the react-jsx and react-tsx presets'
+        >(),
         '@stylistic/jsx-tag-spacing': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/jsx-quotes': disable<'Layout is handled by the active formatter'>(),
         '@stylistic/jsx-wrap-multilines': disable<'Layout is handled by the active formatter'>(),
