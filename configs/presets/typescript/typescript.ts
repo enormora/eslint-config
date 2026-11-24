@@ -412,6 +412,7 @@ export const typescriptConfig = {
         '@typescript-eslint/no-misused-spread': 'error',
         '@typescript-eslint/no-generated-empty-object-type': 'error',
         '@typescript-eslint/no-unsafe-enum-assignment': 'error',
+        '@typescript-eslint/no-unsafe-class-instance-assignment': 'error',
 
         'functional/functional-parameters': disable<
             'Broad functional restrictions produce too many false positives for the intended style'
