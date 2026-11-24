@@ -15,7 +15,7 @@
         "node": "^26.0.0"
     },
     "dependencies": {
-        "@ben_12/eslint-plugin-dprint": "1.32.0",
+        "@ben_12/eslint-plugin-dprint": "1.33.0",
         "@cspell/eslint-plugin": "10.5.2",
         "@dprint/json": "0.26.0",
         "@dprint/markdown": "0.29.0",

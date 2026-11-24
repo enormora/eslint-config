@@ -25,6 +25,7 @@ export const dprintJsConfig = {
         'dprint/markup': disable<'This preset does not configure a formatter for this file type'>(),
         'dprint/yaml': disable<'Enabled only for matching non-JavaScript files'>(),
         'dprint/graphql': disable<'This preset does not configure a formatter for this file type'>(),
+        'dprint/sql': disable<'This preset does not configure a formatter for this file type'>(),
 
         '@stylistic/member-delimiter-style': disable<
             'Conflicts with the active formatter over type member delimiters'
