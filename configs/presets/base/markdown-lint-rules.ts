@@ -16,7 +16,7 @@ export const markdownLintRules = {
     'markdown/fenced-code-language': 'error',
     'markdown/fenced-code-meta': disable<'Fence metadata conventions depend on the consuming renderer'>(),
     'markdown/heading-increment': 'error',
-    'markdown/no-bare-urls': 'error',
+    'markdown/no-bare-urls': disable<'Requires the GFM markdown language, which this preset does not use'>(),
     'markdown/no-duplicate-definitions': 'error',
     'markdown/no-duplicate-headings': 'error',
     'markdown/no-empty-definitions': 'error',
@@ -36,7 +36,7 @@ export const markdownLintRules = {
     'markdown/no-space-in-emphasis': 'error',
     'markdown/no-unused-definitions': 'error',
     'markdown/require-alt-text': 'error',
-    'markdown/table-column-count': 'error',
+    'markdown/table-column-count': disable<'Requires the GFM markdown language, which this preset does not use'>(),
 
     // markdown-links: external network check is opt-in to keep CI deterministic;
     // local-path and fragment checks are pure wins.

@@ -9,8 +9,7 @@ const comboName = 'base-markdown';
 const configs = baseConfig;
 
 // Rules NOT in this list are still configured (in base.js); they simply don't fire on the fixture:
-//   - markdown/no-bare-urls and markdown/table-column-count require GFM (we pin to commonmark
-//     because @eslint/markdown@8.0.2's gfm language crashes on rule reporting)
+//   - markdown/no-bare-urls and markdown/table-column-count are off because they require GFM
 //   - markdown/no-invalid-label-refs needs a specific shorthand-label syntax not covered by the fixture
 //   - markdown/fenced-code-meta is off in the base preset (would require every fenced block to carry meta)
 //   - markdown-links/no-dead-urls is off (network check; would make CI flaky)

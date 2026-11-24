@@ -48,6 +48,9 @@ export const zodConfig = {
     rules: {
         'zod-mini/consistent-import': [ 'error', { syntax: 'named' } ],
         'zod-mini/consistent-import-source': [ 'error', { sources: [ 'zod/mini' ] } ],
+        'zod-mini/consistent-object-property-key-style': disable<
+            'Object keys mirror the shape of the validated data'
+        >(),
         'zod-mini/consistent-object-schema-type': disable<'Object strictness depends on the schema boundary'>(),
         'zod-mini/consistent-schema-output-type-style': [ 'error', { style: 'output' } ],
         'zod-mini/consistent-schema-var-name': 'error',
@@ -60,6 +63,7 @@ export const zodConfig = {
         'zod-mini/no-function-scoped-schema': disable<'Schema factories may construct schemas inside functions'>(),
         'zod-mini/no-native-enum': disable<'Covered by restricted-syntax-zod/no-native-enum-schema'>(),
         'zod-mini/no-promise-schema': 'error',
+        'zod-mini/no-reshape-on-refined-object': 'error',
         'zod-mini/no-throw-in-refine': 'error',
         'zod-mini/no-transform-in-record-key': 'error',
         'zod-mini/no-unknown-schema': disable<'Unknown is a valid boundary type before further validation'>(),
