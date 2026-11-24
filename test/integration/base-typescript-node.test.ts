@@ -9,7 +9,7 @@ const comboName = 'base-typescript-node';
 const configs = [ ...baseConfig, nodeConfig, { ...typescriptConfig, files: [ '**/*.ts' ] } ];
 
 const expectedViolationRuleIds = [
-    '@stylistic/array-bracket-spacing',
+    '@stylistic/list-style',
     '@stylistic/no-extra-parens',
     '@typescript-eslint/array-type',
     '@typescript-eslint/ban-ts-comment',

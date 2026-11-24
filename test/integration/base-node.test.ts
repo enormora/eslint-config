@@ -8,7 +8,7 @@ const comboName = 'base-node';
 const configs = [ ...baseConfig, nodeConfig ];
 
 const expectedViolationRuleIds = [
-    '@stylistic/array-bracket-spacing',
+    '@stylistic/list-style',
     '@stylistic/no-extra-parens',
     'complexity',
     'default-case',
