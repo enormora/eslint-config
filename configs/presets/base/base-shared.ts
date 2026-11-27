@@ -368,7 +368,7 @@ export const baseSharedConfig = {
         'prefer-exponentiation-operator': 'error',
 
         'default-case-last': 'error',
-        'no-restricted-exports': disable<'Export restrictions depend on the consuming project'>(),
+        'no-restricted-exports': [ 'error', { restrictedNamedExports: [ 'then' ] } ],
         'no-useless-backreference': 'error',
         'id-denylist': disable<'Identifier deny lists depend on the consuming project'>(),
         'no-loss-of-precision': 'error',
