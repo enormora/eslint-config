@@ -27,6 +27,9 @@ Nested function and constructor calls are limited to three levels by `unicorn/ma
 
 Namespace imports and wildcard re-exports are prohibited by `sonarjs/no-wildcard-import`.
 
+Named exports called `then` are prohibited by `no-restricted-exports` because dynamic `import()` treats a callable
+`then` export as a promise-like method and invokes it.
+
 The local `enormora/prefer-ternary-for-value-selection` rule reports simple `if/else` returns,
 assignments to the same variable, and an initialized `let` followed by a conditional reassignment.
 Guard returns followed by a fallback return remain allowed. The rule skips multiline or nested
